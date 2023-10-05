@@ -1,0 +1,175 @@
+<div style="background-color: #f6f7f8;" *ngIf="!(isMobile | async)">
+    <div class="profile-and-cards">
+<div class="profile-section">
+    <div class="profile-picture">
+      <img src="{{ partner.profilePicture }}" alt="Profile Picture" />
+    </div>
+    
+  </div>
+
+  <div class="cards-section">
+    <div class="small-card">
+      <p class="title">Furnizori</p>
+      <p class="value">30</p>
+    </div>
+    <div class="small-card">
+      <p class="title">Furnizori abonati</p>
+      <p class="value">20</p>
+    </div>
+    <div class="small-card">
+      <p class="title">Venituri lunare</p>
+      <p class="value">800 RON</p>
+    </div>
+  </div>
+</div>
+  <div class="chart-section">
+    <div class="chart-container" >
+      <!-- First Chart -->
+      <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend">
+</canvas>
+    </div>
+    
+    <div class="chart-container" >
+      <!-- Second Chart -->
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+        <div class="progress-label"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="table-section">
+    <h1 class="table-title">Furnizori adaugati</h1>
+    <mat-form-field>
+        <input matInput [formControl]="searchControl" placeholder="Cautare">
+      </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        
+      <!-- Define the columns -->
+      <ng-container matColumnDef="profilePicture">
+        <th mat-header-cell *matHeaderCellDef> Profile Picture </th>
+        <td mat-cell *matCellDef="let profile"> <img [src]="profile.profilePicture" alt="Profile Picture" class="table-image"> </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="profileName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nume </th>
+        <td mat-cell *matCellDef="let profile"> {{ profile.profileName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </th>
+        <td mat-cell *matCellDef="let profile"> {{profile.category}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Locatie </th>
+        <td mat-cell *matCellDef="let profile"> {{profile.location}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateAdded">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data adaugarii </th>
+        <td mat-cell *matCellDef="let profile"> {{profile.dateAdded}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isPaying">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Platitor </th>
+        <td mat-cell *matCellDef="let profile"> {{profile.isPaying}} </td>
+      </ng-container>
+  
+      <!-- Add similar column definitions for dateAdded, category, boolValue -->
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+</div>
+
+<div style="background-color: #f6f7f8;" *ngIf="(isMobile | async)">
+  <div class="mobile-profile">
+    <!-- Profile Image -->
+    <div class="mobile-profile-image-section">
+      <img class="mobile-profile-image" src="{{ partner.profilePicture }}" alt="Profile Picture" />
+    </div>
+  
+    <!-- Cards -->
+    <div class="mobile-card">
+      <div class="label">Furnizori</div>
+      <div class="text">30</div>
+    </div>
+  
+    <div class="mobile-card">
+      <div class="label">Furnizori abonati</div>
+      <div class="text">20</div>
+    </div>
+  
+    <div class="mobile-card">
+      <div class="label">Venituri lunare</div>
+      <div class="text">500 RON</div>
+    </div>
+  
+    <!-- Charts -->
+    <div class="mobile-chart">
+      <div class="chart-container" >
+        <!-- First Chart -->
+        <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend">
+  </canvas>
+      </div>
+    </div>
+  
+    <div class="mobile-chart">
+      <p>Proces pana la urmatorul rank</p>
+      <div class="mobile-chart-container" >
+        <!-- Second Chart -->
+        <div class="mobile-progress-bar">
+          <div class="progress-fill"></div>
+          <div class="progress-label"></div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Table -->
+    <div class="mobile-table">
+      <mat-form-field>
+        <input matInput [formControl]="searchControl" placeholder="Cautare">
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+          <ng-container matColumnDef="profileName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nume </th>
+            <td mat-cell *matCellDef="let profile"> {{ profile.profileName }} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </th>
+            <td mat-cell *matCellDef="let profile"> {{profile.category}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Locatie </th>
+            <td mat-cell *matCellDef="let profile"> {{profile.location}} </td>
+          </ng-container>
+      
+          <!-- Add similar column definitions for dateAdded, category, boolValue -->
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+video {
+    width: 100%;
+    height: 100vh; 
+    object-fit: cover; 
+  }
+
+.mobile video {
+  height: 50vh; 
+  object-fit: cover; 
+}

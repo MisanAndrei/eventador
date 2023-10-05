@@ -1,0 +1,11 @@
+<div *ngIf="!(isMobile | async)" class="contact-container" style="text-align:center">
+    <p>Aici o sa fie contactul</p>
+    <p>Poate niste poze sau linkuri</p>
+    <p>probabil un link catre furnizor</p>
+  </div>
+
+  <div *ngIf="(isMobile | async)" class="mobile-contact-container" style="text-align:center">
+    <p>Aici o sa fie contactul</p>
+    <p>Poate niste poze sau linkuri</p>
+    <p>probabil un link catre furnizor</p>
+  </div>

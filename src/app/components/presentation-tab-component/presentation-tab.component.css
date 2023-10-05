@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto; /* Optional: This sets the container to take up the full viewport height */
+  }
+  
+  .container img,
+  .container p {
+    margin: 10px; /* Optional: Add some space between the elements */
+  }
+
+  .container img{
+    width:400px;
+  }
+
+  .container p {
+    font-size: 60px;
+    color: #7643CA;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .mobile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto; /* Optional: This sets the container to take up the full viewport height */
+  }
+  
+  .mobile-container img,
+  .mobile-container p {
+    margin: 10px; /* Optional: Add some space between the elements */
+  }
+
+  .mobile-container img{
+    width:50vw;
+  }
+
+  .mobile-container p {
+    font-size: 5vw;
+    color: #7643CA;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  
+

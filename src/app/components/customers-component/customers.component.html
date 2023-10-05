@@ -1,0 +1,35 @@
+
+<ul *ngIf="!(isMobile | async)" class="card-list">
+    <li *ngFor="let card of cards" class="card-item">
+      <div class="card">
+        <div class="header">
+          <div class="logo">
+            <img src="{{ card.imageUrl }}" alt="{{ card.name }} Logo" />
+          </div>
+          <h3>{{ card.name }}</h3>
+        </div>
+        <h4> din {{ card.location }}</h4>
+        <img src="{{ card.imageUrl }}" alt="{{ card.name }}" />
+        <h4>{{ card.categoryDescription }}</h4>
+        <p>{{ card.description }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="(isMobile | async)" class="mobile-card-container">
+  <div  *ngFor="let card of cards" class="mobile-card">
+    <div class="mobile-card-header">
+      <h2>{{ card.name }}</h2>
+      <p>din {{ card.location }}</p>
+    </div>
+    <div class="mobile-card-image">
+      <img src="{{ card.imageUrl }}" alt="Image Description">
+    </div>
+    <div class="mobile-card-details">
+      <p>{{ card.categoryDescription }}</p>
+      <p>{{ card.description }}</p>
+    </div>
+  
+  </div>
+</div>
+

@@ -1,0 +1,11 @@
+.contact-container {
+    width: 100%;
+    height: 30vh; /* This sets the height to 30% of the viewport height */
+    background-color: #f0f0f0; /* Example background color, you can change this */
+  }
+
+  .mobile-contact-container {
+    width: 100%;
+    height: 15vh; /* This sets the height to 30% of the viewport height */
+    background-color: #f0f0f0; /* Example background color, you can change this */
+  }

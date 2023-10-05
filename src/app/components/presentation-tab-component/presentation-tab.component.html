@@ -1,0 +1,11 @@
+
+
+<div  *ngIf="!(isMobile | async)" class="container">
+    <img src="https://eventador.ro/images/logo.svg" alt="Your Image"/>
+    <p>Evenimentul tau, alegerea ta!</p>
+  </div>
+
+  <div  *ngIf="(isMobile | async)" class="mobile-container">
+    <img src="https://eventador.ro/images/logo.svg" alt="Your Image"/>
+    <p>Evenimentul tau, alegerea ta!</p>
+  </div>

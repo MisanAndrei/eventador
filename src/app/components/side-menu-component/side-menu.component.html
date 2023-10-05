@@ -1,0 +1,17 @@
+<div class="sidebar" [class.collapsed]="isCollapsed">
+
+    <button (click)="toggleCollapse()" mat-menu-item><p>Meniu</p></button>
+    <ul>
+      <span *ngIf="(isMobile | async)">
+        <li *ngFor="let menuLink of menuLinks">
+          <a [routerLink]="[menuLink.link]">{{ menuLink.description }}</a>
+        </li>
+      </span>
+      <li *ngIf="!this.isCollapsed">
+        <a [routerLink]="[customersLink.link]">{{ customersLink.description }}</a>
+      </li>
+      <li *ngFor="let category of categories">
+        <a [routerLink]="['/category', category.id]">{{ category.name }}</a>
+      </li>
+    </ul>
+  </div>

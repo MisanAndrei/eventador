@@ -1,0 +1,44 @@
+.sidebar {
+    width: 300px;
+    background-color: transparent;
+    color: #7643CA;
+    transition: width 0.3s;
+    margin-right: -50px;
+  }
+  
+  .collapsed {
+    width: 50px;
+  }
+  
+  .sidebar button {
+    display: block;
+    margin: 0%; 
+    z-index: 1;
+    width: 100px;
+    background-color: transparent;
+    border: 2px solid #7643CA;
+    cursor: pointer;
+    font-size: 30px;
+    color: #7643CA;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+  }
+  
+  .sidebar a {
+    color:#7643CA;
+    text-decoration: none;
+  }
+
+  p {
+    color: #7643CA;
+    margin: 0;
+  }
+
+

@@ -1,0 +1,28 @@
+.blog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray; /* Light gray background on the sides */
+  }
+  
+  .blog-content {
+    width: 60%;
+    text-align: center;
+    padding: 20px;
+    background-color: white; /* White background for the content area */
+  }
+  
+  .blog-content img {
+    width: 100%;
+    height: 50%;
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+  }
+  
+  .blog-content h1 {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+  
+  .blog-content p {
+    font-size: 1rem;
+  }

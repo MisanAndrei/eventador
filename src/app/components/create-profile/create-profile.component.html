@@ -1,0 +1,103 @@
+<div class="backdrop"></div>
+
+<div class="profile-container">
+  <div class="profile-header">
+    <!-- Profile Picture -->
+    <img class="profile-picture" src="https://eventador.ro/images/logo.svg" alt="Profile Picture">
+    <h2 class="username">Bine ai Venit pe platforma eventador.ro!</h2>
+  </div>
+
+  <!-- Personal Information -->
+  <div class="form-group">
+    <label for="name">Nume</label>
+    <input type="text" id="name" [(ngModel)]="name" name="name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" [(ngModel)]="email" name="email" required>
+  </div>
+  <div class="form-group">
+    <label for="phone">Numar de telefon</label>
+    <input type="tel" id="phone" [(ngModel)]="phone" name="phone" required>
+  </div>
+
+  <!-- Business Toggle -->
+  <div class="business-toggle">
+    <label>Cont Furnizor Servicii:</label>
+    <input type="checkbox" [(ngModel)]="isBusinessAccount" (change)="toggleBusinessInfo()">
+  </div>
+
+  <!-- Business Information (Shown only for business accounts) -->
+  <div *ngIf="isBusinessAccount" class="business-info">
+    <h3>Informatiile legate de serviciile oferite</h3>
+    <div class="form-group">
+      <label for="businessName">Numele firmei</label>
+      <input type="text" id="businessName" [(ngModel)]="businessName" name="businessName">
+    </div>
+    <div class="form-group">
+      <label for="businessEmail">Email business</label>
+      <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+    </div>
+    <div class="form-group">
+        <label for="businessEmail">Numar telefon business</label>
+        <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+      </div>
+    <div class="form-group">
+        <label for="businessEmail">Judet</label>
+        <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+      </div>
+      <div class="form-group">
+        <label for="businessEmail">Oras</label>
+        <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+      </div>
+    <div class="form-group">
+      <label for="category">Categorie</label>
+      <input type="text" id="category" [(ngModel)]="category" name="category">
+    </div>
+    <div class="form-group">
+      <label for="motto">Motto</label>
+      <input type="text" id="motto" [(ngModel)]="motto" name="motto">
+    </div>
+    <div class="form-group">
+      <label for="websiteUrl">Website URL</label>
+      <input type="url" id="websiteUrl" [(ngModel)]="websiteUrl" name="websiteUrl">
+    </div>
+    <div class="form-group">
+      <label for="facebookUrl">Facebook URL</label>
+      <input type="url" id="facebookUrl" [(ngModel)]="facebookUrl" name="facebookUrl">
+    </div>
+    <div class="form-group">
+      <label for="instagramUrl">Instagram URL</label>
+      <input type="url" id="instagramUrl" [(ngModel)]="instagramUrl" name="instagramUrl">
+    </div>
+    <div class="form-group">
+      <label for="youtubeUrl">YouTube URL</label>
+      <input type="url" id="youtubeUrl" [(ngModel)]="youtubeUrl" name="youtubeUrl">
+    </div>
+    <div class="form-group">
+        <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil (maxim 10)</label>
+        <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
+      </div>
+    <div class="form-group">
+        <label for="description">Descriere</label>
+        <textarea id="description" [(ngModel)]="description" name="description"></textarea>
+      </div>
+  </div>
+
+  <div class="save-button-container">
+    <button class="save-button" (click)="onSaveButtonClick()">Salveaza profil</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,209 @@
+
+.profile-section {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0;
+  flex-direction: column;
+  margin-bottom: 20px; /* Add this line to adjust the margin */
+  }
+
+  .profile-and-cards {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Added margin for space */
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction:column;
+    gap: 10px; /* Adjust as needed for spacing between items */
+  }
+  
+  .info-item {
+    margin: 0;
+  }
+  
+  /* Additional styling for name, date added, category, and location */
+  .name {
+    font-weight: bold;
+  }
+  
+  .category {
+    color: #555; /* Adjust color as needed */
+  }
+
+  .cards-section {
+    width: 40%;
+    margin: 20px auto; /* Added margin for spacing */
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0;
+  }
+  
+  .small-card {
+    width: 200px;
+    height: 150px;
+    background-color: #7643CA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    border-radius: 3%;
+  }
+  
+  .title, .value {
+    margin: 5px 0;
+  }
+
+  .small-card .title {
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: bold;
+  }
+  
+  .small-card .value {
+    font-weight: 600; /* Adjust the font weight as needed */
+  }
+
+  .table-section {
+    margin-top: 50px !important;
+    justify-content: center;
+    width: 70%;
+    margin: 20px auto; /* Adjust margin as needed */
+  }
+  
+  .table-container {
+    width: 100%; /* Ensure the table takes full width */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+
+  .table-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .table-title {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust margin as needed */
+    
+  }
+
+  .chart-section {
+    margin-top: 50px !important;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .chart-container {
+    align-content: center;
+    width: 100%;
+  }
+
+  .progress-bar {
+    margin-left: 200px;
+    position: relative;
+    width: 200px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    border-radius: 50%;
+    border: 10px solid #ccc; /* Border color */
+    overflow: hidden; /* Clip the progress bar */
+  }
+  
+  .progress-fill {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: conic-gradient(
+      #007bff 0% var(--progress, 0%),
+      transparent var(--progress, 0%) 100%
+    ); /* Set progress color based on variable */
+  }
+  
+  .progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px; /* Adjust font size as needed */
+  }
+
+  .mobile-profile {
+    display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  text-align: center;
+  }
+  
+  .mobile-profile-image {
+    width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+
+  }
+  
+  .mobile-card {
+    width: 200px;
+  height: 50px;
+  background-color: #7643CA; /* Placeholder background color, replace with your own */
+  border-radius: 5%;
+  border: 1px solid #ccc; /* Placeholder border, replace with your own */
+  margin-bottom: 20px; /* Add some spacing between cards */
+  }
+
+  .mobile-card .label {
+    font-weight: bold;
+    color:white;
+  }
+  
+  .mobile-card .text {
+    margin-top: 5px; /* Add some spacing between label and text */
+    color:white;
+  }
+  
+
+  .mobile-progress-bar {
+ 
+    position: relative;
+    width: 150px; /* Adjust width as needed */
+    height: 150px; /* Adjust height as needed */
+    border-radius: 50%;
+    border: 10px solid #ccc; /* Border color */
+    overflow: hidden; /* Clip the progress bar */
+    margin-right: 0 !important;
+  }
+  
+  .mobile-table {
+    margin-top: 10px;
+  }
+
+  .mobile-chart-container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    
+  }
+  
+  
+  
+  
+  

@@ -1,0 +1,30 @@
+<div *ngIf="!(isMobile | async)">
+  <nav>
+    <div class="logo">
+      <img
+    style="margin: left 50px;"
+    width="80"
+    src="https://eventador.ro/images/logo.svg"
+  />
+    </div>
+    <ul class="menu">
+      <li><a routerLink="/despre-noi">Despre Noi</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li><a routerLink="/autentificare">Autentifica-te</a></li>
+    </ul>
+  </nav>  
+
+
+</div>
+
+<div *ngIf="(isMobile | async)" class="mobile-nav">
+  
+  <img
+  style="margin: left 50px;"
+  width="80"
+  src="https://eventador.ro/images/logo.svg"
+/>
+
+</div>
+

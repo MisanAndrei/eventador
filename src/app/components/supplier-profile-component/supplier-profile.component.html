@@ -1,0 +1,71 @@
+
+<div *ngIf="!(isMobile | async)" class="my-container">
+<div class="container">
+   
+   
+   
+    <div class="left">
+    
+        <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
+    
+        <h3>{{ profileName }}</h3>
+    
+        <div *ngFor="let category of categories" style="display:inline-block;">
+        
+            <button style="border: 0px; background-color: #f2f2f2; border-radius: 4px;"><p>{{category.name}}</p></button>
+    
+        </div>
+    
+        <h3 style="margin:0px 5px 0px 5px; text-align: center;">{{motto}}</h3>
+    
+        <h4 style="align-self: left;">{{ location }}</h4>
+        
+        <button class="profile-message-button"><img style="padding-top:15px; float: left;" src="https://eventador.ro/images/mail-icon.svg"><p style="color:white">Trimite-ne un mesaj</p></button>
+        <button class="profile-call-button" ><img style="padding-top:15px; float: left;" src="https://eventador.ro/images/mail-icon.svg"><p style="color:white">Suna-ne</p></button>
+
+        <!--icons section-->
+        <div style="margin-top: 10px;">
+            <img style="margin-right:70px;" src="https://eventador.ro/images/facebook-icon.svg" alt="facebook">
+            <img src="https://eventador.ro/images/youtube-icon.svg" alt="youtube">
+        </div>
+   
+    </div>
+  
+  
+   <div class="right">
+    <div style="text-align: center; margin-top: 3px;">
+        <img style="height: 230px; width: 230px; margin-right: 5px; object-fit: cover" src="{{ images[0] }}" alt="Photo of a Shiba Inu" (click)="openEnlargedView(0)">
+        <img style="height: 230px; width: 230px; margin-right: 5px; object-fit: cover" src="{{ images[1] }}" alt="Photo of a Shiba Inu" (click)="openEnlargedView(1)">
+        <img style="height: 230px; width: 230px; margin-right: 5px; object-fit: cover" src="{{ images[2] }}" alt="Photo of a Shiba Inu" (click)="openEnlargedView(2)">
+
+    </div>
+        
+        <h4 style="margin-left: 10px;">Descriere</h4>
+        <p style="text-align: center; margin: 0px 10px">{{ description }}</p>
+    </div>
+    
+  
+  
+
+</div>
+</div>
+
+<div *ngIf="(isMobile | async)" class="mobile-profile">
+    <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
+    <h3>{{ profileName }}</h3>
+    <div *ngFor="let category of categories" style="display:inline-block;">
+        
+        <button style="border: 0px; background-color: #f2f2f2; border-radius: 4px;"><p>{{category.name}}</p></button>
+
+    </div>
+    <p>{{motto}}</p>
+    <p>{{location}}</p>
+    <p style="margin-right: 5px; margin-left: 5px">{{description}}</p>
+
+    <div class="mobile-image-grid">
+        <div *ngFor="let imageUrl of images" class="mobile-image-item">
+          <img [src]="imageUrl" alt="Image">
+        </div>
+      </div>
+  </div>
+

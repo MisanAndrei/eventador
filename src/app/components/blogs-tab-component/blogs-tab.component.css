@@ -1,0 +1,52 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10%;
+  }
+  
+  .card {
+    width: 48%;
+    margin-bottom: 20px;
+    margin-right: 2%; /* Add margin-right to create space between cards */
+  }
+  
+  .card:last-child {
+    margin-right: 0; /* Remove margin-right from the last card to prevent extra space */
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-content { 
+    padding: 10px;
+  }
+  
+  .card-content h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .card-content p, h2 {
+    margin: 5px 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .mobile-card {
+    width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  }
+  
+  .mobile-card-image img {
+    width: 80%; /* Set image width to 80% */
+  height: auto;
+  margin: 0 auto; /* Center align the image */
+  }
+  
+  .mobile-card-content {
+    padding: 10px;
+    text-align: center; /* Center the text within the card */
+  }

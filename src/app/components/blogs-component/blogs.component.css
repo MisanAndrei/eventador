@@ -1,0 +1,175 @@
+.card-container {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the cards horizontally */
+  }
+  
+  .big-card {
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    position: relative;
+    margin: 15px; /* Add 5px margin around each card */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2%;
+  }
+
+  .medium-card {
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 15px; /* Add 5px margin around each card */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2%;
+    
+  }
+
+  .small-card {
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 15px; /* Add 5px margin around each card */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2%;
+  }
+  
+  .big-card-image {
+    width: 66%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top-left-radius: 2%;
+    border-bottom-left-radius: 2%;
+  }
+
+  .medium-card-image {
+    width: 100%;
+    height:50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+  }
+
+  .small-card-image {
+    width: 100%;
+    height:50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+  }
+  
+  .big-card-text {
+    width: 34%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .medium-card-text {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+ 
+  }
+
+  .small-card-text {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+ 
+  }
+
+  .image, .text {
+    box-sizing: border-box;
+  }
+  
+  .text h3 {
+    margin: 0;
+  }
+  
+  .big-card.items-1 {
+    width: 90%;
+    height: 400px;
+  }
+  
+  .medium-card.items-2 {
+    width: 40%;
+    height: 500px;
+  }
+  
+  .small-card.items-3 {
+    width: 30%;
+    height: 500px;
+  }
+
+  .background-section{
+    overflow: visible;
+    background-color:#F4F8FB;
+  }
+
+  .big-card:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    transition: transform 0.3s;
+  }
+
+  .medium-card:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    transition: transform 0.3s;
+  }
+
+  .small-card:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    transition: transform 0.3s;
+  }
+
+  .category{
+    color:gray;
+  }
+
+  .font-used {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .blog-description {
+    line-height: 1.5;
+    font-size: larger;
+    color:gray;
+  }
+
+  .time {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 14px;
+    color: #555; /* Adjust color as needed */
+  }
+
+  .read-more{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 14px;
+    color: #555; /* Adjust color as needed */
+  }
+
+  .background-image {
+    width: 100%;
+    height: 500px;
+    background-image: url('https://eventador.ro/images/slider/3.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+  }

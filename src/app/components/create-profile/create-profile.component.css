@@ -1,0 +1,152 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styling for the backdrop */
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://eventador.ro/images/slider/3.jpg');
+    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px);
+    z-index: -1;
+  }
+  
+  /* Styling for the profile container */
+  .profile-container {
+    max-width: 50%;
+    margin: 5% auto 0; /* 10% margin from the top, centered horizontally */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    position: relative; /* To make the backdrop cover the entire screen */
+    z-index: 1; /* To position the container above the backdrop */
+  }
+  
+  /* Styling for the profile header */
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture {
+    width: 300px;
+    height: 200px;
+  }
+  
+  .username {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .bio {
+    font-size: 16px;
+  }
+  
+  h3 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Center everything within the form-group */
+  .form-group {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px; /* Add margin below the label to separate from the input */
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px; /* Add margin below the label to separate from the input */
+    text-align: center; /* Center the labels */
+  }
+  
+  /* Adjust width and height of input fields */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"] {
+    width: 30vw; /* Set the width to 50% */
+    height: 3vh; /* Increase the height */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    width: 40vw; /* Set the width to 50% */
+    height: 80vh; /* Increase the height */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .business-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    margin-bottom: 20px;
+  }
+  
+  .business-toggle label {
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  /* Styling for the description textarea */
+  #description {
+    resize: vertical; /* Allow vertical resizing of the textarea */
+    max-width: 100%; /* Limit the width of the textarea */
+    max-height: 200px; /* Limit the height of the textarea */
+  }
+  
+  /* Styling for the social media links */
+  .social-links {
+    text-align: center;
+  }
+  
+  .social-links a {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .social-links a:hover {
+    background-color: #f1f1f1;
+  }
+
+  .save-button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Styling for the Save button */
+  .save-button {
+    padding: 12px 20px;
+    background-color: #7643CA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }

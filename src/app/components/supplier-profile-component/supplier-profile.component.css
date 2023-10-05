@@ -1,0 +1,78 @@
+ :host{
+  display: block;
+  background-color: #f7f8f9;
+}
+
+.container {
+    display: flex;
+    width: 70%;
+    margin: 0 auto; /* centers the container */
+    overflow: hidden;
+  }
+  
+  .left {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color:white;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+  
+  .right {
+    width: 70%;
+    background-color: white;
+    margin-left: 5px;
+    margin-top:20px;
+    margin-bottom:50px;
+  }
+
+  .card-image {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-top: 5px;
+    object-fit: cover;
+  }
+
+  .profile-message-button {
+    background-color: #326a63;
+    font-size: large;
+    width: 250px;
+    border-radius: 8px;
+    height: 50px;
+    border: 0;
+  }
+
+  .profile-call-button {
+    background-color: #007aff;
+    font-size: large;
+    width: 250px;
+    margin-top: 10px;
+    border-radius: 8px;
+    height: 50px;
+    border: 0;
+  }
+
+  .mobile-profile{
+    background-color: #f7f8f9;
+    text-align: center;
+  }
+
+  .mobile-image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .mobile-image-item {
+    margin: 10px;
+  }
+  
+  .mobile-image-item img {
+    max-width: 100%;
+    height: auto;
+  }
+
