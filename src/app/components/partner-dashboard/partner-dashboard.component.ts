@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
-import { startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 

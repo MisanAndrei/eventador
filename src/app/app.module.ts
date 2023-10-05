@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
-import { NgChartsModule } from 'ng2-charts';
+import { NgChartsModule} from 'ng2-charts';
+
 
 
 import {NgIf} from '@angular/common';
@@ -19,8 +20,8 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { MatIconModule } from '@angular/material/icon';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { NgImageSliderModule } from 'ng-image-slider';
+
+
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -86,8 +87,6 @@ import { PartnerDashboardComponent } from './components/partner-dashboard/partne
     MatMenuModule,
     MatIconModule,
     MatCardModule,
-    SlickCarouselModule,
-    NgImageSliderModule,
     NgIf,
     FormsModule,
     MatInputModule,
