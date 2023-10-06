@@ -12,7 +12,7 @@ import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/colaborator', pathMatch: 'full' },
+  { path: '', redirectTo: '/autentificare', pathMatch: 'full' },
 { path: 'contact', component: ContactComponent},
 { path: 'colaborator', component: SupplierProfileComponent },
 { path: 'acasa', component: DashboardComponent },
