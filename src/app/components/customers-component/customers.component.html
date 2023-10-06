@@ -19,15 +19,15 @@
   <div *ngIf="(isMobile | async)" class="mobile-card-container">
   <div  *ngFor="let card of cards" class="mobile-card">
     <div class="mobile-card-header">
-      <h2>{{ card.name }}</h2>
+      <p class="mobile-card-name">{{ card.name }}</p>
       <p>din {{ card.location }}</p>
     </div>
     <div class="mobile-card-image">
       <img src="{{ card.imageUrl }}" alt="Image Description">
     </div>
     <div class="mobile-card-details">
-      <p>{{ card.categoryDescription }}</p>
-      <p>{{ card.description }}</p>
+      <p class="mobile-card-category">{{ card.categoryDescription }}</p>
+      <p class="mobile-card-description">{{ card.description }}</p>
     </div>
   
   </div>

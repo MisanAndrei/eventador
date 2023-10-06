@@ -55,19 +55,33 @@
     margin: 10px auto;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5%;
   }
   
   .mobile-card-header {
     text-align: center;
-    padding: 10px;
   }
   
   .mobile-card-image img {
     width: 100%;
-    height: 50%;
+    height: 160px;
     object-fit: cover;
   }
   
   .mobile-card-details {
-    padding: 10px;
+    text-align: center;
+  }
+
+  .mobile-card-name {
+    font-weight: 700;
+  }
+
+  .mobile-card-category {
+    color: gray;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .mobile-card-description{
+    margin-top: 0px;
   }
