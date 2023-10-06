@@ -12,7 +12,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('https://eventadorapi.azurewebsites.net/api/Category');
+    return this.http.get<Category[]>('https://eventadorapitest.azurewebsites.net/api/Category');
   }
 
   // Perform a GET request
