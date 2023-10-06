@@ -62,11 +62,22 @@ body {
   line-height: 1.5;
 }
 
-/* Media Query for smaller screens */
-@media screen and (max-width: 768px) {
-  .categories-section,
-  .second-section,
-  .third-section {
-    width: 90%;
-  }
+.mobile-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.mobile-section {
+  margin-bottom: 20px;
+}
+
+.mobile-container h2 {
+  font-weight: bold;
+  text-align: center;
+  margin-top:35px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mobile-section p {
+  font-family: Arial, Helvetica, sans-serif;
 }

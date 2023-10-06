@@ -1,11 +1,4 @@
-<div class="categories-section">
-    <div class="category-list">
-        <div class="category" *ngFor="let category of categories">{{ category }}</div>
-
-        <!-- Add more category elements here -->
-      </div>
-  </div>
-  
+  <div *ngIf="!(isMobile | async)"> 
   <div class="second-section">
     <h2 class="section-title">Salut și bine ai venit pe eventador.ro!</h2>
     <p class="section-text">{{ secondSectionDescription }}</p>
@@ -30,3 +23,11 @@
       <p class="subsection-text">Accesul este gratuit și așa va rămâne. În cel mai scurt timp, vei avea și posibilitatea să descarci și aplicația EVENTADOR disponibilă pentru IOS/Android.</p>
     </div>
   </div>
+</div> 
+
+<div *ngIf="(isMobile | async)" class="mobile-container">
+  <div class="mobile-section" *ngFor="let section of sections">
+    <h2><strong>{{ section.title }}</strong></h2>
+    <p>{{ section.text }}</p>
+  </div>
+</div>
