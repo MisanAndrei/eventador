@@ -33,6 +33,9 @@ export class SideMenuComponent implements OnInit {
   }
 
   toggleCollapse() {
+    console.log(this.isCollapsed);
+    document.getElementsByClassName("menu-container")[0].classList.toggle("menu-change");
+
     this.isCollapsed = !this.isCollapsed;
     if (this.isCollapsed){
       this.categories = [];

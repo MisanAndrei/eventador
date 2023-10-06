@@ -16,7 +16,7 @@
     z-index: 1;
     width: 100px;
     background-color: transparent;
-    border: 2px solid #7643CA;
+    border: none;
     cursor: pointer;
     font-size: 30px;
     color: #7643CA;
@@ -39,6 +39,29 @@
   p {
     color: #7643CA;
     margin: 0;
+  }
+
+  .menu-container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .menu-bar1, .menu-bar2, .menu-bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .menu-change .menu-bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  
+  .menu-change .menu-bar2 {opacity: 0;}
+  
+  .menu-change .menu-bar3 {
+    transform: translate(0, -11px) rotate(45deg);
   }
 
 
