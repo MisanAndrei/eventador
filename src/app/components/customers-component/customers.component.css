@@ -2,7 +2,7 @@
     width: 15vw; /* Adjust the width as needed */
     height: 60vh; /* Twice the width */
     background-color: #fff;
-
+    border: 1px solid #f2f2f2;
     text-align: center;
     border-radius: 5%;
     cursor: pointer;
@@ -26,6 +26,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #f8f8f8;
+    margin-top: 0px;
   }
   
   .card-item {
@@ -88,6 +90,7 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  background-color: #f8f8f8;
 
   }
 
@@ -98,6 +101,7 @@
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #f2f2f2;
     border-radius: 5%;
+    background-color: white;
   }
   
   .mobile-card-header {
