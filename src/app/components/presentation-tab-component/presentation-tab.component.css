@@ -18,7 +18,7 @@
   .container p {
     font-size: 60px;
     color: #7643CA;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   .mobile-container {
@@ -41,7 +41,7 @@
   .mobile-container p {
     font-size: 5vw;
     color: #7643CA;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   

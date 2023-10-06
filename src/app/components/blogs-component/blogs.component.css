@@ -137,10 +137,11 @@
 
   .category{
     color:gray;
+    margin-bottom: 5px;
   }
 
   .font-used {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   .blog-description {
@@ -172,4 +173,43 @@
     background-size: cover;
     background-position: center;
     object-fit: cover;
+  }
+
+  .mobile-blog-list {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .mobile-blog {
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-blog-image {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+  }
+  
+  .mobile-blog-details {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .mobile-blog-category,
+  .mobile-blog-title,
+  .mobile-blog-content {
+    text-align: left;
+  }
+  
+  .mobile-read-more {
+    text-align: right;
+    font-style: italic;
+    color: #7643CA;
+    cursor: pointer;
+  }
+
+  .mobile-container {
+    margin-top: 40px;
   }

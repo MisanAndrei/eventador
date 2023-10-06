@@ -13,7 +13,7 @@ export class SideMenuComponent implements OnInit {
   categories: Category[] = [];
   isCollapsed = true;
   allCategories: Category[] = [];
-  allMenuLinks: MenuLinks[] = [ { link: '/despre-noi', description: 'Despre noi'}, { link: '/contact', description: 'Contact'}, { link: '/dashboard', description: 'Dashboard'}, { link: '/autentificare', description: 'Autentifica-te'}];
+  allMenuLinks: MenuLinks[] = [ { link: '/despre-noi', description: 'Despre noi'}, { link: '/contact', description: 'Contact'}, { link: '/dashboard', description: 'Dashboard'}, { link: '/autentificare', description: 'Autentifica-te'}, { link: '/noutati', description: 'Blog'}, { link: '/blog', description: 'Blog simplu'}];
   menuLinks: MenuLinks[] = [];
   customersLink: MenuLinks = {link: '/furnizori', description: 'Toti furnizorii'};
 
