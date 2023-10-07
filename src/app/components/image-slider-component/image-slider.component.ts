@@ -20,6 +20,8 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     const videoElement = this.el.nativeElement.querySelector('#myVideo');
+    this.el.nativeElement.querySelector('#myVideo').play();
+    videoElement.play();
 
     videoElement.addEventListener('play', () => {
       // Your code to handle the play event goes here
