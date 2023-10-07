@@ -1,4 +1,4 @@
-<div class="sidebar" [class.collapsed]="isCollapsed">
+<div class="sidebar" [class.collapsed]="isCollapsed" *ngIf="!(isMobile | async)">
 
     <button (click)="toggleCollapse()" mat-menu-item><div class="menu-container">
       <div class="menu-bar1"></div>
@@ -6,11 +6,6 @@
       <div class="menu-bar3"></div>
     </div></button>
     <ul>
-      <span *ngIf="(isMobile | async)">
-        <li *ngFor="let menuLink of menuLinks">
-          <a [routerLink]="[menuLink.link]">{{ menuLink.description }}</a>
-        </li>
-      </span>
       <li *ngIf="!this.isCollapsed">
         <a [routerLink]="[customersLink.link]">{{ customersLink.description }}</a>
       </li>

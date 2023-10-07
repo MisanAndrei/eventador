@@ -8,6 +8,7 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent {
+  showFilter: boolean = false;
   searchTerm: string = '';
   selectedCategory: string = '';
   selectedZone: string = '';
@@ -59,5 +60,9 @@ export class CustomersComponent {
         console.log('Search Term:', this.searchTerm);
         console.log('Selected Category:', this.selectedCategory);
         console.log('Selected Zone:', this.selectedZone);
+      }
+
+      toggleFilter() {
+        this.showFilter = !this.showFilter;
       }
 }

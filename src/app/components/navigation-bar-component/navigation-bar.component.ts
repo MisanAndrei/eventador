@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -11,11 +12,45 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./navigation-bar.component.css']
 })
 export class NavigationBarComponent {
+  showMenu = false;
+  isCollapsed = true;
   isMobile: Observable<boolean>;
-  constructor(private breakpointObserver: BreakpointObserver) {
+
+  menuItems = [
+    { link: '/acasa', description: 'Acasa' },
+    { link: '/despre-noi', description: 'Despre Noi' },
+    { link: '/contact', description: 'Contact' },
+    { link: '/dashboard', description: 'Dashboard' },
+    { link: '/autentificare', description: 'Autentificare' },
+    { link: '/noutati', description: 'Blog complet' },
+    { link: '/blog', description: 'Blog Simplu' },
+    { link: '/furnizori', description: 'Furnizori'}
+    // Add more items as needed
+  ];
+
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
       );
   }
+
+ 
+
+  toggleCollapse() {
+
+    document.getElementsByClassName("menu-container")[0].classList.toggle("menu-change");
+    this.showMenu = !this.showMenu;
+    document.body.classList.toggle('no-scroll', this.showMenu); // Optional: Prevent scrolling in the background
+    this.isCollapsed = !this.isCollapsed;
+    
+  }
+
+  onItemClick(link: string) {
+    this.toggleCollapse();
+    this.router.navigate([link]);
+  }
+
+  
 }
+

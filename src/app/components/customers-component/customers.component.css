@@ -172,6 +172,12 @@
 
   .mobile-filter-container{
     background-color: #f8f8f8;
+    max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  }
+  .show-container {
+    max-height: 500px; /* Adjust the max height as needed */
   }
 
   .mobile-filter-button{

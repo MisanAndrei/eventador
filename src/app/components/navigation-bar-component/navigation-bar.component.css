@@ -38,13 +38,111 @@ nav {
   }
 
 
-.mobile-nav {
-  height:60px;
-  text-align: center;
-  width: 100vw;
-}
 
-.mobile-nav img {
-  margin-top: 15px;
-}
 
+  .mobile-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    text-align: center;
+    width: 100vw;
+  }
+  
+  .left-content {
+    position: absolute;
+    left: 10px;
+  }
+  
+  .center-content {
+    flex: 1;
+    text-align: center;
+  }
+
+  
+  
+  /* Add this to hide the menu initially */
+  .overlay.hidden {
+    display: none;
+  }
+  
+  .menu-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-list li {
+    margin-bottom: 10px;
+  }
+  
+  .menu-list a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2em;
+  }
+  
+  .menu-container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .menu-bar1, .menu-bar2, .menu-bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .menu-change .menu-bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  
+  .menu-change .menu-bar2 {opacity: 0;}
+  
+  .menu-change .menu-bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }
+
+  .mobile-nav button{
+    border: 0;
+    background-color:transparent;
+  }
+
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 60px; /* Adjusted to match your navbar height */
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 60px); /* Subtract the navbar height from viewport height */
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+
+  }
+  
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Add some space from the top */
+  }
+  
+  .menu-item {
+    font-size: 24px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Add space between items */
+    font-weight: bold;
+  }
+  
+  .menu-item a {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: black;
+    padding: 5px 10px; /* Add padding for space around the text */
+    border-radius: 5px;
+  }
+  
+  .menu-item a:hover {
+    font-weight: bold;
+  }

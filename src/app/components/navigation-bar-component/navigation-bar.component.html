@@ -19,13 +19,27 @@
 
 </div>
 
-<div *ngIf="(isMobile | async)" class="mobile-nav">
-  <a routerLink="/acasa">
-  <img
-  style="margin: left 50px;"
-  width="80"
-  src="https://eventador.ro/images/logo.svg"
-/></a>
 
+<div *ngIf="(isMobile | async)" class="mobile-nav">
+  <div class="left-content">
+    <button (click)="toggleCollapse()" mat-menu-item><div class="menu-container">
+      <div class="menu-bar1"></div>
+      <div class="menu-bar2"></div>
+      <div class="menu-bar3"></div>
+    </div></button>
+  </div>
+  <div class="center-content">
+    <a routerLink="/acasa">
+      <img width="80" src="https://eventador.ro/images/logo.svg" />
+    </a>
+  </div>
+</div>
+
+<div *ngIf="showMenu" class="overlay">
+  <ul class="menu-list">
+    <li *ngFor="let item of menuItems" class="menu-item">
+      <a (click)="onItemClick(item.link)">{{ item.description }}</a>
+    </li>
+  </ul>
 </div>
 

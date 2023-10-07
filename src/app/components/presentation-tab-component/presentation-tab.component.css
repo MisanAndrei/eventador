@@ -6,17 +6,20 @@
     height: auto; /* Optional: This sets the container to take up the full viewport height */
   }
   
-  .container img,
-  .container p {
+  
+  .container p, h1 {
     margin: 10px; /* Optional: Add some space between the elements */
   }
 
-  .container img{
-    width:400px;
+  
+  .container p{
+    font-size: 60px;
+    color: #7643CA;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
-  .container p {
-    font-size: 60px;
+  .container h1 {
+    font-size: 100px;
     color: #7643CA;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
@@ -29,17 +32,22 @@
     height: auto; /* Optional: This sets the container to take up the full viewport height */
   }
   
-  .mobile-container img,
-  .mobile-container p {
-    margin: 10px; /* Optional: Add some space between the elements */
+
+  .mobile-container h1 {
+    margin: 5px; /* Optional: Add some space between the elements */
   }
 
-  .mobile-container img{
-    width:50vw;
-  }
+
 
   .mobile-container p {
     font-size: 5vw;
+    margin: 10px 0;
+    color: #7643CA;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  .mobile-container h1 {
+    font-size: 10vw;
     color: #7643CA;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
