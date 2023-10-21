@@ -55,6 +55,7 @@ import { ApplicationContainerComponent } from './components/application-containe
 import { CustomersComponent } from './components/customers-component/customers.component';
 import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
+import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 
 
 
@@ -80,7 +81,8 @@ import { PartnerDashboardComponent } from './components/partner-dashboard/partne
     ApplicationContainerComponent,
     CustomersComponent,
     BlogsComponent,
-    PartnerDashboardComponent
+    PartnerDashboardComponent,
+    PopularCustomersTabComponent
   ],
   imports: [
     AppRoutingModule,

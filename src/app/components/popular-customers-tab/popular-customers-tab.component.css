@@ -1,0 +1,20 @@
+.popular-customers-container{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.cards-container {
+    display: flex;
+    width: 100vw; /* Set to full viewport width */
+    overflow: auto; /* Enable scrolling */
+    -ms-overflow-style: none; /* Hide scrollbar on Edge and IE */
+    scrollbar-width: none; /* Hide scrollbar on Firefox */
+  }
+  
+  .cards-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar on Chrome, Safari, and Opera */
+  }
+  
+  .item {
+    margin-right: 10px;
+    min-width: 100px; /* Adjust the width as needed */
+  }
