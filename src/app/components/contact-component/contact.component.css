@@ -63,18 +63,18 @@
   }
 
   .fa-facebook {
-    background: #125688;
-    color: white;
+    background: white;
+    color: #125688;
   }
 
   .fa-instagram {
-    background: #c222ba;
-    color: white;
+    background:white;
+    color: #c222ba ;
   }
 
   .fa {
     padding: 20px;
-    font-size: 30px;
+    font-size: 48px;
     width: 50px;
     text-align: center;
     text-decoration: none;

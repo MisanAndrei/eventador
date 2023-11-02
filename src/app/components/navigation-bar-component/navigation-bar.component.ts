@@ -25,6 +25,7 @@ export class NavigationBarComponent {
     { link: '/noutati', description: 'Blog complet' },
     { link: '/blog', description: 'Blog Simplu' },
     { link: '/furnizori', description: 'Furnizori'},
+    { link: '/colaborator', description: 'Colaborator'},
     { link: '/creare-profil', description: 'Creare Profil'}
     // Add more items as needed
   ];

@@ -76,7 +76,29 @@
     height: auto;
   }
 
-  .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img, .ng-image-slider .ng-image-slider-container .main .main-inner .img-div video {
-    object-fit: cover !important;
-}
+  .fa-facebook {
+    background: white;
+    color: #125688;
+  }
 
+  .fa-instagram {
+    background:white;
+    color: #c222ba ;
+  }
+
+  .fa-globe{
+    color:blue;
+  }
+
+  .fa-youtube-play {
+    color: red;
+  }
+
+  .fa {
+    padding: 20px;
+    font-size: 48px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+  }

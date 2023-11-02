@@ -10,24 +10,23 @@
     
         <h3>{{ profileName }}</h3>
     
-        <div *ngFor="let category of categories" style="display:inline-block;">
         
-            <button style="border: 0px; background-color: #f2f2f2; border-radius: 4px;"><p>{{category.name}}</p></button>
-    
-        </div>
     
         <h3 style="margin:0px 5px 0px 5px; text-align: center;">{{motto}}</h3>
     
         <h4 style="align-self: left;">{{ location }}</h4>
+
+        <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+            <div *ngFor="let category of categories" >
+                <button style="border: 0px;color: white; background-color: #7643CA; border-radius: 4px; margin: 0 5px;"><p>{{category.name}}</p></button>
+            </div>
+        </div>
         
-        <button class="profile-message-button"><img style="padding-top:15px; float: left;" src="https://eventador.ro/images/mail-icon.svg"><p style="color:white">Trimite-ne un mesaj</p></button>
-        <button class="profile-call-button" ><img style="padding-top:15px; float: left;" src="https://eventador.ro/images/mail-icon.svg"><p style="color:white">Suna-ne</p></button>
+        <p style="margin-bottom: 0px;">Numar telefon: 0752173948</p>
+        <p style="margin-bottom: 0px;">E-mail: dorel@yahoo.com</p>
 
         <!--icons section-->
-        <div style="margin-top: 10px;">
-            <img style="margin-right:70px;" src="https://eventador.ro/images/facebook-icon.svg" alt="facebook">
-            <img src="https://eventador.ro/images/youtube-icon.svg" alt="youtube">
-        </div>
+        
    
     </div>
   
@@ -38,12 +37,18 @@
     [images]="imageObject"
     [infinite]="true"
     [autoSlide]="false"
-    [imageSize]="{ width: '25%', height: 200 }"
+    [imageSize]="{ width: '33%', height: 300 }"
     slideImage="1"
   ></ng-image-slider>
-        
-        <h4 style="margin-left: 10px;">Descriere</h4>
+    
+        <h3 style="margin-left: 10px; text-align: center;">Descriere</h3>
         <p style="text-align: center; margin: 0px 10px">{{ description }}</p>
+        <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+            <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
+            <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+            <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
+            <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
+          </div>
     </div>
     
   
@@ -55,19 +60,34 @@
 <div *ngIf="(isMobile | async)" class="mobile-profile">
     <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
     <h3>{{ profileName }}</h3>
-    <div *ngFor="let category of categories" style="display:inline-block;">
-        
-        <button style="border: 0px; background-color: #f2f2f2; border-radius: 4px;"><p>{{category.name}}</p></button>
-
+    <p>{{location}}</p>
+    <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: 0752173948</p>
+    <p style="margin-bottom: 2px; margin-top:3px;">E-mail: dorel@yahoo.com</p>
+    <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+        <div *ngFor="let category of categories" >
+            <button style="border: 0px;color: white; background-color: #7643CA; border-radius: 4px; margin: 0 5px;"><p>{{category.name}}</p></button>
+        </div>
     </div>
     <p>{{motto}}</p>
-    <p>{{location}}</p>
+    
     <p style="margin-right: 5px; margin-left: 5px">{{description}}</p>
 
-    <div class="mobile-image-grid">
-        <div *ngFor="let imageUrl of images" class="mobile-image-item">
-          <img [src]="imageUrl" alt="Image">
-        </div>
-      </div>
+    
+
+    <ng-image-slider
+    #nav
+    [images]="imageObject"
+    [infinite]="true"
+    [autoSlide]="false"
+    [imageSize]="{ width: '25%', height: 200 }"
+    slideImage="1"
+  ></ng-image-slider>
+
+  <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+    <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
+  </div>
   </div>
 
