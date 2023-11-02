@@ -76,3 +76,7 @@
     height: auto;
   }
 
+  .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img, .ng-image-slider .ng-image-slider-container .main .main-inner .img-div video {
+    object-fit: cover !important;
+}
+

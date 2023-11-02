@@ -22,8 +22,18 @@ import { Observable, map } from 'rxjs';
     images: string[] = ['https://eventador.ro/uploads/2019/02/rotar2.jpeg', 'https://eventador.ro/uploads/2019/02/rotar3.jpeg', 
                         'https://eventador.ro/uploads/2019/03/a56d6a3204cc73d5a3a60edd9c3397b5.jpg', 'https://eventador.ro/uploads/2019/03/e2cfa33521c09b0a39cbaca2ce4ffe03.jpg',
                         'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-1@2x-50.jpg', 'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-2@2x-50.jpg', 
-                        'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-3@2x-50.jpg']
+                        'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-3@2x-50.jpg'];
 
+    imageObject: any = [{image: '', thumbImage: 'https://eventador.ro/uploads/2019/02/rotar2.jpeg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2019/02/rotar3.jpeg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2019/03/a56d6a3204cc73d5a3a60edd9c3397b5.jpg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2019/03/e2cfa33521c09b0a39cbaca2ce4ffe03.jpg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-1@2x-50.jpg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-3@2x-50.jpg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-1@2x-50.jpg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2019/03/e2cfa33521c09b0a39cbaca2ce4ffe03.jpg', title: ''},
+                          {image: '', thumbImage: 'https://eventador.ro/uploads/2018/07/Claudiu-Moldovan-2@2x-50.jpg', title: ''}]
+    
     //model
     profileImage: string = 'https://eventador.ro/uploads/2019/02/rotar1.jpeg';
     profileName:string = 'Misan Andrei';

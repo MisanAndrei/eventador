@@ -33,6 +33,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 
 
@@ -112,7 +113,8 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
     NgChartsModule,
     MatChipsModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgImageSliderModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

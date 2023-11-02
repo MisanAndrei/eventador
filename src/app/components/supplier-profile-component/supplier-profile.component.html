@@ -33,12 +33,14 @@
   
   
    <div class="right">
-    <div style="text-align: center; margin-top: 3px;">
-        <img style="height: 230px; width: 230px; margin-right: 5px; object-fit: cover" src="{{ images[0] }}" alt="Photo of a Shiba Inu" (click)="openEnlargedView(0)">
-        <img style="height: 230px; width: 230px; margin-right: 5px; object-fit: cover" src="{{ images[1] }}" alt="Photo of a Shiba Inu" (click)="openEnlargedView(1)">
-        <img style="height: 230px; width: 230px; margin-right: 5px; object-fit: cover" src="{{ images[2] }}" alt="Photo of a Shiba Inu" (click)="openEnlargedView(2)">
-
-    </div>
+    <ng-image-slider
+    #nav
+    [images]="imageObject"
+    [infinite]="true"
+    [autoSlide]="false"
+    [imageSize]="{ width: '25%', height: 200 }"
+    slideImage="1"
+  ></ng-image-slider>
         
         <h4 style="margin-left: 10px;">Descriere</h4>
         <p style="text-align: center; margin: 0px 10px">{{ description }}</p>
