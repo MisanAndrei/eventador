@@ -55,9 +55,14 @@
     height: 50px;
     border: 0;
   }
+  .mobile-container {
+    background-color: white;
+  }
 
   .mobile-profile{
-    background-color: #f7f8f9;
+    margin: 0 auto;
+    width:90%;
+    background-color: white;
     text-align: center;
   }
 
@@ -77,12 +82,12 @@
   }
 
   .fa-facebook {
-    background: white;
+
     color: #125688;
   }
 
   .fa-instagram {
-    background:white;
+
     color: #c222ba ;
   }
 
@@ -95,7 +100,7 @@
   }
 
   .fa {
-    padding: 20px;
+    padding: 10px;
     font-size: 48px;
     width: 50px;
     text-align: center;
