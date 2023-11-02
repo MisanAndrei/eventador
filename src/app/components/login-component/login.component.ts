@@ -23,10 +23,12 @@ export class LoginComponent {
   login() {
     // Replace with your actual login logic and API call
     // After successful login, you'll receive the token in the response
+    console.log('button clicked');
+    this.authService.login('testuser@gmail.com', 'test');
 
-    this.router.navigate(['/acasa']);
-    const token = 'your_access_token'; // Replace with the actual token from the response
+    //this.router.navigate(['/acasa']);
+    //const token = 'your_access_token'; // Replace with the actual token from the response
 
-    this.authService.storeToken(token);
+    //this.authService.storeToken(token);
   }
 }

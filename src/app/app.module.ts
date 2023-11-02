@@ -30,6 +30,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+
 
 
 
@@ -104,7 +109,10 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
     MatSortModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    NgChartsModule
+    NgChartsModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

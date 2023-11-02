@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -6,9 +7,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   private jwtHelper: JwtHelperService = new JwtHelperService();
-  private tokenKey = 'access_token'; // Replace with your desired key for storing the token
+  private tokenKey = 'access_token';
+  private apiUrl = 'https://eventadorapitest.azurewebsites.net/api/Auth/login';
+   // Replace with your desired key for storing the token
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   storeToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
@@ -30,6 +33,31 @@ export class AuthService {
 
   getDecodedToken(): any {
     const token = this.getToken();
-    return token ? this.jwtHelper.decodeToken(token) : null;
+    const decodedToken = this.jwtHelper.decodeToken(token ?? "");
+    var name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    var role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    console.log(name, role);
+    //return token ? this.jwtHelper.decodeToken(token) : null;
+  }
+
+  async login(email: string, password: string) {
+    try {
+      const response = await this.http.post(this.apiUrl, { email, password }, { responseType: 'text' }).toPromise();
+      console.log(response);
+      this.handleLoginResponse(response ?? "");
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  handleLoginResponse(response: string) {
+    const token = response; // Assuming the response is a token as a string
+    if (token) {
+      this.storeToken(token);
+      this.getDecodedToken();
+      console.log('Login successful');
+    } else {
+      console.error('Invalid response from API');
+    }
   }
 }

@@ -1,78 +1,158 @@
-<div class="backdrop"></div>
+<div *ngIf="!(isMobile | async)" class="backdrop"></div>
 
-<div class="profile-container">
+<div *ngIf="!(isMobile | async)" class="profile-container">
   <div class="profile-header">
     <!-- Profile Picture -->
     <img class="profile-picture" src="https://eventador.ro/images/logo.svg" alt="Profile Picture">
     <h2 class="username">Bine ai Venit pe platforma eventador.ro!</h2>
   </div>
 
-  <!-- Personal Information -->
   <div class="form-group">
-    <label for="name">Nume</label>
-    <input type="text" id="name" [(ngModel)]="name" name="name" required>
+    <mat-form-field class="custom-input">
+    <input matInput placeholder="Email" type="email" id="email" [(ngModel)]="email" name="email" required>
+  </mat-form-field>
   </div>
+
   <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" id="email" [(ngModel)]="email" name="email" required>
+    <mat-form-field class="custom-input">
+    <input matInput placeholder="Parola" type="password" [(ngModel)]="password" name="password" required>
+  </mat-form-field>
   </div>
+
   <div class="form-group">
-    <label for="phone">Numar de telefon</label>
-    <input type="tel" id="phone" [(ngModel)]="phone" name="phone" required>
+    <mat-form-field class="custom-input">
+    <input matInput type="password" placeholder="Verificare Parola" [(ngModel)]="passwordVerified" name="passwordVerified" required>
+  </mat-form-field>
+  </div>
+
+  <h3>Informatiile legate de cont</h3>
+  
+  <div class="form-group">
+    <mat-form-field class="custom-input">
+    <input matInput placeholder="Nume de familie" [(ngModel)]="lastName" name="lastName" required>
+  </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input">
+    <input matInput placeholder="Prenume" [(ngModel)]="firstName" name="firstName" required>
+  </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input">
+      <input matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon" required>
+    </mat-form-field>
   </div>
 
   <!-- Business Toggle -->
   <div class="business-toggle">
     <label>Cont Furnizor Servicii:</label>
-    <input type="checkbox" [(ngModel)]="isBusinessAccount" (change)="toggleBusinessInfo()">
+    <mat-slide-toggle
+          [checked]="isBusinessAccount"
+          [(ngModel)]="isBusinessAccount"
+          (change)="toggleBusinessInfo()">
+      </mat-slide-toggle>
   </div>
 
   <!-- Business Information (Shown only for business accounts) -->
   <div *ngIf="isBusinessAccount" class="business-info">
     <h3>Informatiile legate de serviciile oferite</h3>
-    <div class="form-group">
-      <label for="businessName">Numele firmei</label>
-      <input type="text" id="businessName" [(ngModel)]="businessName" name="businessName">
+
+    <div class="business-toggle">
+      <label>Persoana Juridica:</label>
+      <mat-slide-toggle
+          [checked]="isLegalPerson"
+          [(ngModel)]="isLegalPerson"
+          (change)="toggleLegalPerson()">
+      </mat-slide-toggle>
     </div>
-    <div class="form-group">
-      <label for="businessEmail">Email business</label>
-      <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
-    </div>
-    <div class="form-group">
-        <label for="businessEmail">Numar telefon business</label>
-        <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+
+    <div *ngIf="isLegalPerson" class="business-info">
+      <div class="form-group">
+        <mat-form-field class="custom-input">
+        <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI">
+      </mat-form-field>
       </div>
+    </div>
+
     <div class="form-group">
-        <label for="businessEmail">Judet</label>
-        <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Numele firmei" [(ngModel)]="businessName" name="businessName">
+    </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Email Business" [(ngModel)]="businessEmail" name="businessEmail">
+    </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="custom-input">
+        <input matInput placeholder="Numar de telefon business" type="text" id="businessPhoneNumber" [(ngModel)]="businessPhoneNumber" name="businessPhoneNumber">
+      </mat-form-field>
       </div>
       <div class="form-group">
-        <label for="businessEmail">Oras</label>
-        <input type="email" id="businessEmail" [(ngModel)]="businessEmail" name="businessEmail">
+        <mat-form-field class="custom-dropdown">
+          <mat-label>Judet</mat-label>
+          <mat-select [(ngModel)]="countyId">
+            <mat-option *ngFor="let county of counties" [value]="county.id" (change)="onCountyChange()">{{ county.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
+      
+      <div class="form-group" *ngIf="countyId">
+        <mat-form-field class="custom-dropdown">
+          <mat-label>Oras</mat-label>
+          <mat-select [(ngModel)]="cityId">
+            <mat-option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>       
+      </div>
+      
+      <div class="form-group">
+        <mat-form-field class="custom-dropdown">
+          <mat-label>Zona de acoperire</mat-label>
+          <mat-select [(ngModel)]="selectedAreas" multiple>
+            <mat-option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="custom-dropdown">
+          <mat-label>Selectare categorie</mat-label>
+          <mat-select [(ngModel)]="selectedCategories"  multiple>
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
     <div class="form-group">
-      <label for="category">Categorie</label>
-      <input type="text" id="category" [(ngModel)]="category" name="category">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Motto" [(ngModel)]="motto" name="motto">
+    </mat-form-field>
     </div>
     <div class="form-group">
-      <label for="motto">Motto</label>
-      <input type="text" id="motto" [(ngModel)]="motto" name="motto">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Website URL" [(ngModel)]="websiteUrl" name="websiteUrl">
+    </mat-form-field>
     </div>
     <div class="form-group">
-      <label for="websiteUrl">Website URL</label>
-      <input type="url" id="websiteUrl" [(ngModel)]="websiteUrl" name="websiteUrl">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Facebook URL" [(ngModel)]="facebookUrl" name="facebookUrl">
+    </mat-form-field>
     </div>
     <div class="form-group">
-      <label for="facebookUrl">Facebook URL</label>
-      <input type="url" id="facebookUrl" [(ngModel)]="facebookUrl" name="facebookUrl">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Instagram URL" [(ngModel)]="instagramUrl" name="instagramUrl">
+    </mat-form-field>
     </div>
     <div class="form-group">
-      <label for="instagramUrl">Instagram URL</label>
-      <input type="url" id="instagramUrl" [(ngModel)]="instagramUrl" name="instagramUrl">
-    </div>
-    <div class="form-group">
-      <label for="youtubeUrl">YouTube URL</label>
-      <input type="url" id="youtubeUrl" [(ngModel)]="youtubeUrl" name="youtubeUrl">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Youtube URL" [(ngModel)]="youtubeUrl" name="youtubeUrl">
+    </mat-form-field>
     </div>
     <div class="form-group">
         <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil (maxim 10)</label>
@@ -81,6 +161,174 @@
     <div class="form-group">
         <label for="description">Descriere</label>
         <textarea id="description" [(ngModel)]="description" name="description"></textarea>
+      </div>
+  </div>
+
+  <div class="save-button-container">
+    <button class="save-button" (click)="onSaveButtonClick()">Salveaza profil</button>
+  </div>
+</div>
+
+<div *ngIf="(isMobile | async)">
+  <div class="profile-header">
+    <!-- Profile Picture -->
+    <h2 class="username">Bine ai Venit pe platforma eventador.ro!</h2>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input-mobile">
+    <input matInput placeholder="Email" type="email" id="email" [(ngModel)]="email" name="email" required>
+  </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input-mobile">
+    <input matInput placeholder="Parola" type="password" [(ngModel)]="password" name="password" required>
+  </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input-mobile">
+    <input matInput type="password" placeholder="Verificare Parola" [(ngModel)]="passwordVerified" name="passwordVerified" required>
+  </mat-form-field>
+  </div>
+
+  <h3>Informatiile legate de cont</h3>
+  
+  <div class="form-group">
+    <mat-form-field class="custom-input-mobile">
+    <input matInput placeholder="Nume de familie" [(ngModel)]="lastName" name="lastName" required>
+  </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input-mobile">
+    <input matInput placeholder="Prenume" [(ngModel)]="firstName" name="firstName" required>
+  </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="custom-input-mobile">
+      <input matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon" required>
+    </mat-form-field>
+  </div>
+
+  <!-- Business Toggle -->
+  <div class="business-toggle">
+    <label>Cont Furnizor Servicii:</label>
+    <mat-slide-toggle
+          [checked]="isBusinessAccount"
+          [(ngModel)]="isBusinessAccount"
+          (change)="toggleBusinessInfo()">
+      </mat-slide-toggle>
+  </div>
+
+  <!-- Business Information (Shown only for business accounts) -->
+  <div *ngIf="isBusinessAccount" class="business-info">
+    <h3>Informatiile legate de serviciile oferite</h3>
+
+    <div class="business-toggle">
+      <label>Persoana Juridica:</label>
+      <mat-slide-toggle
+          [checked]="isLegalPerson"
+          [(ngModel)]="isLegalPerson"
+          (change)="toggleLegalPerson()">
+      </mat-slide-toggle>
+    </div>
+
+    <div *ngIf="isLegalPerson" class="business-info">
+      <div class="form-group">
+        <mat-form-field class="custom-input-mobile">
+        <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI">
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Numele firmei" [(ngModel)]="businessName" name="businessName">
+    </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Email Business" [(ngModel)]="businessEmail" name="businessEmail">
+    </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+        <input matInput placeholder="Numar de telefon business" type="text" id="businessPhoneNumber" [(ngModel)]="businessPhoneNumber" name="businessPhoneNumber">
+      </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="custom-dropdown-mobile">
+          <mat-label>Judet</mat-label>
+          <mat-select [(ngModel)]="countyId">
+            <mat-option *ngFor="let county of counties" [value]="county.id" (change)="onCountyChange()">{{ county.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-group" *ngIf="countyId">
+        <mat-form-field class="custom-dropdown-mobile">
+          <mat-label>Oras</mat-label>
+          <mat-select [(ngModel)]="cityId">
+            <mat-option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>       
+      </div>
+      
+      <div class="form-group">
+        <mat-form-field class="custom-dropdown-mobile">
+          <mat-label>Zona de acoperire</mat-label>
+          <mat-select [(ngModel)]="selectedAreas" multiple>
+            <mat-option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="custom-dropdown-mobile">
+          <mat-label>Selectare categorie</mat-label>
+          <mat-select [(ngModel)]="selectedCategories"  multiple>
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Motto" [(ngModel)]="motto" name="motto">
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Website URL" [(ngModel)]="websiteUrl" name="websiteUrl">
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Facebook URL" [(ngModel)]="facebookUrl" name="facebookUrl">
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Instagram URL" [(ngModel)]="instagramUrl" name="instagramUrl">
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Youtube URL" [(ngModel)]="youtubeUrl" name="youtubeUrl">
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+        <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil (maxim 10)</label>
+        <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
+      </div>
+    <div class="form-group">
+        <label for="description">Descriere</label>
+        <textarea style="width: 90%;" id="description" [(ngModel)]="description" name="description"></textarea>
       </div>
   </div>
 

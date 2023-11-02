@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../Models/Models';
+import { AuthService } from './AuthService';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,20 @@ import { Category } from '../Models/Models';
 export class ApiService {
   private apiUrl = 'https://api.example.com'; // Replace with your API endpoint
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('https://eventadorapitest.azurewebsites.net/api/Category');
+    var token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Category[]>('https://eventadorapitest.azurewebsites.net/api/Category', { headers });
+  }
+
+  getCategoriesModel(): Observable<Category[]> {
+    var token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Category[]>('https://eventadorapitest.azurewebsites.net/api/Category', { headers });
   }
 
   // Perform a GET request

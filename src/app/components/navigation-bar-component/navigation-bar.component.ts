@@ -24,7 +24,8 @@ export class NavigationBarComponent {
     { link: '/autentificare', description: 'Autentificare' },
     { link: '/noutati', description: 'Blog complet' },
     { link: '/blog', description: 'Blog Simplu' },
-    { link: '/furnizori', description: 'Furnizori'}
+    { link: '/furnizori', description: 'Furnizori'},
+    { link: '/creare-profil', description: 'Creare Profil'}
     // Add more items as needed
   ];
 
