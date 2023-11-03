@@ -20,7 +20,7 @@ import { NgChartsModule } from 'ng2-charts';
 })
 export class AdminDashboardComponent implements OnInit, AfterViewInit {
     private _observer: BreakpointObserver;
-    
+    public isMobile!: Observable<boolean>;
   
   constructor(private breakpointObserver: BreakpointObserver) {
     this._observer = breakpointObserver;
@@ -29,7 +29,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
    
-
+    this.isMobile = this._observer.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches)
+      );
       
 
     

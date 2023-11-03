@@ -11,3 +11,17 @@
   overflow-x: auto;
   width: 90vw; 
 }
+
+.centered-tabs-mobile {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 90vw;
+  overflow: hidden;
+}
+
+.scrollable-tabs-mobile {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100vw; 
+}

@@ -1,5 +1,36 @@
-<div class="centered-tabs">
+<div class="centered-tabs" *ngIf="!(isMobile | async)">
     <mat-tab-group class="scrollable-tabs">
+      <!--Tabul de schimbari-->
+    <mat-tab label="Schimbari furnizori">
+       
+      
+    </mat-tab>
+      
+    <mat-tab label="Parteneri">
+    
+      
+    </mat-tab>
+      
+    <mat-tab label="Pachete">
+    
+      
+    </mat-tab>
+      
+    <mat-tab label="Categorii">
+  
+      
+    </mat-tab>
+      
+    <mat-tab label="Bloguri">
+
+      
+    </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
+  <div class="centered-tabs-mobile" *ngIf="(isMobile | async)">
+    <mat-tab-group class="scrollable-tabs-mobile">
       <!--Tabul de schimbari-->
     <mat-tab label="Schimbari furnizori">
        
