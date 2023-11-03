@@ -26,7 +26,7 @@ export class LoginComponent {
     console.log('button clicked');
     this.authService.login('admin', 'admin');
 
-    //this.router.navigate(['/acasa']);
+    this.router.navigate(['/acasa']);
     //const token = 'your_access_token'; // Replace with the actual token from the response
 
     //this.authService.storeToken(token);
