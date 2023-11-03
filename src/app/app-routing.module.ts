@@ -10,6 +10,7 @@ import { BlogComponent } from './components/blog-component/blog.component';
 import { CustomersComponent } from './components/customers-component/customers.component';
 import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
 { path: 'blog', component: BlogComponent},
 { path: 'noutati', component: BlogsComponent},
 { path: 'dashboard', component: PartnerDashboardComponent},
+{ path: 'admin-dashboard', component: AdminDashboardComponent},
 { path: 'furnizori', component: CustomersComponent}];
 
 @NgModule({

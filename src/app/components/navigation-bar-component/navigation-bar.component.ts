@@ -16,19 +16,28 @@ export class NavigationBarComponent {
   isCollapsed = true;
   isMobile: Observable<boolean>;
 
+  isLoggedIn(): boolean {
+    // Check if the user is logged in by checking if the token is present in local storage
+    const token = localStorage.getItem('access_token');
+
+    return token !== null;
+  }
+
   menuItems = [
     { link: '/acasa', description: 'Acasa' },
     { link: '/despre-noi', description: 'Despre Noi' },
     { link: '/contact', description: 'Contact' },
     { link: '/dashboard', description: 'Dashboard' },
-    { link: '/autentificare', description: 'Autentificare' },
     { link: '/noutati', description: 'Blog complet' },
+    { link: '/autentificare', description: 'Autentifica-te' },
     { link: '/blog', description: 'Blog Simplu' },
     { link: '/furnizori', description: 'Furnizori'},
     { link: '/colaborator', description: 'Colaborator'},
     { link: '/creare-profil', description: 'Creare Profil'}
     // Add more items as needed
   ];
+
+
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)

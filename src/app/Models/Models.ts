@@ -1,3 +1,5 @@
+import { UserRole } from "../Utilities/enums/Enums";
+
   export interface ProfileCard {
     name: string;
     image: string;
@@ -97,6 +99,25 @@
     isProfileImage: boolean;
     deletedAfterApproval: boolean;
     needsApproval: boolean;
+  }
+
+  export interface LoggingUserResponse {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    role: UserRole;
+    token: string;
+  }
+
+  export interface LoggedUser {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    role: UserRole;
   }
 
   

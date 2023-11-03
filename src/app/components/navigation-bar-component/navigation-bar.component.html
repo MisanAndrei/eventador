@@ -11,8 +11,15 @@
       <li><a routerLink="/despre-noi">Despre Noi</a></li>
       <li><a routerLink="/contact">Contact</a></li>
       <li><a routerLink="/dashboard">Dashboard</a></li>
-      <li><a routerLink="/autentificare">Autentifica-te</a></li>
+      <li><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
       <li><a routerLink="/noutati">Blog</a></li>
+      <ng-container *ngIf="!isLoggedIn(); else loggedIn">
+        <li><a routerLink="/autentificare">Autentifica-te</a></li>
+      </ng-container>
+      <ng-template #loggedIn>
+        <!-- Display something else when logged in, e.g., an icon -->
+        <li><a routerLink="/profile"><i class="fa fa-user"></i> Profile</a></li>
+      </ng-template>
     </ul>
   </nav>  
 
@@ -33,13 +40,40 @@
       <img width="80" src="https://eventador.ro/images/logo.svg" />
     </a>
   </div>
+  <div *ngIf="isLoggedIn()" class="right-content"><i class="fa fa-user-circle-o" style="font-size:36px"></i></div>
 </div>
 
 <div *ngIf="showMenu" class="overlay">
   <ul class="menu-list">
-    <li *ngFor="let item of menuItems" class="menu-item">
-      <a (click)="onItemClick(item.link)">{{ item.description }}</a>
+    <li class="menu-item">
+      <a (click)="onItemClick('/autentificare')">Autentifica-te</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/acasa')">Acasa</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/despre-noi')">Despre noi</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/contact')">Contact</a>
+    </li>
+    <li  class="menu-item">
+      <a (click)="onItemClick('/dashboard')">Dashboard Partener</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/noutati')">Blog complet</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/furnizori')">Furnizori</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/colaborator')">Colaborator</a>
+    </li>
+    <li class="menu-item">
+      <a (click)="onItemClick('/admin-dashboard')">Admin Dashboard</a>
+    </li>
+    <li class="menu-item" *ngIf="!isLoggedIn()">
+      <a (click)="onItemClick('/creare-profil')">Creare profil</a>
     </li>
   </ul>
 </div>
-

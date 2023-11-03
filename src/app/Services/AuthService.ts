@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { LoggingUserResponse } from '../Models/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +43,12 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
-      const response = await this.http.post(this.apiUrl, { email, password }, { responseType: 'text' }).toPromise();
-      console.log(response);
-      this.handleLoginResponse(response ?? "");
+      const response1 = this.http.post<LoggingUserResponse>(this.apiUrl, { email, password });
+
+      response1.subscribe(x => {
+        console.log(x);
+        this.handleLoginResponse(x.token);
+      })
     } catch (error) {
       console.error('Error:', error);
     }

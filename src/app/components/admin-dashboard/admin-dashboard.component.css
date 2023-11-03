@@ -1,0 +1,13 @@
+.centered-tabs {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 90%;
+  overflow: hidden;
+}
+
+.scrollable-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 90%; 
+}

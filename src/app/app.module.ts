@@ -34,6 +34,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -62,6 +63,7 @@ import { CustomersComponent } from './components/customers-component/customers.c
 import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 
 
@@ -88,7 +90,8 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
     CustomersComponent,
     BlogsComponent,
     PartnerDashboardComponent,
-    PopularCustomersTabComponent
+    PopularCustomersTabComponent,
+    AdminDashboardComponent
   ],
   imports: [
     AppRoutingModule,
@@ -114,7 +117,8 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
     MatChipsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    MatTabsModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

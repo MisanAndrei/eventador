@@ -1,7 +1,7 @@
 
 <div *ngIf="!(isMobile | async)">
   <video autoplay loop [muted]="true">
-    <source src="https://eventadorstorage.blob.core.windows.net/videos/demovideo.mp4" type="video/mp4">
+    <source src="https://evemtadorstoragetest.blob.core.windows.net/images/demovideo.mp4" type="video/mp4">
   
   </video>
 
@@ -11,7 +11,7 @@
 
 <div *ngIf="(isMobile | async)" class="mobile">
   <video id="myVideo" autoplay="autoplay" loop [muted]="true" playsinline preload="auto">
-    <source src="https://eventadorstorage.blob.core.windows.net/videos/demovideo.mp4" type="video/mp4">
+    <source src="https://evemtadorstoragetest.blob.core.windows.net/images/demovideo.mp4" type="video/mp4">
   
   </video>
 

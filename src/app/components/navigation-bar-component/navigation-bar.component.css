@@ -54,6 +54,11 @@ nav {
     position: absolute;
     left: 10px;
   }
+
+  .right-content {
+    position: absolute;
+    right: 10px;
+  }
   
   .center-content {
     flex: 1;
