@@ -204,7 +204,7 @@
   }
   
   .mobile-read-more {
-    text-align: right;
+    text-align: center; 
     color: #7643CA;
     cursor: pointer;
   }
