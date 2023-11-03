@@ -46,7 +46,7 @@
 <div *ngIf="showMenu" class="overlay">
   <ul class="menu-list">
     <li class="menu-item">
-      <a (click)="onItemClick('/autentificare')">Autentifica-te</a>
+      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifica-te</a>
     </li>
     <li class="menu-item">
       <a (click)="onItemClick('/acasa')">Acasa</a>
@@ -72,7 +72,7 @@
     <li class="menu-item">
       <a (click)="onItemClick('/admin-dashboard')">Admin Dashboard</a>
     </li>
-    <li class="menu-item" *ngIf="!isLoggedIn()">
+    <li class="menu-item">
       <a (click)="onItemClick('/creare-profil')">Creare profil</a>
     </li>
   </ul>
