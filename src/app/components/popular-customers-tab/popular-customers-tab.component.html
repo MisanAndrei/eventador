@@ -1,33 +1,14 @@
-<div class="popular-customers-container">
-<div class="cards-container">
-    <div class="item">Item 1</div>
-    <div (dragstart)="onDragStart($event)"
-    (dragend)="onDragEnd($event)" class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <!-- Add more items as needed -->
-  </div></div>
+<div class="container">
+  <h1 class="title">Furnizori Populari</h1>
+  <h3 class="subtitle">Descopera cei mai apreciati si populari furnizori</h3>
+
+  <div class="card-container">
+    <div *ngFor="let supplier of suppliers" class="card">
+      <img [src]="supplier.image" alt="{{ supplier.name }}" class="card-image">
+      <h4 class="card-title">{{ supplier.name }}</h4>
+      <p class="card-category">{{ supplier.category }}</p>
+    </div>
+  </div>
+
+  <button mat-raised-button color="accent">Vezi toti furnizorii</button>
+</div>

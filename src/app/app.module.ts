@@ -64,6 +64,7 @@ import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AboutUsTabComponent } from './components/about-us-tab-component/about-us-tab.component';
 
 
 
@@ -91,7 +92,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     BlogsComponent,
     PartnerDashboardComponent,
     PopularCustomersTabComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    AboutUsTabComponent
   ],
   imports: [
     AppRoutingModule,
