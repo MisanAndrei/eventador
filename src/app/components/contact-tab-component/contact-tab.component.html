@@ -1,11 +1,51 @@
-<div *ngIf="!(isMobile | async)" class="contact-container" style="text-align:center">
-    <p>Aici o sa fie contactul</p>
-    <p>Poate niste poze sau linkuri</p>
-    <p>probabil un link catre furnizor</p>
+<div  *ngIf="!(isMobile | async)" class="contact-tab">
+  <div class="column">
+    <h2>Eventador</h2>
+    <p>Email: office@eventador.ro</p>
+    <div class="icons">
+      <!-- Replace with your icon elements or use icon fonts -->
+      <a href="https://www.facebook.com/eventador.ro" class="fa fa-facebook"></a>
+      <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+    </div>
   </div>
 
-  <div *ngIf="(isMobile | async)" class="mobile-contact-container" style="text-align:center">
-    <p>Aici o sa fie contactul</p>
-    <p>Poate niste poze sau linkuri</p>
-    <p>probabil un link catre furnizor</p>
+  <div class="column">
+    <h2>Ajutor</h2>
+    <p>Despre noi</p>
+    <p>Politica de confidentialitate</p>
+    <p>Termeni si conditii</p>
   </div>
+
+  <div class="column">
+    <h2>Navigatie</h2>
+    <p>Blog</p>
+    <p>Furnizori</p>
+    <p>Contact</p>
+  </div>
+</div>
+
+<div  *ngIf="(isMobile | async)" class="mobile-contact-tab">
+  <div>
+    <h2>Eventador</h2>
+    <p>Email: office@eventador.ro</p>
+    <div>
+      <!-- Replace with your icon elements or use icon fonts -->
+      <a href="https://www.facebook.com/eventador.ro" class="fa fa-facebook"></a>
+      <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+    </div>
+  </div>
+
+  <div>
+    <h2>Ajutor</h2>
+    <p>Despre noi</p>
+    <p>Politica de confidentialitate</p>
+    <p>Termeni si conditii</p>
+  </div>
+
+  <div>
+    <h2>Navigatie</h2>
+    <p>Blog</p>
+    <p>Furnizori</p>
+    <p>Contact</p>
+  </div>
+</div>

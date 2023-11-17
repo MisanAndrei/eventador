@@ -18,12 +18,18 @@
 
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
             <div *ngFor="let category of categories" >
-                <button style="border: 0px;color: white; background-color: #7643CA; border-radius: 4px; margin: 0 5px;"><p>{{category.name}}</p></button>
+                <button class="category-button"><p>{{category.name}}</p></button>
             </div>
         </div>
         
         <p style="margin-bottom: 0px;">Numar telefon: 0752173948</p>
         <p style="margin-bottom: 0px;">E-mail: dorel@yahoo.com</p>
+        <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+          <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
+          <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+          <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
+          <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
+        </div>
 
         <!--icons section-->
         
@@ -43,12 +49,7 @@
     
         <h3 style="margin-left: 10px; text-align: left;">Descriere</h3>
         <p style="text-align: center; margin: 0px 10px">{{ description }}</p>
-        <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-            <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
-            <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
-            <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
-            <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
-          </div>
+        
     </div>
     
   
@@ -56,6 +57,8 @@
 
 </div>
 </div>
+
+<!--                  Mobile               -->
 
 <div *ngIf="(isMobile | async)" class="mobile-container">
     <div class="mobile-profile">
@@ -64,7 +67,7 @@
 
     <div style="display:flex; justify-content: center; flex-wrap: wrap;">
         <div *ngFor="let category of categories" >
-            <button style="border: 0px;color: white; background-color: #7643CA; border-radius: 4px; margin: 0 5px;"><p>{{category.name}}</p></button>
+            <button class="category-button"><p>{{category.name}}</p></button>
         </div>
     </div>
 
@@ -72,7 +75,17 @@
     <p>{{location}}</p>
     
     
-    <p>{{motto}}</p>
+    <p class="motto">{{motto}}</p>
+
+    <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: 0752173948</p>
+  <p style="margin-bottom: 2px; margin-top:3px;">E-mail: dorel@yahoo.com</p>
+
+  <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+    <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
+  </div>
     
     
 
@@ -90,15 +103,7 @@
   <h3 style="text-align: left; margin-left: 5px;">Descriere</h3>
   <p style="margin-right: 5px; margin-left: 5px; text-align: left;">{{description}}</p>
 
-  <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: 0752173948</p>
-  <p style="margin-bottom: 2px; margin-top:3px;">E-mail: dorel@yahoo.com</p>
-
-  <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-    <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
-    <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
-    <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
-    <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
-  </div>
+  
 
   
     </div>

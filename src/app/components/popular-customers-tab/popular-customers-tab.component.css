@@ -34,7 +34,7 @@
 
 .card-image {
   width: 100%;
-  max-height: 200px; /* Adjust as needed */
+  height: 200px; /* Adjust as needed */
   object-fit: cover; /* Keep aspect ratio */
   
 }

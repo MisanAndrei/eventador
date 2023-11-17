@@ -8,11 +8,6 @@
   /></a>
     </div>
     <ul class="menu">
-      <li><a routerLink="/despre-noi">Despre Noi</a></li>
-      <li><a routerLink="/contact">Contact</a></li>
-      <li><a routerLink="/dashboard">Dashboard</a></li>
-      <li><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
-      <li><a routerLink="/noutati">Blog</a></li>
       <ng-container *ngIf="!isLoggedIn(); else loggedIn">
         <li><a routerLink="/autentificare">Autentifica-te</a></li>
       </ng-container>
@@ -21,9 +16,26 @@
         <li><a routerLink="/profile"><i class="fa fa-user"></i> Profile</a></li>
       </ng-template>
     </ul>
-  </nav>  
+  </nav>
+  <nav class="secondnav">
+    <ul class="second-menu">
+      <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori">Toti Furnizorii</a></li>
+    <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/despre-noi">Despre Noi</a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/contact">Contact</a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard</a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/noutati">Blog</a></li>
+    </ul>
+  </nav>   
+</div>
 
-
+<div (mouseover)="showCategoriesFromMenu = true" (mouseleave)="hideOverlay()" class="overlay-section" *ngIf="showCategoriesFromLink || showCategoriesFromMenu">
+  <!-- Your section content goes here -->
+  <div class="categories-section">
+    <div class="category" *ngFor="let category of categories">
+      <a class="subMenuLinks"><p>{{ category }}</p></a>
+    </div>
+  </div>
 </div>
 
 

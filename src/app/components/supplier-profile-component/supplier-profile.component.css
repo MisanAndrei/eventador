@@ -59,6 +59,24 @@
     background-color: white;
   }
 
+  .category-button {
+    border: 0px;color: white; 
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+    border-radius: 4px; 
+    margin: 0 5px;
+    height: 30px;
+  }
+
+  .category-button p {
+    margin: 0px;
+    font-size: large;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  .motto {
+    font-weight: 700;
+  }
+
   .mobile-profile{
     margin: 0 auto;
     width:90%;
@@ -82,26 +100,25 @@
   }
 
   .fa-facebook {
-
-    color: #125688;
+    background-color: white;
+    color: lightgray;
   }
 
   .fa-instagram {
-
-    color: #c222ba ;
+    color: lightgray ;
   }
 
   .fa-globe{
-    color:blue;
+    color:lightgray;
   }
 
   .fa-youtube-play {
-    color: red;
+    color: lightgray;
   }
 
   .fa {
     padding: 10px;
-    font-size: 48px;
+    font-size: 30px;
     width: 50px;
     text-align: center;
     text-decoration: none;

@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 @Component({
-  selector: 'app-about-us-tab',
-  templateUrl: './about-us-tab.component.html',
-  styleUrls: ['./about-us-tab.component.css']
+  selector: 'app-about-customers-tab',
+  templateUrl: './about-customers-tab.component.html',
+  styleUrls: ['./about-customers-tab.component.css']
 })
-export class AboutUsTabComponent {
+export class AboutCustomersTabComponent {
   isMobile: Observable<boolean>;
   constructor(private breakpointObserver: BreakpointObserver){
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)

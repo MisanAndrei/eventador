@@ -1,0 +1,15 @@
+<div *ngIf="!(isMobile | async)" class="affiliate-tab">
+    <div class="overlay">
+      <h1>Devino afiliat Eventador!</h1>
+      <p>Iti punem la discopozitie toate cunostintele noastre pentru a deveni un afiliat valoros in cautarea furnizorilor!</p>
+      <button mat-raised-button color="accent">Contacteaza-ne</button>
+    </div>
+  </div>
+
+  <div *ngIf="(isMobile | async)" class="affiliate-tab-mobile">
+    <div class="overlay-mobile">
+      <h1>Devino afiliat Eventador!</h1>
+      <p>Iti punem la discopozitie toate cunostintele noastre pentru a deveni un afiliat valoros in cautarea furnizorilor!</p>
+      <button mat-raised-button color="accent">Contacteaza-ne</button>
+    </div>
+  </div>

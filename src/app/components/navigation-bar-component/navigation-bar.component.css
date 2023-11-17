@@ -6,6 +6,11 @@ nav {
     padding: 10px 20px;
     height: 60px;
   }
+
+  .secondnav {
+    height: 40px;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+  }
   
 
   
@@ -33,13 +38,113 @@ nav {
   }
   
   .menu li a:hover {
-    background-color: #333;
+    background-color:#FF63A4;
     color: #fff;
   }
 
+  .secondnav {
+    height: 60px;
+    padding: 0;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+  }
+  
+  .second-menu {
+    list-style: none;
+    margin-left: 100px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align links to the left */
+  }
+  
+  .second-menu li {
+    margin-right: 10px;
+  }
+  
+  .second-menu li:last-child {
+    margin-right: 0;
+  }
+  
+  .second-menu li a {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .second-menu li a:hover {
+    color: #fff;
+    border: 1px solid white;
+  }
 
+  .overlay-section {
+    position: absolute;
+    top: 160; /* Specify a unit (e.g., pixels) */
+    left: 0;
+    width: 60%;
+    height: 600px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border-radius: 5%;
+  }
+  
+  .categories-section {
+    width: 90%;
+    max-width: 1200px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the container */
+    height: 600px; /* Adjust the height as needed */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+  }
+  
+  .category {
+    width: 23%; /* Adjust the width to fit 4 columns with some spacing */
+    text-align: center;
+    margin: 0;
+  }
 
+  .menuLink {
+    padding-top: 19px !important;
+    padding-bottom: 20px !important;
+  }
 
+  .menuLink:hover {
+    background-color: white;
+    color: black !important;
+  }
+
+  .subMenuLinks{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .subMenuLinks:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .overlay-section {
+    position: absolute;
+    top: 160; /* Specify a unit (e.g., pixels) */
+    left: 0;
+    width: 60%;
+    height: 600px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border-radius: 5%;
+  }
+  
+  
+
+  /*mobile section       ************************************************/
   .mobile-nav {
     position: relative;
     display: flex;

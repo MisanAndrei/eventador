@@ -1,0 +1,32 @@
+<div *ngIf="!(isMobile | async)" class="about-customers-container">
+    <div class="main-section">
+      <div class="left-section">
+        <!-- Place your image here -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF33EKSL7WvvB7tOnT7zO59Pybrybx6zx9PzrTqu88wpnZMcXv4jnZbO5kMD_uxKIg_q8&usqp=CAU" type="jpeg" alt="About Customers Image">
+      </div>
+      <div class="right-section">
+        <h2>Alatura-te echipei Eventador</h2>
+        <p>
+            Te invitam sa faci parte din echipa noastra, cea mai mare platforma de furnizori de evenimente din Romania!
+        </p>
+        <button mat-raised-button color="accent">Înscrie-te și tu</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 50px 5px; width: 90%" *ngIf="(isMobile | async)">
+    <div style="text-align: center;">
+      <div>
+        <!-- Place your image here -->
+        <img style="width:60%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF33EKSL7WvvB7tOnT7zO59Pybrybx6zx9PzrTqu88wpnZMcXv4jnZbO5kMD_uxKIg_q8&usqp=CAU" type="jpeg" alt="About Us Image">
+      </div>
+      <div>
+        <h2>Eventador</h2>
+        <p>
+          Te invitam sa faci parte din echipa noastra, cea mai mare platforma de furnizori de evenimente din Romania!
+        </p>
+        <button style="width:150px" mat-raised-button color="accent">Înscrie-te și tu</button>
+      </div>
+    </div>
+  </div>
+

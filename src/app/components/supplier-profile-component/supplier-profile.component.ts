@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
     selector: 'app-supplier-profile',
     templateUrl: './supplier-profile.component.html',
     styleUrls: ['./supplier-profile.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.Default
   })
 
   export class SupplierProfileComponent implements OnInit  {
@@ -42,7 +42,7 @@ import { Observable, map } from 'rxjs';
     //model
     profileImage: string = 'https://eventador.ro/uploads/2019/02/rotar1.jpeg';
     profileName:string = 'Misan Andrei';
-    categories: Category[] = [{id: 1, name: 'M.C'}, {id: 2, name: 'Vestimentatie Si Accesorii - El'}]
+    categories: Category[] = [{id: 2, name: 'Vestimentatie Si Accesorii - El'}]
     motto: string = 'Cel mai mare mestru de ceremonii';
     county: string = 'Cluj';
     city: string = 'Cluj-Napoca';

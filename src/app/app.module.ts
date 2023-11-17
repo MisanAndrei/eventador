@@ -65,6 +65,10 @@ import { PartnerDashboardComponent } from './components/partner-dashboard/partne
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AboutUsTabComponent } from './components/about-us-tab-component/about-us-tab.component';
+import { CategoriesTabComponent } from './components/categories-tab-component/categories-tab.component';
+import { AboutCustomersTabComponent } from './components/about-customers-tab-component/about-customers-tab.component';
+import { AffiliateTabComponent } from './components/affiliate-tab-component/affiliate-tab.component';
+
 
 
 
@@ -93,7 +97,10 @@ import { AboutUsTabComponent } from './components/about-us-tab-component/about-u
     PartnerDashboardComponent,
     PopularCustomersTabComponent,
     AdminDashboardComponent,
-    AboutUsTabComponent
+    AboutUsTabComponent,
+    CategoriesTabComponent,
+    AboutCustomersTabComponent,
+    AffiliateTabComponent
   ],
   imports: [
     AppRoutingModule,

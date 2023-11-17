@@ -1,6 +1,6 @@
 .card {
-    width: 15vw; /* Adjust the width as needed */
-    height: 60vh; /* Twice the width */
+    width: 300px; /* Adjust the width as needed */
+    height:600px; /* Twice the width */
     background-color: #fff;
     border: 1px solid #f2f2f2;
     text-align: center;
@@ -35,7 +35,7 @@
   }
 
   .header {
-    margin-top: 1%;
+    margin-top: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,7 +143,7 @@
     width: 100px;
     margin-right: 5px;
     color:white;
-    background-color: #7643CA;
+    background: linear-gradient(to right, #FF63A4, #FE8962);;
     border: none;
     border-radius: 3%;
   }

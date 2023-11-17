@@ -15,6 +15,40 @@ export class NavigationBarComponent {
   showMenu = false;
   isCollapsed = true;
   isMobile: Observable<boolean>;
+  showCategoriesFromLink: boolean = false;
+  showCategoriesFromMenu: boolean = false;
+
+  categories = [ 
+    "Artisti",
+    "Locații",
+    "Foto-Video",
+    "Flori",
+    "Dulce",
+    "Trupe",
+    "M.C.",
+    "Deejays",
+    "Cocktail Bars",
+    "Vestimentație / Accesorii – Ea",
+    "Vestimentație / Accesorii – El",
+    "Saloane",
+    "Gheață Carbonică / Artificii",
+    "Photo Booth",
+    "Lumini",
+    "Limuzine",
+    "Aranjamente Locație",
+    "Invitații / Mărturii",
+    "Hostess",
+    "Wedding Planners",
+    "Zâne Ursitoare",
+    "Dansatori / Coregrafi",
+    "Bijuterii",
+    "Băuturi",
+    "Catering",
+    "Diverse",
+    "Make-up Artiști",
+    "Fotografi",
+    "Personal Trainers",
+    "Vacanțe"];
 
   isLoggedIn(): boolean {
     // Check if the user is logged in by checking if the token is present in local storage
@@ -62,6 +96,9 @@ export class NavigationBarComponent {
     this.router.navigate([link]);
   }
 
-  
+  hideOverlay(){
+    this.showCategoriesFromLink = false;
+    this.showCategoriesFromMenu = false;
+  }
 }
 
