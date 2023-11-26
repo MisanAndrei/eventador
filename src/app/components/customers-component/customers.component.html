@@ -22,12 +22,15 @@
           <div class="logo">
             <img src="{{ card.imageUrl }}" alt="{{ card.name }} Logo" />
           </div>
-          <h3>{{ card.name }}</h3>
+          <div>
+          <h3 style="margin-bottom: 0px; margin-top: 15px;">{{ card.name }}</h3>
+          <h5 style="margin-top: 5px;"><i class="fa fa-map-marker" style="font-size:20px"></i> {{ card.location }}</h5>
         </div>
-        <h4> din {{ card.location }}</h4>
+        </div>
+        
         <img src="{{ card.imageUrl }}" alt="{{ card.name }}" />
-        <h4>{{ card.categoryDescription }}</h4>
-        <p>{{ card.description }}</p>
+        <h4 style="margin-left: 10px;">{{ card.categoryDescription }}</h4>
+        <p style="margin-left: 10px;">{{ card.description }}</p>
       </div>
     </li>
   </ul>
@@ -61,7 +64,7 @@
   <div  *ngFor="let card of cards" class="mobile-card">
     <div class="mobile-card-header">
       <p class="mobile-card-name">{{ card.name }}</p>
-      <p class="mobile-card-location">din {{ card.location }}</p>
+      <p class="mobile-card-location"><i class="fa fa-map-marker" style="font-size:15px"></i> {{ card.location }}</p>
     </div>
     <div class="mobile-card-image">
       <img src="{{ card.imageUrl }}" alt="Image Description">

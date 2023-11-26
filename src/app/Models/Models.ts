@@ -1,11 +1,14 @@
 import { UserRole } from "../Utilities/enums/Enums";
 
   export interface ProfileCard {
+    id: number;
     name: string;
-    image: string;
-    description: string;
-    location: string;
-    categoryId: number
+    profileImage: string;
+    coverImage: string;
+    motto: string;
+    city: string;
+    category: Category;
+    areaOfInterest?: County[];
   }
 
   export interface City {
@@ -35,7 +38,6 @@ import { UserRole } from "../Utilities/enums/Enums";
     }
     
   export interface ProfileDto {
-    id?: number;
     userId?: number;
     cityId: number;
     motto?: string;
@@ -50,7 +52,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     businessPhonenumber: string;
     businessCUI?: string;
     address: string;
-    supplierCategories: supplierCategory[];
+    category: supplierCategory;
     images: Image[];
     }
     
@@ -118,6 +120,100 @@ import { UserRole } from "../Utilities/enums/Enums";
     lastName: string;
     phoneNumber: string;
     role: UserRole;
+  }
+
+  export interface UserProfile {
+    id: number;
+    businessName: string;
+    businessEmail: string;
+    businessPhoneNumber: string;
+    category: string;
+    images: UserImage[];
+    motto?: string;
+    description: string;
+    city: string; 
+    areaOfInterest: string[];
+    websiteUrl?: string;
+    facebookUrl: string;
+    instagramUrl: string;
+    youtubeUrl: string;
+  }
+
+  export interface CreateUser{
+    id?: number;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber?: string;
+    role: UserRole;
+    profile?: CreateProfile;
+  }
+
+  export interface CreateProfile {
+    businessName: string;
+    businessCUI: string;
+    motto?: string;
+    countyId: number;
+    cityId: number;
+    areaOfInterest: number[];
+    categoryId: number;
+    images: string[];
+    description: string[]; 
+    websiteUrl?: string;
+    facebookUrl?: string;
+    instagramUrl?: string;
+    youtubeUrl?: string;
+  }
+
+  export interface EditUser {
+    id?: number;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    role?: UserRole;
+    profile?: CreateProfile;
+  }
+
+  export interface EditProfile {
+    businessName: string;
+    businessCUI: string;
+    motto?: string;
+    countyId: number;
+    cityId: number;
+    areaOfInterest: number[];
+    categoryId: number;
+    description: string[]; 
+    websiteUrl?: string;
+    facebookUrl?: string;
+    instagramUrl?: string;
+    youtubeUrl?: string;
+    imagesToDelete?: number[];
+    images?: string[];
+  }
+
+  export interface LandingPage {
+    sections: Section[]; 
+    blogs: Blog[];
+    categories: Category[];
+    popularSuppliers: ProfileCard[];
+  }
+
+  export interface Section {
+    id: number;
+    name: string;
+    title: string;
+    content: string;
+    image: string;
+  }
+
+  export interface Blog {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
   }
 
   

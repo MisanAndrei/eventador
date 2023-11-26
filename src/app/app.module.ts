@@ -44,7 +44,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ImageSliderComponent } from './components/image-slider-component/image-slider.component';
 import { NavigationBarComponent } from './components/navigation-bar-component/navigation-bar.component';
 import { DashboardComponent } from './components/dashboard-component/dashboard.component';
-import { CategoriesProfilesComponent } from './components/categories-profiles-component/categories-profiles.component';
 import { SupplierProfileComponent } from './components/supplier-profile-component/supplier-profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -79,7 +78,6 @@ import { AffiliateTabComponent } from './components/affiliate-tab-component/affi
     ImageSliderComponent,
     NavigationBarComponent,
     DashboardComponent,
-    CategoriesProfilesComponent,
     SupplierProfileComponent,
     ContactComponent,
     AboutUsComponent,
