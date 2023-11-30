@@ -1,0 +1,21 @@
+.profile-container {
+    width: 30%;
+    margin: 0 auto; /* Center the container */
+    text-align: center; /* Center the text within the container */
+  }
+  
+  .profile-details {
+    margin-top: 20px;
+    text-align: left; /* Align the details text to the left */
+    font-size: 1.2em; /* Increase the font size (adjust as needed) */
+    line-height: 1.5; /* Add space between lines (adjust as needed) */
+  }
+  
+  h1 {
+    color: #333; /* Set the title color to dark gray (adjust as needed) */
+    font-size: 1.5em; /* Increase the title font size (adjust as needed) */
+  }
+
+  strong {
+    margin-right: 20px;
+  }

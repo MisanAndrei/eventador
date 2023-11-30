@@ -59,6 +59,7 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface Category {
     id: number;
     name: string;
+    image?: string;
     }
 
   export interface MenuLinks {
@@ -140,9 +141,7 @@ import { UserRole } from "../Utilities/enums/Enums";
   }
 
   export interface CreateUser{
-    id?: number;
     email: string;
-    password: string;
     firstName: string;
     lastName: string;
     phoneNumber?: string;
@@ -152,9 +151,8 @@ import { UserRole } from "../Utilities/enums/Enums";
 
   export interface CreateProfile {
     businessName: string;
-    businessCUI: string;
+    businessCUI?: string;
     motto?: string;
-    countyId: number;
     cityId: number;
     areaOfInterest: number[];
     categoryId: number;
@@ -214,7 +212,47 @@ import { UserRole } from "../Utilities/enums/Enums";
     title: string;
     description: string;
     image: string;
+    minutesToRead: number;
   }
+
+  export interface LandingPage {
+    sections: Section[];
+    popularCards: ProfileCard[];
+    categories: Category[]; 
+    blogs: Blog[];
+  }
+
+  export interface SuppliersChanges {
+    id: number;
+    firstname: string;
+    lastname: string;
+  }
+
+  export interface AdminDashboardProfilesChanged {
+    id: number;
+    firstname: string;
+    lastname: string;
+    category: string;
+  }
+
+  export interface AdminDashboardCategory {
+    id: number;
+    name: string;
+    image: string;
+  }
+
+  export interface AdminDashboardBlog {
+    id: number;
+    title: string;
+    image: string;
+  }
+
+  export interface AdminDashboardPartners {
+    id: number;
+    firstname: string;
+    lastname: string;
+  }
+  
 
   
 

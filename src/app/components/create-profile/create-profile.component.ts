@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { FormControl, Validators, ValidatorFn } from '@angular/forms';
-import { Category, City, County } from 'src/app/Models/Models';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Category, City, County, CreateUser } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
-import { MatChipsModule } from '@angular/material/chips';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
+import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
   selector: 'app-create-profile',
   templateUrl: './create-profile.component.html',
-  styleUrls: ['./create-profile.component.css']
+  styleUrls: ['./create-profile.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
-export class CreateProfileComponent {
+export class CreateProfileComponent implements OnInit {
   selectedAreas: number[] = [];
-  selectedCategories: number[] = [];
+  selectedCategory: number[] = [];
   
   // Common User Information
     id = 0;
@@ -36,37 +36,47 @@ export class CreateProfileComponent {
     instagramUrl: string = '';
     youtubeUrl: string = '';
     businessName: string = '';
-    businessEmail: string = '';
-    businessPhoneNumber: string = '';
     businessCUI: string = '';
     category: string = '';
     description: string = '';
     selectedImages: File[] = [];
+    convertedSelectedImages: string[] = [];
 
     //just for testing
     cities: City[] = [{id: 1, name: 'Cluj-Napoca'}, {id: 2, name: 'Bucuresti'}];
     counties: County[] = [{id: 1, name: 'Cluj'}, {id: 2, name: 'Brasov'}];
     areas: County[] = [{id: 1, name: 'Cluj'}, {id: 2, name: 'Brasov'}];
     categories: Category[] = [{id: 1, name: 'M.C'}, {id: 2, name: 'DJ'}, {id: 3, name: 'Florarie'}]
+
+    
   
     // Toggle for Business Account
     isBusinessAccount: boolean = false;
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
           );
       }
+  ngOnInit(): void {
+    //this.apiService.getCategories().subscribe(x => {
+    //  this.categories = x;
+   // })
+
+    this.apiService.getCounties().subscribe(x => {
+      this.areas = x;
+      this.counties = x;
+    })
+  }
   
     // Method to toggle business info visibility
     toggleBusinessInfo() {
       // Reset business info fields when toggled off
       if (!this.isBusinessAccount) {
         this.businessName = '';
-        this.businessEmail = '';
         this.category = '';
         this.description = '';
         this.motto = '';
@@ -84,18 +94,85 @@ export class CreateProfileComponent {
     }
 
     onImagesSelected(event: any) {
-        this.selectedImages = Array.from(event.target.files);
-        // Process the selected images here, e.g., upload them or display previews.
-      }
+      const files: File[] = Array.from(event.target.files);
+      this.convertedSelectedImages.slice(0);
+      files.forEach(file => {
+        const reader = new FileReader();
+  
+        reader.onload = (e: any) => {
+          const base64Image = e.target.result as string;
+          this.convertedSelectedImages.push(base64Image);
+        };
+  
+        // Read the file as a data URL, triggering the `onload` event
+        reader.readAsDataURL(file);
+      });
+
+    }
 
     onCountyChange() {
         // Reset the selectedCityId when the county changes
         this.cityId = null; 
+        this.apiService.getCities(this.countyId ?? 0).subscribe(x => {
+          this.cities = x;
+        });
+    }
+
+    saveButtonEnabled(){
+      if (this.nullOrEmpty(this.email) || this.nullOrEmpty(this.firstName) || this.nullOrEmpty(this.lastName)){
+        return false;
+      }
+
+      if (this.isBusinessAccount && (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0)){
+        return false;
+      }
+
+      if (this.isLegalPerson && this.nullOrEmpty(this.businessCUI)){
+        return false;
+      }
+
+      return true;
+      
+    }
+
+    nullOrEmpty(value: string){
+      if (value == undefined || value == null || value == '')
+      return true;
+
+      return false;
     }
 
     onSaveButtonClick() {
-    // Implement the logic to save the profile data and images here
-    // This method will be triggered when the "Save" button is clicked.
-    // You can access all the form field values and selected images from the component properties.
+    var user = {
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      phoneNumber: this.phoneNumber,
+      role: this.isBusinessAccount ? UserRole.supplier : UserRole.customer,
+      profile: {
+        businessName: this.businessName,
+        businessCUI: this.businessCUI,
+        motto: this.motto,
+        cityId: this.cityId,
+        areaOfInterest: this.selectedAreas,
+        images: this.convertedSelectedImages,
+        description: this.description,
+        websiteUrl: this.websiteUrl,
+        facebookUrl: this.facebookUrl,
+        youtubeUrl: this.youtubeUrl,
+        instagramUrl: this.instagramUrl
+      } as unknown
+    } as CreateUser
+
+    if (user.role == UserRole.customer){
+      user.profile = undefined;
+    }
+
+    this.apiService.createUser(user);
+
+
+    console.log(user);
     }
   }
+
+  

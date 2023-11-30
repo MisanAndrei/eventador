@@ -136,7 +136,7 @@ body {
   /* Styling for the Save button */
   .save-button {
     padding: 12px 20px;
-    background-color: #7643CA;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
     color: #fff;
     border: none;
     border-radius: 5px;

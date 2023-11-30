@@ -65,7 +65,7 @@
   
   .btn-primary {
     width: 100%;
-    background-color: #7643CA;
+    background: linear-gradient(to right, #FE8962, #FF63A4);
     color: #fff;
     padding: 14px;
     border: none;
@@ -77,7 +77,7 @@
   }
   
   .btn-primary:hover {
-    background-color: #0056b3;
+    cursor: pointer;
   }
 
   .background {

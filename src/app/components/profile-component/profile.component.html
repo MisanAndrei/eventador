@@ -1,0 +1,23 @@
+<div class="profile-container">
+    <h1>Profil Personal</h1>
+    <div class="profile-details">
+      <div>
+        <strong>First Name:</strong> {{ firstName }}
+      </div>
+      <div>
+        <strong>Last Name:</strong> {{ lastName }}
+      </div>
+      <div>
+        <strong>Email:</strong> {{ email }}
+      </div>
+      <div>
+        <strong>Phone Number:</strong> {{ phoneNumber }}
+      </div>
+      <div>
+        <strong>Account Created:</strong> {{ accountCreated | date:'medium' }}
+      </div>
+    </div>
+    <button mat-raised-button color="accent">Schimba Parola</button>
+    <button mat-raised-button color="accent">Editeaza Profil</button>
+    <button mat-raised-button color="accent">Sterge Profil</button>
+  </div>

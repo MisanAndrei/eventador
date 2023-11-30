@@ -67,6 +67,7 @@ import { AboutUsTabComponent } from './components/about-us-tab-component/about-u
 import { CategoriesTabComponent } from './components/categories-tab-component/categories-tab.component';
 import { AboutCustomersTabComponent } from './components/about-customers-tab-component/about-customers-tab.component';
 import { AffiliateTabComponent } from './components/affiliate-tab-component/affiliate-tab.component';
+import { ProfileComponent } from './components/profile-component/profile.component';
 
 
 
@@ -98,7 +99,8 @@ import { AffiliateTabComponent } from './components/affiliate-tab-component/affi
     AboutUsTabComponent,
     CategoriesTabComponent,
     AboutCustomersTabComponent,
-    AffiliateTabComponent
+    AffiliateTabComponent,
+    ProfileComponent
   ],
   imports: [
     AppRoutingModule,

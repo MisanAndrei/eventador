@@ -83,13 +83,15 @@ nav {
     position: absolute;
     top: 160; /* Specify a unit (e.g., pixels) */
     left: 0;
-    width: 60%;
+    width: 40%;
     height: 600px;
     background-color: white;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    border-radius: 5%;
+    border: 1px solid lightgray;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
   }
   
   .categories-section {
@@ -105,7 +107,8 @@ nav {
   .category {
     width: 23%; /* Adjust the width to fit 4 columns with some spacing */
     text-align: center;
-    margin: 0;
+    margin-top: -10px !important;
+    margin-bottom: 0 !important;
   }
 
   .menuLink {
@@ -128,18 +131,7 @@ nav {
     text-decoration: underline;
   }
   
-  .overlay-section {
-    position: absolute;
-    top: 160; /* Specify a unit (e.g., pixels) */
-    left: 0;
-    width: 60%;
-    height: 600px;
-    background-color: white;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    border-radius: 5%;
-  }
+  
   
   
 

@@ -3,25 +3,12 @@
 <div *ngIf="!(isMobile | async)" class="profile-container">
   <div class="profile-header">
     <!-- Profile Picture -->
-    <img class="profile-picture" src="https://eventador.ro/images/logo.svg" alt="Profile Picture">
     <h2 class="username">Bine ai Venit pe platforma eventador.ro!</h2>
   </div>
 
   <div class="form-group">
     <mat-form-field class="custom-input">
-    <input matInput placeholder="Email" type="email" id="email" [(ngModel)]="email" name="email" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput placeholder="Parola" type="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput type="password" placeholder="Verificare Parola" [(ngModel)]="passwordVerified" name="passwordVerified" required>
+    <input matInput placeholder="Email*" type="email" id="email" [(ngModel)]="email" name="email" required>
   </mat-form-field>
   </div>
 
@@ -29,13 +16,13 @@
   
   <div class="form-group">
     <mat-form-field class="custom-input">
-    <input matInput placeholder="Nume de familie" [(ngModel)]="lastName" name="lastName" required>
+    <input matInput placeholder="Nume*" [(ngModel)]="lastName" name="lastName" required>
   </mat-form-field>
   </div>
 
   <div class="form-group">
     <mat-form-field class="custom-input">
-    <input matInput placeholder="Prenume" [(ngModel)]="firstName" name="firstName" required>
+    <input matInput placeholder="Prenume*" [(ngModel)]="firstName" name="firstName" required>
   </mat-form-field>
   </div>
 
@@ -71,33 +58,22 @@
     <div *ngIf="isLegalPerson" class="business-info">
       <div class="form-group">
         <mat-form-field class="custom-input">
-        <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI">
+        <input matInput placeholder="CUI*" [(ngModel)]="businessCUI" name="businessCUI" required>
       </mat-form-field>
       </div>
     </div>
 
     <div class="form-group">
       <mat-form-field class="custom-input">
-      <input matInput placeholder="Numele firmei" [(ngModel)]="businessName" name="businessName">
-    </mat-form-field>
-    </div>
-    
-    <div class="form-group">
-      <mat-form-field class="custom-input">
-      <input matInput placeholder="Email Business" [(ngModel)]="businessEmail" name="businessEmail">
+      <input matInput placeholder="Numele firmei*" [(ngModel)]="businessName" name="businessName" required>
     </mat-form-field>
     </div>
 
-    <div class="form-group">
-      <mat-form-field class="custom-input">
-        <input matInput placeholder="Numar de telefon business" type="text" id="businessPhoneNumber" [(ngModel)]="businessPhoneNumber" name="businessPhoneNumber">
-      </mat-form-field>
-      </div>
       <div class="form-group">
         <mat-form-field class="custom-dropdown">
           <mat-label>Judet</mat-label>
-          <mat-select [(ngModel)]="countyId">
-            <mat-option *ngFor="let county of counties" [value]="county.id" (change)="onCountyChange()">{{ county.name }}</mat-option>
+          <mat-select [(ngModel)]="countyId" (selectionChange)="onCountyChange()" required>
+            <mat-option *ngFor="let county of counties" [value]="county.id" >{{ county.name }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -105,7 +81,7 @@
       <div class="form-group" *ngIf="countyId">
         <mat-form-field class="custom-dropdown">
           <mat-label>Oras</mat-label>
-          <mat-select [(ngModel)]="cityId">
+          <mat-select [(ngModel)]="cityId" required>
             <mat-option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</mat-option>
           </mat-select>
         </mat-form-field>       
@@ -114,7 +90,7 @@
       <div class="form-group">
         <mat-form-field class="custom-dropdown">
           <mat-label>Zona de acoperire</mat-label>
-          <mat-select [(ngModel)]="selectedAreas" multiple>
+          <mat-select [(ngModel)]="selectedAreas" multiple required>
             <mat-option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -123,7 +99,7 @@
       <div class="form-group">
         <mat-form-field class="custom-dropdown">
           <mat-label>Selectare categorie</mat-label>
-          <mat-select [(ngModel)]="selectedCategories"  multiple>
+          <mat-select [(ngModel)]="selectedCategory" required>
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -159,13 +135,13 @@
         <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
       </div>
     <div class="form-group">
-        <label for="description">Descriere</label>
-        <textarea id="description" [(ngModel)]="description" name="description"></textarea>
+        <label for="description">Descriere*</label>
+        <textarea id="description" [(ngModel)]="description" name="description" required></textarea>
       </div>
   </div>
 
   <div class="save-button-container">
-    <button class="save-button" (click)="onSaveButtonClick()">Salveaza profil</button>
+    <button class="save-button" [ngStyle]="{'cursor': saveButtonEnabled() ? 'pointer' : 'not-allowed'}" [disabled]="!saveButtonEnabled()" (click)="onSaveButtonClick()">Salveaza profil</button>
   </div>
 </div>
 
@@ -177,19 +153,7 @@
 
   <div class="form-group">
     <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Email" type="email" id="email" [(ngModel)]="email" name="email" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Parola" type="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput type="password" placeholder="Verificare Parola" [(ngModel)]="passwordVerified" name="passwordVerified" required>
+    <input matInput placeholder="Email*" type="email" id="email" [(ngModel)]="email" name="email" required>
   </mat-form-field>
   </div>
 
@@ -249,18 +213,7 @@
       <input matInput placeholder="Numele firmei" [(ngModel)]="businessName" name="businessName">
     </mat-form-field>
     </div>
-    
-    <div class="form-group">
-      <mat-form-field class="custom-input-mobile">
-      <input matInput placeholder="Email Business" [(ngModel)]="businessEmail" name="businessEmail">
-    </mat-form-field>
-    </div>
 
-    <div class="form-group">
-      <mat-form-field class="custom-input-mobile">
-        <input matInput placeholder="Numar de telefon business" type="text" id="businessPhoneNumber" [(ngModel)]="businessPhoneNumber" name="businessPhoneNumber">
-      </mat-form-field>
-      </div>
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Judet</mat-label>
@@ -270,7 +223,7 @@
         </mat-form-field>
       </div>
       
-      <div class="form-group" *ngIf="countyId">
+      <div class="form-group" *ngIf="cityId">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Oras</mat-label>
           <mat-select [(ngModel)]="cityId">
@@ -291,7 +244,7 @@
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Selectare categorie</mat-label>
-          <mat-select [(ngModel)]="selectedCategories"  multiple>
+          <mat-select [(ngModel)]="selectedCategory" >
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>

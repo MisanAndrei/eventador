@@ -1,5 +1,5 @@
 <div *ngIf="!(isMobile | async)">
-  <nav>
+  <nav (mouseover)="showCategoriesFromLink = false">
     <div class="logo">
       <a routerLink="/acasa"><img
     style="margin: left 50px;"
@@ -13,7 +13,7 @@
       </ng-container>
       <ng-template #loggedIn>
         <!-- Display something else when logged in, e.g., an icon -->
-        <li><a routerLink="/profile"><i class="fa fa-user"></i> Profile</a></li>
+        <li><a routerLink="/profil"><i class="fa fa-user"></i> Profile</a></li>
       </ng-template>
     </ul>
   </nav>

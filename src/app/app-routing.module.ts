@@ -11,6 +11,7 @@ import { CustomersComponent } from './components/customers-component/customers.c
 import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ProfileComponent } from './components/profile-component/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
 { path: 'noutati', component: BlogsComponent},
 { path: 'dashboard', component: PartnerDashboardComponent},
 { path: 'admin-dashboard', component: AdminDashboardComponent},
-{ path: 'furnizori', component: CustomersComponent}];
+{ path: 'furnizori', component: CustomersComponent},
+{ path: 'profil', component: ProfileComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

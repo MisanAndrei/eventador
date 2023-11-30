@@ -1,29 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../Models/Models';
+import { Category, City, County, CreateUser } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://api.example.com'; // Replace with your API endpoint
+  private apiUrl = 'https://eventador-api.azurewebsites.net/api'; // Replace with your API endpoint
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getCategories(): Observable<Category[]> {
+  getApiModel(): Observable<Category[]> {
     var token = this.authService.getToken();
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Category[]>('https://eventadorapitest.azurewebsites.net/api/Category', { headers });
+    return this.http.get<Category[]>(this.apiUrl + '/Category', { headers });
   }
 
-  getCategoriesModel(): Observable<Category[]> {
-    var token = this.authService.getToken();
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiUrl + '/Category');
+  }
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Category[]>('https://eventadorapitest.azurewebsites.net/api/Category', { headers });
+  getCities(countyId: number): Observable<City[]> {
+    const url = `${this.apiUrl}/County/GetCitiesByCountyId/${countyId}`;
+    return this.http.get<City[]>(url);
+  }
+
+  getCounties(): Observable<County[]> {
+    return this.http.get<County[]>(this.apiUrl + '/County/GetAllCounties');
+  }
+
+  createUser(user: CreateUser) {
+    return this.http.post<any>(this.apiUrl + 'User', user);
   }
 
   // Perform a GET request
