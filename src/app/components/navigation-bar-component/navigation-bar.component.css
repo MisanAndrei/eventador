@@ -124,6 +124,8 @@ nav {
   .subMenuLinks{
     margin: 0 !important;
     padding: 0 !important;
+    text-decoration: none;
+    color: black;
   }
 
   .subMenuLinks:hover {

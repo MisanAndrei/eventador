@@ -1,0 +1,35 @@
+
+<div *ngIf="!(isMobile | async)" class="rating-container">
+  <div class="rating-card" *ngFor="let rating of ratings">
+    <div class="user-rating">
+      <div class="username"><i class="fa fa-user"></i> {{ rating.username }}</div>
+      
+      <div class="star-rating">
+        <span *ngFor="let value of getStarValues()" class="star" [class.filled]="value <= rating.rating">
+          {{ value <= rating.rating ? '★' : '☆' }}
+        </span>
+      </div>
+      <div class="rating-title">{{ rating.title }}</div>
+    </div>
+    <div class="review">{{ rating.review }}</div>
+    <div class="response" *ngIf="rating.response">{{ rating.response }}</div>
+  </div>
+</div>
+
+<div *ngIf="(isMobile | async)" class="rating-container">
+    <div class="rating-card" *ngFor="let rating of ratings">
+      <div class="user-rating">
+        <div class="username"><i class="fa fa-user"></i> {{ rating.username }}</div>
+        
+        <div class="star-rating">
+          <span *ngFor="let value of getStarValues()" class="star" [class.filled]="value <= rating.rating">
+            {{ value <= rating.rating ? '★' : '☆' }}
+          </span>
+        </div>
+        <div class="rating-title">{{ rating.title }}</div>
+      </div>
+      <div class="review">{{ rating.review }}</div>
+      <div class="response" *ngIf="rating.response">{{ rating.response }}</div>
+    </div>
+  </div>
+

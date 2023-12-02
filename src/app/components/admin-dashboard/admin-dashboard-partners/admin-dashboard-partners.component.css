@@ -1,0 +1,11 @@
+.table-section {
+    margin-top: 50px !important;
+    justify-content: center;
+    width: 70%;
+    margin: 20px auto; /* Adjust margin as needed */
+  }
+  
+  .table-container {
+    width: 100%; /* Ensure the table takes full width */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }

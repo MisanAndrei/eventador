@@ -68,6 +68,11 @@ import { CategoriesTabComponent } from './components/categories-tab-component/ca
 import { AboutCustomersTabComponent } from './components/about-customers-tab-component/about-customers-tab.component';
 import { AffiliateTabComponent } from './components/affiliate-tab-component/affiliate-tab.component';
 import { ProfileComponent } from './components/profile-component/profile.component';
+import { RatingComponent } from './components/rating-component/rating.component';
+import { AdminDashboardSuppliersComponent } from './components/admin-dashboard/admin-dashboard-suppliers-changes/admin-dashboard-suppliers.component';
+import { AdminDashboardPartnersComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partners.component';
+import { AdminDashboardCategoriesComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-categories.component';
+import { AdminDashboardBlogsComponent } from './components/admin-dashboard/admin-dashboard-blogs/admin-dashboard-blogs.component';
 
 
 
@@ -100,7 +105,12 @@ import { ProfileComponent } from './components/profile-component/profile.compone
     CategoriesTabComponent,
     AboutCustomersTabComponent,
     AffiliateTabComponent,
-    ProfileComponent
+    ProfileComponent,
+    RatingComponent,
+    AdminDashboardSuppliersComponent,
+    AdminDashboardPartnersComponent,
+    AdminDashboardCategoriesComponent,
+    AdminDashboardBlogsComponent
   ],
   imports: [
     AppRoutingModule,

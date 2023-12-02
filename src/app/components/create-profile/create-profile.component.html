@@ -131,8 +131,9 @@
     </mat-form-field>
     </div>
     <div class="form-group">
-        <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil (maxim 10)</label>
+        <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil iar a doua de coperta (maxim 6)</label>
         <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
+        <p *ngIf="tooManyImages" style="color:red">{{ tooManyImagesMessage }}</p>
       </div>
     <div class="form-group">
         <label for="description">Descriere*</label>
@@ -276,8 +277,9 @@
     </mat-form-field>
     </div>
     <div class="form-group">
-        <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil (maxim 10)</label>
+        <label for="imageSelector">Imaginile profilului, prima selectata va fi poza de profil iar a doua de coperta (maxim 6)</label>
         <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
+        <p>{{ tooManyImagesMessage }}</p>
       </div>
     <div class="form-group">
         <label for="description">Descriere</label>

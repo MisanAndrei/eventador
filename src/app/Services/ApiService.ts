@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category, City, County, CreateUser } from '../Models/Models';
+import { Category, City, County, CreateUser, ProfileCard, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
@@ -32,8 +32,22 @@ export class ApiService {
     return this.http.get<County[]>(this.apiUrl + '/County/GetAllCounties');
   }
 
+  getProfileCards(): Observable<ProfileCard[]>{
+    return this.http.get<ProfileCard[]>(this.apiUrl + '/Profile/ProfileCards')
+  }
+
+  getUserProfile(id: number): Observable<UserProfile>{
+    const url = `${this.apiUrl}/Profile/ProfileById/${id}`;
+    return this.http.get<UserProfile>(url);
+  }
+
   createUser(user: CreateUser) {
-    return this.http.post<any>(this.apiUrl + 'User', user);
+    var test = this.http.post<any>(this.apiUrl + '/User', user);
+    test.subscribe(x => {
+      console.log(x);
+    })
+    console.log(test);
+    return test;
   }
 
   // Perform a GET request

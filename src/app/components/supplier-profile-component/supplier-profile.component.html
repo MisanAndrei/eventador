@@ -1,9 +1,6 @@
 
 <div *ngIf="!(isMobile | async)" class="my-container">
 <div class="container">
-   
-   
-   
     <div class="left">
     
         <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
@@ -14,21 +11,21 @@
     
         <h3 style="margin:0px 5px 0px 5px; text-align: center;">{{motto}}</h3>
     
-        <h4 style="align-self: left;">{{ location }}</h4>
+        <h4 style="align-self: left;">din {{ location }}</h4>
 
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-            <div *ngFor="let category of categories" >
-                <button class="category-button"><p>{{category.name}}</p></button>
-            </div>
+           
+                <button class="category-button"><p>{{categoryName}}</p></button>
+       
         </div>
         
-        <p style="margin-bottom: 0px;">Numar telefon: 0752173948</p>
-        <p style="margin-bottom: 0px;">E-mail: dorel@yahoo.com</p>
+        <p style="margin-bottom: 0px;">Numar telefon: {{phoneNumber}}</p>
+        <p style="margin-bottom: 0px;">E-mail: {{email}}</p>
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-          <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
-          <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
-          <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
-          <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
+          <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
+          <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>
+          <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="fa fa-globe"></a>
+          <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
         </div>
 
         <!--icons section-->
@@ -56,8 +53,10 @@
   
 
 </div>
+<div *ngIf="!changesProfileId">
+<app-rating></app-rating>
 </div>
-
+</div>
 <!--                  Mobile               -->
 
 <div *ngIf="(isMobile | async)" class="mobile-container">
@@ -66,9 +65,7 @@
     <h3>{{ profileName }}</h3>
 
     <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-        <div *ngFor="let category of categories" >
-            <button class="category-button"><p>{{category.name}}</p></button>
-        </div>
+      <button class="category-button"><p>{{categoryName}}</p></button>
     </div>
 
 
@@ -77,14 +74,14 @@
     
     <p class="motto">{{motto}}</p>
 
-    <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: 0752173948</p>
-  <p style="margin-bottom: 2px; margin-top:3px;">E-mail: dorel@yahoo.com</p>
+    <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: {{phoneNumber}}</p>
+  <p style="margin-bottom: 2px; margin-top:3px;">E-mail: {{email}}</p>
 
   <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-    <a href="{{ youtubeUrl }}" class="fa fa-facebook"></a>
-    <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
-    <a href="https://www.instagram.com/eventador.ro" class="fa fa-globe"></a>
-    <a href="https://www.instagram.com/eventador.ro" class="fa fa-youtube-play"></a>
+    <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
+    <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>
+    <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="fa fa-globe"></a>
+    <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
   </div>
     
     
@@ -107,5 +104,8 @@
 
   
     </div>
+    <div *ngIf="!changesProfileId">
+      <app-rating></app-rating>
+      </div>
   </div>
 

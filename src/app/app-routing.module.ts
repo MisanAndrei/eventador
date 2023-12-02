@@ -16,7 +16,8 @@ import { ProfileComponent } from './components/profile-component/profile.compone
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
 { path: 'contact', component: ContactComponent},
-{ path: 'colaborator', component: SupplierProfileComponent },
+{ path: 'furnizor', component: SupplierProfileComponent },
+{ path: 'furnizor/:id', component: SupplierProfileComponent },
 { path: 'acasa', component: DashboardComponent },
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
 { path: 'dashboard', component: PartnerDashboardComponent},
 { path: 'admin-dashboard', component: AdminDashboardComponent},
 { path: 'furnizori', component: CustomersComponent},
+{ path: 'furnizori/:id', component: CustomersComponent },
 { path: 'profil', component: ProfileComponent}];
 
 @NgModule({

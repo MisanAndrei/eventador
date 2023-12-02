@@ -85,6 +85,14 @@
     width: 150px; /* Adjust the width of the dropdowns as needed */
   }
 
+  .custom-dropdown {
+    margin-right: 20px;
+  }
+
+  .custom-input {
+    margin-right: 20px;
+  }
+
   .mobile-card-container {
     display: flex;
   flex-wrap: wrap;
@@ -147,9 +155,10 @@
     width: 100px;
     margin-right: 5px;
     color:white;
-    background: linear-gradient(to right, #FF63A4, #FE8962);;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
     border: none;
     border-radius: 3%;
+    height: 56px;
   }
 
   .mobile-filter-input,
@@ -185,7 +194,7 @@
   }
 
   .mobile-filter-button{
-    background-color:#7643CA;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
     color: white;
     border:none;
     border-radius: 5%;

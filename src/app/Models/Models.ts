@@ -126,18 +126,18 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface UserProfile {
     id: number;
     businessName: string;
-    businessEmail: string;
-    businessPhoneNumber: string;
-    category: string;
+    email: string;
+    phoneNumber: string;
+    categoryName: string;
     images: UserImage[];
     motto?: string;
     description: string;
-    city: string; 
-    areaOfInterest: string[];
+    cityName: string; 
+    areaOfInterestNames: string[];
     websiteUrl?: string;
-    facebookUrl: string;
-    instagramUrl: string;
-    youtubeUrl: string;
+    facebookUrl?: string;
+    instagramUrl?: string;
+    youtubeUrl?: string;
   }
 
   export interface CreateUser{
@@ -239,6 +239,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     id: number;
     name: string;
     image: string;
+    isLandingPage: boolean;
   }
 
   export interface AdminDashboardBlog {

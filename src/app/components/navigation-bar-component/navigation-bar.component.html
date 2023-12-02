@@ -33,7 +33,7 @@
   <!-- Your section content goes here -->
   <div class="categories-section">
     <div class="category" *ngFor="let category of categories">
-      <a class="subMenuLinks"><p>{{ category }}</p></a>
+      <a [routerLink]="['/furnizori', category.id]" class="subMenuLinks"><p>{{ category.name }}</p></a>
     </div>
   </div>
 </div>

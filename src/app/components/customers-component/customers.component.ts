@@ -1,65 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
+import { ProfileCard } from 'src/app/Models/Models';
+import { ApiService } from 'src/app/Services/ApiService';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css']
 })
-export class CustomersComponent {
+export class CustomersComponent implements OnInit {
   showFilter: boolean = false;
   searchTerm: string = '';
-  selectedCategory: string = '';
-  selectedZone: string = '';
+  selectedCategory?: number;
+  selectedZone?: number;
+  profileCards: ProfileCard[] = [];
+  filteredProfileCards: ProfileCard[] = [];
+  zoneOfInterestRomania: number = 43;
+  zones: any[] = [];
+  categories: any[] = [];
+  isMobile: Observable<boolean>;
 
-  zones: any[] = [
-    { id: 1, name: 'Zone 1' },
-    { id: 2, name: 'Zone 2' },
-    // Add more zones as needed
-  ];
-  
-  categories: any[] = [
-    { id: 1, name: 'Category 1' },
-    { id: 2, name: 'Category 2' },
-    // Add more categories as needed
-  ];
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute) {
+    this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches)
+      );
+  }
 
+  ngOnInit(): void {
+    this.apiService.getProfileCards().pipe(
+      switchMap(response1 => {
+        this.profileCards = response1;
+        this.filteredProfileCards = response1;
+        this.applyFilters();
+        return this.apiService.getCategories();
+      }),
+      switchMap(response2 => {
+        this.categories = response2
+        return this.apiService.getCounties();
+      })
+    ).subscribe(response3 => {
+      this.zones = response3;
+    });
 
-    cards: any[] = [
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        { name: 'Misan Andrei', imageUrl: 'https://eventador.ro/uploads/2019/03/PHOTO-2018-09-21-15-52-43.jpg', description: 'Cea mai eleganta imbracaminte pentru tine!', location: 'Cluj-Napoca', categoryDescription: 'Imbracaminte' },
-        // Add more cards as needed
-      ];
-      
-      isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver) {
-        this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
-          .pipe(
-            map(result => result.matches)
-          );
-      }
+    this.selectedCategory = Number(this.route.snapshot.paramMap.get('id')) ?? undefined;
+
+  }
 
       applyFilters() {
-        // Implement your filtering logic here using the searchTerm, selectedCategory, and selectedZone
-        console.log('Search Term:', this.searchTerm);
-        console.log('Selected Category:', this.selectedCategory);
-        console.log('Selected Zone:', this.selectedZone);
+        this.filteredProfileCards = this.profileCards;
+        if (this.searchTerm != ''){
+          this.filteredProfileCards = this.filteredProfileCards.filter(x => x.name.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()));
+        }
+        
+        if (this.selectedZone != undefined && this.selectedZone != 0){
+          this.filteredProfileCards = this.filteredProfileCards.filter(x => x.areaOfInterest?.map(x => x.id).includes(this.selectedZone ?? 0) || x.areaOfInterest?.map(x => x.id).includes(this.zoneOfInterestRomania));
+        }
+
+        if (this.selectedCategory != undefined && this.selectedCategory != 0) {
+          this.filteredProfileCards = this.filteredProfileCards.filter(x => x.category.id == this.selectedCategory);
+        }
+
       }
 
       clearFilters() {
         // Implement your filtering logic here using the searchTerm, selectedCategory, and selectedZone
-        console.log('Search Term:', this.searchTerm);
-        console.log('Selected Category:', this.selectedCategory);
-        console.log('Selected Zone:', this.selectedZone);
+        this.filteredProfileCards = this.profileCards;
+        this.searchTerm = '';
+        this.selectedCategory = undefined;
+        this.selectedZone = undefined;
       }
 
       toggleFilter() {

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/Models/Models';
+import { ApiService } from 'src/app/Services/ApiService';
 
 
 
@@ -18,37 +20,9 @@ export class NavigationBarComponent {
   showCategoriesFromLink: boolean = false;
   showCategoriesFromMenu: boolean = false;
 
-  categories = [ 
-    "Artisti",
-    "Locații",
-    "Foto-Video",
-    "Flori",
-    "Dulce",
-    "Trupe",
-    "M.C.",
-    "Deejays",
-    "Cocktail Bars",
-    "Vestimentație / Accesorii – Ea",
-    "Vestimentație / Accesorii – El",
-    "Saloane",
-    "Gheață Carbonică / Artificii",
-    "Photo Booth",
-    "Lumini",
-    "Limuzine",
-    "Aranjamente Locație",
-    "Invitații / Mărturii",
-    "Hostess",
-    "Wedding Planners",
-    "Zâne Ursitoare",
-    "Dansatori / Coregrafi",
-    "Bijuterii",
-    "Băuturi",
-    "Catering",
-    "Diverse",
-    "Make-up Artiști",
-    "Fotografi",
-    "Personal Trainers",
-    "Vacanțe"];
+  categories: Category[] = [];
+
+  
 
   isLoggedIn(): boolean {
     // Check if the user is logged in by checking if the token is present in local storage
@@ -73,11 +47,15 @@ export class NavigationBarComponent {
 
 
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
       );
+
+      apiService.getCategories().subscribe(response => {
+        this.categories = response;
+      })
   }
 
  

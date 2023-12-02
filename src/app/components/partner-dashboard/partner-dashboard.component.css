@@ -56,7 +56,7 @@
   .small-card {
     width: 200px;
     height: 150px;
-    background-color: #7643CA;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -163,7 +163,7 @@
   .mobile-card {
     width: 200px;
   height: 50px;
-  background-color: #7643CA; /* Placeholder background color, replace with your own */
+  background: linear-gradient(to right, #FF63A4, #FE8962); /* Placeholder background color, replace with your own */
   border-radius: 5%;
   border: 1px solid #ccc; /* Placeholder border, replace with your own */
   margin-bottom: 20px; /* Add some spacing between cards */

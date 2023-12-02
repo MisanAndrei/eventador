@@ -9,15 +9,16 @@ import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  selector: 'app-admin-dashboard-suppliers',
+  templateUrl: './admin-dashboard-suppliers.component.html',
+  styleUrls: ['./admin-dashboard-suppliers.component.css']
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit {
+export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     private _observer: BreakpointObserver;
     public isMobile!: Observable<boolean>;
     displayedColumnsProfilesChanged: string[] = ['firstname', 'lastname', 'category', 'actions'];
     searchControl = new FormControl('');
+    changesProfileId?: number;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -62,6 +63,14 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       .subscribe(value => {
         this.dataSource.filter = value!.trim().toLowerCase();
       });
+  }
+
+  acceptChanges(){
+
+  }
+
+  showChanges(){
+    this.changesProfileId = 9;
   }
 
   

@@ -48,7 +48,7 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
       public barChartType: ChartType = 'bar';
       public barChartLegend = true;
       public barChartData: ChartDataset[] = [
-        { data: [], label: 'Furnizori adaugati',backgroundColor: '#7643CA' },
+        { data: [], label: 'Furnizori adaugati',backgroundColor: '#FF63A4' },
       ];
     
     searchControl = new FormControl('');
@@ -142,7 +142,7 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
   
     progressLabel.textContent = `${percent}%`;
     progressFill.style.backgroundColor = '#7643CA';
-  
+    progressFill.style.background = 'linear-gradient(to right, #FF63A4, #FE8962)';
  
   }
 

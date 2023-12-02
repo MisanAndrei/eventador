@@ -1,0 +1,63 @@
+.rating-card {
+    border: 1px solid #ddd;
+    margin: 20px;
+    padding: 10px;
+    width: 300px;
+    background-color: white;
+    border-radius: 5%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-rating {
+    display: flex;
+    flex-direction: column; /* Change this property */
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .rating-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .stars-and-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .star-rating {
+    font-size: 24px;
+  }
+  
+  .star {
+    margin-right: 5px;
+  }
+  
+  .filled {
+    color: gold;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .review {
+    margin-bottom: 10px;
+  }
+  
+  .response {
+    font-style: italic;
+    color: #666;
+  }
+
+  .rating-container {
+    width: 70%;
+    margin: 0 auto; /* This centers the container horizontally */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }

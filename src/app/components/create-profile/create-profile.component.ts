@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Category, City, County, CreateUser } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
@@ -14,6 +14,8 @@ import { ApiService } from 'src/app/Services/ApiService';
 export class CreateProfileComponent implements OnInit {
   selectedAreas: number[] = [];
   selectedCategory: number[] = [];
+  tooManyImages: boolean = false;
+  tooManyImagesMessage: string = 'Prea multe imagini selectate, va rugam alegeti din nou!';
   
   // Common User Information
     id = 0;
@@ -41,6 +43,7 @@ export class CreateProfileComponent implements OnInit {
     description: string = '';
     selectedImages: File[] = [];
     convertedSelectedImages: string[] = [];
+    maxAllowedFiles: number = 6;
 
     //just for testing
     cities: City[] = [{id: 1, name: 'Cluj-Napoca'}, {id: 2, name: 'Bucuresti'}];
@@ -61,15 +64,17 @@ export class CreateProfileComponent implements OnInit {
             map(result => result.matches)
           );
       }
-  ngOnInit(): void {
-    //this.apiService.getCategories().subscribe(x => {
-    //  this.categories = x;
-   // })
-
-    this.apiService.getCounties().subscribe(x => {
-      this.areas = x;
-      this.counties = x;
-    })
+  
+    ngOnInit(): void {
+      this.apiService.getCategories().pipe(
+        switchMap(categories => {
+          this.categories = categories;
+          return this.apiService.getCounties();
+        })
+      ).subscribe(areas => {
+        this.areas = areas;
+        this.counties = areas;
+      });
   }
   
     // Method to toggle business info visibility
@@ -95,19 +100,29 @@ export class CreateProfileComponent implements OnInit {
 
     onImagesSelected(event: any) {
       const files: File[] = Array.from(event.target.files);
-      this.convertedSelectedImages.slice(0);
+
+      if (files.length > this.maxAllowedFiles){
+        this.tooManyImages = true;
+        return ;
+      }
+
+      this.tooManyImages = false;
+
+      this.convertedSelectedImages = [];
+    
       files.forEach(file => {
         const reader = new FileReader();
-  
+    
         reader.onload = (e: any) => {
+          // Extract the base64 data part
           const base64Image = e.target.result as string;
-          this.convertedSelectedImages.push(base64Image);
+          const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
+          this.convertedSelectedImages.push(base64Data);
         };
-  
+    
         // Read the file as a data URL, triggering the `onload` event
         reader.readAsDataURL(file);
       });
-
     }
 
     onCountyChange() {
@@ -152,6 +167,7 @@ export class CreateProfileComponent implements OnInit {
       profile: {
         businessName: this.businessName,
         businessCUI: this.businessCUI,
+        categoryId: this.selectedCategory,
         motto: this.motto,
         cityId: this.cityId,
         areaOfInterest: this.selectedAreas,
