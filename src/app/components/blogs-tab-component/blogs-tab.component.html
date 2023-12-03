@@ -1,6 +1,6 @@
 <div class="blog-container">
-  <div class="blog-card" *ngFor="let blog of blogs">
-    <div class="blog-image" [style.background-image]="'url(' + blog.image + ')'">
+  <div [routerLink]="['/blog', blog.id]" class="blog-card" *ngFor="let blog of blogs">
+    <div class="blog-image" [style.background-image]="'url(' + blog.imageUrl + ')'">
       <div class="blog-details">
         <h3>{{ blog.title }}</h3>
       </div>

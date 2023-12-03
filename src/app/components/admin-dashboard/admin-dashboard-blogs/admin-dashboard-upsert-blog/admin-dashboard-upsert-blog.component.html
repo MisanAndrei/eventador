@@ -1,0 +1,27 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="form-container">
+  <div>
+    <label>Titlu:</label>
+    <input type="text" formControlName="title" />
+  </div>
+
+  <div>
+    <label>Content:</label>
+    <textarea formControlName="content"></textarea>
+  </div>
+
+  <div>
+    <label>Imagine:</label>
+    <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+    
+  </div>
+
+  <div>
+    <label>Minute de citire:</label>
+    <input type="number" formControlName="minutesToRead" />
+  </div>
+
+  <div>
+    
+    <button mat-raised-button color="accent" type="submit">{{ isEditing ? 'Modifica Blog' : 'Creare Blog' }}</button>
+  </div>
+</form>

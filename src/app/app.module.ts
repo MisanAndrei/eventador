@@ -73,6 +73,9 @@ import { AdminDashboardSuppliersComponent } from './components/admin-dashboard/a
 import { AdminDashboardPartnersComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partners.component';
 import { AdminDashboardCategoriesComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-categories.component';
 import { AdminDashboardBlogsComponent } from './components/admin-dashboard/admin-dashboard-blogs/admin-dashboard-blogs.component';
+import { AdminDashboardBlogUpsertComponent } from './components/admin-dashboard/admin-dashboard-blogs/admin-dashboard-upsert-blog/admin-dashboard-upsert-blog.component';
+import { AdminDashboardCategoryUpsertComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-upsert/admin-dashboard-category-upsert.component';
+import { AdminDashboardCategoryStatusComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-status/admin-dashboard-category-status.component';
 
 
 
@@ -110,7 +113,10 @@ import { AdminDashboardBlogsComponent } from './components/admin-dashboard/admin
     AdminDashboardSuppliersComponent,
     AdminDashboardPartnersComponent,
     AdminDashboardCategoriesComponent,
-    AdminDashboardBlogsComponent
+    AdminDashboardBlogsComponent,
+    AdminDashboardBlogUpsertComponent,
+    AdminDashboardCategoryUpsertComponent,
+    AdminDashboardCategoryStatusComponent
   ],
   imports: [
     AppRoutingModule,

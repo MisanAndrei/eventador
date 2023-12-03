@@ -22,7 +22,7 @@ const routes: Routes = [
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
 { path: 'creare-profil', component: CreateProfileComponent},
-{ path: 'blog', component: BlogComponent},
+{ path: 'blog/:id', component: BlogComponent},
 { path: 'noutati', component: BlogsComponent},
 { path: 'dashboard', component: PartnerDashboardComponent},
 { path: 'admin-dashboard', component: AdminDashboardComponent},

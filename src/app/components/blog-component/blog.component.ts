@@ -1,6 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {  Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { Blog } from 'src/app/Models/Models';
+import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
   selector: 'app-blog',
@@ -9,13 +12,24 @@ import { Observable, map } from 'rxjs';
 })
 export class BlogComponent implements OnInit {
   isMobile: Observable<boolean>;
-  blog: any = {id : 1, title: 'Nunta de vis', image: 'https://eventador.ro/uploads/2019/05/0b8be5c58e45e0a5ebe76150a98a7a4d.png', content: 'Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need. Your blog text goes here. Write as much content as you need.'}
-  constructor(private breakpointObserver: BreakpointObserver) {
+  blog?: Blog;
+  selectedBlog!: number;
+
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
   this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
     map(result => result.matches)
   );
 }
   ngOnInit(): void {   
+    this.selectedBlog = Number(this.route.snapshot.paramMap.get('id')) ?? undefined;
+
+    if (this.selectedBlog == undefined){
+      this.router.navigate(['/noutati']);
+    }
+
+    this.apiService.getBlogById(this.selectedBlog).subscribe(response => {
+      this.blog = response;
+    });
   }
 }

@@ -3,10 +3,9 @@
 <div class="background-section">
     <h1 class="font-used" style="text-align: center;">Un blog cu și despre evenimente reușite.</h1>
 <div class="card-container">
-    <div [class.big-card]="card.itemsPerRow === 1" [class.medium-card]="card.itemsPerRow === 2" [class.small-card]="card.itemsPerRow === 3" *ngFor="let card of blogs" [class.items-1]="card.itemsPerRow === 1" [class.items-2]="card.itemsPerRow === 2" [class.items-3]="card.itemsPerRow === 3">
+    <div [routerLink]="['/blog', card.id]" [class.big-card]="card.itemsPerRow === 1" [class.medium-card]="card.itemsPerRow === 2" [class.small-card]="card.itemsPerRow === 3" *ngFor="let card of blogs" [class.items-1]="card.itemsPerRow === 1" [class.items-2]="card.itemsPerRow === 2" [class.items-3]="card.itemsPerRow === 3">
       <div [class.big-card-image]="card.itemsPerRow === 1" [class.medium-card-image]="card.itemsPerRow === 2" [class.small-card-image]="card.itemsPerRow === 3" [style.background-image]="'url(' + card.image + ')'"></div>
       <div [class.big-card-text]="card.itemsPerRow === 1" [class.medium-card-text]="card.itemsPerRow === 2" [class.small-card-text]="card.itemsPerRow === 3">
-        <p class="category font-used">{{ card.category }}</p>
         <h2 class="font-used">{{ card.title }}</h2>
         <p class="font-used blog-description">{{ card.content }}</p>
         <p class="time">Citeste mai mult</p>    
@@ -18,10 +17,9 @@
 <div class="mobile-container" *ngIf="(isMobile | async)">
   <h1 class="font-used" style="text-align: center;">Un blog cu și despre evenimente reușite.</h1>
   <div class="mobile-blog-list">
-    <div *ngFor="let blog of blogs" class="mobile-blog">
+    <div [routerLink]="['/blog', blog.id]" *ngFor="let blog of blogs" class="mobile-blog">
       <img [src]="blog.image" alt="{{ blog.title }}" class="mobile-blog-image" />
       <div class="mobile-blog-details">
-        <div class="category font-used mobile-blog-category">{{ blog.category }}</div>
         <div class="font-used mobile-blog-title">{{ blog.title }}</div>
         <div class="font-used mobile-blog-content">{{ blog.content }}</div>
         <div class="font-used mobile-read-more">Citeste mai mult</div>

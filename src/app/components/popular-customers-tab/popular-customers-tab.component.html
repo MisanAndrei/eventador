@@ -3,12 +3,12 @@
   <h3 class="subtitle">Descopera cei mai apreciati si populari furnizori</h3>
 
   <div class="card-container">
-    <div *ngFor="let supplier of suppliers" class="card">
-      <img [src]="supplier.image" alt="{{ supplier.name }}" class="card-image">
+    <div *ngFor="let supplier of cards" class="card">
+      <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
       <h4 class="card-title">{{ supplier.name }}</h4>
-      <p class="card-category">{{ supplier.category }}</p>
+      <p class="card-category">{{ supplier.category.name }}</p>
     </div>
   </div>
 
-  <button mat-raised-button color="accent">Vezi toti furnizorii</button>
+  <button [routerLink]="['/furnizori']" mat-raised-button color="accent">Vezi toti furnizorii</button>
 </div>

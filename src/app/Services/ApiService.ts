@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category, City, County, CreateUser, ProfileCard, UserProfile } from '../Models/Models';
+import { Blog, Category, City, County, CreateUser, LandingPage, ProfileCard, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
@@ -17,6 +17,36 @@ export class ApiService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<Category[]>(this.apiUrl + '/Category', { headers });
+  }
+
+  upsertCategory(category: Category) {
+    this.http.post<any>(this.apiUrl + '/Category/AddOrUpdateCategory', category).subscribe(x => {
+      console.log(x);
+    });
+  }
+
+  getBlogs(): Observable<Blog[]>{
+    return this.http.get<Blog[]>(this.apiUrl + '/Blog/GetAllBlogsCards');
+  }
+
+  getBlogById(id: number): Observable<Blog>{
+    return this.http.get<Blog>(`${this.apiUrl}/Blog/${id}`);
+  }
+
+  getLandingPage(): Observable<LandingPage>{
+    return this.http.get<LandingPage>(this.apiUrl + '/Section/LandingPage');
+  }
+
+  addBlog(blog: Blog){
+    this.http.post<any>(this.apiUrl + '/Blog', blog).subscribe(x => {
+      console.log(x);
+    });
+  }
+
+  markCategoriesOnLandingPage(ids: number[]){
+    this.http.post<any>(this.apiUrl + '/Category/MarkCategoriesToShow', ids).subscribe(x => {
+      console.log(x);
+    });
   }
 
   getCategories(): Observable<Category[]> {

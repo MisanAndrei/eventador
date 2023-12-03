@@ -1,10 +1,10 @@
 
 <app-image-slider></app-image-slider>
-<app-about-us-tab></app-about-us-tab>
-<app-blogs-tab></app-blogs-tab>
-<app-popular-customers-tab></app-popular-customers-tab>
-<app-categories-tab></app-categories-tab>
-<app-about-customers-tab></app-about-customers-tab>
-<app-affiliate-tab></app-affiliate-tab>
+<app-about-us-tab [section]="section1"></app-about-us-tab>
+<app-blogs-tab [blogs]="blogs"></app-blogs-tab>
+<app-popular-customers-tab [cards]="profileCards" [section]="section2"></app-popular-customers-tab>
+<app-categories-tab [categories]="categories"></app-categories-tab>
+<app-about-customers-tab [section]="section3"></app-about-customers-tab>
+<app-affiliate-tab [section]="section4"></app-affiliate-tab>
 <app-contact-tab></app-contact-tab>
 <!--<app-categories-profiles></app-categories-profiles>-->

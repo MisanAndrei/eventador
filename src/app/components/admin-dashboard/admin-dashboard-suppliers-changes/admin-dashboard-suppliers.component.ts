@@ -69,15 +69,13 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
 
   }
 
+  deleteChanges(){
+
+  }
+
   showChanges(){
     this.changesProfileId = 9;
   }
-
-  
-
-  
-  
- 
-  }
+}
 
   

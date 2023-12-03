@@ -1,0 +1,13 @@
+<div class="center-container">
+    <h1>Toate Categoriile</h1>
+    <div *ngFor="let category of categories" class="category-item">
+      <input type="checkbox" [checked]="category.showOnLandingPage" (change)="toggleCategorySelection(category)" />
+      <span>{{ category.name }}</span>
+      <span *ngIf="!category.showOnLandingPage">Nu arata</span>
+      <span *ngIf="category.showOnLandingPage">Arata pe landing page</span>
+    </div>
+
+    <button mat-raised-button color="accent" (click)="submitCategoryChanges()" [disabled]="!canSubmitChanges()">Salveaza schimbarile</button>
+  </div>
+  
+  

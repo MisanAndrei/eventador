@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   isMobile: any;
+  username: string = '';
+  password: string = '';
   constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -20,11 +22,11 @@ export class LoginComponent {
       );
    }
 
-  login() {
+  async login() {
     // Replace with your actual login logic and API call
     // After successful login, you'll receive the token in the response
     console.log('button clicked');
-    this.authService.login('admin', 'admin');
+    var loggedIn = this.authService.login(this.username, this.password)
 
     this.router.navigate(['/acasa']);
     //const token = 'your_access_token'; // Replace with the actual token from the response

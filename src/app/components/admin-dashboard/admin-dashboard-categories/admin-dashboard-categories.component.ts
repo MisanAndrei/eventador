@@ -1,23 +1,28 @@
-import {  AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {  AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
-import { AdminDashboardCategory, AdminDashboardPartners, AdminDashboardProfilesChanged, DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
+import { AdminDashboardCategory, AdminDashboardPartners, AdminDashboardProfilesChanged, Category, DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
   selector: 'app-admin-dashboard-categories',
   templateUrl: './admin-dashboard-categories.component.html',
-  styleUrls: ['./admin-dashboard-categories.component.css']
+  styleUrls: ['./admin-dashboard-categories.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class AdminDashboardCategoriesComponent implements OnInit, AfterViewInit {
     private _observer: BreakpointObserver;
     public isMobile!: Observable<boolean>;
-    displayedColumnsProfilesChanged: string[] = ['name', 'image', 'isLandingPage', 'actions'];
+    isCreatingOrEditing: boolean = false;
+    isChangingStatus: boolean = false;
+    editedCategory?: Category;
+    displayedColumnsProfilesChanged: string[] = ['name', 'image', 'showOnLandingPage', 'actions'];
     searchControl = new FormControl('');
     changesProfileId?: number;
 
@@ -25,25 +30,18 @@ export class AdminDashboardCategoriesComponent implements OnInit, AfterViewInit 
     @ViewChild(MatSort) sort!: MatSort;
 
 
-    profiles: AdminDashboardCategory[] = [{ id : 1, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 2, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 3, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 1, name: 'Categorie', isLandingPage: false, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 2, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 3, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 1, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 2, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                  { id : 3, name: 'Categorie', isLandingPage: true, image: 'https://eventador.ro/uploads/2018/07/Francisc-Photographer-1@2x-50.jpg' },
-                                                ];
+    profiles: Category[] = [];
 
-    dataSource = new MatTableDataSource<AdminDashboardCategory>(this.profiles);
+    dataSource = new MatTableDataSource<Category>(this.profiles);
     
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
     this._observer = breakpointObserver;
     
   }
 
   ngOnInit(): void {
+    
+
    console.log(this.profiles);
     this.isMobile = this._observer.observe(Breakpoints.Handset)
       .pipe(
@@ -52,8 +50,12 @@ export class AdminDashboardCategoriesComponent implements OnInit, AfterViewInit 
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.apiService.getCategories().subscribe(x => {
+      this.profiles = x;
+      this.dataSource = new MatTableDataSource<Category>(this.profiles)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
     
     this.searchControl.valueChanges
       .pipe(
@@ -66,19 +68,27 @@ export class AdminDashboardCategoriesComponent implements OnInit, AfterViewInit 
       });
   }
 
-  acceptChanges(){
-
+  createCategory(){
+    this.isChangingStatus = false;
+    this.isCreatingOrEditing = false;
+    this.editedCategory = undefined;
+    this.isCreatingOrEditing = true;
+  }
+  editCategory(categoryId: Category) {
+    this.isChangingStatus = false;
+    this.isCreatingOrEditing = false;
+    this.editedCategory = categoryId;
+    this.isCreatingOrEditing = true;
+    
   }
 
-  onIsLandingPageChange(event: any, profile: AdminDashboardCategory): void {
-    // Handle the change in the "isLandingPage" column
-    profile.isLandingPage = event.checked;
-    // Optionally, you can save the changes to your backend or update your state
+  changeCategoriesStatus(){
+    this.isCreatingOrEditing = false;
+    this.isChangingStatus = true;
   }
 
-  showChanges(){
-    this.changesProfileId = 9;
-  }
+
+
 
   
 

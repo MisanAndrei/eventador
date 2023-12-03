@@ -17,9 +17,9 @@
         <td mat-cell *matCellDef="let profile"> {{ profile.name }} </td>
       </ng-container>
 
-      <ng-container matColumnDef="isLandingPage">
+      <ng-container matColumnDef="showOnLandingPage">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Pagina principala </th>
-        <td mat-cell *matCellDef="let profile"> {{ profile.isLandingPage }} </td>
+        <td mat-cell *matCellDef="let profile"> {{ profile.showOnLandingPage }} </td>
       </ng-container>
       
       
@@ -27,7 +27,10 @@
       
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Actiuni </th>
-        <td mat-cell *matCellDef="let profile"> <button style="margin-right: 20px" mat-raised-button color="accent">Vezi Partener</button></td>
+        <td mat-cell *matCellDef="let profile"> 
+          <button style="margin-right: 20px" mat-raised-button color="accent" (click)="editCategory(profile)">Editeaza Categorie</button>
+
+        </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumnsProfilesChanged"></tr>
@@ -36,4 +39,12 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
+</div>
+<button style="margin-right: 20px" mat-raised-button color="accent" (click)="createCategory()">Adauga Categorie</button>
+<button style="margin-right: 20px" mat-raised-button color="accent" (click)="changeCategoriesStatus()">Schimba categoriile aparute pe pagina principala</button>
+<div *ngIf="isCreatingOrEditing">
+  <app-admin-dashboard-category-upsert [category]="editedCategory"></app-admin-dashboard-category-upsert>
+</div>
+<div *ngIf="isChangingStatus">
+  <app-admin-dashboard-category-status [categories]="profiles"></app-admin-dashboard-category-status>
 </div>

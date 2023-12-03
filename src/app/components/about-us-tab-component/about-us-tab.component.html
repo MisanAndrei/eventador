@@ -5,11 +5,11 @@
         <img src="assets/imagesandvideos/eventadorpink.jpeg" type="jpeg" alt="About Us Image">
       </div>
       <div class="right-section">
-        <h2>Eventador</h2>
+        <h2>{{section?.title}}</h2>
         <p>
-            Dacă te întrebi cine suntem, te invităm să afli direct de la noi! Împreună cu tine și cu toți colaboratorii din domeniul evenimentelor, vom face ca eventador.ro să ajungă în cel mai scurt timp, cea mai mare platformă online de organizare evenimente din România.
+           {{section?.content}}
         </p>
-        <button mat-raised-button color="accent">Despre Noi</button>
+        <button [routerLink]="['/despre-noi']" mat-raised-button color="accent">Despre Noi</button>
       </div>
     </div>
   </div>
@@ -22,11 +22,11 @@
         <img style="width:60%" src="assets/imagesandvideos/eventadorpink.jpeg" type="jpeg" alt="About Us Image">
       </div>
       <div>
-        <h2>Eventador</h2>
+        <h2>{{section?.title}}</h2>
         <p>
-            Dacă te întrebi cine suntem, te invităm să afli direct de la noi! Împreună cu tine și cu toți colaboratorii din domeniul evenimentelor, vom face ca eventador.ro să ajungă în cel mai scurt timp, cea mai mare platformă online de organizare evenimente din România.
+          {{section?.content}}
         </p>
-        <button style="width:100px" mat-raised-button color="accent">Despre Noi</button>
+        <button [routerLink]="['/despre-noi']" style="width:100px" mat-raised-button color="accent">Despre Noi</button>
       </div>
     </div>
   </div>

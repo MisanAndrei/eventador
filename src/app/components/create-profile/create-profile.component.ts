@@ -162,6 +162,7 @@ export class CreateProfileComponent implements OnInit {
       email: this.email,
       firstName: this.firstName,
       lastName: this.lastName,
+      password: "secheioia",
       phoneNumber: this.phoneNumber,
       role: this.isBusinessAccount ? UserRole.supplier : UserRole.customer,
       profile: {

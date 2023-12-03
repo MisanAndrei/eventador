@@ -57,9 +57,10 @@ import { UserRole } from "../Utilities/enums/Enums";
     }
     
   export interface Category {
-    id: number;
+    id?: number;
     name: string;
     image?: string;
+    showOnLandingPage?: boolean;
     }
 
   export interface MenuLinks {
@@ -109,8 +110,9 @@ import { UserRole } from "../Utilities/enums/Enums";
     email: string;
     firstName: string;
     lastName: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     role: UserRole;
+    profileId?: number
     token: string;
   }
 
@@ -119,7 +121,8 @@ import { UserRole } from "../Utilities/enums/Enums";
     email: string;
     firstName: string;
     lastName: string;
-    phoneNumber: string;
+    phoneNumber?: string;
+    profileId?: number;
     role: UserRole;
   }
 
@@ -142,6 +145,7 @@ import { UserRole } from "../Utilities/enums/Enums";
 
   export interface CreateUser{
     email: string;
+    password:string;
     firstName: string;
     lastName: string;
     phoneNumber?: string;
@@ -210,16 +214,27 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface Blog {
     id: number;
     title: string;
-    description: string;
-    image: string;
+    content?: string;
+    description?: string;
+    imageUrl: string;
     minutesToRead: number;
+  }
+
+
+
+  export interface MainBlog{
+    id: number;
+    title: string;
+    itemsPerRow: number;
+    content?: string;
+    image: string;
   }
 
   export interface LandingPage {
     sections: Section[];
-    popularCards: ProfileCard[];
+    profileCards: ProfileCard[];
     categories: Category[]; 
-    blogs: Blog[];
+    blogCards: Blog[];
   }
 
   export interface SuppliersChanges {
@@ -239,7 +254,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     id: number;
     name: string;
     image: string;
-    isLandingPage: boolean;
+    showOnLandingPage: boolean;
   }
 
   export interface AdminDashboardBlog {

@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { Section } from 'src/app/Models/Models';
 
 @Component({
   selector: 'app-about-us-tab',
@@ -8,6 +9,7 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./about-us-tab.component.css']
 })
 export class AboutUsTabComponent {
+  @Input() section?: Section;
   isMobile: Observable<boolean>;
   constructor(private breakpointObserver: BreakpointObserver){
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)

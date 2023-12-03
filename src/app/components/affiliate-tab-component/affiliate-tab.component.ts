@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { Section } from 'src/app/Models/Models';
 
 @Component({
   selector: 'app-affiliate-tab',
@@ -8,6 +9,7 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./affiliate-tab.component.css']
 })
 export class AffiliateTabComponent {
+  @Input() section?: Section;
   isMobile: Observable<boolean>;
   constructor(private breakpointObserver: BreakpointObserver){
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)

@@ -1,7 +1,6 @@
 .affiliate-tab {
     width: 100%;
     height: 700px;
-    background-image: url('https://images6.alphacoders.com/373/373180.jpg'); /* Replace with your image path */
     background-size: cover;
     position: relative;
   }
@@ -41,7 +40,6 @@
   .affiliate-tab-mobile {
     width: 100%;
     height: 400px;
-    background-image: url('https://images6.alphacoders.com/373/373180.jpg'); /* Replace with your image path */
     background-size: cover;
     position: relative;
   }
