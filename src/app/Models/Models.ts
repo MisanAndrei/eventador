@@ -141,6 +141,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     facebookUrl?: string;
     instagramUrl?: string;
     youtubeUrl?: string;
+    reviews?: Review[]; 
   }
 
   export interface CreateUser{
@@ -220,7 +221,26 @@ import { UserRole } from "../Utilities/enums/Enums";
     minutesToRead: number;
   }
 
+  export interface Review {
+    authorName: string;
+    creationDate: Date;
+    id: number;
+    responseText?: string;
+    reviewText: string;
+    score: number;
+  }
 
+  export interface ReviewMapped {
+    authorName: string;
+    creationDate: Date;
+    id: number;
+    responseText?: string;
+    reviewText: string;
+    score: number;
+    responseShown: boolean;
+    responseInApproval: boolean;
+    responseSent: boolean;
+  }
 
   export interface MainBlog{
     id: number;
@@ -267,6 +287,18 @@ import { UserRole } from "../Utilities/enums/Enums";
     id: number;
     firstname: string;
     lastname: string;
+  }
+
+  export interface SendReview {
+    score: number;
+    reviewText: string;
+    userId: number;
+    profileId: number;
+  }
+
+  export interface SendResponse {
+    reviewId: number;
+    responseText: string;
   }
   
 

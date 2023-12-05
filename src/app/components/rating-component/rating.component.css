@@ -51,6 +51,7 @@
   .response {
     font-style: italic;
     color: #666;
+    text-align: right;
   }
 
   .rating-container {
@@ -60,4 +61,44 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .show-Response{
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin-right: 5px;
+    margin-left: auto;
+  }
+
+  .show-all-reviews {
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+
+  .response-area-mobile {
+    margin-left: 10px;
+    width: 200px;
+    height: 50px;
+    margin-top: 5px;
+  }
+
+  .response-area {
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 270px;
+    height: 60px;
+  }
+
+  .button-allReviews-section {
+    width: 90%;
+    text-align: center;
   }

@@ -124,3 +124,65 @@
     text-decoration: none;
     margin: 5px 2px;
   }
+
+  /*          -               - Review        -                  -                  */
+  
+  .review-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .rating-title {
+    margin: 5px;
+  }
+  
+  .rating-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .star {
+    font-size: 36px;
+    cursor: pointer;
+  }
+
+  .star:hover {
+    cursor: pointer;
+  }
+  
+  .star.selected {
+    color: gold; /* Set the star color for selected stars */
+  }
+  
+  .review-text {
+    width: 90%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submit-btn {
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .submit-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+
+  .center-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+  }

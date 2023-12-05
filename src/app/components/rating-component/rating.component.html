@@ -1,35 +1,50 @@
 
 <div *ngIf="!(isMobile | async)" class="rating-container">
-  <div class="rating-card" *ngFor="let rating of ratings">
+  <div class="rating-card" *ngFor="let rating of ratingsMapped">
     <div class="user-rating">
-      <div class="username"><i class="fa fa-user"></i> {{ rating.username }}</div>
+      <div class="username"><i class="fa fa-user"></i> {{ rating.authorName }}</div>
       
       <div class="star-rating">
-        <span *ngFor="let value of getStarValues()" class="star" [class.filled]="value <= rating.rating">
-          {{ value <= rating.rating ? '★' : '☆' }}
+        <span *ngFor="let value of getStarValues()" class="star" [class.filled]="value <= rating.score">
+          {{ value <= rating.score ? '★' : '☆' }}
         </span>
       </div>
-      <div class="rating-title">{{ rating.title }}</div>
     </div>
-    <div class="review">{{ rating.review }}</div>
-    <div class="response" *ngIf="rating.response">{{ rating.response }}</div>
+    <div class="review">{{ rating.reviewText }}</div>
+    <button *ngIf="rating.responseText && !currentProfileLoggedIn" class="show-Response">Arata Raspuns</button>
+      <div class="response" *ngIf="rating.responseText">{{ rating.responseText }}</div>
+      <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
+        <textarea class="response-area"></textarea>
+        <button (click)="sendResponse(rating.id, rating.responseText)" class="show-Response">Trimite Raspuns</button>
+    </div>
+    <h4 *ngIf="!rating.responseText && rating.responseSent">Raspunsul a fost trimis spre aprobare, multumim !</h4>
   </div>
+  <div class="button-allReviews-section">  
+    <button *ngIf="!showAllReviews" (click)="getReviewsByProfileId()" class="show-all-reviews">Arata toate review-urile</button>
+  </div>
+
 </div>
 
 <div *ngIf="(isMobile | async)" class="rating-container">
-    <div class="rating-card" *ngFor="let rating of ratings">
+    <div class="rating-card" *ngFor="let rating of ratingsMapped">
       <div class="user-rating">
-        <div class="username"><i class="fa fa-user"></i> {{ rating.username }}</div>
+        <div class="username"><i class="fa fa-user"></i> {{ rating.authorName }}</div>
         
         <div class="star-rating">
-          <span *ngFor="let value of getStarValues()" class="star" [class.filled]="value <= rating.rating">
-            {{ value <= rating.rating ? '★' : '☆' }}
+          <span *ngFor="let value of getStarValues()" class="star" [class.filled]="value <= rating.score">
+            {{ value <= rating.score ? '★' : '☆' }}
           </span>
         </div>
-        <div class="rating-title">{{ rating.title }}</div>
       </div>
-      <div class="review">{{ rating.review }}</div>
-      <div class="response" *ngIf="rating.response">{{ rating.response }}</div>
+      <div class="review">{{ rating.reviewText }}</div>
+      <button *ngIf="rating.responseText && !currentProfileLoggedIn" class="show-Response">Arata Raspuns</button>
+      <div class="response" *ngIf="rating.responseText">{{ rating.responseText }}</div>
+      <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
+        <textarea class="response-area-mobile"></textarea>
+        <button (click)="sendResponse(rating.id, rating.responseText)" class="show-Response">Trimite Raspuns</button>
     </div>
+    <h4 *ngIf="!rating.responseText && rating.responseSent">Raspunsul a fost trimis spre aprobare, multumim !</h4>
+    </div>
+    <button *ngIf="!showAllReviews" (click)="getReviewsByProfileId()" class="show-all-reviews">Arata toate review-urile</button>
   </div>
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Blog, Category, City, County, CreateUser, LandingPage, ProfileCard, UserProfile } from '../Models/Models';
+import { Blog, Category, City, County, CreateUser, LandingPage, ProfileCard, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
@@ -45,6 +45,18 @@ export class ApiService {
 
   markCategoriesOnLandingPage(ids: number[]){
     this.http.post<any>(this.apiUrl + '/Category/MarkCategoriesToShow', ids).subscribe(x => {
+      console.log(x);
+    });
+  }
+
+  saveReview(request: SendReview){
+    this.http.post<any>(this.apiUrl + '/Review/AddReview', request).subscribe(x => {
+      console.log(x);
+    });
+  }
+
+  saveResponse(request: SendResponse){
+    this.http.post<any>(this.apiUrl + '/Review/AddResponse', request).subscribe(x => {
       console.log(x);
     });
   }
