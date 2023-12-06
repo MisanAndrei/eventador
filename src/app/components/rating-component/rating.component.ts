@@ -39,9 +39,11 @@ export class RatingComponent implements OnInit {
         responseInApproval: false,
         responseSent: false
       };
-
+      
       
     });
+
+    console.log(this.currentProfileLoggedIn);
   }
     
   getStarValues(): number[] {
@@ -70,6 +72,16 @@ export class RatingComponent implements OnInit {
       // Change the value for the object with id 2
       if (obj.id === id) {
         return { ...obj, responseSent: true };
+      }
+      return obj;
+    });
+  }
+
+  showResponse(review: ReviewMapped){
+    this.ratingsMapped = this.ratingsMapped.map((obj) => {
+      // Change the value for the object with id 2
+      if (obj.id === review.id) {
+        return { ...obj, responseShown: true };
       }
       return obj;
     });

@@ -67,6 +67,16 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
     ngOnInit(): void {
       this.profileId = this.route.snapshot.paramMap.get('id') ?? '';
       
+      if (this.authService.isUserLogged()){
+        this.userLoggedIn = true;
+        var user = this.authService.getLoggedUser();
+        this.currentUserRole = user.role;
+        this.currentUserId = user.id;
+        if (this.profileId != undefined && Number(this.profileId) && Number(this.profileId) == user.profileId){
+          this.isCurrentProfileLogged = true;
+        }
+      }
+
       if (isNaN(Number(this.profileId)) && this.changesProfileId == undefined) {
         this.router.navigate(['/furnizori']);
       } else {
@@ -118,15 +128,7 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
         }
       }
 
-      if (this.authService.isUserLogged()){
-        this.userLoggedIn = true;
-        var user = this.authService.getLoggedUser();
-        this.currentUserRole = user.role;
-        this.currentUserId = user.id;
-        if (this.profileId != undefined && Number(this.profileId) && Number(this.profileId) == user.profileId){
-          this.isCurrentProfileLogged = true;
-        }
-      }
+      
 
     }
 

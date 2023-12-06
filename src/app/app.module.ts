@@ -76,6 +76,7 @@ import { AdminDashboardBlogsComponent } from './components/admin-dashboard/admin
 import { AdminDashboardBlogUpsertComponent } from './components/admin-dashboard/admin-dashboard-blogs/admin-dashboard-upsert-blog/admin-dashboard-upsert-blog.component';
 import { AdminDashboardCategoryUpsertComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-upsert/admin-dashboard-category-upsert.component';
 import { AdminDashboardCategoryStatusComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-status/admin-dashboard-category-status.component';
+import { AdminDashboardReviewsComponent } from './components/admin-dashboard/admin-dashboard-reviews/admin-dashboard-reviews.component';
 
 
 
@@ -116,7 +117,8 @@ import { AdminDashboardCategoryStatusComponent } from './components/admin-dashbo
     AdminDashboardBlogsComponent,
     AdminDashboardBlogUpsertComponent,
     AdminDashboardCategoryUpsertComponent,
-    AdminDashboardCategoryStatusComponent
+    AdminDashboardCategoryStatusComponent,
+    AdminDashboardReviewsComponent
   ],
   imports: [
     AppRoutingModule,

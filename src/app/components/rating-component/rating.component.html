@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="review">{{ rating.reviewText }}</div>
-    <button *ngIf="rating.responseText && !currentProfileLoggedIn" class="show-Response">Arata Raspuns</button>
-      <div class="response" *ngIf="rating.responseText">{{ rating.responseText }}</div>
+    <button *ngIf="rating.responseText && !rating.responseShown" (click)="showResponse(rating)" class="show-Response">Arata Raspuns</button>
+      <div class="response" *ngIf="rating.responseText && rating.responseShown">{{ rating.responseText }}</div>
       <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
         <textarea class="response-area"></textarea>
         <button (click)="sendResponse(rating.id, rating.responseText)" class="show-Response">Trimite Raspuns</button>
@@ -37,8 +37,8 @@
         </div>
       </div>
       <div class="review">{{ rating.reviewText }}</div>
-      <button *ngIf="rating.responseText && !currentProfileLoggedIn" class="show-Response">Arata Raspuns</button>
-      <div class="response" *ngIf="rating.responseText">{{ rating.responseText }}</div>
+      <button *ngIf="rating.responseText && !rating.responseShown" (click)="showResponse(rating)" class="show-Response">Arata Raspuns</button>
+      <div class="response" *ngIf="rating.responseText && rating.responseShown">{{ rating.responseText }}</div>
       <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
         <textarea class="response-area-mobile"></textarea>
         <button (click)="sendResponse(rating.id, rating.responseText)" class="show-Response">Trimite Raspuns</button>

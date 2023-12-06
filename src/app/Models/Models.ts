@@ -300,6 +300,13 @@ import { UserRole } from "../Utilities/enums/Enums";
     reviewId: number;
     responseText: string;
   }
+
+  export interface ApprovalReview {
+    reviewId: number;
+    profileName: string;
+    reviewText: string;
+    responseText: string;
+  }
   
 
   

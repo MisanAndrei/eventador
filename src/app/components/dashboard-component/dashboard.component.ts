@@ -1,4 +1,6 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 
 
@@ -10,22 +12,7 @@ import { ApiService } from 'src/app/Services/ApiService';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private apiService: ApiService){
-
-  }
-  ngOnInit(): void {
-    this.apiService.getLandingPage().subscribe(response => {
-      this.section1 = response.sections[0];
-      this.section2 = response.sections[1];
-      this.section3 = response.sections[2];
-      this.section4 = response.sections[3];
-      this.blogs = response.blogCards;
-      this.profileCards = response.profileCards;
-      this.categories = response.categories;
-    })
-  }
-
-
+  isMobile: Observable<boolean>;
   section1: any;
   blogs: any;
   section2: any;
@@ -33,4 +20,28 @@ export class DashboardComponent implements OnInit {
   categories: any;
   section3: any;
   section4: any;
+
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+    this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches)
+      );
+  }
+  ngOnInit(): void {
+    this.apiService.getLandingPage().subscribe(response => {
+      this.section1 = response.sections[0];
+      this.section2 = response.sections[1];
+      this.section3 = response.sections[2];
+      this.section4 = response.sections[3];
+      this.profileCards = response.profileCards;
+
+      this.isMobile.subscribe(isMobile => {
+        this.blogs = isMobile ? response.blogCards.slice(0, 4) : response.blogCards;
+        this.categories = isMobile ? response.categories.slice(0, 4) : response.categories;
+      });
+    })
+  }
+
+
+
 }

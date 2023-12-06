@@ -53,7 +53,7 @@
   
 
 </div>
-<button class="center-button" *ngIf="!isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
+<button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
 <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
   <h4 class="rating-title">Acorda o nota</h4>
 
@@ -71,7 +71,7 @@
   <h4 *ngIf="reviewSent">Review-ul tau a fost trimis spre aprobare, multumim!</h4>
 </div>
 <div *ngIf="!changesProfileId && reviews">
-<app-rating [ratings]="reviews" [profileId]="numberProfileId"></app-rating>
+<app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
 </div>
 </div>
 <!--                  Mobile               -->
@@ -121,8 +121,8 @@
 
   
     </div>
-    <button class="center-button" *ngIf="isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
-<div class="review-container" *ngIf="offerRating && isCurrentProfileLogged && userLoggedIn">
+    <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
+<div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
   <h4 class="rating-title">Acorda o nota</h4>
 
   <div class="rating-container">

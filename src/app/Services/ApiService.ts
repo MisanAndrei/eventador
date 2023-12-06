@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Blog, Category, City, County, CreateUser, LandingPage, ProfileCard, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { ApprovalReview, Blog, Category, City, County, CreateUser, LandingPage, ProfileCard, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
@@ -27,6 +27,10 @@ export class ApiService {
 
   getBlogs(): Observable<Blog[]>{
     return this.http.get<Blog[]>(this.apiUrl + '/Blog/GetAllBlogsCards');
+  }
+
+  getApprovalReviews(): Observable<ApprovalReview[]>{
+    return this.http.get<ApprovalReview[]>(this.apiUrl + '/Review/GetApprovalReviews')
   }
 
   getBlogById(id: number): Observable<Blog>{
