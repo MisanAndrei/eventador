@@ -99,10 +99,15 @@ import { UserRole } from "../Utilities/enums/Enums";
   }
 
   export interface Image {
-    imageBase64: string;
+    id: number;
+    imageUrl: string;
     isProfileImage: boolean;
-    deletedAfterApproval: boolean;
-    needsApproval: boolean;
+  }
+
+  export interface UsedImage {
+    imageId: number;
+    imageUrl: string;
+    isMaintained: boolean;
   }
 
   export interface LoggingUserResponse {
@@ -162,7 +167,8 @@ import { UserRole } from "../Utilities/enums/Enums";
     areaOfInterest: number[];
     categoryId: number;
     images: string[];
-    description: string[]; 
+    profileImage: string;
+    description: string;  
     websiteUrl?: string;
     facebookUrl?: string;
     instagramUrl?: string;
@@ -173,28 +179,32 @@ import { UserRole } from "../Utilities/enums/Enums";
     id?: number;
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+    firstName: string; //se poate schimba
+    lastName: string; //se poate schimba
+    phoneNumber: string; //se poate schimba
     role?: UserRole;
-    profile?: CreateProfile;
+    profile?: EditProfile;
   }
 
   export interface EditProfile {
-    businessName: string;
-    businessCUI: string;
-    motto?: string;
+    profileId: number;
+    businessName: string;  //se poate schimba
+    businessCUI: string;   //se poate schimba daca nu are valoare
+    motto?: string;  //se poate schimba
     countyId: number;
     cityId: number;
-    areaOfInterest: number[];
+    areaOfInterest: number[];  //se poate schimba
     categoryId: number;
-    description: string[]; 
-    websiteUrl?: string;
-    facebookUrl?: string;
-    instagramUrl?: string;
-    youtubeUrl?: string;
-    imagesToDelete?: number[];
-    images?: string[];
+    description: string; //se poate schimba
+    websiteUrl?: string; //se poate schimba
+    facebookUrl?: string; //se poate schimba
+    instagramUrl?: string; //se poate schimba
+    youtubeUrl?: string; //se poate schimba
+    imagesToDelete?: number[];  //se poate schimba
+    existingImages: Image[]; // vin imaginile 
+    images?: string[];  //se poate schimba
+    profileImage?: string;  //se poate schimba
+    existingProfileImage: Image;
   }
 
   export interface LandingPage {
@@ -265,8 +275,7 @@ import { UserRole } from "../Utilities/enums/Enums";
 
   export interface AdminDashboardProfilesChanged {
     id: number;
-    firstname: string;
-    lastname: string;
+    name: string;
     category: string;
   }
 

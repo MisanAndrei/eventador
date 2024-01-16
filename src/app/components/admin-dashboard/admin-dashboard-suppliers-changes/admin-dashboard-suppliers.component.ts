@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
+import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
   selector: 'app-admin-dashboard-suppliers',
@@ -16,7 +17,7 @@ import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     private _observer: BreakpointObserver;
     public isMobile!: Observable<boolean>;
-    displayedColumnsProfilesChanged: string[] = ['firstname', 'lastname', 'category', 'actions'];
+    displayedColumnsProfilesChanged: string[] = ['name', 'category', 'actions'];
     searchControl = new FormControl('');
     changesProfileId?: number;
 
@@ -24,20 +25,11 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
 
 
-    profiles: AdminDashboardProfilesChanged[] = [{ id : 1, firstname: 'Misan', lastname: 'Andrei', category: 'M.C'  },
-                                                  { id : 2, firstname: 'Sechei', lastname: 'Radu', category: 'M.C'  },
-                                                  { id : 3, firstname: 'Varga', lastname: 'Alex', category: 'M.C'  },
-                                                  { id : 1, firstname: 'Misan', lastname: 'Andrei', category: 'M.C'  },
-                                                  { id : 2, firstname: 'Sechei', lastname: 'Radu', category: 'M.C'  },
-                                                  { id : 3, firstname: 'Varga', lastname: 'Alex', category: 'M.C'  },
-                                                  { id : 1, firstname: 'Misan', lastname: 'Andrei', category: 'M.C'  },
-                                                  { id : 2, firstname: 'Sechei', lastname: 'Radu', category: 'M.C'  },
-                                                  { id : 3, firstname: 'Varga', lastname: 'Alex', category: 'M.C'  }
-                                                ];
+    profiles: AdminDashboardProfilesChanged[] = [];
 
     dataSource = new MatTableDataSource<AdminDashboardProfilesChanged>(this.profiles);
     
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
     this._observer = breakpointObserver;
     
   }
@@ -51,8 +43,12 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.apiService.getProfilesWithChanges().subscribe(x => {
+      this.profiles = x;
+      this.dataSource = new MatTableDataSource<AdminDashboardProfilesChanged>(this.profiles)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
     
     this.searchControl.valueChanges
       .pipe(
@@ -65,16 +61,16 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  acceptChanges(){
-
+  acceptChanges(profile: AdminDashboardProfilesChanged){
+    this.apiService.acceptProfileChanges(profile.id);
   }
 
   deleteChanges(){
 
   }
 
-  showChanges(){
-    this.changesProfileId = 9;
+  showChanges(profile: AdminDashboardProfilesChanged){
+    this.changesProfileId = profile.id;
   }
 }
 

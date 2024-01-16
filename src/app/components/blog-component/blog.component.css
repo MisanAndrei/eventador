@@ -1,27 +1,29 @@
 .blog-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: #f4f8fb; /* Light gray background on the sides */
   }
   
   .blog-content {
     width: 60%;
-    text-align: center;
     padding: 20px;
     background-color: white; /* White background for the content area */
+  }
+
+  .blog-content .first-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 20px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   .blog-content img {
     width: 70%;
-    height: 30%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
     object-fit: cover; /* Maintain aspect ratio and cover the container */
-  }
-  
-  .blog-content h1 {
-    font-size: 1.5rem;
-    margin: 20px 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   .blog-content p {
@@ -44,10 +46,7 @@
     height: 50%;
     object-fit: cover;
   }
-  
-  .mobile-blog-details {
-    text-align: left;
-  }
+
   
   .mobile-blog-title {
     font-weight: bold;
@@ -61,3 +60,8 @@
     font-size: 18px;
     letter-spacing: 0.05rem;
   }
+
+  .blog-html-content h1, h2 {
+    text-align: center !important;
+  }
+ 

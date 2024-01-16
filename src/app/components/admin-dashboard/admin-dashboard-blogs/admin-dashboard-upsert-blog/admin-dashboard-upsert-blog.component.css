@@ -35,3 +35,7 @@ form {
     flex-direction: column;
     align-items: center;
   }
+
+  .custom-class {
+    font-family: 'Courier New', Courier, monospace;
+  }

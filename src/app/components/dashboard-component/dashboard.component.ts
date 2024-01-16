@@ -3,9 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 
-
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +11,7 @@ import { ApiService } from 'src/app/Services/ApiService';
 export class DashboardComponent implements OnInit {
   isMobile: Observable<boolean>;
   section1: any;
-  blogs: any;
+  blogs: any; 
   section2: any;
   profileCards: any;
   categories: any;

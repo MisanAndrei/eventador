@@ -36,6 +36,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { MatTabsModule } from '@angular/material/tabs';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
@@ -77,6 +78,7 @@ import { AdminDashboardBlogUpsertComponent } from './components/admin-dashboard/
 import { AdminDashboardCategoryUpsertComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-upsert/admin-dashboard-category-upsert.component';
 import { AdminDashboardCategoryStatusComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-status/admin-dashboard-category-status.component';
 import { AdminDashboardReviewsComponent } from './components/admin-dashboard/admin-dashboard-reviews/admin-dashboard-reviews.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 
@@ -118,7 +120,8 @@ import { AdminDashboardReviewsComponent } from './components/admin-dashboard/adm
     AdminDashboardBlogUpsertComponent,
     AdminDashboardCategoryUpsertComponent,
     AdminDashboardCategoryStatusComponent,
-    AdminDashboardReviewsComponent
+    AdminDashboardReviewsComponent,
+    EditProfileComponent
   ],
   imports: [
     AppRoutingModule,
@@ -145,7 +148,8 @@ import { AdminDashboardReviewsComponent } from './components/admin-dashboard/adm
     MatSelectModule,
     MatSlideToggleModule,
     NgImageSliderModule,
-    MatTabsModule
+    MatTabsModule,
+    AngularEditorModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApprovalReview, Blog, Category, City, County, CreateUser, LandingPage, ProfileCard, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, City, County, CreateUser, EditProfile, EditUser, LandingPage, ProfileCard, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://eventador-api.azurewebsites.net/api'; // Replace with your API endpoint
+  private apiUrl = 'https://eventador-api-dev.azurewebsites.net/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -53,8 +53,24 @@ export class ApiService {
     });
   }
 
+  acceptProfileChanges(profileId: number){
+    this.http.post<any>(this.apiUrl + '/Profile/ApproveProfile', profileId).subscribe(x => {
+      console.log(x);
+    });
+  }
+
   saveReview(request: SendReview){
     this.http.post<any>(this.apiUrl + '/Review/AddReview', request).subscribe(x => {
+      console.log(x);
+    });
+  }
+
+  approveOrRejectReview(reviewId: number, isApproved: boolean){
+    const request = {
+      reviewId: reviewId,
+      isApproved: isApproved
+    } as any
+    this.http.post<any>(this.apiUrl + '/Review/ApproveOrRejectReview', request).subscribe(x => {
       console.log(x);
     });
   }
@@ -74,6 +90,11 @@ export class ApiService {
     return this.http.get<City[]>(url);
   }
 
+  getProfileToReview(profileId: number): Observable<UserProfile> {
+    const url = `${this.apiUrl}/Profile/ProfilesToReview/${profileId}`;
+    return this.http.get<UserProfile>(url);
+  }
+
   getCounties(): Observable<County[]> {
     return this.http.get<County[]>(this.apiUrl + '/County/GetAllCounties');
   }
@@ -87,8 +108,26 @@ export class ApiService {
     return this.http.get<UserProfile>(url);
   }
 
+  getProfileToBeEdited(id: number): Observable<EditProfile>{
+    const url = `${this.apiUrl}/Profile/EditProfileById/${id}`;
+    return this.http.get<EditProfile>(url);
+  }
+
+  getProfilesWithChanges(): Observable<AdminDashboardProfilesChanged[]> {
+    return this.http.get<AdminDashboardProfilesChanged[]>(this.apiUrl + '/Profile/ProfilesToReview');
+  }
+
   createUser(user: CreateUser) {
     var test = this.http.post<any>(this.apiUrl + '/User', user);
+    test.subscribe(x => {
+      console.log(x);
+    })
+    console.log(test);
+    return test;
+  }
+
+  editProfile(profile: EditProfile) {
+    var test = this.http.put<any>(this.apiUrl + '/Profile/EditProfile', profile);
     test.subscribe(x => {
       console.log(x);
     })

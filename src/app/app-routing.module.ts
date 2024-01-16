@@ -12,6 +12,7 @@ import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './components/profile-component/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
 { path: 'acasa', component: DashboardComponent },
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
-{ path: 'creare-profil', component: CreateProfileComponent},
+{ path: 'Inscriere', component: CreateProfileComponent},
+{ path: 'EditareProfil', component: EditProfileComponent},
 { path: 'blog/:id', component: BlogComponent},
 { path: 'noutati', component: BlogsComponent},
 { path: 'dashboard', component: PartnerDashboardComponent},

@@ -194,3 +194,22 @@ body {
     margin-top: -35px;
     color:red;
   }
+
+  .existingProfileImage {
+    width: 300px;
+    height: 300px;
+  }
+
+  .existingProfileImages {
+    width: 150px;
+    height: 150px;
+  }
+
+  .image-container {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .checkbox-container {
+    margin-bottom: 5px; /* Adjust as needed to provide spacing between checkbox and image */
+  }

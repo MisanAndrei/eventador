@@ -5,9 +5,15 @@
   </div>
 
   <div>
-    <label>Content:</label>
-    <textarea formControlName="content"></textarea>
+    <label>Descriere:</label>
+    <input type="text" formControlName="description" />
   </div>
+
+  <div>
+    <label>Content:</label>
+    <angular-editor [placeholder]="'Enter text here...'" formControlName="content" [config]="editorConfig"></angular-editor>
+  </div>
+  
 
   <div>
     <label>Imagine:</label>

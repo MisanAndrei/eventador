@@ -28,8 +28,8 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Actiuni </th>
         <td mat-cell *matCellDef="let review">
-           <button style="margin-right: 20px" (click)="approveReview(review.id)" mat-raised-button color="accent">Accepta Review</button>
-           <button style="margin-right: 20px" (click)="rejectReview(review.id)" mat-raised-button color="accent">Respinge Review</button>
+           <button style="margin-right: 20px" (click)="approveReview(review)" mat-raised-button color="accent">Accepta Review</button>
+           <button style="margin-right: 20px" (click)="rejectReview(review)" mat-raised-button color="accent">Respinge Review</button>
           </td>
       </ng-container>
   

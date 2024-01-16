@@ -81,7 +81,7 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
         this.router.navigate(['/furnizori']);
       } else {
         if (this.changesProfileId != undefined){
-          this.apiService.getUserProfile(this.changesProfileId).subscribe(response => {
+          this.apiService.getProfileToReview(this.changesProfileId).subscribe(response => {
             console.log(response);
             this.imageObject = response.images.map(x => ({
               image: x.imageUrl,

@@ -1,25 +1,32 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Category, City, County, CreateUser } from 'src/app/Models/Models';
+import { Category, City, County, CreateUser, EditProfile, EditUser, Image, UsedImage } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
+import { AuthService } from 'src/app/Services/AuthService';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-profile',
-  templateUrl: './create-profile.component.html',
-  styleUrls: ['./create-profile.component.css'],
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.css'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class CreateProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
+  imagesLimit: number = 5;
+  maximumNumberAllowed: number = 5;
+  alreadyExistingCUI: boolean = false;
+
+
   selectedAreas: number[] = [];
-  selectedCategory: number[] = [];
+  selectedCategory!: number;
   tooManyImages: boolean = false;
   tooManyImagesMessage: string = 'Prea multe imagini selectate, va rugam alegeti din nou!';
   
   // Common User Information
     id = 0;
-    
+    currentProfileId: number | undefined;
     firstName: string = '';
     lastName: string = '';
     email: string = '';
@@ -45,7 +52,13 @@ export class CreateProfileComponent implements OnInit {
     selectedProfileImage: File[] = [];
     convertedSelectedImages: string[] = [];
     convertedSelectedProfileImage: string = '';
-    maxAllowedFiles: number = 5;
+    
+    imagesToDelete: number[] = [];
+
+
+    //existing images
+    existingProfileImage!: string;
+    existingImages: UsedImage[] = [];
 
     //just for testing
     cities: City[] = [];
@@ -58,7 +71,7 @@ export class CreateProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -66,15 +79,61 @@ export class CreateProfileComponent implements OnInit {
       }
   
     ngOnInit(): void {
-      this.apiService.getCategories().pipe(
-        switchMap(categories => {
-          this.categories = categories;
-          return this.apiService.getCounties();
-        })
-      ).subscribe(areas => {
-        this.areas = areas;
-        this.counties = areas;
-      });
+        this.currentProfileId = 9;
+
+        if (this.currentProfileId == undefined || this.currentProfileId == 0){
+            this.router.navigate(['/acasa']);
+        }
+
+
+        this.apiService.getCategories().pipe(
+          switchMap(categories => {
+            this.categories = categories;
+            return this.apiService.getCounties();
+          }),
+          switchMap(areas => {
+            this.areas = areas;
+            this.counties = areas;
+            return this.apiService.getProfileToBeEdited(this.currentProfileId ?? 0);
+          })
+        ).subscribe(profile => {
+          console.log(profile);
+
+          this.apiService.getCities(profile.countyId).subscribe(x => {
+            this.cities = x;
+          });
+
+          if (!this.nullOrEmpty(profile.businessCUI)){
+            this.isLegalPerson = true;
+            this.alreadyExistingCUI = true;
+          }
+
+          this.businessCUI = profile.businessCUI;
+          this.businessName = profile.businessName;
+          this.countyId = profile.countyId;
+          this.cityId = profile.cityId;
+          this.selectedAreas = profile.areaOfInterest;
+          this.selectedCategory = profile.categoryId;
+          this.motto = profile.motto ?? '';
+          this.websiteUrl = profile.websiteUrl ?? '';
+          this.facebookUrl = profile.facebookUrl ?? '';
+          this.instagramUrl = profile.instagramUrl ?? '';
+          this.youtubeUrl = profile.youtubeUrl ?? '';
+          this.description = profile.description;
+          this.existingProfileImage = profile.existingProfileImage.imageUrl ?? '';
+          this.existingImages = profile.existingImages.map((profileExistingImages: Image) => {
+            return {
+              imageId: profileExistingImages.id,
+              imageUrl: profileExistingImages.imageUrl,
+              isMaintained: true
+            } as UsedImage
+          });
+          this.maximumNumberAllowed = this.imagesLimit - this.existingImages.length;
+        });
+
+      
+
+
   }
   
     // Method to toggle business info visibility
@@ -101,9 +160,9 @@ export class CreateProfileComponent implements OnInit {
     onImagesSelected(event: any) {
       const files: File[] = Array.from(event.target.files);
 
-      if (files.length > this.maxAllowedFiles){
+      if (files.length > this.maximumNumberAllowed){
         this.tooManyImages = true;
-        return ;
+        return;
       }
 
       this.tooManyImages = false;
@@ -155,11 +214,7 @@ export class CreateProfileComponent implements OnInit {
     }
 
     saveButtonEnabled(){
-      if (this.nullOrEmpty(this.email) || this.nullOrEmpty(this.firstName) || this.nullOrEmpty(this.lastName) || this.password != this.passwordVerified || this.password == ''){
-        return false;
-      }
-
-      if (this.isBusinessAccount && (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0 || this.convertedSelectedProfileImage == '' || this.phoneNumber == '')){
+      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0){
         return false;
       }
 
@@ -179,38 +234,30 @@ export class CreateProfileComponent implements OnInit {
     }
 
     onSaveButtonClick() {
-    var user = {
-      email: this.email,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      password: this.password,
-      phoneNumber: this.phoneNumber,
-      role: this.isBusinessAccount ? UserRole.supplier : UserRole.customer,
-      profile: {
-        businessName: this.businessName,
-        businessCUI: this.businessCUI,
-        categoryId: this.selectedCategory,
-        motto: this.motto,
-        cityId: this.cityId,
-        areaOfInterest: this.selectedAreas,
-        images: this.convertedSelectedImages,
-        profileImage: this.convertedSelectedProfileImage,
-        description: this.description,
-        websiteUrl: this.websiteUrl,
-        facebookUrl: this.facebookUrl,
-        youtubeUrl: this.youtubeUrl,
-        instagramUrl: this.instagramUrl
-      } as unknown
-    } as CreateUser
+    var profile = {
+      profileId: this.currentProfileId,
+      businessName: this.businessName,
+      businessCUI: this.businessCUI,
+      categoryId: this.selectedCategory,
+      motto: this.motto,
+      cityId: this.cityId,
+      areaOfInterest: this.selectedAreas,
+      images: this.convertedSelectedImages,
+      description: this.description,
+      websiteUrl: this.websiteUrl,
+      facebookUrl: this.facebookUrl,
+      youtubeUrl: this.youtubeUrl,
+      instagramUrl: this.instagramUrl,
+      imagesToDelete: this.imagesToDelete,
+      profileImage : this.convertedSelectedProfileImage
+    } as EditProfile
 
-    if (user.role == UserRole.customer){
-      user.profile = undefined;
-    }
+    
 
-    this.apiService.createUser(user);
+    this.apiService.editProfile(profile);
 
 
-    console.log(user);
+    console.log(profile);
     }
 
     checkPasswordIncorrect(){
@@ -220,6 +267,19 @@ export class CreateProfileComponent implements OnInit {
 
       return false;
     }
+
+    onCheckboxChange(existingImage: any){
+      console.log(existingImage);
+      if (existingImage.isMaintained == false){
+        this.imagesToDelete.push(existingImage.imageId);
+      }else{
+        this.imagesToDelete = this.imagesToDelete.filter(x => x!== existingImage.imageId);
+      }
+      console.log(this.imagesToDelete);
+      this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
+    }
+
+
   }
 
   

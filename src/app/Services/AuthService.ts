@@ -12,7 +12,7 @@ export class AuthService {
   private jwtHelper: JwtHelperService = new JwtHelperService();
   private readonly userKey: string = 'loggedUser';
   private tokenKey = 'access_token';
-  private apiUrl = 'https://eventador-api.azurewebsites.net/api/Auth/login';
+  private apiUrl = 'https://eventador-api-dev.azurewebsites.net/api/Auth/login';
    // Replace with your desired key for storing the token
 
   constructor(private http: HttpClient) { }

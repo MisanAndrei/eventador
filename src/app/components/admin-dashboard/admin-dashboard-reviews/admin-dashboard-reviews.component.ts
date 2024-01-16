@@ -61,12 +61,12 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
         this.dataSource.filter = value!.trim().toLowerCase();
       });
   }
-  approveReview(reviewId: number){
-
+  approveReview(review: ApprovalReview){
+    this.apiService.approveOrRejectReview(review.reviewId, true);
   }
 
-  rejectReview(reviewId: number){
-
+  rejectReview(review: ApprovalReview){
+    this.apiService.approveOrRejectReview(review.reviewId, false);
   }
   }
 
