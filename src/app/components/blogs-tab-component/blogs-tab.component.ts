@@ -21,6 +21,6 @@ export class BlogsTabComponent implements OnInit {
   }
 
   ngOnInit(): void {   
-    console.log("aici is blogurileeeeeeeeee", this.blogs)
+
   }
 }

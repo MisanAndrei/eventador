@@ -1,25 +1,75 @@
 .profile-container {
-    width: 30%;
-    margin: 0 auto; /* Center the container */
-    text-align: center; /* Center the text within the container */
-  }
-  
-  .profile-details {
-    margin-top: 20px;
-    text-align: left; /* Align the details text to the left */
-    font-size: 1.2em; /* Increase the font size (adjust as needed) */
-    line-height: 1.5; /* Add space between lines (adjust as needed) */
-  }
-  
-  h1 {
-    color: #333; /* Set the title color to dark gray (adjust as needed) */
-    font-size: 1.5em; /* Increase the title font size (adjust as needed) */
-  }
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
 
-  strong {
-    margin-right: 20px;
-  }
+.user-logo {
+  font-size: 50px;
+  margin: 30px;
+  background-color: #FE8962;
+  border-radius: 5%;
+}
 
-  button {
-    margin-right: 20px;
-  }
+.profile-details {
+  font-size: 1.2em;
+  line-height: 1.5;
+  max-width: 600px; /* Adjust as needed */
+}
+
+h1 {
+  color: #333;
+  font-size: 1.5em;
+}
+
+strong {
+  margin-right: 20px;
+}
+
+button {
+  margin-top: 20px; /* Add spacing between buttons and details */
+}
+
+.action-buttons {
+  margin-right: 10px;
+  background: linear-gradient(to right, #FF63A4, #FE8962);
+  color: white !important;
+}
+
+/*mobile css*/
+.mobile-profile-container {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-action-buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-action-button {
+  width: 200px;
+  background: linear-gradient(to right, #FF63A4, #FE8962);
+}
+
+.mobile-user-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-user-logo p {
+  padding: 30px;
+  background-color: #FE8962;
+  border-radius: 5%;
+  font-size: xx-large;
+}
+
+.mobile-title {
+  margin-top: 0px;
+}

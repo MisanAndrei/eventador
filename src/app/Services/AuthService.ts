@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoggedUser, LoggingUserResponse } from '../Models/Models';
+import { UserRole } from '../Utilities/enums/Enums';
+import { Observable, catchError, first, map, of } from 'rxjs';
 
 
 @Injectable({
@@ -12,7 +14,7 @@ export class AuthService {
   private jwtHelper: JwtHelperService = new JwtHelperService();
   private readonly userKey: string = 'loggedUser';
   private tokenKey = 'access_token';
-  private apiUrl = 'https://eventador-api-dev.azurewebsites.net/api/Auth/login';
+  private apiUrl = 'https://eventadorapi20240119163432.azurewebsites.net/api/Auth/login';
    // Replace with your desired key for storing the token
 
   constructor(private http: HttpClient) { }
@@ -27,6 +29,10 @@ export class AuthService {
 
   removeToken(): void {
     localStorage.removeItem(this.tokenKey);
+  }
+
+  removeUserToken(): void {
+    localStorage.removeItem(this.userKey);
   }
 
   isAuthenticated(): boolean {
@@ -44,49 +50,26 @@ export class AuthService {
     //return token ? this.jwtHelper.decodeToken(token) : null;
   }
 
-  login(email: string, password: string): boolean {
-    try {
-      const response1 = this.http.post<LoggingUserResponse>(this.apiUrl, { email, password });
-
-      response1.subscribe(x => {
-        var user =  {
-          id: x.id,
-          email: x.email,
-          firstName: x.firstName,
-          lastName: x.lastName,
-          phoneNumber: x.phoneNumber,
-          profileId: x.profileId,
-          role: x.role
-        } as LoggedUser
-
-        var response = this.handleLoginResponse(x.token);
-
-        if (!response){
-          return false;
-        }
-
-        localStorage.setItem(this.userKey ,this.encodeObject(user));
-        
-        return true;
-      })
-      return false;
-    } catch (error) {
-      console.error('Error:', error);
-      return false;
-    }
+  login(email: string, password: string): Observable<LoggingUserResponse> {
+    return new Observable<LoggingUserResponse>(subscriber => {
+      this.http.post<LoggingUserResponse>(this.apiUrl, { email, password })
+        .subscribe(
+          response => {
+            this.storeLoggedUser(response);
+            subscriber.next(response);
+            subscriber.complete();
+          },
+          error => {
+            console.error('Error:', error);
+            subscriber.error(error);
+          }
+        );
+    });
   }
   
-  handleLoginResponse(response: string): boolean {
+  handleLoginResponse(response: string) {
     const token = response; // Assuming the response is a token as a string
-    if (token) {
-      this.storeToken(token);
-      this.getDecodedToken();
-      console.log('Login successful');
-      return true;
-    } else {
-      console.error('Invalid response from API');
-      return false;
-    }
+    this.storeToken(token);   
   }
 
   encodeObject(objectToEncode: any): string {
@@ -106,11 +89,45 @@ export class AuthService {
     return user;
   }
 
+  updateLoggedUser(firstName: string, lastName: string, phoneNumber: string) {
+    const user = this.decodeToObject(localStorage.getItem(this.userKey) ?? "")
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.phoneNumber = phoneNumber;
+
+    localStorage.setItem(this.userKey ,this.encodeObject(user));
+  }
+
   isUserLogged() {
     if (localStorage.getItem(this.userKey))
       return true;
     else
     return false;
+  }
+
+  getLoggedUserRole(): UserRole {
+    const user = this.getLoggedUser();
+    return user.role;
+  }
+
+  storeLoggedUser(x: LoggingUserResponse){
+    var user =  {
+      id: x.id,
+      email: x.email,
+      firstName: x.firstName,
+      lastName: x.lastName,
+      phoneNumber: x.phoneNumber,
+      profilesIds: x.profilesIds,
+      role: x.role
+    } as LoggedUser
+
+    this.handleLoginResponse(x.token);
+    localStorage.setItem(this.userKey ,this.encodeObject(user));
+  }
+
+  logOut(){
+    this.removeToken();
+    this.removeUserToken();
   }
 
 }

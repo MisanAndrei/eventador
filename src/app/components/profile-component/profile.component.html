@@ -1,23 +1,58 @@
-<div class="profile-container">
-    <h1>Profil Personal</h1>
-    <div class="profile-details">
-      <div>
-        <strong>First Name:</strong> {{ firstName }}
-      </div>
-      <div>
-        <strong>Last Name:</strong> {{ lastName }}
-      </div>
-      <div>
-        <strong>Email:</strong> {{ email }}
-      </div>
-      <div>
-        <strong>Phone Number:</strong> {{ phoneNumber }}
-      </div>
-      <div>
-        <strong>Account Created:</strong> {{ accountCreated | date:'medium' }}
-      </div>
-    </div>
-    <button mat-raised-button color="accent">Schimba Parola</button>
-    <button mat-raised-button color="accent">Sterge Cont</button>
-    <button mat-raised-button color="accent">Adauga Profil</button>
+<div *ngIf="!(isMobile | async)" class="profile-container">
+  <div class="user-logo">
+    <div class="user-logo">{{ nameInitials }}</div>
   </div>
+  <div class="profile-details">
+    <h1>Profil Personal</h1>
+    <div>
+      <strong>Prenume:</strong> {{ firstName }}
+    </div>
+    <div>
+      <strong>Nume:</strong> {{ lastName }}
+    </div>
+    <div>
+      <strong>Email:</strong> {{ email }}
+    </div>
+    <div>
+      <strong>Numar de telefon:</strong> {{ phoneNumber }}
+    </div>
+    <button mat-raised-button class="action-buttons" (click)="changePassword()"><b>Schimba Parola</b></button>
+    <button mat-raised-button class="action-buttons" (click)="addProfile()"><b>Adauga Profil</b></button>
+    <button mat-raised-button class="action-buttons" (click)="editUser()"><b>Editare date personale</b></button>
+    <button mat-raised-button class="action-buttons" (click)="deleteAccount()"><b>Sterge Cont</b></button>
+  </div>
+</div>
+
+<app-change-password *ngIf="changePasswordVisible && !(isMobile | async)"></app-change-password>
+<app-edit-personal-data *ngIf="editUserVisible && !(isMobile | async)"></app-edit-personal-data>
+<app-delete-account *ngIf="deleteAccountVisible && !(isMobile | async)" (confirmation)="handleConfirmation($event)"></app-delete-account>
+
+<div *ngIf="isMobile | async" class="mobile-profile-container">
+  <div class="mobile-user-logo"><p>{{ nameInitials }}</p></div>
+  <div>
+    <h1 class="mobile-title">Profil Personal</h1>
+    <div>
+      <strong>Prenume:</strong> {{ firstName }}
+    </div>
+    <div>
+      <strong>Nume:</strong> {{ lastName }}
+    </div>
+    <div>
+      <strong>Email:</strong> {{ email }}
+    </div>
+    <div>
+      <strong>Numar de telefon:</strong> {{ phoneNumber }}
+    </div>
+    <div class="mobile-action-buttons">
+    <button mat-raised-button class="mobile-action-button" (click)="editUser()">Editare date personale</button>
+    <app-edit-personal-data *ngIf="editUserVisible"></app-edit-personal-data>
+    <button mat-raised-button class="mobile-action-button" (click)="changePassword()">Schimba Parola</button>
+    <app-change-password *ngIf="changePasswordVisible"></app-change-password>
+    <button mat-raised-button class="mobile-action-button" (click)="addProfile()">Adauga Profil</button>
+    <button mat-raised-button class="mobile-action-button" (click)="deleteAccount()">Sterge Cont</button>
+    <app-delete-account *ngIf="deleteAccountVisible" (confirmation)="handleConfirmation($event)"></app-delete-account>
+    </div>
+    
+  </div>
+</div>
+

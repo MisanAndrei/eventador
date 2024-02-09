@@ -117,7 +117,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     lastName: string;
     phoneNumber?: string;
     role: UserRole;
-    profileId?: number
+    profilesIds?: number[];
     token: string;
   }
 
@@ -127,7 +127,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     firstName: string;
     lastName: string;
     phoneNumber?: string;
-    profileId?: number;
+    profilesIds?: number[];
     role: UserRole;
   }
 
@@ -249,6 +249,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     score: number;
     responseShown: boolean;
     responseInApproval: boolean;
+    responseTextToSend: string;
     responseSent: boolean;
   }
 
@@ -315,6 +316,19 @@ import { UserRole } from "../Utilities/enums/Enums";
     profileName: string;
     reviewText: string;
     responseText: string;
+  }
+
+  export interface ChangePasswordRequest {
+    userId: number;
+    oldPassword: string;
+    newPassword: string;
+  }
+
+  export interface EditUserRequest {
+    userId: number;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
   }
   
 

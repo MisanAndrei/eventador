@@ -14,13 +14,13 @@
     <button *ngIf="rating.responseText && !rating.responseShown" (click)="showResponse(rating)" class="show-Response">Arata Raspuns</button>
       <div class="response" *ngIf="rating.responseText && rating.responseShown">{{ rating.responseText }}</div>
       <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
-        <textarea class="response-area"></textarea>
-        <button (click)="sendResponse(rating.id, rating.responseText)" class="show-Response">Trimite Raspuns</button>
+        <textarea class="response-area" [(ngModel)]="rating.responseTextToSend"></textarea>
+        <button (click)="sendResponse(rating.id, rating.responseTextToSend)" class="show-Response">Trimite Raspuns</button>
     </div>
     <h4 *ngIf="!rating.responseText && rating.responseSent">Raspunsul a fost trimis spre aprobare, multumim !</h4>
   </div>
   <div class="button-allReviews-section">  
-    <button *ngIf="!showAllReviews" (click)="getReviewsByProfileId()" class="show-all-reviews">Arata toate review-urile</button>
+    <button *ngIf="!showAllReviews && reviewsNumber === 3" (click)="getReviewsByProfileId()" class="show-all-reviews">Arata toate review-urile</button>
   </div>
 
 </div>
@@ -40,11 +40,11 @@
       <button *ngIf="rating.responseText && !rating.responseShown" (click)="showResponse(rating)" class="show-Response">Arata Raspuns</button>
       <div class="response" *ngIf="rating.responseText && rating.responseShown">{{ rating.responseText }}</div>
       <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
-        <textarea class="response-area-mobile"></textarea>
-        <button (click)="sendResponse(rating.id, rating.responseText)" class="show-Response">Trimite Raspuns</button>
+        <textarea class="response-area-mobile" [(ngModel)]="rating.responseTextToSend"></textarea>
+        <button (click)="sendResponse(rating.id, rating.responseTextToSend)" class="show-Response">Trimite Raspuns</button>
     </div>
     <h4 *ngIf="!rating.responseText && rating.responseSent">Raspunsul a fost trimis spre aprobare, multumim !</h4>
     </div>
-    <button *ngIf="!showAllReviews" (click)="getReviewsByProfileId()" class="show-all-reviews">Arata toate review-urile</button>
+    <button *ngIf="!showAllReviews && reviewsNumber === 3" (click)="getReviewsByProfileId()" class="show-all-reviews">Arata toate review-urile</button>
   </div>
 

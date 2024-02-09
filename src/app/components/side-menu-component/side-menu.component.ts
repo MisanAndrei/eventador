@@ -28,12 +28,10 @@ export class SideMenuComponent implements OnInit {
   ngOnInit() {
     this.apiService.getCategories().subscribe(values => {
       this.allCategories = values;
-      console.log(values);
     })
   }
 
   toggleCollapse() {
-    console.log(this.isCollapsed);
     document.getElementsByClassName("menu-container")[0].classList.toggle("menu-change");
 
     this.isCollapsed = !this.isCollapsed;

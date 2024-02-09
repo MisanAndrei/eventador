@@ -30,7 +30,6 @@ export class BlogComponent implements OnInit {
 
     this.apiService.getBlogById(this.selectedBlog).subscribe(response => {
       this.blog = response;
-      console.log(this.blog);
     });
   }
 }

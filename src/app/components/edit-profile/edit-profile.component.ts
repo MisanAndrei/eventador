@@ -97,7 +97,6 @@ export class EditProfileComponent implements OnInit {
             return this.apiService.getProfileToBeEdited(this.currentProfileId ?? 0);
           })
         ).subscribe(profile => {
-          console.log(profile);
 
           this.apiService.getCities(profile.countyId).subscribe(x => {
             this.cities = x;
@@ -255,9 +254,6 @@ export class EditProfileComponent implements OnInit {
     
 
     this.apiService.editProfile(profile);
-
-
-    console.log(profile);
     }
 
     checkPasswordIncorrect(){
@@ -269,13 +265,11 @@ export class EditProfileComponent implements OnInit {
     }
 
     onCheckboxChange(existingImage: any){
-      console.log(existingImage);
       if (existingImage.isMaintained == false){
         this.imagesToDelete.push(existingImage.imageId);
       }else{
         this.imagesToDelete = this.imagesToDelete.filter(x => x!== existingImage.imageId);
       }
-      console.log(this.imagesToDelete);
       this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
     }
 

@@ -43,7 +43,6 @@ export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-   console.log(this.profiles);
     this.isMobile = this._observer.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

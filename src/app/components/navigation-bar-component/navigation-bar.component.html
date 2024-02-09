@@ -10,10 +10,12 @@
     <ul class="menu">
       <ng-container *ngIf="!isLoggedIn(); else loggedIn">
         <li><a routerLink="/autentificare">Autentifica-te</a></li>
+        <li><a routerLink="/Inscriere">Inscrie-te</a></li>
       </ng-container>
       <ng-template #loggedIn>
         <!-- Display something else when logged in, e.g., an icon -->
-        <li><a routerLink="/profil"><i class="fa fa-user"></i> Profile</a></li>
+        <li><a routerLink="/profil"><i class="fa fa-user"></i> Profil</a></li>
+        <li class="logout" (click)="logOut()"><a> Deconecteaza-te</a></li>
       </ng-template>
     </ul>
   </nav>
@@ -22,8 +24,8 @@
       <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori">Toti Furnizorii</a></li>
     <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/despre-noi">Despre Noi</a></li>
       <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/contact">Contact</a></li>
-      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard</a></li>
-      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
+      <li *ngIf="isPartnerLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard Partener</a></li>
+      <li *ngIf="isAdminOrMarketingLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
       <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/noutati">Blog</a></li>
     </ul>
   </nav>   
@@ -52,14 +54,12 @@
       <img width="80" src="assets\imagesandvideos\pinklogo.png" />
     </a>
   </div>
-  <div *ngIf="isLoggedIn()" class="right-content"><i class="fa fa-user-circle-o" style="font-size:36px"></i></div>
+  <div *ngIf="isLoggedIn()" class="right-content"><a routerLink="/profil"><i class="fa fa-user-circle-o" style="font-size:36px"></i></a></div>
 </div>
 
 <div *ngIf="showMenu" class="overlay">
   <ul class="menu-list">
-    <li class="menu-item">
-      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifica-te</a>
-    </li>
+   
     <li class="menu-item">
       <a (click)="onItemClick('/acasa')">Acasa</a>
     </li>
@@ -69,23 +69,23 @@
     <li class="menu-item">
       <a (click)="onItemClick('/contact')">Contact</a>
     </li>
-    <li  class="menu-item">
+    <li *ngIf="isPartnerLoggedIn()" class="menu-item">
       <a (click)="onItemClick('/dashboard')">Dashboard Partener</a>
     </li>
     <li class="menu-item">
-      <a (click)="onItemClick('/noutati')">Blog complet</a>
+      <a (click)="onItemClick('/noutati')">Blog</a>
     </li>
     <li class="menu-item">
       <a (click)="onItemClick('/furnizori')">Furnizori</a>
     </li>
-    <li class="menu-item">
-      <a (click)="onItemClick('/colaborator')">Colaborator</a>
-    </li>
-    <li class="menu-item">
+    <li *ngIf="isAdminOrMarketingLoggedIn()" class="menu-item">
       <a (click)="onItemClick('/admin-dashboard')">Admin Dashboard</a>
     </li>
     <li class="menu-item">
-      <a (click)="onItemClick('/creare-profil')">Creare profil</a>
+      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifica-te</a>
+    </li>
+    <li *ngIf="!isLoggedIn()" class="menu-item">
+      <a (click)="onItemClick('/creare-profil')">Inscrie-te</a>
     </li>
   </ul>
 </div>

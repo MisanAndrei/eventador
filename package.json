@@ -31,7 +31,7 @@
     "ng-image-slider": "^7.0.1",
     "ng2-charts": "^5.0.3",
     "ngx-slick-carousel": "^15.0.0",
-    "rxjs": "~7.8.0",
+    "rxjs": "^7.8.1",
     "slick-carousel": "^1.8.1",
     "zone.js": "~0.13.0"
   },

@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form-container {
+    width: 70%;
+    margin-top: 10px; /* Adjust margin as needed */
+    text-align: center;
+  }
+
+  .form-container-mobile {
+    width: 100%;
+    margin-top: 10px; /* Adjust margin as needed */
+    text-align: center;
+  }
+  
+  .input-field {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center; /* Center text in input field */
+  }
+  
+  .input-field input {
+    width: 150px; /* Set a fixed width for the input fields */
+  }
+  
+  /* Center the button */
+  button {
+    display: block;
+    margin: 0 auto; /* Centers the button */
+    width: 150px; /* Set the same width as inputs */
+    cursor: pointer;
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+  }

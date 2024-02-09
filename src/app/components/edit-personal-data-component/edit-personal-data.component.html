@@ -1,0 +1,45 @@
+<div class="container">
+    <div *ngIf="!(isMobile | async)" class="form-container">
+      <h1 style="text-align: center;">Date Personale</h1>
+      <div class="input-field">
+        <mat-form-field>
+          <input [(ngModel)]="firstName" matInput placeholder="Prenume">
+        </mat-form-field>
+      </div>
+      <div class="input-field"> 
+        <mat-form-field>
+          <input [(ngModel)]="lastName" matInput placeholder="Nume">
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field>
+          <input [(ngModel)]="phoneNumber" matInput placeholder="Nr. de telefon">
+        </mat-form-field>
+      </div>
+      <p *ngIf="incorrectData" style="color: red; margin-top: -30px;">Datele introduse sunt invalide!</p>
+      <p *ngIf="dataChangedSuccessfully" style="margin-top: -30px;">Datele au fost salvate cu succes !</p>
+      <button mat-raised-button [disabled]="checkData()" (click)="editPersonalData()">Salvare</button>
+    </div>
+  
+    <div *ngIf="(isMobile | async)" class="form-container-mobile">
+      <h1 style="text-align: center;">Date Personale</h1>
+      <div class="input-field">
+        <mat-form-field>
+          <input [(ngModel)]="firstName" matInput placeholder="Prenume">
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field>
+          <input [(ngModel)]="lastName" matInput placeholder="Nume">
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field>
+          <input [(ngModel)]="phoneNumber" matInput placeholder="Nr. de telefon">
+        </mat-form-field>
+      </div>
+      <p *ngIf="incorrectData" style="color: red; margin-top: -30px;">Datele introduse sunt invalide!</p>
+      <p *ngIf="dataChangedSuccessfully" style="margin-top: -30px;">Datele au fost salvate cu succes !</p>
+      <button mat-raised-button [disabled]="checkData()" (click)="editPersonalData()">Salvare</button>
+    </div>
+  </div>

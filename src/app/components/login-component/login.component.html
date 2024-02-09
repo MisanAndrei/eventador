@@ -18,9 +18,13 @@
       <div class="form-group">
         <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password">
       </div>
+      <p *ngIf="errorWhenLogging" class="error-message">Datele de logare sunt incorecte!</p>
   
       <!-- Login button -->
       <button class="btn btn-primary" (click)="login()">Login</button>
+      <a [routerLink]="['/Inscriere']" class="additional-links"><p class="create-account">Nu ai cont? Inscrie-te si tu!</p></a>
+      <a [routerLink]="['/RecuperareParola']" class="additional-links"><p class="error-message">Ai uitat parola?</p></a>
+      
     </div>
   </div>
 
@@ -28,7 +32,7 @@
     <div class="mobile-login-box">
       <div class="logo-container">
         <!-- Your logo image goes here -->
-        <img class="logo-image" src="https://eventador.ro/images/logo.svg" alt="Your Logo" />
+        <img class="logo-image" src="assets\imagesandvideos\pinklogo.png" alt="Your Logo" />
       </div>
   
       <div class="header">
@@ -37,14 +41,17 @@
   
       <!-- Username and Password inputs -->
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username">
+        <input type="text" [(ngModel)]="username" class="form-control" placeholder="Username">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password">
       </div>
+      <p *ngIf="errorWhenLogging" class="error-message">Datele de logare sunt incorecte!</p>
   
       <!-- Login button -->
       <button class="btn btn-primary" (click)="login()">Login</button>
+      <a [routerLink]="['/Inscriere']" class="additional-links"><p class="create-account">Nu ai cont? Inscrie-te si tu!</p></a>
+      <a [routerLink]="['/RecuperareParola']" class="additional-links"><p class="error-message">Ai uitat parola?</p></a>
     </div>
   </div>
 

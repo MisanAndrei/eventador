@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, City, County, CreateUser, EditProfile, EditUser, LandingPage, ProfileCard, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateUser, EditProfile, EditUser, EditUserRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://eventador-api-dev.azurewebsites.net/api';
+  private apiUrl = 'https://eventadorapi20240119163432.azurewebsites.net/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -57,6 +57,10 @@ export class ApiService {
     this.http.post<any>(this.apiUrl + '/Profile/ApproveProfile', profileId).subscribe(x => {
       console.log(x);
     });
+  }
+
+  getReviewsByProfileId(id: number): Observable<Review[]>{
+    return this.http.get<Review[]>(`${this.apiUrl}/Review/GetProfileReviews/${id}`);
   }
 
   saveReview(request: SendReview){
@@ -133,6 +137,14 @@ export class ApiService {
     })
     console.log(test);
     return test;
+  }
+
+  changePassword(changePasswordRequest: ChangePasswordRequest): Observable<any> {
+    return this.http.put( this.apiUrl + '/User/ChangePassword', changePasswordRequest);
+  }
+
+  editPersonalData(personalData: EditUserRequest){
+    return this.http.put( this.apiUrl + '/User/EditUser', personalData);
   }
 
   // Perform a GET request

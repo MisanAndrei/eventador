@@ -4,6 +4,8 @@ import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
+import { UserRole } from 'src/app/Utilities/enums/Enums';
+import { AuthService } from 'src/app/Services/AuthService';
 
 
 
@@ -13,7 +15,10 @@ import { ApiService } from 'src/app/Services/ApiService';
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
 })
-export class NavigationBarComponent {
+export class NavigationBarComponent implements OnInit {
+  //security
+  currentUserRole!: UserRole;
+
   showMenu = false;
   isCollapsed = true;
   isMobile: Observable<boolean>;
@@ -29,6 +34,25 @@ export class NavigationBarComponent {
     const token = localStorage.getItem('access_token');
 
     return token !== null;
+  }
+
+  isAdminOrMarketingLoggedIn(): boolean {
+    if (this.isLoggedIn()){
+      if (this.authService.getLoggedUserRole() === UserRole.blogWriter || this.authService.getLoggedUserRole() === UserRole.admin){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  isPartnerLoggedIn(): boolean {
+    if (this.isLoggedIn()){
+      if (this.authService.getLoggedUserRole() === UserRole.partner){
+        return true;
+      }
+    }
+    return false;
   }
 
   menuItems = [
@@ -47,7 +71,7 @@ export class NavigationBarComponent {
 
 
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService) {
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService, private authService: AuthService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -57,8 +81,13 @@ export class NavigationBarComponent {
         this.categories = response;
       })
   }
+  ngOnInit(): void {
+    if (this.isLoggedIn()){
+      this.currentUserRole = this.authService.getLoggedUserRole();
+    }
+  }
 
- 
+  
 
   toggleCollapse() {
 
@@ -77,6 +106,11 @@ export class NavigationBarComponent {
   hideOverlay(){
     this.showCategoriesFromLink = false;
     this.showCategoriesFromMenu = false;
+  }
+
+  logOut(){
+    this.authService.logOut();
+    this.router.navigate(['/acasa']);
   }
 }
 

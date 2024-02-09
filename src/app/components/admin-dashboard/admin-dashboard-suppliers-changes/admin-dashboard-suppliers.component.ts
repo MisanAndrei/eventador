@@ -8,6 +8,9 @@ import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
+import { UserRole } from 'src/app/Utilities/enums/Enums';
+import { AuthService } from 'src/app/Services/AuthService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard-suppliers',
@@ -29,13 +32,11 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
 
     dataSource = new MatTableDataSource<AdminDashboardProfilesChanged>(this.profiles);
     
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
-    this._observer = breakpointObserver;
-    
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService) {
+    this._observer = breakpointObserver; 
   }
 
   ngOnInit(): void {
-   console.log(this.profiles);
     this.isMobile = this._observer.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

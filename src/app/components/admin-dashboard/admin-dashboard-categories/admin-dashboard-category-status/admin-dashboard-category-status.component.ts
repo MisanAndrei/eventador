@@ -25,8 +25,6 @@ export class AdminDashboardCategoryStatusComponent implements OnInit {
 
   submitCategoryChanges(): void {
     // Handle the list of updated categories as needed
-    console.log('Updated Categories:', this.categories);
-
     var request = this.categories.filter(x => x.showOnLandingPage == true).map(x => x.id).filter(id => id !== undefined) as number[];
     this.apiService.markCategoriesOnLandingPage(request);
 

@@ -15,6 +15,8 @@ export class LoginComponent {
   isMobile: any;
   username: string = '';
   password: string = '';
+  errorWhenLogging: boolean = false;
+
   constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -22,15 +24,22 @@ export class LoginComponent {
       );
    }
 
-  async login() {
-    // Replace with your actual login logic and API call
-    // After successful login, you'll receive the token in the response
-    console.log('button clicked');
-    var loggedIn = this.authService.login(this.username, this.password)
-
-    this.router.navigate(['/acasa']);
-    //const token = 'your_access_token'; // Replace with the actual token from the response
-
-    //this.authService.storeToken(token);
+   async login() {
+    this.authService.login(this.username, this.password).subscribe(
+      result => {
+        if (result) {
+          // Successful login logic, navigate, etc.
+          this.router.navigate(['/acasa']);
+        } else {
+          // Handle unsuccessful login
+          this.errorWhenLogging = true;
+          console.error('Login failed');
+        }
+      },
+      error => {
+        // Handle errors, if any
+        this.errorWhenLogging = true;
+      }
+    );
   }
 }

@@ -249,3 +249,7 @@ nav {
   .menu-item a:hover {
     font-weight: bold;
   }
+
+  .logout {
+    cursor: pointer;
+  }

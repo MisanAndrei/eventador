@@ -6,3 +6,7 @@
 mat-checkbox {
     display: block; /* or inline-block, or any other appropriate display value */
   }
+
+.section {
+    overflow-y: hidden;
+}

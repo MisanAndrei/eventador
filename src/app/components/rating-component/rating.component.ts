@@ -16,6 +16,7 @@ export class RatingComponent implements OnInit {
 
   ratingsMapped!: ReviewMapped[];
   showAllReviews: boolean = false;
+  reviewsNumber: number = 0;
   
 
 
@@ -27,11 +28,17 @@ export class RatingComponent implements OnInit {
         );
     }
   ngOnInit(): void {
-    this.ratingsMapped = this.ratings.map((rating: Review) => {
+    this.mapReviewsToCurrentModel(this.ratings);
+    console.log(this.currentProfileLoggedIn);
+  }
+
+  mapReviewsToCurrentModel(ratings: Review[]){
+    this.ratingsMapped = ratings.map((rating: Review) => {
       return {
         authorName: rating.authorName,
         id: rating.id,
         responseText: rating.responseText,
+        responseTextToSend: '',
         reviewText: rating.reviewText,
         score: rating.score,
         creationDate: rating.creationDate,
@@ -42,21 +49,18 @@ export class RatingComponent implements OnInit {
       
       
     });
-
-    console.log(this.currentProfileLoggedIn);
+    this.reviewsNumber = this.ratingsMapped.length;
   }
     
   getStarValues(): number[] {
     return [1, 2, 3, 4, 5];
   }
 
-  setRating(rating: any, value: number): void {
-    // Implement your logic to handle setting the rating
-    console.log(`Setting rating ${value} for user ${rating.username}`);
-  }
-
   getReviewsByProfileId(){
-    
+    this.apiService.getReviewsByProfileId(this.profileId).subscribe(reviews => {
+      this.mapReviewsToCurrentModel(reviews);
+      this.showAllReviews = true;
+    });
   }
 
   sendResponse(id: number, responseText?: string){

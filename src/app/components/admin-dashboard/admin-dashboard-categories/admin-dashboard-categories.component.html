@@ -1,4 +1,4 @@
-<div>
+<div class="section">
     <h1>Categorii</h1>
     <mat-form-field>
         <input matInput [formControl]="searchControl" placeholder="Cautare">
@@ -39,12 +39,12 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
-</div>
-<button style="margin-right: 20px" mat-raised-button color="accent" (click)="createCategory()">Adauga Categorie</button>
+  <button style="margin-right: 20px" mat-raised-button color="accent" (click)="createCategory()">Adauga Categorie</button>
 <button style="margin-right: 20px" mat-raised-button color="accent" (click)="changeCategoriesStatus()">Schimba categoriile aparute pe pagina principala</button>
 <div *ngIf="isCreatingOrEditing">
   <app-admin-dashboard-category-upsert [category]="editedCategory"></app-admin-dashboard-category-upsert>
 </div>
 <div *ngIf="isChangingStatus">
   <app-admin-dashboard-category-status [categories]="profiles"></app-admin-dashboard-category-status>
+</div>
 </div>

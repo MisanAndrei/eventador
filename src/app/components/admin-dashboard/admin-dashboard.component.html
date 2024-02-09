@@ -1,21 +1,21 @@
 <div class="centered-tabs" *ngIf="!(isMobile | async)">
     <mat-tab-group class="scrollable-tabs">
       <!--Tabul de schimbari-->
-    <mat-tab label="Schimbari furnizori">
+    <mat-tab *ngIf="currentUserRole === 1" label="Schimbari furnizori">
       <app-admin-dashboard-suppliers></app-admin-dashboard-suppliers>
     </mat-tab>
       
-    <mat-tab label="Parteneri">
+    <mat-tab *ngIf="currentUserRole === 1" label="Parteneri">
     <app-admin-dashboard-partners></app-admin-dashboard-partners>
       
     </mat-tab>
       
-    <mat-tab label="Pachete">
+    <mat-tab *ngIf="currentUserRole === 1" label="Pachete">
     
       
     </mat-tab>
       
-    <mat-tab label="Categorii">
+    <mat-tab *ngIf="currentUserRole === 1" label="Categorii">
   <app-admin-dashboard-categories></app-admin-dashboard-categories>
       
     </mat-tab>
@@ -25,7 +25,7 @@
       
     </mat-tab>
 
-    <mat-tab label="Review">
+    <mat-tab *ngIf="currentUserRole === 1" label="Review">
 
       <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
     </mat-tab>
@@ -37,22 +37,22 @@
   <div class="centered-tabs-mobile" *ngIf="(isMobile | async)">
     <mat-tab-group class="scrollable-tabs-mobile">
       <!--Tabul de schimbari-->
-    <mat-tab label="Schimbari furnizori">
+    <mat-tab *ngIf="currentUserRole === 1" label="Schimbari furnizori">
       <app-admin-dashboard-suppliers></app-admin-dashboard-suppliers>
       
     </mat-tab>
       
-    <mat-tab label="Parteneri">
+    <mat-tab *ngIf="currentUserRole === 1" label="Parteneri">
       <app-admin-dashboard-partners></app-admin-dashboard-partners>
       
     </mat-tab>
       
-    <mat-tab label="Pachete">
+    <mat-tab *ngIf="currentUserRole === 1" label="Pachete">
     
       
     </mat-tab>
       
-    <mat-tab label="Categorii">
+    <mat-tab *ngIf="currentUserRole === 1" label="Categorii">
   
       <app-admin-dashboard-categories></app-admin-dashboard-categories>
     </mat-tab>
@@ -62,7 +62,7 @@
       
     </mat-tab>
 
-    <mat-tab label="Review">
+    <mat-tab *ngIf="currentUserRole === 1" label="Review">
       <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
       
     </mat-tab>

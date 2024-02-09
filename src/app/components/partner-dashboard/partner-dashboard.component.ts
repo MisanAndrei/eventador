@@ -87,11 +87,9 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
         this.isMobile.subscribe(x => {
             if (x){
                 this.displayedColumns = this.mobileColumns;
-                console.log('e mobile');
               }
               else{
                 this.displayedColumns = this.webColumns;
-                console.log('nu e mobile');
               }
         })
 

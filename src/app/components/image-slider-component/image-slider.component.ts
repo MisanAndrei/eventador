@@ -25,7 +25,6 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
 
     videoElement.addEventListener('play', () => {
       // Your code to handle the play event goes here
-      console.log('Video started playing.');
     });
   }
 

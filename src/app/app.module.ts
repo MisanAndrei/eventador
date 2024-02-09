@@ -79,6 +79,9 @@ import { AdminDashboardCategoryUpsertComponent } from './components/admin-dashbo
 import { AdminDashboardCategoryStatusComponent } from './components/admin-dashboard/admin-dashboard-categories/admin-dashboard-category-status/admin-dashboard-category-status.component';
 import { AdminDashboardReviewsComponent } from './components/admin-dashboard/admin-dashboard-reviews/admin-dashboard-reviews.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './components/change-password-component/change-password.component';
+import { EditPersonalDataComponent } from './components/edit-personal-data-component/edit-personal-data.component';
+import { DeleteAccountComponent } from './components/delete-account-component/delete-account.component';
 
 
 
@@ -121,7 +124,10 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     AdminDashboardCategoryUpsertComponent,
     AdminDashboardCategoryStatusComponent,
     AdminDashboardReviewsComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ChangePasswordComponent,
+    EditPersonalDataComponent,
+    DeleteAccountComponent
   ],
   imports: [
     AppRoutingModule,

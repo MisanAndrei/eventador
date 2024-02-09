@@ -16,8 +16,7 @@ import { ProfileCard, Section } from "src/app/Models/Models";
 
     }
   ngOnInit(): void {
-    console.log("aiciiiiiiii");
-    console.log(this.cards);
+
   }
 
     onDragStart(event: DragEvent): void {

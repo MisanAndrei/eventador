@@ -89,20 +89,9 @@ export class AdminDashboardBlogUpsertComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.blogForm.value);
     const blog = this.blogForm.value;
     this.apiService.addBlog(blog);
-/*
-    if (this.isEditing) {
-      this.blogService.updateBlog(this.blogId, blog).subscribe((updatedBlog) => {
-        console.log('Blog updated:', updatedBlog);
-      });
-    } else {
-      this.blogService.createBlog(blog).subscribe((createdBlog) => {
-        console.log('Blog created:', createdBlog);
-      });
-    }
-*/ }
+ }
 
 onImageSelected(event: any): void {
   const files: FileList = event.target.files;

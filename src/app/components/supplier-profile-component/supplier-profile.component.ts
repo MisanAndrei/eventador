@@ -72,7 +72,7 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
         var user = this.authService.getLoggedUser();
         this.currentUserRole = user.role;
         this.currentUserId = user.id;
-        if (this.profileId != undefined && Number(this.profileId) && Number(this.profileId) == user.profileId){
+        if (this.profileId != undefined && user.profilesIds?.includes(Number(this.profileId))){
           this.isCurrentProfileLogged = true;
         }
       }
@@ -82,7 +82,6 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
       } else {
         if (this.changesProfileId != undefined){
           this.apiService.getProfileToReview(this.changesProfileId).subscribe(response => {
-            console.log(response);
             this.imageObject = response.images.map(x => ({
               image: x.imageUrl,
               thumbImage: x.imageUrl,
@@ -96,15 +95,14 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
             this.phoneNumber = response.phoneNumber;
             this.email = response.email;
             this.description = response.description;
-            this.websiteUrl = response.websiteUrl;
-            this.facebookUrl = response.facebookUrl;
-            this.instagramUrl = response.instagramUrl;
-            this.youtubeUrl = response.youtubeUrl;
+            this.websiteUrl = response.websiteUrl ? this.addHttpPrefix(response.websiteUrl) : undefined;
+            this.facebookUrl = response.facebookUrl ? this.addHttpPrefix(response.facebookUrl) : undefined;
+            this.instagramUrl = response.instagramUrl ? this.addHttpPrefix(response.instagramUrl) : undefined;
+            this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
           })
         }
         else{
           this.apiService.getUserProfile(Number(this.profileId)).subscribe(response => {
-            console.log(response);
             this.imageObject = response.images.map(x => ({
               image: x.imageUrl,
               thumbImage: x.imageUrl,
@@ -118,10 +116,10 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
             this.phoneNumber = response.phoneNumber;
             this.email = response.email;
             this.description = response.description;
-            this.websiteUrl = response.websiteUrl;
-            this.facebookUrl = response.facebookUrl;
-            this.instagramUrl = response.instagramUrl;
-            this.youtubeUrl = response.youtubeUrl;
+            this.websiteUrl = response.websiteUrl ? this.addHttpPrefix(response.websiteUrl) : undefined;
+            this.facebookUrl = response.facebookUrl ? this.addHttpPrefix(response.facebookUrl) : undefined;
+            this.instagramUrl = response.instagramUrl ? this.addHttpPrefix(response.instagramUrl) : undefined;
+            this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
             this.numberProfileId = Number(this.profileId);
             this.reviews = response.reviews;
           })
@@ -137,8 +135,6 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
     }
   
     submitReview(): void {
-      console.log('Rating:', this.selectedRating);
-      console.log('Review Text:', this.reviewText);
       var review = {
         score: this.selectedRating,
         reviewText: this.reviewText,
@@ -160,5 +156,18 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
 
     showRatingInput(){
       this.offerRating = true;
+    }
+
+    addHttpPrefix(url: string): string {
+      // Check if the URL has a valid protocol (http:// or https://)
+      const hasValidProtocol = /^https?:\/\//i.test(url);
+    
+      // If not, add the http:// prefix
+      if (!hasValidProtocol) {
+        return `http://${url}`;
+      }
+    
+      // If already has a valid protocol, return the original URL
+      return url;
     }
   }

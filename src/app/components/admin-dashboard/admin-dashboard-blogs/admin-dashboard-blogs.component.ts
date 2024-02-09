@@ -35,9 +35,7 @@ export class AdminDashboardBlogsComponent implements OnInit, AfterViewInit {
     
   }
 
-  ngOnInit(): void {
-   console.log(this.profiles);
-   
+  ngOnInit(): void { 
     this.isMobile = this._observer.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

@@ -208,9 +208,6 @@ export class CreateProfileComponent implements OnInit {
     }
 
     this.apiService.createUser(user);
-
-
-    console.log(user);
     }
 
     checkPasswordIncorrect(){
