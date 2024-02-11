@@ -33,7 +33,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { NgImageSliderModule } from 'ng-image-slider';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -153,7 +152,6 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
     MatChipsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    NgImageSliderModule,
     MatTabsModule,
     AngularEditorModule
   ],
