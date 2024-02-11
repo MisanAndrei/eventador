@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
-import { NgChartsModule} from 'ng2-charts';
 
 
 
@@ -148,7 +147,6 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
     MatSortModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    NgChartsModule,
     MatChipsModule,
     MatSelectModule,
     MatSlideToggleModule,
