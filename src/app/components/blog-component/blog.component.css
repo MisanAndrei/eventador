@@ -1,67 +1,12 @@
-.blog-container {
-    display: flex;
-    justify-content: center;
-    background-color: #f4f8fb; /* Light gray background on the sides */
-  }
-  
-  .blog-content {
-    width: 60%;
-    padding: 20px;
-    background-color: white; /* White background for the content area */
-  }
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Hide any overflow content */
+}
 
-  .blog-content .first-title {
-    text-align: center;
-    font-size: 1.5rem;
-    margin: 20px 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-  
-  .blog-content img {
-    width: 70%;
-    height: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
-  }
-  
-  .blog-content p {
-    font-size: x-large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
+.pdf-container {
+  width: 100%;
+  height: 100vh; /* Adjusted to always fill the screen height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
 
-  .mobile-background {
-    background-color: white;
-  }
-
-  .mobile-blog-container {
-    width: 90%;
-    margin: 0 auto;
-    background-color: white;
-  }
-  
-  .mobile-blog-image {
-    width: 100%;
-    height: 50%;
-    object-fit: cover;
-  }
-
-  
-  .mobile-blog-title {
-    font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-  .mobile-blog-content {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 18px;
-    letter-spacing: 0.05rem;
-  }
-
-  .blog-html-content h1, h2 {
-    text-align: center !important;
-  }
- 

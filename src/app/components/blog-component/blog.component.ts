@@ -12,8 +12,8 @@ import { ApiService } from 'src/app/Services/ApiService';
 })
 export class BlogComponent implements OnInit {
   isMobile: Observable<boolean>;
-  blog?: Blog;
   selectedBlog!: number;
+  pdfSrc: string = '';
 
   constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
   this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -29,7 +29,9 @@ export class BlogComponent implements OnInit {
     }
 
     this.apiService.getBlogById(this.selectedBlog).subscribe(response => {
-      this.blog = response;
+      this.pdfSrc = response.content ?? "";
     });
   }
+
+  
 }

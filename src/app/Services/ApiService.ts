@@ -8,7 +8,7 @@ import { AuthService } from './AuthService';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://eventadorapi20240119163432.azurewebsites.net/api';
+  private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -41,11 +41,11 @@ export class ApiService {
     return this.http.get<LandingPage>(this.apiUrl + '/Section/LandingPage');
   }
 
-  addBlog(blog: Blog){
-    this.http.post<any>(this.apiUrl + '/Blog', blog).subscribe(x => {
+  addBlog(formData: FormData): void {
+    this.http.post<any>(this.apiUrl + '/Blog', formData).subscribe(x => {
       console.log(x);
     });
-  }
+}
 
   markCategoriesOnLandingPage(ids: number[]){
     this.http.post<any>(this.apiUrl + '/Category/MarkCategoriesToShow', ids).subscribe(x => {

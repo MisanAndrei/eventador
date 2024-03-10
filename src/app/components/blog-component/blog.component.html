@@ -1,17 +1,11 @@
-<div class="blog-container" *ngIf="!(isMobile | async)">
-    <div class="blog-content">
-      <h1 class="first-title">{{ blog?.title }}</h1>
-      <img src="{{blog?.imageUrl}}" alt="Blog Image">
-      <div class="blog-html-content" [innerHTML]="blog?.content"></div>
-    </div>
+<div *ngIf="!(isMobile | async)" class="container">
+  <div class="pdf-container">
+    <pdf-viewer [src]="pdfSrc" style="width: 100%; height: 100%;"></pdf-viewer>
   </div>
+</div>
 
-  <div class="mobile-background" *ngIf="(isMobile | async)">
-    <div class="mobile-blog-container">
-      <img [src]="blog?.imageUrl" alt="{{ blog?.title }}" class="mobile-blog-image" />
-      <div>
-        <div class="mobile-blog-title">{{ blog?.title }}</div>
-        <div [innerHTML]="blog?.content"></div>
-      </div>
-    </div>
+<div *ngIf="(isMobile | async)" class="container">
+  <div class="pdf-container">
+    <pdf-viewer [src]="pdfSrc" [autoresize]="true" [original-size]="false" style="width: 100%; height: 100%;"></pdf-viewer>
   </div>
+</div>

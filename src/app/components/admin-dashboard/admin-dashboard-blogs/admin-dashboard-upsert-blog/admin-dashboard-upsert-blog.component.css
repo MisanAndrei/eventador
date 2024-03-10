@@ -39,3 +39,9 @@ form {
   .custom-class {
     font-family: 'Courier New', Courier, monospace;
   }
+
+  .pdf-container {
+    width: 100%;
+    height: calc(300vh); /* Adjust the height as needed */
+    overflow: hidden; /* Hide any overflow content */
+  }

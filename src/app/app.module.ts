@@ -35,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 
@@ -151,7 +152,8 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
     MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    PdfViewerModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

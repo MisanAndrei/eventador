@@ -8,11 +8,6 @@
     <label>Descriere:</label>
     <input type="text" formControlName="description" />
   </div>
-
-  <div>
-    <label>Content:</label>
-    <angular-editor [placeholder]="'Enter text here...'" formControlName="content" [config]="editorConfig"></angular-editor>
-  </div>
   
 
   <div>
@@ -27,7 +22,19 @@
   </div>
 
   <div>
-    
-    <button mat-raised-button color="accent" type="submit">{{ isEditing ? 'Modifica Blog' : 'Creare Blog' }}</button>
+    <label for="pdfFile">Select PDF:</label>
+    <input type="file" id="pdfFile" (change)="onFileSelected($event)" accept=".pdf">
   </div>
+
+  <button mat-raised-button color="accent" type="submit">{{ isEditing ? 'Modifica Blog' : 'Creare Blog' }}</button>
+
+ 
+
+  <div #pdfContainer class="pdf-container">
+    <pdf-viewer [src]="pdfSrc" style="width: 100%; height: 100%;"></pdf-viewer>
+</div>
+
+  
+
+  
 </form>

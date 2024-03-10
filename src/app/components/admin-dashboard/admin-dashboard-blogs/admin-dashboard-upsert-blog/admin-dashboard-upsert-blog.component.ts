@@ -5,6 +5,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { valueOrDefault } from 'chart.js/dist/helpers/helpers.core';
 import { ApiService } from 'src/app/Services/ApiService';
 //import { BlogService } from './blog.service';
+import { ViewChild, ElementRef } from '@angular/core';
+import * as pdfjs from 'pdfjs-dist';
 
 @Component({
   selector: 'app-admin-dashboard-upsert-blog',
@@ -15,55 +17,8 @@ export class AdminDashboardBlogUpsertComponent implements OnInit {
   @Input() blogId?: number;
   blogForm!: FormGroup;
   isEditing = false;
-
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'},
-        {class: 'Courier New, Courier, monospace', name: 'Courier New, Courier, monospace'},
-        {class: 'Serif', name: 'Serif'}, 
-        {class: 'Georgia', name: 'Georgia'},
-        {class: 'Serif, Georgia', name: 'Serif, Georgia'}
-      ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    uploadWithCredentials: false,
-    sanitize: false,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['bold', 'italic']
-    ]
-};
+  pdfSrc: string = "https://evemtadorstorage.blob.core.windows.net/blogs/Oferta_colaborare_MC_Alexandru_Costin_-_24_08_2024_Grand_Hotel_Italia.pdf";
+  pdfFile: File | null = null;
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
@@ -89,8 +44,16 @@ export class AdminDashboardBlogUpsertComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const blog = this.blogForm.value;
-    this.apiService.addBlog(blog);
+    const formData = new FormData();
+    formData.append('title', this.blogForm.value.title);
+    formData.append('description', this.blogForm.value.description);
+    formData.append('minutesToRead', this.blogForm.value.minutesToRead);
+    formData.append('image', this.blogForm.value.image);
+    if (this.pdfFile) {
+      formData.append('content', this.pdfFile); // Append the pdfFile if it exists
+    }
+
+    this.apiService.addBlog(formData);
  }
 
 onImageSelected(event: any): void {
@@ -111,4 +74,13 @@ onImageSelected(event: any): void {
     reader.readAsDataURL(selectedImage);
   }
 }
+
+onFileSelected(event: any): void {
+  const files: FileList = event.target.files;
+  if (files && files.length > 0) {
+    this.pdfFile = files[0]; // Store the selected PDF file for later use
+  }
+}
+
+
 }

@@ -14,7 +14,7 @@ export class AuthService {
   private jwtHelper: JwtHelperService = new JwtHelperService();
   private readonly userKey: string = 'loggedUser';
   private tokenKey = 'access_token';
-  private apiUrl = 'https://eventadorapi20240119163432.azurewebsites.net/api/Auth/login';
+  private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api/Auth/login';
    // Replace with your desired key for storing the token
 
   constructor(private http: HttpClient) { }
