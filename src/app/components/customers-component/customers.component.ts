@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
-  showFilter: boolean = false;
+  showFilter: boolean = true;
   searchTerm: string = '';
   selectedCategory?: number;
   selectedZone?: number;

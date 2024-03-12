@@ -2,7 +2,7 @@
     <div class="overlay">
       <h1>{{section?.title}}</h1>
       <p>{{section?.content}}</p>
-      <button mat-raised-button color="accent">Contacteaza-ne</button>
+      <button [routerLink]="['/contact']" mat-raised-button color="accent">Contacteaza-ne</button>
     </div>
   </div>
 
@@ -10,6 +10,6 @@
     <div class="overlay-mobile">
       <h1>{{section?.title}}</h1>
       <p>{{section?.content}}</p>
-      <button mat-raised-button color="accent">Contacteaza-ne</button>
+      <button [routerLink]="['/contact']" mat-raised-button  color="accent">Contacteaza-ne</button>
     </div>
   </div>

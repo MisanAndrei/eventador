@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateUser, EditProfile, EditUser, EditUserRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUser, EditUserRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
@@ -123,6 +123,16 @@ export class ApiService {
 
   createUser(user: CreateUser) {
     var test = this.http.post<any>(this.apiUrl + '/User', user);
+    test.subscribe(x => {
+      console.log(x);
+    })
+    console.log(test);
+    return test;
+  }
+
+  addProfile(userId: number, profile: CreateProfile){
+    const url = `${this.apiUrl}/Profile/EditProfile/${userId}`;
+    var test = this.http.put<any>(url, profile);
     test.subscribe(x => {
       console.log(x);
     })

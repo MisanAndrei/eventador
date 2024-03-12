@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 
@@ -81,6 +82,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ChangePasswordComponent } from './components/change-password-component/change-password.component';
 import { EditPersonalDataComponent } from './components/edit-personal-data-component/edit-personal-data.component';
 import { DeleteAccountComponent } from './components/delete-account-component/delete-account.component';
+import { AddProfileComponent } from './components/profile-components/add-profile-component/add-profile.component';
 
 
 
@@ -126,7 +128,8 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
     EditProfileComponent,
     ChangePasswordComponent,
     EditPersonalDataComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    AddProfileComponent
   ],
   imports: [
     AppRoutingModule,
@@ -153,7 +156,8 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
     MatSlideToggleModule,
     MatTabsModule,
     AngularEditorModule,
-    PdfViewerModule
+    PdfViewerModule,
+    SlickCarouselModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

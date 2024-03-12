@@ -1,65 +1,8 @@
-<div *ngIf="!(isMobile | async)" class="backdrop"></div>
+
 
 <div *ngIf="!(isMobile | async)" class="profile-container">
-  <div class="profile-header">
-    <!-- Profile Picture -->
-    <h2 class="username">Bine ai Venit pe platforma eventador.ro!</h2>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput placeholder="Email*" type="email" id="email" [(ngModel)]="email" name="email" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput placeholder="Parola*" type="password" id="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput placeholder="Verificare Parola*" type="password" id="password" [(ngModel)]="passwordVerified" name="passwordVerified" required>
-  </mat-form-field>
-  </div>
-  <div *ngIf="checkPasswordIncorrect()" class="form-group error-message">
-    <p>Cele doua parole nu sunt identice!</p>
-  </div>
-  
-
-  <h3>Informatiile legate de cont</h3>
-  
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput placeholder="Nume*" [(ngModel)]="lastName" name="lastName" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-    <input matInput placeholder="Prenume*" [(ngModel)]="firstName" name="firstName" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input">
-      <input matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon" required>
-    </mat-form-field>
-  </div>
-
-  <!-- Business Toggle -->
-  <div class="business-toggle">
-    <label>Cont Furnizor Servicii:</label>
-    <mat-slide-toggle
-          [checked]="isBusinessAccount"
-          [(ngModel)]="isBusinessAccount"
-          (change)="toggleBusinessInfo()">
-      </mat-slide-toggle>
-  </div>
-
   <!-- Business Information (Shown only for business accounts) -->
-  <div *ngIf="isBusinessAccount" class="business-info">
+  <div *ngIf="isBusinessAccount" class="business-info"> 
     <h3>Informatiile legate de serviciile oferite</h3>
 
     <div class="business-toggle">
@@ -167,63 +110,6 @@
 </div>
 
 <div *ngIf="(isMobile | async)">
-  <div class="profile-header">
-    <!-- Profile Picture -->
-    <h2 class="username">Bine ai Venit pe platforma eventador.ro!</h2>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Email*" type="email" id="email" [(ngModel)]="email" name="email" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Parola*" type="password" id="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Verificare Parola*" type="password" id="password" [(ngModel)]="passwordVerified" name="passwordVerified" required>
-  </mat-form-field>
-  </div>
-  <div *ngIf="checkPasswordIncorrect()" class="form-group error-message">
-    <p>Cele doua parole nu sunt identice!</p>
-  </div>
-
-  <h3>Informatiile legate de cont</h3>
-  
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Nume de familie" [(ngModel)]="lastName" name="lastName" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Prenume" [(ngModel)]="firstName" name="firstName" required>
-  </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="custom-input-mobile">
-      <input matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon" required>
-    </mat-form-field>
-  </div>
-
-  <!-- Business Toggle -->
-  <div class="business-toggle">
-    <label>Cont Furnizor Servicii:</label>
-    <mat-slide-toggle
-          [checked]="isBusinessAccount"
-          [(ngModel)]="isBusinessAccount"
-          (change)="toggleBusinessInfo()">
-      </mat-slide-toggle>
-  </div>
-
-  <!-- Business Information (Shown only for business accounts) -->
   <div *ngIf="isBusinessAccount" class="business-info">
     <h3>Informatiile legate de serviciile oferite</h3>
 

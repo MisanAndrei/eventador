@@ -1,51 +1,51 @@
 <div  *ngIf="!(isMobile | async)" class="contact-tab">
   <div class="column">
     <h2>Eventador</h2>
-    <p>Email: officeeventador.ro</p>
+    <p>Email: officeeventador&#64;gmail.com</p>
     <div class="icons">
       <!-- Replace with your icon elements or use icon fonts -->
-      <a href="https://www.facebook.com/eventador.ro" class="fa fa-facebook"></a>
-      <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+      <a href="https://www.facebook.com/eventador.ro" target="_blank" class="fa fa-facebook"></a>
+      <a href="https://www.instagram.com/eventador.ro" target="_blank" class="fa fa-instagram"></a>
     </div>
   </div>
 
   <div class="column">
     <h2>Ajutor</h2>
-    <p>Despre noi</p>
-    <p>Politica de confidentialitate</p>
-    <p>Termeni si conditii</p>
+    <p [routerLink]="['/despre-noi']">Despre noi</p>
+    <p [routerLink]="['/despre-noi']">Politica de confidentialitate</p>
+    <p [routerLink]="['/despre-noi']">Termeni si conditii</p>
   </div>
 
   <div class="column">
     <h2>Navigatie</h2>
-    <p>Blog</p>
-    <p>Furnizori</p>
-    <p>Contact</p>
+    <p [routerLink]="['/noutati']">Blog</p>
+    <p [routerLink]="['/furnizori']">Furnizori</p>
+    <p [routerLink]="['/contact']">Contact</p>
   </div>
 </div>
 
 <div  *ngIf="(isMobile | async)" class="mobile-contact-tab">
   <div>
     <h2>Eventador</h2>
-    <p>Email: officeeventador.ro</p>
+    <p>Email: officeeventador&#64;gmail.com</p>
     <div>
       <!-- Replace with your icon elements or use icon fonts -->
-      <a href="https://www.facebook.com/eventador.ro" class="fa fa-facebook"></a>
-      <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+      <a href="https://www.facebook.com/eventador.ro" target="_blank" class="fa fa-facebook"></a>
+      <a href="https://www.instagram.com/eventador.ro" target="_blank" class="fa fa-instagram"></a>
     </div>
   </div>
 
   <div>
     <h2>Ajutor</h2>
-    <p>Despre noi</p>
-    <p>Politica de confidentialitate</p>
-    <p>Termeni si conditii</p>
+    <p [routerLink]="['/despre-noi']">Despre noi</p>
+    <p [routerLink]="['/despre-noi']">Politica de confidentialitate</p>
+    <p [routerLink]="['/despre-noi']">Termeni si conditii</p>
   </div>
 
   <div>
     <h2>Navigatie</h2>
-    <p>Blog</p>
-    <p>Furnizori</p>
-    <p>Contact</p>
+    <p [routerLink]="['/noutati']">Blog</p>
+    <p [routerLink]="['/furnizori']">Furnizori</p>
+    <p [routerLink]="['/contact']">Contact</p>
   </div>
 </div>

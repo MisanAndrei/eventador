@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/Services/AuthService';
+import { UserRole } from 'src/app/Utilities/enums/Enums';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,8 @@ import { AuthService } from 'src/app/Services/AuthService';
 })
 export class ProfileComponent implements OnInit {
   //profile details
+  userRole!: UserRole;
+  loggedUserId!: number;
   firstName: string = '';
   lastName: string = '';
   email: string = '';
@@ -36,6 +39,8 @@ export class ProfileComponent implements OnInit {
     this.email = user.email;
     this.phoneNumber = user.phoneNumber ?? '';
     this.nameInitials = this.firstName[0].toUpperCase() + this.lastName[0].toUpperCase();
+    this.userRole = user.role;
+    this.loggedUserId = user.id;
   }
 
   changePassword(){

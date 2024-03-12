@@ -55,6 +55,7 @@ button {
 .mobile-action-button {
   width: 200px;
   background: linear-gradient(to right, #FF63A4, #FE8962);
+  color: white !important;
 }
 
 .mobile-user-logo {

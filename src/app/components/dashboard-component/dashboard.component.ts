@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
+import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
   section3: any;
   section4: any;
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -37,6 +38,17 @@ export class DashboardComponent implements OnInit {
         this.categories = isMobile ? response.categories.slice(0, 4) : response.categories;
       });
     })
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event: any) {
+    const favoriteProfiles = this.loadFavoriteProfilesFromLocalStorage();
+    this.favoriteProfilesService.updateFavoriteProfiles(favoriteProfiles as number[]);
+  }
+
+  loadFavoriteProfilesFromLocalStorage() {
+    const storedFavoriteProfiles = localStorage.getItem('favoriteProfiles');
+    return storedFavoriteProfiles ? JSON.parse(storedFavoriteProfiles) : [];
   }
 
 

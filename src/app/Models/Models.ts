@@ -118,6 +118,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     phoneNumber?: string;
     role: UserRole;
     profilesIds?: number[];
+    favourtieProfilesIds?: number[];
     token: string;
   }
 

@@ -170,6 +170,9 @@ SOFTWARE.
 ng2-pdf-viewer
 MIT
 
+ngx-slick-carousel
+MIT
+
 pdfjs-dist
 Apache-2.0
 
