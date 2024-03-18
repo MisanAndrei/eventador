@@ -13,6 +13,7 @@ export class AuthService {
   private readonly secretKey: string = 'ca9f449f-173f-4de5-b50d-95ce0e08ae5d';
   private jwtHelper: JwtHelperService = new JwtHelperService();
   private readonly userKey: string = 'loggedUser';
+  private readonly favoriteProfilesKey: string = 'favoriteProfiles';
   private tokenKey = 'access_token';
   private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api/Auth/login';
    // Replace with your desired key for storing the token
@@ -33,6 +34,10 @@ export class AuthService {
 
   removeUserToken(): void {
     localStorage.removeItem(this.userKey);
+  }
+
+  removeFavoriteProfilesToken(){
+    localStorage.removeItem(this.favoriteProfilesKey);
   }
 
   isAuthenticated(): boolean {
@@ -56,6 +61,7 @@ export class AuthService {
         .subscribe(
           response => {
             this.storeLoggedUser(response);
+            this.storeFavoriteProfiles(response.favourtieProfilesIds ?? []);
             subscriber.next(response);
             subscriber.complete();
           },
@@ -78,7 +84,7 @@ export class AuthService {
     return encodedString;
   }
 
-  decodeToObject(encodedString: string): LoggedUser {
+  decodeToObject(encodedString: string): any {
     const decodedString = atob(encodedString);
     const jsonString = decodedString.slice(0, -this.secretKey.length);
     return JSON.parse(jsonString);
@@ -128,6 +134,23 @@ export class AuthService {
   logOut(){
     this.removeToken();
     this.removeUserToken();
+    this.removeFavoriteProfilesToken()
   }
 
+  storeFavoriteProfiles(favoriteProfiles: number[]){
+    localStorage.setItem(this.favoriteProfilesKey, this.encodeObject(favoriteProfiles))
+  }
+
+  getFavoriteProfiles(){
+    const favoriteProfiles = this.decodeToObject(localStorage.getItem(this.favoriteProfilesKey) ?? "")
+    return favoriteProfiles as number[];
+  }
+
+  checkFavoriteProfilesKey(){
+    const favoriteProfiles = localStorage.getItem(this.favoriteProfilesKey);
+    if (favoriteProfiles === null) {
+      // Key doesn't exist, populate it with an empty array
+      this.storeFavoriteProfiles([]);
+    }
+  }
 }

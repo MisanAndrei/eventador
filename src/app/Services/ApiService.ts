@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUser, EditUserRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUser, EditUserRequest, FavoriteProfilesRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
 @Injectable({
@@ -155,6 +155,12 @@ export class ApiService {
 
   editPersonalData(personalData: EditUserRequest){
     return this.http.put( this.apiUrl + '/User/EditUser', personalData);
+  }
+
+  updateFavoriteProfiles(favoriteProfilesRequest: FavoriteProfilesRequest){
+    this.http.post<any>(this.apiUrl + '/User/AddRemoveFavouriteProfile', favoriteProfilesRequest).subscribe(x => {
+      console.log(x);
+    });
   }
 
   // Perform a GET request

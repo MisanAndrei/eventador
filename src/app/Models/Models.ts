@@ -331,6 +331,11 @@ import { UserRole } from "../Utilities/enums/Enums";
     lastName: string;
     phoneNumber: string;
   }
+
+  export interface FavoriteProfilesRequest {
+    userId: number;
+    profileIds: number[];
+  }
   
 
   

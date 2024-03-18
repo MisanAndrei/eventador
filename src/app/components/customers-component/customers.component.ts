@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 import { ProfileCard } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
+import { AuthService } from 'src/app/Services/AuthService';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css']
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent implements OnInit, OnDestroy {
+  @Input() favoriteProfilesPage?: boolean;
+  currentUserFavoriteProfiles: number[] = [];
+  currentUserOldFavoriteProfiles: number[] = [];
   showFilter: boolean = true;
   searchTerm: string = '';
   selectedCategory?: number;
@@ -22,16 +27,24 @@ export class CustomersComponent implements OnInit {
   categories: any[] = [];
   isMobile: Observable<boolean>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute, private authService: AuthService, private router: Router, private favoriteProfilesService: FavoriteProfilesServiceComponent) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
       );
   }
+  ngOnDestroy(): void {
+    if (!this.arraysHaveSameValues(this.currentUserFavoriteProfiles, this.currentUserOldFavoriteProfiles)){
+      this.favoriteProfilesService.updateFavoriteProfiles();
+    }
+  }
 
   ngOnInit(): void {
+    this.authService.checkFavoriteProfilesKey();
     this.apiService.getProfileCards().pipe(
       switchMap(response1 => {
+        this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+        this.currentUserOldFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
         this.profileCards = response1;
         this.filteredProfileCards = response1;
         this.applyFilters();
@@ -75,5 +88,37 @@ export class CustomersComponent implements OnInit {
 
       toggleFilter() {
         this.showFilter = !this.showFilter;
+      }
+
+      isFavorite(profileId: number): boolean{
+        if (this.currentUserFavoriteProfiles.includes(profileId)) {
+          return true;
+        }
+
+        return false;
+      }
+
+      onCardClick(profileId: number){
+        this.router.navigate(['/furnizor', profileId]);
+      }
+
+      onHeartClick(event: Event, profileId: number){
+        event.stopPropagation();
+        if (!this.currentUserFavoriteProfiles.includes(profileId)) {
+          this.currentUserFavoriteProfiles.push(profileId);
+          this.favoriteProfilesService.addProfileToFavorite(profileId);
+        }
+        else {
+          const index = this.currentUserFavoriteProfiles.indexOf(profileId);
+          if (index !== -1) {
+            this.currentUserFavoriteProfiles.splice(index, 1);
+            this.favoriteProfilesService.removeProfileFromFavorite(profileId);
+          }
+        }
+      }
+
+      arraysHaveSameValues(arr1: number[], arr2: number[]): boolean {
+        // Convert arrays to strings and compare
+        return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
       }
 }

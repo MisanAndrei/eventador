@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
         map(result => result.matches)
       );
   }
+
   ngOnInit(): void {
     this.apiService.getLandingPage().subscribe(response => {
       this.section1 = response.sections[0];
@@ -39,18 +40,4 @@ export class DashboardComponent implements OnInit {
       });
     })
   }
-
-  @HostListener('window:beforeunload', ['$event'])
-  handleBeforeUnload(event: any) {
-    const favoriteProfiles = this.loadFavoriteProfilesFromLocalStorage();
-    this.favoriteProfilesService.updateFavoriteProfiles(favoriteProfiles as number[]);
-  }
-
-  loadFavoriteProfilesFromLocalStorage() {
-    const storedFavoriteProfiles = localStorage.getItem('favoriteProfiles');
-    return storedFavoriteProfiles ? JSON.parse(storedFavoriteProfiles) : [];
-  }
-
-
-
 }

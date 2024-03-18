@@ -1,5 +1,6 @@
 <div *ngIf="!(isMobile | async)">
-  <div class="filter-bar">
+  <div *ngIf="favoriteProfilesPage"><h1>Furnizori favoriti</h1></div>
+  <div *ngIf="!favoriteProfilesPage" class="filter-bar">
     <h1>Filtrati furnizorii dupa criteriile dorite</h1>
     <div class="filter-controls">
       <mat-form-field class="custom-input">
@@ -29,7 +30,10 @@
   </div>
 <ul class="card-list">
     <li *ngFor="let card of filteredProfileCards" class="card-item">
-      <div class="card" [routerLink]="['/furnizor', card.id]">
+      <div class="card" (click)="onCardClick(card.id)">
+        <div class="favorite-icon" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
+          <i class="fa fa-heart"></i>
+        </div>
         <div class="header">
           <div class="logo">
             <img src="{{ card.profileImage }}" alt="{{ card.name }} Logo" />
@@ -48,8 +52,9 @@
   </ul>
 </div>
   <div *ngIf="(isMobile | async)" class="mobile-card-container">
-    <h2 class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
-    <div [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">  
+    <h2  *ngIf="favoriteProfilesPage" class="mobile-filter-heading">Furnizori favoriti</h2>
+    <h2  *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
+    <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">  
   <div class="mobile-filter-section">
     <mat-form-field>
       <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm" >
@@ -75,11 +80,14 @@
   </div>
   
   <div class="mobile-button-row">
-    <button class="mobile-filter-button" (click)="applyFilters()">Aplica filtre</button>  
+    <button class="moblele-filter-button" (click)="applyFilters()">Aplica filtre</button>  
     <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
   </div>
 </div>
   <div  *ngFor="let card of filteredProfileCards" class="mobile-card"  [routerLink]="['/furnizor', card.id]">
+    <div class="favorite-icon-mobile" [ngClass]="{'favorited': isFavorite(card.id)}">
+      <i class="fa fa-heart"></i>
+    </div>
     <div class="mobile-card-header">
       <p class="mobile-card-name">{{ card.name }}</p>
       <p class="mobile-card-location"><i class="fa fa-map-marker" style="font-size:15px"></i> {{ card.city }}</p>
