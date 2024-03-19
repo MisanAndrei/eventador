@@ -1,5 +1,7 @@
 <div *ngIf="!(isMobile | async)">
-  <div *ngIf="favoriteProfilesPage"><h1>Furnizori favoriti</h1></div>
+  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Furnizori favoriti</h1></div>
+  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="filter-bar-favorite-message"><h2>Te invitam sa te inscrii in platforma eventador pentru a-ti pastra preferintele!</h2></div>
+  <div *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Nu ati adaugat la favorite nici un furnizor!</h1></div>
   <div *ngIf="!favoriteProfilesPage" class="filter-bar">
     <h1>Filtrati furnizorii dupa criteriile dorite</h1>
     <div class="filter-controls">
@@ -52,7 +54,9 @@
   </ul>
 </div>
   <div *ngIf="(isMobile | async)" class="mobile-card-container">
-    <h2  *ngIf="favoriteProfilesPage" class="mobile-filter-heading">Furnizori favoriti</h2>
+    <h2  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriti</h2>
+    <h3  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam sa te inscrii in platforma eventador pentru a-ti pastra preferintele!</h3>
+    <h2  *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ati adaugat la favorite nici un furnizor!</h2>
     <h2  *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
     <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">  
   <div class="mobile-filter-section">
@@ -84,8 +88,8 @@
     <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
   </div>
 </div>
-  <div  *ngFor="let card of filteredProfileCards" class="mobile-card"  [routerLink]="['/furnizor', card.id]">
-    <div class="favorite-icon-mobile" [ngClass]="{'favorited': isFavorite(card.id)}">
+  <div  *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card.id)">
+    <div class="favorite-icon-mobile" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
       <i class="fa fa-heart"></i>
     </div>
     <div class="mobile-card-header">

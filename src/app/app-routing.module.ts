@@ -13,6 +13,7 @@ import { PartnerDashboardComponent } from './components/partner-dashboard/partne
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './components/profile-component/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { FavoritesComponent } from './components/favorites-component/favorites.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
 { path: 'Inscriere', component: CreateProfileComponent},
+{ path: 'Favorite', component: FavoritesComponent},
 { path: 'EditareProfil', component: EditProfileComponent},
 { path: 'blog/:id', component: BlogComponent},
 { path: 'noutati', component: BlogsComponent},

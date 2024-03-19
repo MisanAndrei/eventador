@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUser, EditUserRequest, FavoriteProfilesRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
@@ -105,6 +105,11 @@ export class ApiService {
 
   getProfileCards(): Observable<ProfileCard[]>{
     return this.http.get<ProfileCard[]>(this.apiUrl + '/Profile/ProfileCards')
+  }
+
+  getProfileCardsByIds(profileIds: number[]): Observable<ProfileCard[]> {
+    let params = new HttpParams();
+    return this.http.get<ProfileCard[]>(this.apiUrl + '/Profile/ProfileCardsByIds', {params: {profilesIds: profileIds}});
   }
 
   getUserProfile(id: number): Observable<UserProfile>{

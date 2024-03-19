@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/Services/AuthService';
 })
 export class CustomersComponent implements OnInit, OnDestroy {
   @Input() favoriteProfilesPage?: boolean;
+  noFavoritesMessageVisible: boolean = false;
   currentUserFavoriteProfiles: number[] = [];
   currentUserOldFavoriteProfiles: number[] = [];
   showFilter: boolean = true;
@@ -26,6 +27,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   zones: any[] = [];
   categories: any[] = [];
   isMobile: Observable<boolean>;
+  currrentUserLoggedIn: boolean = true;
 
   constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute, private authService: AuthService, private router: Router, private favoriteProfilesService: FavoriteProfilesServiceComponent) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -40,25 +42,42 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authService.checkFavoriteProfilesKey();
-    this.apiService.getProfileCards().pipe(
-      switchMap(response1 => {
-        this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
-        this.currentUserOldFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
-        this.profileCards = response1;
-        this.filteredProfileCards = response1;
-        this.applyFilters();
-        return this.apiService.getCategories();
-      }),
-      switchMap(response2 => {
-        this.categories = response2
-        return this.apiService.getCounties();
-      })
-    ).subscribe(response3 => {
-      this.zones = response3;
-    });
+    this.currrentUserLoggedIn = this.authService.isAuthenticated();
 
-    this.selectedCategory = Number(this.route.snapshot.paramMap.get('id')) ?? undefined;
+    if (this.favoriteProfilesPage){
+      this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+          this.currentUserOldFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+      if (this.currentUserFavoriteProfiles.length > 0){
+        this.apiService.getProfileCardsByIds(this.currentUserFavoriteProfiles).subscribe(x => {
+          this.profileCards = x;
+          this.filteredProfileCards = x;
+        })
+      }else{
+        this.noFavoritesMessageVisible = true;
+      }
+      
+    }else{
+      this.authService.checkFavoriteProfilesKey();
+      this.apiService.getProfileCards().pipe(
+        switchMap(response1 => {
+          this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+          this.currentUserOldFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+          this.profileCards = response1;
+          this.filteredProfileCards = response1;
+          this.applyFilters();
+          return this.apiService.getCategories();
+        }),
+        switchMap(response2 => {
+          this.categories = response2
+          return this.apiService.getCounties();
+        })
+      ).subscribe(response3 => {
+        this.zones = response3;
+      });
+  
+      this.selectedCategory = Number(this.route.snapshot.paramMap.get('id')) ?? undefined;
+    }
+
 
   }
 
@@ -113,6 +132,14 @@ export class CustomersComponent implements OnInit, OnDestroy {
           if (index !== -1) {
             this.currentUserFavoriteProfiles.splice(index, 1);
             this.favoriteProfilesService.removeProfileFromFavorite(profileId);
+          }
+
+          if (this.favoriteProfilesPage){
+            this.filteredProfileCards = this.filteredProfileCards.filter(x => x.id != profileId);
+
+            if (this.filteredProfileCards.length == 0){
+              this.noFavoritesMessageVisible = true;
+            }
           }
         }
       }

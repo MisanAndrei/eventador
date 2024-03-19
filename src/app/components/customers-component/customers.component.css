@@ -63,6 +63,28 @@
     flex-direction: column;
   }
 
+  .filter-bar-favorite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+    height: 100px;
+    padding: 0 0;
+    margin: 0 0;
+    flex-direction: column;
+  }
+
+  .filter-bar-favorite-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+    height: 50px;
+    padding: 0 0;
+    margin: 0 0;
+    flex-direction: column;
+  }
+
   .filter-controls {
     display: flex;
   }

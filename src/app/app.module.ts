@@ -83,6 +83,7 @@ import { ChangePasswordComponent } from './components/change-password-component/
 import { EditPersonalDataComponent } from './components/edit-personal-data-component/edit-personal-data.component';
 import { DeleteAccountComponent } from './components/delete-account-component/delete-account.component';
 import { AddProfileComponent } from './components/profile-components/add-profile-component/add-profile.component';
+import { FavoritesComponent } from './components/favorites-component/favorites.component';
 
 
 
@@ -129,7 +130,8 @@ import { AddProfileComponent } from './components/profile-components/add-profile
     ChangePasswordComponent,
     EditPersonalDataComponent,
     DeleteAccountComponent,
-    AddProfileComponent
+    AddProfileComponent,
+    FavoritesComponent
   ],
   imports: [
     AppRoutingModule,
