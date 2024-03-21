@@ -20,6 +20,7 @@
     <button mat-raised-button class="action-buttons" (click)="addProfile()"><b>Adauga Profil</b></button>
     <button mat-raised-button class="action-buttons" (click)="editUser()"><b>Editare date personale</b></button>
     <button mat-raised-button class="action-buttons" (click)="deleteAccount()"><b>Sterge Cont</b></button>
+    <button mat-raised-button class="action-buttons" (click)="viewPersonalProfiles()"><b>Profile Personale</b></button>
   </div>
 </div>
 
@@ -27,6 +28,7 @@
 <app-edit-personal-data *ngIf="editUserVisible && !(isMobile | async)"></app-edit-personal-data>
 <app-delete-account *ngIf="deleteAccountVisible && !(isMobile | async)" (confirmation)="handleConfirmation($event)"></app-delete-account>
 <app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible && !(isMobile | async)"></app-add-profile>
+
 
 <div *ngIf="isMobile | async" class="mobile-profile-container">
   <div class="mobile-user-logo"><p>{{ nameInitials }}</p></div>
@@ -52,9 +54,12 @@
     <button mat-raised-button class="mobile-action-button" (click)="addProfile()">Adauga Profil</button>
     <app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible"></app-add-profile>
     <button mat-raised-button class="mobile-action-button" (click)="deleteAccount()">Sterge Cont</button>
-    <app-delete-account *ngIf="deleteAccountVisible" (confirmation)="handleConfirmation($event)"></app-delete-account>
+    <app-delete-account *ngIf="deleteAccountVisible" (confirmation)="handleConfirmation($event)"></app-delete-account>  
+    <button mat-raised-button class="mobile-action-button" (click)="viewPersonalProfiles()">Profile Personale</button>
+    
     </div>
     
   </div>
 </div>
+<app-personal-profiles *ngIf="personalProfilesVisible" [personalProfiles]="personalProfiles" [forApprovalPersonalProfiles]="false"></app-personal-profiles>
 

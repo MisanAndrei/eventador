@@ -5,7 +5,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -25,7 +25,7 @@ export class EditProfileComponent implements OnInit {
   tooManyImagesMessage: string = 'Prea multe imagini selectate, va rugam alegeti din nou!';
   
   // Common User Information
-    id = 0;
+
     currentProfileId: number | undefined;
     firstName: string = '';
     lastName: string = '';
@@ -71,7 +71,7 @@ export class EditProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -79,13 +79,25 @@ export class EditProfileComponent implements OnInit {
       }
   
     ngOnInit(): void {
-        this.currentProfileId = 9;
+      this.route.params.subscribe(params => {
+        // Extract profileId from route parameters
+        this.currentProfileId = +params['id']; // Assuming 'id' is the parameter name in the route
+        // You may need to use a different parameter name based on your route configuration
+      });
+      if (this.currentProfileId == undefined || this.currentProfileId == 0 || this.currentProfileId == null){
+        this.router.navigate(['/acasa']);
+      }
 
-        if (this.currentProfileId == undefined || this.currentProfileId == 0){
-            this.router.navigate(['/acasa']);
+        if (!this.authService.isUserLogged()){
+          this.router.navigate(['/acasa']);
         }
 
+        const user = this.authService.getLoggedUser();
 
+        if (!user.profilesIds?.includes(this.currentProfileId ?? 0)){
+          this.router.navigate(['/acasa']);
+        }
+        
         this.apiService.getCategories().pipe(
           switchMap(categories => {
             this.categories = categories;
@@ -213,7 +225,7 @@ export class EditProfileComponent implements OnInit {
     }
 
     saveButtonEnabled(){
-      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0){
+      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0){
         return false;
       }
 

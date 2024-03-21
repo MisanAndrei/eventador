@@ -24,6 +24,8 @@ export class ProfileComponent implements OnInit {
   deleteAccountVisible: boolean = false;
   addProfileVisible: boolean = false;
   editUserVisible: boolean = false;
+  personalProfiles!: number[];
+  personalProfilesVisible: boolean = false;
 
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -41,6 +43,10 @@ export class ProfileComponent implements OnInit {
     this.nameInitials = this.firstName[0].toUpperCase() + this.lastName[0].toUpperCase();
     this.userRole = user.role;
     this.loggedUserId = user.id;
+
+    if (this.userRole == UserRole.supplier){
+      this.personalProfiles = user.profilesIds ?? [];
+    }
   }
 
   changePassword(){
@@ -48,6 +54,7 @@ export class ProfileComponent implements OnInit {
     this.deleteAccountVisible = false;
     this.addProfileVisible = false;
     this.editUserVisible = false;
+    this.personalProfilesVisible = false;
   }
 
   deleteAccount() {
@@ -55,6 +62,7 @@ export class ProfileComponent implements OnInit {
     this.addProfileVisible = false;
     this.changePasswordVisible = false;
     this.editUserVisible = false;
+    this.personalProfilesVisible = false;
   }
 
   addProfile(){
@@ -62,10 +70,20 @@ export class ProfileComponent implements OnInit {
     this.deleteAccountVisible = false;
     this.changePasswordVisible = false;
     this.editUserVisible = false;
+    this.personalProfilesVisible = false;
   }
 
   editUser(){
     this.editUserVisible = !this.editUserVisible;
+    this.addProfileVisible = false;
+    this.deleteAccountVisible = false;
+    this.changePasswordVisible = false;
+    this.personalProfilesVisible = false;
+  }
+
+  viewPersonalProfiles(){
+    this.personalProfilesVisible = !this.personalProfilesVisible;
+    this.editUserVisible = false;
     this.addProfileVisible = false;
     this.deleteAccountVisible = false;
     this.changePasswordVisible = false;

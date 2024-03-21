@@ -213,3 +213,8 @@ body {
   .checkbox-container {
     margin-bottom: 5px; /* Adjust as needed to provide spacing between checkbox and image */
   }
+
+  .grayScaleImage {
+    /* Apply grayscale filter when existingImage.isMaintained is false */
+    filter: grayscale(100%) /* Full grayscale effect */;
+  }

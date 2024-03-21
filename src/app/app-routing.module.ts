@@ -12,7 +12,7 @@ import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './components/profile-component/profile.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditProfileComponent } from './components/profile-components/edit-profile/edit-profile.component';
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
 
 const routes: Routes = [
@@ -25,7 +25,7 @@ const routes: Routes = [
 { path: 'autentificare', component: LoginComponent},
 { path: 'Inscriere', component: CreateProfileComponent},
 { path: 'Favorite', component: FavoritesComponent},
-{ path: 'EditareProfil', component: EditProfileComponent},
+{ path: 'EditareProfil/:id', component: EditProfileComponent},
 { path: 'blog/:id', component: BlogComponent},
 { path: 'noutati', component: BlogsComponent},
 { path: 'dashboard', component: PartnerDashboardComponent},
