@@ -41,12 +41,14 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 
+
+
 //Components
 import { ImageSliderComponent } from './components/image-slider-component/image-slider.component';
 import { NavigationBarComponent } from './components/navigation-bar-component/navigation-bar.component';
 import { DashboardComponent } from './components/dashboard-component/dashboard.component';
 import { SupplierProfileComponent } from './components/supplier-profile-component/supplier-profile.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact-component/contact.component';
 import { AboutUsComponent } from './components/about-us-component/about-us.component';
@@ -85,6 +87,7 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
 import { AddProfileComponent } from './components/profile-components/add-profile-component/add-profile.component';
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
 import { PersonalProfilesComponent } from './components/profile-components/personal-profiles-component/personal-profiles.component';
+import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 
 
 
@@ -161,9 +164,19 @@ import { PersonalProfilesComponent } from './components/profile-components/perso
     MatTabsModule,
     AngularEditorModule,
     PdfViewerModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    HammerModule,
+    GalleryModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
+    provide: GALLERY_CONFIG,
+    useValue: {
+      autoHeight: false,
+      imageSize: 'cover',
+      autoPlay: true,
+      itemAutosize: false
+    } as GalleryConfig
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

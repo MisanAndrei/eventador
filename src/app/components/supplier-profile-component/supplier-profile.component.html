@@ -35,7 +35,7 @@
   
   
    <div class="right">
-    
+    <gallery [items]="images" thumbPosition="left"></gallery>
     
         <h3 style="margin-left: 10px; text-align: left;">Descriere</h3>
         <p style="text-align: left; margin: 0px 10px; white-space: pre-wrap;">{{ description }}</p>
@@ -87,14 +87,19 @@
     <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: {{phoneNumber}}</p>
   <p style="margin-bottom: 2px; margin-top:3px;">E-mail: {{email}}</p>
 
+
+
   <div style="display:flex; justify-content: center; flex-wrap: wrap;">
     <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
     <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>
     <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="fa fa-globe"></a>
     <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
   </div>
+
+
+  <gallery [items]="images" thumbPosition="bottom" [thumbWidth]="70"></gallery>
     
-    
+
 
     
 

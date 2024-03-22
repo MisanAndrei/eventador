@@ -158,6 +158,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     phoneNumber?: string;
     role: UserRole;
     profile?: CreateProfile;
+    partnerId?: number;
   }
 
   export interface CreateProfile {

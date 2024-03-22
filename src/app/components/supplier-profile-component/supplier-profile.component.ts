@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 import { Category, Review, SendReview } from 'src/app/Models/Models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
+import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gallery';
 
 @Component({
     selector: 'app-supplier-profile',
@@ -16,6 +17,7 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
 
   export class SupplierProfileComponent implements OnInit  {
     @Input() changesProfileId: number | undefined;
+    @ViewChild('myGallery') gallery!: GalleryComponent;
 
     profileId: string = '';
     isMobile: Observable<boolean>;
@@ -33,6 +35,8 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
     customerUserLoggedId: boolean = false;
     userLoggedIn: boolean = false;
     reviewSent: boolean = false;
+
+    images!: GalleryItem[];
 
 
     imageObject: any = [];
@@ -65,6 +69,8 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
     }
     
     ngOnInit(): void {
+      
+
       this.profileId = this.route.snapshot.paramMap.get('id') ?? '';
       
       if (this.authService.isUserLogged()){
@@ -82,11 +88,6 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
       } else {
         if (this.changesProfileId != undefined){
           this.apiService.getProfileToReview(this.changesProfileId).subscribe(response => {
-            this.imageObject = response.images.map(x => ({
-              image: x.imageUrl,
-              thumbImage: x.imageUrl,
-              title: ''
-            }))
             this.profileName = response.businessName;
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
@@ -99,15 +100,14 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
             this.facebookUrl = response.facebookUrl ? this.addHttpPrefix(response.facebookUrl) : undefined;
             this.instagramUrl = response.instagramUrl ? this.addHttpPrefix(response.instagramUrl) : undefined;
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
+
+            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+
           })
         }
         else{
           this.apiService.getUserProfile(Number(this.profileId)).subscribe(response => {
-            this.imageObject = response.images.map(x => ({
-              image: x.imageUrl,
-              thumbImage: x.imageUrl,
-              title: ''
-            }))
+
             this.profileName = response.businessName;
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
@@ -122,6 +122,8 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
             this.numberProfileId = Number(this.profileId);
             this.reviews = response.reviews;
+            
+            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
           })
         }
       }
@@ -170,4 +172,6 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
       // If already has a valid protocol, return the original URL
       return url;
     }
+
+    
   }

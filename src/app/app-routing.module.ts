@@ -24,6 +24,7 @@ const routes: Routes = [
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
 { path: 'Inscriere', component: CreateProfileComponent},
+{ path: 'Inscriere/:partnerIdentifier', component: CreateProfileComponent},
 { path: 'Favorite', component: FavoritesComponent},
 { path: 'EditareProfil/:id', component: EditProfileComponent},
 { path: 'blog/:id', component: BlogComponent},

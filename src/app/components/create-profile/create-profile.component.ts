@@ -4,6 +4,7 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-create-profile',
@@ -27,6 +28,8 @@ export class CreateProfileComponent implements OnInit {
     role: number = UserRole.supplier;
     password: string = '';
     passwordVerified: string = '';
+    partnerId: number = 13;
+    partnerIdentifier: string = '';
   
     // Business Specific Information
     profileId: number = 0;
@@ -58,7 +61,7 @@ export class CreateProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute ) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -66,6 +69,12 @@ export class CreateProfileComponent implements OnInit {
       }
   
     ngOnInit(): void {
+      this.route.params.subscribe(params => {
+        // Extract profileId from route parameters
+        this.partnerIdentifier = params['partnerIdentifier']; 
+        
+      });
+
       this.apiService.getCategories().pipe(
         switchMap(categories => {
           this.categories = categories;
@@ -186,6 +195,7 @@ export class CreateProfileComponent implements OnInit {
       password: this.password,
       phoneNumber: this.phoneNumber,
       role: this.isBusinessAccount ? UserRole.supplier : UserRole.customer,
+      partnerId: this.partnerId,
       profile: {
         businessName: this.businessName,
         businessCUI: this.businessCUI,
