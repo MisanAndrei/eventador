@@ -14,19 +14,21 @@
     </div>
   </div>
 
-  <div style="margin: 50px auto; width: 90%" *ngIf="(isMobile | async)">
+  <div *ngIf="(isMobile | async)" [style.backgroundImage]="'url(' + section?.image + ')'" style="background-size: cover; background-position: center;">
+    <div style="height: 50px;"></div>
     <div style="text-align: center;">
       <div>
         <!-- Place your image here -->
-        <img style="width:60%" src="{{section?.image}}" type="jpeg" alt="About Us Image">
+        
       </div>
       <div>
-        <h2>{{section?.title}}</h2>
+        <h2 style="margin-top: 0px;">{{section?.title}}</h2>
         <p>
           {{section?.content}}
         </p>
         <button [routerLink]="['/Inscriere']" style="width:150px" mat-raised-button color="accent">Înscrie-te și tu</button>
       </div>
+      <div style="height: 50px;"></div>
     </div>
   </div>
 
