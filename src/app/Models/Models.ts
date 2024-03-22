@@ -337,6 +337,20 @@ import { UserRole } from "../Utilities/enums/Enums";
     userId: number;
     profileIds: number[];
   }
+
+  export interface PartnerSupplierUser{
+    id: number;
+    name: string;
+    createdAt: Date;
+    profiles: PartnerSupplierUserProfile[];
+  }
+
+  export interface PartnerSupplierUserProfile{
+    id: number;
+    name: string;
+    category: string;
+    createdAt: Date;
+  }
   
 
   
