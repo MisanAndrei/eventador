@@ -11,12 +11,17 @@
     
         <h3 style="margin:0px 5px 0px 5px; text-align: center;">{{motto}}</h3>
     
-        <h4 style="align-self: left;">din {{ location }}</h4>
+        <h4 style="align-self: left; margin-top: 2px !important; margin-bottom: 2px !important;"><i class="fa fa-map-marker" style="font-size:30px; width:20px !important; padding:2px;"></i> {{ location }}</h4>
 
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
            
                 <button class="category-button"><p>{{categoryName}}</p></button>
        
+        </div>
+        <h4 style="margin-bottom: 5px;">Zone de Activitate</h4>
+        <div>
+          
+          <button *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</button>
         </div>
         
         <p style="margin-bottom: 0px;">Numar telefon: {{phoneNumber}}</p>
@@ -79,9 +84,14 @@
     </div>
 
 
-    <p>{{location}}</p>
+    <p><i class="fa fa-map-marker" style="font-size:30px; width:20px !important; padding:2px;"></i> {{location}}</p>
     
-    
+    <h4 style="margin-bottom: 5px;">Zone de Activitate</h4>
+        <div>
+          
+          <button *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</button>
+        </div>
+
     <p class="motto">{{motto}}</p>
 
     <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: {{phoneNumber}}</p>

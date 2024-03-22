@@ -186,3 +186,9 @@
     margin-right: auto;
     background: linear-gradient(to right, #FF63A4, #FE8962);
   }
+
+  .area-of-interest-button {
+    margin: 5px;
+    border: none;
+    border-radius: 5%;
+  }

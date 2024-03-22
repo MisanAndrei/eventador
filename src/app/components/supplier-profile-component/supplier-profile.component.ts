@@ -35,6 +35,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     customerUserLoggedId: boolean = false;
     userLoggedIn: boolean = false;
     reviewSent: boolean = false;
+    areasOfInterest: string[] = [];
 
     images!: GalleryItem[];
 
@@ -100,7 +101,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.facebookUrl = response.facebookUrl ? this.addHttpPrefix(response.facebookUrl) : undefined;
             this.instagramUrl = response.instagramUrl ? this.addHttpPrefix(response.instagramUrl) : undefined;
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
-
+            this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
 
           })
@@ -122,7 +123,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
             this.numberProfileId = Number(this.profileId);
             this.reviews = response.reviews;
-            
+            this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
           })
         }
