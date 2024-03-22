@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   editUserVisible: boolean = false;
   personalProfiles!: number[];
   personalProfilesVisible: boolean = false;
+  signUpLink: string = '';
 
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -43,9 +44,13 @@ export class ProfileComponent implements OnInit {
     this.nameInitials = this.firstName[0].toUpperCase() + this.lastName[0].toUpperCase();
     this.userRole = user.role;
     this.loggedUserId = user.id;
-
+    
     if (this.userRole == UserRole.supplier){
       this.personalProfiles = user.profilesIds ?? [];
+    }
+
+    if (this.userRole == UserRole.partner){
+      this.signUpLink = `${window.location.origin}/#/Inscriere/${user.referralCode}`;
     }
   }
 
@@ -98,5 +103,14 @@ export class ProfileComponent implements OnInit {
       this.deleteAccountVisible = false;
       console.log("User canceled deletion");
     }
+  }
+
+  copyToClipboard(text: string) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
   }
 }

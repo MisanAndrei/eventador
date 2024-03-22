@@ -36,7 +36,7 @@ const routes: Routes = [
 { path: 'profil', component: ProfileComponent}];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

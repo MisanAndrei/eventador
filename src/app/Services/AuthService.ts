@@ -124,6 +124,7 @@ export class AuthService {
       lastName: x.lastName,
       phoneNumber: x.phoneNumber,
       profilesIds: x.profilesIds,
+      referralCode: x.referralCode,
       role: x.role
     } as LoggedUser
 

@@ -28,7 +28,7 @@ export class CreateProfileComponent implements OnInit {
     role: number = UserRole.supplier;
     password: string = '';
     passwordVerified: string = '';
-    partnerId: number = 13;
+    partnerId?: number;
     partnerIdentifier: string = '';
   
     // Business Specific Information
@@ -49,6 +49,11 @@ export class CreateProfileComponent implements OnInit {
     convertedSelectedImages: string[] = [];
     convertedSelectedProfileImage: string = '';
     maxAllowedFiles: number = 5;
+
+    //partner referral section
+    partnerName: string = '';
+    partnerNameValid: boolean = false;
+    partnerNameInvalid: boolean = false;
 
     //just for testing
     cities: City[] = [];
@@ -74,6 +79,16 @@ export class CreateProfileComponent implements OnInit {
         this.partnerIdentifier = params['partnerIdentifier']; 
         
       });
+
+      if (this.partnerIdentifier){
+        this.apiService.getPartnerByReferralGuid('asdgfahgerh').subscribe(x => {
+          if (x == 'e'){
+            this.partnerNameInvalid = true;
+          }
+          this.partnerName = x;
+          this.partnerNameValid = true;
+        })
+      }
 
       this.apiService.getCategories().pipe(
         switchMap(categories => {

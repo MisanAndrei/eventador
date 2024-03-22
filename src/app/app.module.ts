@@ -88,6 +88,7 @@ import { AddProfileComponent } from './components/profile-components/add-profile
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
 import { PersonalProfilesComponent } from './components/profile-components/personal-profiles-component/personal-profiles.component';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
+import { NgApexchartsModule } from 'ng-apexcharts'; 
 
 
 
@@ -166,7 +167,8 @@ import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
     PdfViewerModule,
     SlickCarouselModule,
     HammerModule,
-    GalleryModule
+    GalleryModule,
+    NgApexchartsModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
     provide: GALLERY_CONFIG,

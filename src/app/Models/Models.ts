@@ -120,6 +120,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     profilesIds?: number[];
     favourtieProfilesIds?: number[];
     token: string;
+    referralCode?: string;
   }
 
   export interface LoggedUser {
@@ -130,6 +131,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     phoneNumber?: string;
     profilesIds?: number[];
     role: UserRole;
+    referralCode?: string;
   }
 
   export interface UserProfile {

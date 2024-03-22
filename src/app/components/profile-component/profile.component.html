@@ -16,11 +16,15 @@
     <div>
       <strong>Numar de telefon:</strong> {{ phoneNumber }}
     </div>
+    <div *ngIf="userRole == 3">
+      <strong>Link de inscriere:</strong> {{ signUpLink }}
+      <button (click)="copyToClipboard(signUpLink)">Salveaza</button>
+    </div>
     <button mat-raised-button class="action-buttons" (click)="changePassword()"><b>Schimba Parola</b></button>
-    <button mat-raised-button class="action-buttons" (click)="addProfile()"><b>Adauga Profil</b></button>
+    <button *ngIf="userRole == 4" mat-raised-button class="action-buttons" (click)="addProfile()"><b>Adauga Profil</b></button>
     <button mat-raised-button class="action-buttons" (click)="editUser()"><b>Editare date personale</b></button>
     <button mat-raised-button class="action-buttons" (click)="deleteAccount()"><b>Sterge Cont</b></button>
-    <button mat-raised-button class="action-buttons" (click)="viewPersonalProfiles()"><b>Profile Personale</b></button>
+    <button *ngIf="userRole == 4" mat-raised-button class="action-buttons" (click)="viewPersonalProfiles()"><b>Profile Personale</b></button>
   </div>
 </div>
 
@@ -46,16 +50,20 @@
     <div>
       <strong>Numar de telefon:</strong> {{ phoneNumber }}
     </div>
+    <div *ngIf="userRole == 3">
+      <strong>Link de inscriere:</strong> {{ signUpLink }}
+      <button (click)="copyToClipboard(signUpLink)">Salveaza</button>
+    </div>
     <div class="mobile-action-buttons">
     <button mat-raised-button class="mobile-action-button" (click)="editUser()">Editare date personale</button>
     <app-edit-personal-data *ngIf="editUserVisible"></app-edit-personal-data>
     <button mat-raised-button class="mobile-action-button" (click)="changePassword()">Schimba Parola</button>
     <app-change-password *ngIf="changePasswordVisible"></app-change-password>
-    <button mat-raised-button class="mobile-action-button" (click)="addProfile()">Adauga Profil</button>
+    <button *ngIf="userRole == 4" mat-raised-button class="mobile-action-button" (click)="addProfile()">Adauga Profil</button>
     <app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible"></app-add-profile>
     <button mat-raised-button class="mobile-action-button" (click)="deleteAccount()">Sterge Cont</button>
     <app-delete-account *ngIf="deleteAccountVisible" (confirmation)="handleConfirmation($event)"></app-delete-account>  
-    <button mat-raised-button class="mobile-action-button" (click)="viewPersonalProfiles()">Profile Personale</button>
+    <button *ngIf="userRole == 4" mat-raised-button class="mobile-action-button" (click)="viewPersonalProfiles()">Profile Personale</button>
     
     </div>
     

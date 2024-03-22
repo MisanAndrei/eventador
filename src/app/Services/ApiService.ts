@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUser, EditUserRequest, FavoriteProfilesRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 import { AuthService } from './AuthService';
 
@@ -110,6 +110,17 @@ export class ApiService {
   getProfileCardsByIds(profileIds: number[]): Observable<ProfileCard[]> {
     let params = new HttpParams();
     return this.http.get<ProfileCard[]>(this.apiUrl + '/Profile/ProfileCardsByIds', {params: {profilesIds: profileIds}});
+  }
+
+  getPartnerByReferralGuid(partnerGuid: string){
+    return this.http.get(this.apiUrl + '/User/GetUserByReferralGuid' + '/' + partnerGuid, { responseType: 'text' })
+      .pipe(
+        catchError(error => {
+          // Handle the error here
+          console.error('Error:', error);
+          return "e";
+        })
+      );
   }
 
   getUserProfile(id: number): Observable<UserProfile>{
