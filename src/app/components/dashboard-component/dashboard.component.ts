@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
+import { ToastService } from 'src/app/Services/ToastService';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   section3: any;
   section4: any;
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent, private toastService: ToastService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.toastService.showToast('Bun venit pe eventador !');
     this.apiService.getLandingPage().subscribe(response => {
       this.section1 = response.sections[0];
       this.section2 = response.sections[1];

@@ -37,6 +37,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -168,7 +169,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     SlickCarouselModule,
     HammerModule,
     GalleryModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatSnackBarModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
     provide: GALLERY_CONFIG,
