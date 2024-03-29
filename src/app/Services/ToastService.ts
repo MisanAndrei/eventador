@@ -9,7 +9,7 @@ export class ToastService {
   constructor(private snackBar: MatSnackBar) { }
 
   // Method to show a toast message
-  showToast(message: string, duration: number = 3000): void {
+  showToast(message: string, duration: number = 5000): void {
     this.snackBar.open(message, 'Close', {
       duration: duration,
       horizontalPosition: 'center', // Adjust position as needed

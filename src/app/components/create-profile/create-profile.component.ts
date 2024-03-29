@@ -5,6 +5,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 import { ActivatedRoute, Route } from '@angular/router';
+import { ToastService } from 'src/app/Services/ToastService';
 
 @Component({
   selector: 'app-create-profile',
@@ -66,7 +67,7 @@ export class CreateProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute ) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -233,6 +234,7 @@ export class CreateProfileComponent implements OnInit {
     }
 
     this.apiService.createUser(user);
+    this.toastService.showToast('Profilul a fost creat si trimis spre aprobare!');
     }
 
     checkPasswordIncorrect(){

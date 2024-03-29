@@ -1,6 +1,6 @@
 <div  *ngIf="!(isMobile | async)" class="contact-tab">
   <div class="column">
-    <h2>Eventador</h2>
+    <h2>Contact</h2>
     <p>Email: officeeventador&#64;gmail.com</p>
     <div class="icons">
       <!-- Replace with your icon elements or use icon fonts -->
@@ -10,7 +10,7 @@
   </div>
 
   <div class="column">
-    <h2>Ajutor</h2>
+    <h2>Informatii utile</h2>
     <p [routerLink]="['/despre-noi']">Despre noi</p>
     <p [routerLink]="['/despre-noi']">Politica de confidentialitate</p>
     <p [routerLink]="['/despre-noi']">Termeni si conditii</p>
@@ -26,7 +26,7 @@
 
 <div  *ngIf="(isMobile | async)" class="mobile-contact-tab">
   <div>
-    <h2>Eventador</h2>
+    <h2>Contact</h2>
     <p>Email: officeeventador&#64;gmail.com</p>
     <div>
       <!-- Replace with your icon elements or use icon fonts -->
@@ -36,10 +36,12 @@
   </div>
 
   <div>
-    <h2>Ajutor</h2>
-    <p [routerLink]="['/despre-noi']">Despre noi</p>
-    <p [routerLink]="['/despre-noi']">Politica de confidentialitate</p>
+    <h2>Informatii utile</h2>
     <p [routerLink]="['/despre-noi']">Termeni si conditii</p>
+    <p [routerLink]="['/despre-noi']">Politica de confidentialitate</p>
+    <p [routerLink]="['/despre-noi']">Politica de cookies</p>
+    <p [routerLink]="['/despre-noi']">ANPC</p>
+
   </div>
 
   <div>

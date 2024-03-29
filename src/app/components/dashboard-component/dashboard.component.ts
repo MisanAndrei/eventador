@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.toastService.showToast('Bun venit pe eventador !');
+    this.toastService.showToast('Profilul a fost creat si trimis spre aprobare!');
     this.apiService.getLandingPage().subscribe(response => {
       this.section1 = response.sections[0];
       this.section2 = response.sections[1];
