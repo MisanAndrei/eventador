@@ -1,4 +1,4 @@
-<div *ngIf="!(isMobile | async)" class="about-customers-container" [style.backgroundImage]="'url(' + section?.image + ')'">
+<div *ngIf="!(isMobile | async)" class="about-customers-container" style="background-color: #FAF2F6;">
     <div class="main-section">
       <div class="left-section">
         <!-- Place your image here -->
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div *ngIf="(isMobile | async)" [style.backgroundImage]="'url(' + section?.image + ')'" style="background-size: cover; background-position: center;">
+  <div *ngIf="(isMobile | async)" style="background-color: #FAF2F6;">
     <div style="height: 50px;"></div>
     <div style="text-align: center;">
       <div>

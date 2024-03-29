@@ -1,7 +1,7 @@
 .container {
   text-align: center;
   background: #FAF2F6;
-  padding-top: 100px;
+  padding-top: 50px;
   padding-bottom: 100px;
 }
 
@@ -12,10 +12,18 @@
   margin-bottom: 5px;
 }
 
-.subtitle {
+.subtitle-mobile {
   font-size: x-large;
   margin-bottom: 40px;
   font-weight: 200;
+  margin-top: -30px;
+}
+
+.subtitle-mobile {
+  font-size: x-large;
+  margin-bottom: 40px;
+  font-weight: 200;
+  margin-top: -10px;
 }
 
 .card-container {

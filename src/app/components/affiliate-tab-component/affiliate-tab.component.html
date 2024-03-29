@@ -1,4 +1,4 @@
-<div *ngIf="!(isMobile | async)" class="affiliate-tab" [style.backgroundImage]="'url(' + section?.image + ')'">
+<div *ngIf="!(isMobile | async)" class="affiliate-tab" style="background-color: black;">
     <div class="overlay">
       <h1>{{section?.title}}</h1>
       <p>{{section?.content}}</p>
@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div *ngIf="(isMobile | async)" [style.backgroundImage]="'url(' + section?.image + ')'" class="affiliate-tab-mobile">
+  <div *ngIf="(isMobile | async)" style="background-color: black;" class="affiliate-tab-mobile">
     <div class="overlay-mobile">
       <h1>{{section?.title}}</h1>
       <p>{{section?.content}}</p>

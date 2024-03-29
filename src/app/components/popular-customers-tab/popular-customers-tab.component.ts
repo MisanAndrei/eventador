@@ -1,4 +1,7 @@
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Observable, map } from "rxjs";
 import { ProfileCard, Section } from "src/app/Models/Models";
 
 @Component({
@@ -12,8 +15,12 @@ import { ProfileCard, Section } from "src/app/Models/Models";
     @Input() cards?: ProfileCard[];
     @Input() section?: Section;
 
-    constructor(){
-
+    isMobile: Observable<boolean>;
+    constructor(private breakpointObserver: BreakpointObserver, private router: Router){
+      this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
+          .pipe(
+            map(result => result.matches)
+          );
     }
   ngOnInit(): void {
 
@@ -30,5 +37,8 @@ import { ProfileCard, Section } from "src/app/Models/Models";
         (event.target as HTMLDivElement).classList.remove('dragging');
       }
 
+    onCardClick(profileId: number){
+      this.router.navigate(['/furnizor', profileId]);
+    }
 
   }
