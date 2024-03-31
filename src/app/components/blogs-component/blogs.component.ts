@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 import { Blog, MainBlog } from 'src/app/Models/Models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blogs',
@@ -14,7 +15,7 @@ export class BlogsComponent implements OnInit {
   allBlogs?: Blog[];
   blogs?: MainBlog[];
   
-  constructor(private breakpointObserver: BreakpointObserver, private ApiService: ApiService) {
+  constructor(private breakpointObserver: BreakpointObserver, private ApiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -46,5 +47,14 @@ export class BlogsComponent implements OnInit {
     }
     })
       
+  }
+
+  onCardClick(blog: MainBlog){
+    const formattedBlogName = this.formatBlogName(blog.title);
+    this.router.navigate(['/blog', `${formattedBlogName}-${blog.id}`]);
+  }
+
+  formatBlogName(blogName: string): string {
+    return blogName.replace(/\s+/g, '-');
   }
 }

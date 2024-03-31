@@ -32,7 +32,7 @@
   </div>
 <ul class="card-list">
     <li *ngFor="let card of filteredProfileCards" class="card-item">
-      <div class="card" (click)="onCardClick(card.id)">
+      <div class="card" (click)="onCardClick(card)">
         <div class="favorite-icon" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
           <i class="fa fa-heart"></i>
         </div>
@@ -88,7 +88,7 @@
     <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
   </div>
 </div>
-  <div  *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card.id)">
+  <div  *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card)">
     <div class="favorite-icon-mobile" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
       <i class="fa fa-heart"></i>
     </div>

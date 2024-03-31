@@ -15,6 +15,7 @@
       </ng-container>
       <ng-template #loggedIn>
         <!-- Display something else when logged in, e.g., an icon -->
+        <li><a routerLink="/Favorite">Favorite</a></li>
         <li><a routerLink="/profil"><i class="fa fa-user"></i> Profil</a></li>
         <li class="logout" (click)="logOut()"><a> Deconecteaza-te</a></li>
       </ng-template>
@@ -22,12 +23,13 @@
   </nav>
   <nav class="secondnav">
     <ul class="second-menu">
-      <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori">Toti Furnizorii</a></li>
+      <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori">Furnizori</a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/noutati">Blog</a></li>
     <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/despre-noi">Despre Noi</a></li>
       <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/contact">Contact</a></li>
       <li *ngIf="isPartnerLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard Partener</a></li>
       <li *ngIf="isAdminOrMarketingLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
-      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/noutati">Blog</a></li>
+      
     </ul>
   </nav>   
 </div>

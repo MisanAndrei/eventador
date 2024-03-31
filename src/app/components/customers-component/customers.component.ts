@@ -117,8 +117,9 @@ export class CustomersComponent implements OnInit, OnDestroy {
         return false;
       }
 
-      onCardClick(profileId: number){
-        this.router.navigate(['/furnizor', profileId]);
+      onCardClick(profile: ProfileCard){
+        const formattedProfileName = this.formatProfileName(profile.name);
+        this.router.navigate(['/furnizor', `${formattedProfileName}-${profile.id}`]);
       }
 
       onHeartClick(event: Event, profileId: number){
@@ -147,5 +148,9 @@ export class CustomersComponent implements OnInit, OnDestroy {
       arraysHaveSameValues(arr1: number[], arr2: number[]): boolean {
         // Convert arrays to strings and compare
         return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
+      }
+
+       formatProfileName(profileName: string): string {
+        return profileName.replace(/\s+/g, '-');
       }
 }

@@ -37,8 +37,13 @@ import { ProfileCard, Section } from "src/app/Models/Models";
         (event.target as HTMLDivElement).classList.remove('dragging');
       }
 
-    onCardClick(profileId: number){
-      this.router.navigate(['/furnizor', profileId]);
+    onCardClick(profile: ProfileCard){
+      const formattedProfileName = this.formatProfileName(profile.name);
+        this.router.navigate(['/furnizor', `${formattedProfileName}-${profile.id}`]);
+    }
+
+    formatProfileName(profileName: string): string {
+      return profileName.replace(/\s+/g, '-');
     }
 
   }

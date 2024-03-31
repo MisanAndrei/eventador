@@ -2,6 +2,7 @@ import {  ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/cor
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { Blog } from 'src/app/Models/Models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blogs-tab',
@@ -13,7 +14,7 @@ export class BlogsTabComponent implements OnInit {
   @Input() blogs?: Blog[];
   
   isMobile: Observable<boolean>;
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -22,5 +23,14 @@ export class BlogsTabComponent implements OnInit {
 
   ngOnInit(): void {   
 
+  }
+
+  onCardClick(blog: Blog){
+    const formattedBlogName = this.formatBlogName(blog.title);
+    this.router.navigate(['/blog', `${formattedBlogName}-${blog.id}`]);
+  }
+
+  formatBlogName(blogName: string): string {
+    return blogName.replace(/\s+/g, '-');
   }
 }

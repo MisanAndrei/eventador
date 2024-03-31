@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
 { path: 'contact', component: ContactComponent},
 { path: 'furnizor', component: SupplierProfileComponent },
-{ path: 'furnizor/:id', component: SupplierProfileComponent },
+{ path: 'furnizor/:profileId', component: SupplierProfileComponent },
 { path: 'acasa', component: DashboardComponent },
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},

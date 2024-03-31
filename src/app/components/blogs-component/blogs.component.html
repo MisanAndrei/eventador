@@ -4,7 +4,7 @@
   <div style="width: 100%; height: 10px;background-color:#F4F8FB;"></div>
     <h1 class="font-used" style="text-align: center;">Un blog cu și despre evenimente reușite.</h1>
 <div class="card-container">
-    <div [routerLink]="['/blog', card.id]" [class.big-card]="card.itemsPerRow === 1" [class.medium-card]="card.itemsPerRow === 2" [class.small-card]="card.itemsPerRow === 3" *ngFor="let card of blogs" [class.items-1]="card.itemsPerRow === 1" [class.items-2]="card.itemsPerRow === 2" [class.items-3]="card.itemsPerRow === 3">
+    <div (click)="onCardClick(card)" [class.big-card]="card.itemsPerRow === 1" [class.medium-card]="card.itemsPerRow === 2" [class.small-card]="card.itemsPerRow === 3" *ngFor="let card of blogs" [class.items-1]="card.itemsPerRow === 1" [class.items-2]="card.itemsPerRow === 2" [class.items-3]="card.itemsPerRow === 3">
       <div [class.big-card-image]="card.itemsPerRow === 1" [class.medium-card-image]="card.itemsPerRow === 2" [class.small-card-image]="card.itemsPerRow === 3" [style.background-image]="'url(' + card.image + ')'"></div>
       <div [class.big-card-text]="card.itemsPerRow === 1" [class.medium-card-text]="card.itemsPerRow === 2" [class.small-card-text]="card.itemsPerRow === 3">
         <h2 class="font-used">{{ card.title }}</h2>
@@ -18,7 +18,7 @@
 <div class="mobile-container" *ngIf="(isMobile | async)">
   <h2 class="font-used" style="text-align: center;">Un blog cu și despre evenimente reușite.</h2>
   <div class="mobile-blog-list">
-    <div [routerLink]="['/blog', blog.id]" *ngFor="let blog of blogs" class="mobile-blog">
+    <div (click)="onCardClick(blog)" *ngFor="let blog of blogs" class="mobile-blog">
       <img [src]="blog.image" alt="{{ blog.title }}" class="mobile-blog-image" />
       <div class="mobile-blog-details">
         <div class="font-used mobile-blog-title">{{ blog.title }}</div>

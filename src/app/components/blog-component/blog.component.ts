@@ -14,6 +14,7 @@ export class BlogComponent implements OnInit {
   isMobile: Observable<boolean>;
   selectedBlog!: number;
   pdfSrc: string = '';
+  selectedBlogName: string = '';
 
   constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
   this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -22,7 +23,13 @@ export class BlogComponent implements OnInit {
   );
 }
   ngOnInit(): void {   
-    this.selectedBlog = Number(this.route.snapshot.paramMap.get('id')) ?? undefined;
+    this.route.params.subscribe(params => {
+      const blogInfo = params['id'];
+      const lastDashIndex = blogInfo.lastIndexOf('-');
+      this.selectedBlogName = blogInfo.substring(0, lastDashIndex).replace(/-/g, ' ');
+      this.selectedBlog = blogInfo.substring(lastDashIndex + 1);
+    });
+
 
     if (this.selectedBlog == undefined){
       this.router.navigate(['/noutati']);

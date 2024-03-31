@@ -20,6 +20,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     @ViewChild('myGallery') gallery!: GalleryComponent;
 
     profileId: string = '';
+    profileSlug: string ='';
     isMobile: Observable<boolean>;
     phoneNumber?: string;
     email?: string;
@@ -36,6 +37,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     userLoggedIn: boolean = false;
     reviewSent: boolean = false;
     areasOfInterest: string[] = [];
+    urlProfileName: string = '';
 
     images!: GalleryItem[];
 
@@ -70,9 +72,12 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     }
     
     ngOnInit(): void {
-      
-
-      this.profileId = this.route.snapshot.paramMap.get('id') ?? '';
+      this.route.params.subscribe(params => {
+        const profileInfo = params['profileId'];
+        const lastDashIndex = profileInfo.lastIndexOf('-');
+        this.urlProfileName = profileInfo.substring(0, lastDashIndex).replace(/-/g, ' ');
+        this.profileId = profileInfo.substring(lastDashIndex + 1);
+      });
       
       if (this.authService.isUserLogged()){
         this.userLoggedIn = true;

@@ -4,7 +4,7 @@
   <h3 class="subtitle">{{section?.content}}</h3>
 
   <div class="card-container">
-    <div *ngFor="let supplier of cards" (click)="onCardClick(supplier.id)" class="card">
+    <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
       
       <p class="card-category">{{ supplier.category.name }}</p>
@@ -21,7 +21,7 @@
   <h3 class="subtitle-mobile">{{section?.content}}</h3>
 
   <div class="card-container">
-    <div *ngFor="let supplier of cards" (click)="onCardClick(supplier.id)" class="card">
+    <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
       
       <p class="card-category">{{ supplier.category.name }}</p>
