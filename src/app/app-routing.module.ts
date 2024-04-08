@@ -14,6 +14,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { ProfileComponent } from './components/profile-component/profile.component';
 import { EditProfileComponent } from './components/profile-components/edit-profile/edit-profile.component';
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
+import { RecoverPasswordComponent } from './components/recover-password-component/recover-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
 { path: 'admin-dashboard', component: AdminDashboardComponent},
 { path: 'furnizori', component: CustomersComponent},
 { path: 'furnizori/:id', component: CustomersComponent },
+{ path: 'RecuperareParola', component: RecoverPasswordComponent },
 { path: 'profil', component: ProfileComponent}];
 
 @NgModule({

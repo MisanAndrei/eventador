@@ -7,14 +7,13 @@ import { Router } from '@angular/router';
 
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    selector: 'app-recover-password',
+    templateUrl: './recover-password.component.html',
+    styleUrls: ['./recover-password.component.css']
 })
-export class LoginComponent {
+export class RecoverPasswordComponent {
   isMobile: any;
   username: string = '';
-  password: string = '';
   errorWhenLogging: boolean = false;
 
   constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
@@ -25,22 +24,20 @@ export class LoginComponent {
    }
 
    async login() {
-    this.authService.login(this.username, this.password).subscribe({
-      next: result => {
+    this.apiService.recoverPassword(this.username).subscribe(
+      result => {
         if (result) {
           // Successful login logic, navigate, etc.
           this.router.navigate(['/acasa']);
         } else {
           // Handle unsuccessful login
           this.errorWhenLogging = true;
-          console.error('Login failed');
         }
       },
-      error: error => {
+      error => {
         // Handle errors, if any
         this.errorWhenLogging = true;
-        console.error('Error:', error);
       }
-    });
+    );
   }
 }

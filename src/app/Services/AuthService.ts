@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoggedUser, LoggingUserResponse } from '../Models/Models';
 import { UserRole } from '../Utilities/enums/Enums';
-import { Observable, catchError, first, map, of } from 'rxjs';
+import { Observable, catchError, first, map, of, tap } from 'rxjs';
 
 
 @Injectable({
@@ -56,21 +56,12 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<LoggingUserResponse> {
-    return new Observable<LoggingUserResponse>(subscriber => {
-      this.http.post<LoggingUserResponse>(this.apiUrl, { email, password })
-        .subscribe(
-          response => {
-            this.storeLoggedUser(response);
-            this.storeFavoriteProfiles(response.favourtieProfilesIds ?? []);
-            subscriber.next(response);
-            subscriber.complete();
-          },
-          error => {
-            console.error('Error:', error);
-            subscriber.error(error);
-          }
-        );
-    });
+    return this.http.post<LoggingUserResponse>(this.apiUrl, { email, password }).pipe(
+      tap(response => {
+        this.storeLoggedUser(response);
+        this.storeFavoriteProfiles(response.favourtieProfilesIds ?? []);
+      })
+    );
   }
   
   handleLoginResponse(response: string) {

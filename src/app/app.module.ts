@@ -38,6 +38,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
+import { NgApexchartsModule } from 'ng-apexcharts'; 
 
 
 
@@ -88,8 +90,8 @@ import { DeleteAccountComponent } from './components/delete-account-component/de
 import { AddProfileComponent } from './components/profile-components/add-profile-component/add-profile.component';
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
 import { PersonalProfilesComponent } from './components/profile-components/personal-profiles-component/personal-profiles.component';
-import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
-import { NgApexchartsModule } from 'ng-apexcharts'; 
+import { RecoverPasswordComponent } from './components/recover-password-component/recover-password.component';
+
 
 
 
@@ -138,7 +140,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     DeleteAccountComponent,
     AddProfileComponent,
     FavoritesComponent,
-    PersonalProfilesComponent
+    PersonalProfilesComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     AppRoutingModule,
