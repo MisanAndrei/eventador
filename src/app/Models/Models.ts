@@ -352,6 +352,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     name: string;
     category: string;
     createdAt: Date;
+    formattedDate: string;
   }
   
 

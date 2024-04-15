@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, LandingPage, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, LandingPage, PartnerSupplierUser, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +69,10 @@ export class ApiService {
 
   getReviewsByProfileId(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.apiUrl}/Review/GetProfileReviews/${id}`);
+  }
+
+  getPartnerSuppliers(id: number): Observable<PartnerSupplierUser[]> {
+    return this.http.get<PartnerSupplierUser[]>(`${this.apiUrl}/User/GetPartnerSuppliers/${id}`);
   }
 
   saveReview(request: SendReview): Observable<any> {

@@ -1,13 +1,15 @@
 import {  AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
-import { DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
+import { DashboardProfiles, PartnerProfile, PartnerSupplierUser, PartnerSupplierUserProfile } from 'src/app/Models/Models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
-import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataset, Chart } from 'chart.js/auto';
+import { ApiService } from 'src/app/Services/ApiService';
+import { AuthService } from 'src/app/Services/AuthService';
 
 
 
@@ -19,64 +21,43 @@ import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 })
 export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     private _observer: BreakpointObserver;
-    webColumns: string[] = ['profilePicture', 'profileName', 'dateAdded', 'category', 'isPaying', 'location'];
-    mobileColumns: string[] = ['profileName', 'category', 'location'];
+    webColumns: string[] = ['profileName', 'dateAdded', 'category'];
+    mobileColumns: string[] = ['profileName', 'dateAdded', 'category'];
     displayedColumns!: string[];
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
-    
-    public barChartOptions: ChartOptions = {
-        responsive: true,
-        scales: {
-          xAxes: [{
-            ticks: {
-              maxTicksLimit: 10,
-              autoSkip: true
-            }
-          }],
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        } as any // Cast as 'any' to bypass type checking for now
-      };
-
-      public barChartLabels!: string[];
-      public barChartType: ChartType = 'bar';
-      public barChartLegend = true;
-      public barChartData: ChartDataset[] = [
-        { data: [], label: 'Furnizori adaugati',backgroundColor: '#FF63A4' },
-      ];
+  
     
     searchControl = new FormControl('');
     isMobile!: Observable<boolean>;
-    profilesAdded: ProfilesAddedByMonth[] = [{monthName: 'Ianuarie', profilesAdded: 10}, {monthName: 'Februarie', profilesAdded: 5}, {monthName: 'Martie', profilesAdded: 15}, {monthName: 'Aprilie', profilesAdded: 12}, {monthName: 'Mai', profilesAdded: 8}, {monthName: 'Iunie', profilesAdded: 9}, {monthName: 'Iulie', profilesAdded: 10}, {monthName: 'August', profilesAdded: 10}, {monthName: 'Septembrie', profilesAdded: 10}, {monthName: 'Octombie', profilesAdded: 10}, {monthName: 'Noiembrie', profilesAdded: 10}, {monthName: 'Decembrie', profilesAdded: 10}];
-
   
-  
-  partner: PartnerProfile = {id: 1, profilePicture: 'https://eventador.ro/uploads/2020/02/b696e2cace99530e8e6c6fec4c44e95b.jpg', name: 'Misan Andrei', dateAdded: this.convertDate(new Date()), location: 'Cluj-Napoca'}
+    partner: PartnerProfile = {id: 1, profilePicture: 'https://eventador.ro/uploads/2020/02/b696e2cace99530e8e6c6fec4c44e95b.jpg', name: 'Misan Andrei', dateAdded: this.convertDate(new Date()), location: 'Cluj-Napoca'}
 
-  profiles: DashboardProfiles[] = [{ id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2021/02/c63f1056b779e775bf64e89c3c4f2ff0.jpeg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Sechei Radu', profilePicture: 'https://eventador.ro/uploads/2018/07/HaiForLimousine-50.jpg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2018/07/HaiForLimousine-50.jpg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2018/07/HaiForLimousine-50.jpg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2021/02/c63f1056b779e775bf64e89c3c4f2ff0.jpeg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2018/07/HaiForLimousine-50.jpg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2018/07/HaiForLimousine-50.jpg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' },
-                                    { id : 1, profileName : 'Misan Andrei', profilePicture: 'https://eventador.ro/uploads/2021/02/c63f1056b779e775bf64e89c3c4f2ff0.jpeg', dateAdded: this.convertDate(new Date()), category: 'M.C.', isPaying: false, location: 'Cluj-Napoca' }];
+    profiles: PartnerSupplierUserProfile[] = [];
     
-    dataSource = new MatTableDataSource<DashboardProfiles>(this.profiles);
+    dataSource = new MatTableDataSource<PartnerSupplierUserProfile>(this.profiles);
+
+    
   
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService) {
     this._observer = breakpointObserver;
     
   }
 
   ngOnInit(): void {
-    this.barChartLabels = this.profilesAdded.map(item => item.monthName);
-    this.barChartData[0].data = this.profilesAdded.map(item => item.profilesAdded);
+
+    this.apiService.getPartnerSuppliers(this.authService.getLoggedUser().id).subscribe(response => {
+      response.forEach(user => {
+        user.profiles.forEach(profile => {
+          profile.formattedDate = this.convertDate(profile.createdAt);
+          this.profiles.push(profile);
+        })
+      })
+      const profileCounts = this.countProfilesByMonth(response);
+      this.createChart(profileCounts);
+      
+    })
 
     this.isMobile = this._observer.observe(Breakpoints.Handset)
       .pipe(
@@ -93,14 +74,13 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
         })
 
       
-
+        
     
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.setProgress(50);
 
     this.searchControl.valueChanges
       .pipe(
@@ -113,7 +93,8 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
       });
   }
 
-  convertDate(date: Date){
+  convertDate(dateString: Date){
+    const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0'); // Get the day and add leading zero if needed
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get the month (Note: Months are zero-based)
     const year = date.getFullYear(); // Get the full year
@@ -123,24 +104,49 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     return shortDate;
   }
 
-  setProgress(percent: number): void {
-    const progressFill = document.querySelector('.progress-fill') as HTMLElement;
-    const progressLabel = document.querySelector('.progress-label') as HTMLElement;
+  countProfilesByMonth(data: PartnerSupplierUser[]): number[] {
+    const profileCounts = new Array(12).fill(0); // Array to store counts for each month (0-11)
   
-    // Calculate the degree of rotation based on the percentage
-    const degrees = (360 * percent) / 100;
+    data.forEach(user => {
+      user.profiles.forEach(profile => {
+        const month = new Date(profile.createdAt).getMonth(); // Get the month index (0-11)
+        profileCounts[month]++;
+      });
+    });
   
-    // Calculate the clip path based on the percentage
-    const clipPathValue = `inset(0 0 0 ${100 - percent}%)`;
-  
-    // Apply the rotation and clip path
-    progressFill.style.transform = `rotate(${degrees}deg)`;
-    progressFill.style.clipPath = clipPathValue;
-  
-    progressLabel.textContent = `${percent}%`;
-    progressFill.style.backgroundColor = '#7643CA';
-    progressFill.style.background = 'linear-gradient(to right, #FF63A4, #FE8962)';
- 
+    return profileCounts;
+  }
+
+  createChart(profileCounts: number[]): void {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const ctx = document.getElementById('profileChart') as HTMLCanvasElement;
+    new Chart(
+      ctx,
+      {
+        type: 'bar',
+        data: {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          datasets: [
+            {
+              label: 'Profile Counts by Month',
+              data: profileCounts,
+              backgroundColor: 'rgba(54, 162, 235, 0.6)'
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      }
+    );
   }
 
   
