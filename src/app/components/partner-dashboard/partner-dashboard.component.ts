@@ -24,6 +24,9 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     webColumns: string[] = ['profileName', 'dateAdded', 'category'];
     mobileColumns: string[] = ['profileName', 'dateAdded', 'category'];
     displayedColumns!: string[];
+    usersNumber: number = 0;
+    profilesNumber: number = 0;
+    nameinitials: string = "";
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -46,14 +49,17 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    const user = this.authService.getLoggedUser();
+    this.nameinitials = user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase();
     this.apiService.getPartnerSuppliers(this.authService.getLoggedUser().id).subscribe(response => {
       response.forEach(user => {
         user.profiles.forEach(profile => {
           profile.formattedDate = this.convertDate(profile.createdAt);
           this.profiles.push(profile);
         })
+        this.profilesNumber = this.profilesNumber + user.profiles.length;
       })
+      this.usersNumber = response.length;
       const profileCounts = this.countProfilesByMonth(response);
       this.createChart(profileCounts);
       
@@ -119,8 +125,8 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
 
   createChart(profileCounts: number[]): void {
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
+      'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'
     ];
 
     const ctx = document.getElementById('profileChart') as HTMLCanvasElement;
@@ -129,19 +135,22 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
       {
         type: 'bar',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          labels: months,
           datasets: [
             {
-              label: 'Profile Counts by Month',
+              label: 'Numar de furnizori adaugati',
               data: profileCounts,
-              backgroundColor: 'rgba(54, 162, 235, 0.6)'
-            }
+              backgroundColor: 'black'
+            },
           ]
         },
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1
+              }
             }
           }
         }

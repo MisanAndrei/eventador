@@ -1,27 +1,14 @@
 <div style="background-color: #f6f7f8;" *ngIf="!(isMobile | async)">
-    <div class="profile-and-cards">
-<div class="profile-section">
-    <div class="profile-picture">
-      <img src="{{ partner.profilePicture }}" alt="Profile Picture" />
-    </div>
-    
-  </div>
 
-  <div class="cards-section">
-    <div class="small-card">
-      <p class="title">Furnizori</p>
-      <p class="value">30</p>
-    </div>
-    <div class="small-card">
-      <p class="title">Furnizori abonati</p>
-      <p class="value">20</p>
-    </div>
-    <div class="small-card">
-      <p class="title">Venituri lunare</p>
-      <p class="value">800 RON</p>
+  <div class="cards-container">
+    <div class="cards">
+      <div class="initials-card">AP</div>
+      <div class="card"> <span class="card-text">Furnizori</span>
+        <span class="card-text">{{usersNumber}}</span></div>
+      <div class="card"> <span class="card-text">Servicii oferite</span>
+        <span class="card-text">{{profilesNumber}}</span></div>
     </div>
   </div>
-</div>
 
 <div class="chart-container"><canvas id="profileChart" width="400px" height="400px"></canvas></div>
 
@@ -30,7 +17,7 @@
 
   
   <div class="table-section">
-    <h1 class="table-title">Furnizori adaugati</h1>
+    <h1 class="table-title">Furnizori</h1>
     <mat-form-field>
         <input matInput [formControl]="searchControl" placeholder="Cautare">
       </mat-form-field>
@@ -67,30 +54,19 @@
 </div>
 
 <div style="background-color: #f6f7f8;" *ngIf="(isMobile | async)">
-  <div class="mobile-profile">
-    <!-- Profile Image -->
-    <div class="mobile-profile-image-section">
-      <img class="mobile-profile-image" src="{{ partner.profilePicture }}" alt="Profile Picture" />
-    </div>
   
-    <!-- Cards -->
-    <div class="mobile-card">
-      <div class="label">Furnizori</div>
-      <div class="text">30</div>
+  <div class="cards-container">
+    <div class="mobile-cards">
+      <div class="mobile-initials-card">AP</div>
+      <div class="mobile-card"> <span class="mobile-card-text">Furnizori</span>
+        <span class="mobile-card-text">{{usersNumber}}</span></div>
+      <div class="mobile-card"> <span class="mobile-card-text">Servicii oferite</span>
+        <span class="card-text">{{profilesNumber}}</span></div>
     </div>
-  
-    <div class="mobile-card">
-      <div class="label">Furnizori abonati</div>
-      <div class="text">20</div>
-    </div>
-  
-    <div class="mobile-card">
-      <div class="label">Venituri lunare</div>
-      <div class="text">500 RON</div>
-    </div>
+  </div>
   
     <!-- Charts -->
-    <div class="chart-container"><canvas id="profileChart"></canvas></div>
+    <div class="mobile-chart-container"><canvas id="profileChart"></canvas></div>
   
     <!-- Table -->
     <div class="mobile-table">
@@ -124,5 +100,5 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
     </div>
-  </div>
+
 </div>
