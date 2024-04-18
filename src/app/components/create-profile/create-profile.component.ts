@@ -234,7 +234,7 @@ export class CreateProfileComponent implements OnInit {
     }
 
     this.apiService.createUser(user);
-    this.toastService.showToast('Profilul a fost creat si trimis spre aprobare!');
+
     }
 
     checkPasswordIncorrect(){

@@ -10,6 +10,7 @@ import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ChartOptions, ChartType, ChartDataset, Chart } from 'chart.js/auto';
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
+import { Router } from '@angular/router';
 
 
 
@@ -34,8 +35,6 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     
     searchControl = new FormControl('');
     isMobile!: Observable<boolean>;
-  
-    partner: PartnerProfile = {id: 1, profilePicture: 'https://eventador.ro/uploads/2020/02/b696e2cace99530e8e6c6fec4c44e95b.jpg', name: 'Misan Andrei', dateAdded: this.convertDate(new Date()), location: 'Cluj-Napoca'}
 
     profiles: PartnerSupplierUserProfile[] = [];
     
@@ -43,7 +42,7 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
 
     
   
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router) {
     this._observer = breakpointObserver;
     
   }
@@ -78,10 +77,6 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
                 this.displayedColumns = this.webColumns;
               }
         })
-
-      
-        
-    
   }
 
   ngAfterViewInit(): void {
@@ -140,7 +135,7 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
             {
               label: 'Numar de furnizori adaugati',
               data: profileCounts,
-              backgroundColor: 'black'
+              backgroundColor: 'gray'
             },
           ]
         },
@@ -158,5 +153,13 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     );
   }
 
+  goToProfile(profile: PartnerSupplierUserProfile) {
+    const formattedProfileName = this.formatProfileName(profile.name);
+    this.router.navigate(['/furnizor', `${formattedProfileName}-${profile.id}`]);
+    }
+
+  formatProfileName(profileName: string): string {
+    return profileName.replace(/\s+/g, '-');
+  }
   
 }

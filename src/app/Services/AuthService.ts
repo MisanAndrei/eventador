@@ -41,9 +41,16 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = this.getToken();
+    const token = localStorage.getItem(this.userKey);
+
+    if (token != null && token != undefined){
+      return true;
+    }
+    
+    return false;
+    /*const token = this.getToken();
     // Check if token exists and is not expired
-    return token ? !this.jwtHelper.isTokenExpired(token) : false;
+    return token ? !this.jwtHelper.isTokenExpired(token) : false;*/
   }
 
   getDecodedToken(): any {

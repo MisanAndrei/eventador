@@ -123,8 +123,7 @@ export class ApiService {
   }
 
   getProfileCardsByIds(profileIds: number[]): Observable<ProfileCard[]> {
-    const params = new HttpParams().set('profilesIds', profileIds.join(','));
-    return this.http.get<ProfileCard[]>(`${this.apiUrl}/Profile/ProfileCardsByIds`, { params });
+    return this.http.get<ProfileCard[]>(this.apiUrl + '/Profile/ProfileCardsByIds', {params: {profilesIds: profileIds}});
   }
 
   getPartnerByReferralGuid(partnerGuid: string): Observable<any> {
