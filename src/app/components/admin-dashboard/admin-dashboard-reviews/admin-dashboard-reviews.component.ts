@@ -62,11 +62,27 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
       });
   }
   approveReview(review: ApprovalReview){
-    this.apiService.approveOrRejectReview(review.reviewId, true);
+    this.apiService.approveOrRejectReview(review.reviewId, true).subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
   }
 
   rejectReview(review: ApprovalReview){
-    this.apiService.approveOrRejectReview(review.reviewId, false);
+    this.apiService.approveOrRejectReview(review.reviewId, false).subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
   }
   }
 

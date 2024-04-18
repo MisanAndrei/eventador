@@ -63,7 +63,15 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
   }
 
   acceptChanges(profile: AdminDashboardProfilesChanged){
-    this.apiService.acceptProfileChanges(profile.id);
+    this.apiService.acceptProfileChanges(profile.id).subscribe({
+      next: () => {
+        
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
   }
 
   deleteChanges(){

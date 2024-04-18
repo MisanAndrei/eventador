@@ -37,7 +37,15 @@ export class AdminDashboardCategoryUpsertComponent implements OnInit {
   onSubmit(): void {
     const category = this.categoryForm?.value;
     category.id = this.category?.id;
-    this.apiService.upsertCategory(category);
+    this.apiService.upsertCategory(category).subscribe({
+      next: () => {
+        console.log("a mers");
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
   }
 
   onImageSelected(event: any): void {

@@ -21,7 +21,15 @@ export class FavoriteProfilesServiceComponent {
         userId: user.id,
         profileIds: favoriteProfiles
       } as FavoriteProfilesRequest
-      this.apiService.updateFavoriteProfiles(favoriteProfilesRequest);
+      this.apiService.updateFavoriteProfiles(favoriteProfilesRequest).subscribe({
+        next: () => {
+
+        },
+        error: (error) => {
+          console.error('Error saving review:', error);
+          // Handle error
+        }
+      });
     }
   }
 

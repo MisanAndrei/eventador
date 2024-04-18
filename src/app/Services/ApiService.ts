@@ -76,7 +76,7 @@ export class ApiService {
   }
 
   saveReview(request: SendReview): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Review/AddReview`, request).pipe(
+    return this.http.post<any>(this.apiUrl + '/Review/AddReview', request).pipe(
       tap(x => {
         console.log(x);
       })

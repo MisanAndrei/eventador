@@ -61,10 +61,10 @@
 
   .category-button {
     border: 0px;color: white; 
-    background: linear-gradient(to right, #FF63A4, #FE8962);
+    background-color: gray;
     border-radius: 4px; 
     margin: 0 5px;
-    height: 30px;
+    height: 25px;
   }
 
   .category-button p {

@@ -53,7 +53,15 @@ export class AdminDashboardBlogUpsertComponent implements OnInit {
       formData.append('content', this.pdfFile); // Append the pdfFile if it exists
     }
 
-    this.apiService.addBlog(formData);
+    this.apiService.addBlog(formData).subscribe({
+      next: () => {
+        console.log("merge");
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
  }
 
 onImageSelected(event: any): void {

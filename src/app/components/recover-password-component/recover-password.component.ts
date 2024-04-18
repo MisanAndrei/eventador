@@ -24,20 +24,14 @@ export class RecoverPasswordComponent {
    }
 
    async login() {
-    this.apiService.recoverPassword(this.username).subscribe(
-      result => {
-        if (result) {
-          // Successful login logic, navigate, etc.
-          this.router.navigate(['/acasa']);
-        } else {
-          // Handle unsuccessful login
-          this.errorWhenLogging = true;
-        }
+    this.apiService.recoverPassword(this.username).subscribe({
+      next: () => {
+        
       },
-      error => {
-        // Handle errors, if any
-        this.errorWhenLogging = true;
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
       }
-    );
+    });
   }
 }

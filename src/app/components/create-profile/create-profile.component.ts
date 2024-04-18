@@ -233,7 +233,15 @@ export class CreateProfileComponent implements OnInit {
       user.profile = undefined;
     }
 
-    this.apiService.createUser(user);
+    this.apiService.createUser(user).subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
 
     }
 

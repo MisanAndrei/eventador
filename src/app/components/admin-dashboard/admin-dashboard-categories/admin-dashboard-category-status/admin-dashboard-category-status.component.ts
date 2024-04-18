@@ -26,8 +26,15 @@ export class AdminDashboardCategoryStatusComponent implements OnInit {
   submitCategoryChanges(): void {
     // Handle the list of updated categories as needed
     var request = this.categories.filter(x => x.showOnLandingPage == true).map(x => x.id).filter(id => id !== undefined) as number[];
-    this.apiService.markCategoriesOnLandingPage(request);
+    this.apiService.markCategoriesOnLandingPage(request).subscribe({
+        next: () => {
 
+        },
+        error: (error) => {
+          console.error('Error saving review:', error);
+          // Handle error
+        }
+      });
     // Add your submission logic here
   }
 

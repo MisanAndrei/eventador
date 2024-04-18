@@ -70,7 +70,15 @@ export class RatingComponent implements OnInit {
       responseText: responseText
     } as SendResponse;
 
-    this.apiService.saveResponse(reviewResponse);
+    this.apiService.saveResponse(reviewResponse).subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error saving review:', error);
+        // Handle error
+      }
+    });
 
     this.ratingsMapped = this.ratingsMapped.map((obj) => {
       // Change the value for the object with id 2

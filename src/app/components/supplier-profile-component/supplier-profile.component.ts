@@ -150,8 +150,17 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
         profileId: Number(this.numberProfileId)
       } as SendReview
 
-      this.apiService.saveReview(review);
-      this.reviewSent = true;
+      this.apiService.saveReview(review).subscribe({
+        next: () => {
+          this.reviewSent = true;
+        },
+        error: (error) => {
+          console.error('Error saving review:', error);
+          // Handle error
+        }
+      });
+
+      
       // Add your logic to submit the review to the server or perform any other actions
     }
 
