@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* Adjust spacing between form elements */
+  }

@@ -354,6 +354,26 @@ import { UserRole } from "../Utilities/enums/Enums";
     createdAt: Date;
     formattedDate: string;
   }
+
+  export interface Group {
+    id: number;
+    name: string;
+    showOnLandingPage: boolean;
+    categories: Category[];
+  }
+
+  export interface MappedGroup {
+    id: number;
+    name: string;
+    showOnLandingPage: boolean;
+    categories: string;
+  }
+
+  export interface MappedCategory {
+    id: number;
+    name: string;
+    checked: boolean;
+  }
   
 
   

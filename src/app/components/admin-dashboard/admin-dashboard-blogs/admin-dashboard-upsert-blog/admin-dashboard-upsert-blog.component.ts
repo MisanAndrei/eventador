@@ -1,26 +1,39 @@
 // admin-dashboard-blog-upsert.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { valueOrDefault } from 'chart.js/dist/helpers/helpers.core';
 import { ApiService } from 'src/app/Services/ApiService';
+import { Editor, Toolbar } from 'ngx-editor';
 //import { BlogService } from './blog.service';
-import { ViewChild, ElementRef } from '@angular/core';
-import * as pdfjs from 'pdfjs-dist';
 
 @Component({
   selector: 'app-admin-dashboard-upsert-blog',
   templateUrl: './admin-dashboard-upsert-blog.component.html',
   styleUrls: ['./admin-dashboard-upsert-blog.component.css'],
 })
-export class AdminDashboardBlogUpsertComponent implements OnInit {
+export class AdminDashboardBlogUpsertComponent implements OnInit, OnDestroy {
   @Input() blogId?: number;
   blogForm!: FormGroup;
   isEditing = false;
-  pdfSrc: string = "https://evemtadorstorage.blob.core.windows.net/blogs/Oferta_colaborare_MC_Alexandru_Costin_-_24_08_2024_Grand_Hotel_Italia.pdf";
-  pdfFile: File | null = null;
+  editor!: Editor;
+  html = '';
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify']
+  ];
+  
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   ngOnInit(): void {
     this.blogForm = this.formBuilder.group({
@@ -35,6 +48,7 @@ export class AdminDashboardBlogUpsertComponent implements OnInit {
       this.isEditing = true;
       this.loadBlogForEditing();
     }
+    this.editor = new Editor();
   }
 
   private loadBlogForEditing(): void {
@@ -49,9 +63,7 @@ export class AdminDashboardBlogUpsertComponent implements OnInit {
     formData.append('description', this.blogForm.value.description);
     formData.append('minutesToRead', this.blogForm.value.minutesToRead);
     formData.append('image', this.blogForm.value.image);
-    if (this.pdfFile) {
-      formData.append('content', this.pdfFile); // Append the pdfFile if it exists
-    }
+    
 
     this.apiService.addBlog(formData).subscribe({
       next: () => {
@@ -83,12 +95,7 @@ onImageSelected(event: any): void {
   }
 }
 
-onFileSelected(event: any): void {
-  const files: FileList = event.target.files;
-  if (files && files.length > 0) {
-    this.pdfFile = files[0]; // Store the selected PDF file for later use
-  }
-}
+
 
 
 }

@@ -20,6 +20,10 @@
       
     </mat-tab>
       
+    <mat-tab label="Grupuri">
+      <app-admin-dashboard-main-categories></app-admin-dashboard-main-categories>
+    </mat-tab>
+
     <mat-tab label="Bloguri">
       <app-admin-dashboard-blogs></app-admin-dashboard-blogs>
       
@@ -55,6 +59,10 @@
     <mat-tab *ngIf="currentUserRole === 1" label="Categorii">
   
       <app-admin-dashboard-categories></app-admin-dashboard-categories>
+    </mat-tab>
+
+    <mat-tab label="Grupuri">
+      <app-admin-dashboard-main-categories></app-admin-dashboard-main-categories>
     </mat-tab>
       
     <mat-tab label="Bloguri">

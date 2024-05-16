@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, LandingPage, PartnerSupplierUser, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +102,14 @@ export class ApiService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrl}/Category`);
+  }
+
+  getUnassingedCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategory`);
+  }
+
+  getMainCategories(): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.apiUrl}/Category/CategoryGroups`)
   }
 
   getCities(countyId: number): Observable<City[]> {

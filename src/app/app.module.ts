@@ -28,6 +28,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
@@ -40,6 +41,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 import { NgApexchartsModule } from 'ng-apexcharts'; 
+import { NgxEditorModule } from 'ngx-editor';
 
 
 
@@ -91,6 +93,8 @@ import { AddProfileComponent } from './components/profile-components/add-profile
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
 import { PersonalProfilesComponent } from './components/profile-components/personal-profiles-component/personal-profiles.component';
 import { RecoverPasswordComponent } from './components/recover-password-component/recover-password.component';
+import { AdminDashboardMainCategoriesComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-main-categories.component';
+import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
 
 
 
@@ -141,7 +145,9 @@ import { RecoverPasswordComponent } from './components/recover-password-componen
     AddProfileComponent,
     FavoritesComponent,
     PersonalProfilesComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    AdminDashboardMainCategoriesComponent,
+    AdminDashboardUpsertMainCategoryComponent
   ],
   imports: [
     AppRoutingModule,
@@ -173,7 +179,44 @@ import { RecoverPasswordComponent } from './components/recover-password-componen
     HammerModule,
     GalleryModule,
     NgApexchartsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckbox,
+    NgxEditorModule.forRoot({
+      locals: {
+        // menu
+        bold: 'Bold',
+        italic: 'Italic',
+        code: 'Code',
+        blockquote: 'Blockquote',
+        underline: 'Underline',
+        strike: 'Strike',
+        bullet_list: 'Bullet List',
+        ordered_list: 'Ordered List',
+        heading: 'Heading',
+        h1: 'Header 1',
+        h2: 'Header 2',
+        h3: 'Header 3',
+        h4: 'Header 4',
+        h5: 'Header 5',
+        h6: 'Header 6',
+        align_left: 'Left Align',
+        align_center: 'Center Align',
+        align_right: 'Right Align',
+        align_justify: 'Justify',
+        text_color: 'Text Color',
+        background_color: 'Background Color',
+
+        // popups, forms, others...
+        url: 'URL',
+        text: 'Text',
+        openInNewTab: 'Open in new tab',
+        insert: 'Insert',
+        altText: 'Alt Text',
+        title: 'Title',
+        remove: 'Remove',
+        enterValidUrl: 'Please enter a valid URL',
+      },
+    })
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
     provide: GALLERY_CONFIG,
