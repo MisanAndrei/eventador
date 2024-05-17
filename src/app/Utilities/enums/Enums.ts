@@ -5,3 +5,8 @@ export enum UserRole {
     supplier = 4,
     customer = 5
   }
+
+  export enum CategoryServiceEnum {
+    Category = "Categorie",
+    Service = "Serviciu"
+  }

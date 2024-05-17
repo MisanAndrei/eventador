@@ -161,6 +161,13 @@
       </div>
   </div>
 
+  <div class="form-group">
+    <mat-form-field class="custom-input">
+    <input matInput placeholder="Cod Partener" [(ngModel)]="partnerCode" name="CodPartener" [disabled]="referralCodeByUrl" (ngModelChange)="onPartnerCodeChange($event)">
+  </mat-form-field>
+  <p class="code-error-message" *ngIf="showPartnerErrorCode">Codul de partener nu este valabil !</p>
+  <p class="code-success-message" *ngIf="showPartnerSuccessCode">Codul de partener este valabil !</p>
+
   <div class="save-button-container">
     <button class="save-button" mat-raised-button color="accent" [ngStyle]="{'cursor': saveButtonEnabled() ? 'pointer' : 'not-allowed'}" [disabled]="!saveButtonEnabled()" (click)="onSaveButtonClick()">Salveaza profil</button>
   </div>

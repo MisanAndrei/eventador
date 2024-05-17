@@ -33,7 +33,7 @@ const routes: Routes = [
 { path: 'dashboard', component: PartnerDashboardComponent},
 { path: 'admin-dashboard', component: AdminDashboardComponent},
 { path: 'furnizori', component: CustomersComponent},
-{ path: 'furnizori/:id', component: CustomersComponent },
+{ path: 'furnizori/:id/:description', component: CustomersComponent },
 { path: 'RecuperareParola', component: RecoverPasswordComponent },
 { path: 'profil', component: ProfileComponent}];
 

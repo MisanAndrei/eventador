@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -134,8 +134,8 @@ export class ApiService {
     return this.http.get<ProfileCard[]>(this.apiUrl + '/Profile/ProfileCardsByIds', {params: {profilesIds: profileIds}});
   }
 
-  getPartnerByReferralGuid(partnerGuid: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/User/GetUserByReferralGuid/${partnerGuid}`, { responseType: 'text' });
+  getPartnerByReferralGuid(partnerGuid: string): Observable<ReferralResponse> {
+    return this.http.get<ReferralResponse>(`${this.apiUrl}/User/GetUserByReferralGuid/${partnerGuid}`);
   }
 
   getUserProfile(id: number): Observable<UserProfile> {

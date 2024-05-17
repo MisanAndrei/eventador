@@ -194,3 +194,12 @@ body {
     margin-top: -35px;
     color:red;
   }
+
+  .code-error-message {
+    margin-top: -15px;
+    color: red;
+  }
+
+  .code-success-message {
+    margin-top: -15px;
+  }

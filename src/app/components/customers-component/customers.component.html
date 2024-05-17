@@ -9,10 +9,16 @@
         <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm">
       </mat-form-field>
 
+      <mat-form-field class="custom-dropdown">
+        <mat-label>Categorii</mat-label>
+        <mat-select [(ngModel)]="selectedCategoryGroup" (selectionChange)="onCategoryGroupChange($event)">
+          <mat-option *ngFor="let category of categoryGroups" [value]="category.id" >{{ category.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
       
       <mat-form-field class="custom-dropdown">
-        <mat-label>Categorie</mat-label>
-        <mat-select [(ngModel)]="selectedCategory">
+        <mat-label>Servicii</mat-label>
+        <mat-select [(ngModel)]="selectedCategories" multiple>
           <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>
         </mat-select>
       </mat-form-field>

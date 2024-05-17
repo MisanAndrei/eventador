@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
 
       this.isMobile.subscribe(isMobile => {
         this.blogs = isMobile ? response.blogCards.slice(0, 4) : response.blogCards;
-        this.categories = isMobile ? response.categories.slice(0, 4) : response.categories;
+        this.categories = isMobile ? response.categoryGroups.slice(0, 4) : response.categoryGroups;
       });
     })
   }

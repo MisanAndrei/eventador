@@ -57,7 +57,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     }
     
   export interface Category {
-    id?: number;
+    id: number;
     name: string;
     image?: string;
     showOnLandingPage?: boolean;
@@ -214,7 +214,7 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface LandingPage {
     sections: Section[]; 
     blogs: Blog[];
-    categories: Category[];
+    categoryGroups: Group[];
     popularSuppliers: ProfileCard[];
   }
 
@@ -268,7 +268,7 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface LandingPage {
     sections: Section[];
     profileCards: ProfileCard[];
-    categories: Category[]; 
+    category: Category[]; 
     blogCards: Blog[];
   }
 
@@ -359,6 +359,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     id: number;
     name: string;
     showOnLandingPage: boolean;
+    image: string;
     categories: Category[];
   }
 
@@ -374,6 +375,13 @@ import { UserRole } from "../Utilities/enums/Enums";
     name: string;
     checked: boolean;
   }
+
+  export interface ReferralResponse {
+    id: number;
+    name: string;
+  }
+
+
   
 
   

@@ -1,11 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
-import { ProfileCard } from 'src/app/Models/Models';
+import { Group, ProfileCard } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
 import { AuthService } from 'src/app/Services/AuthService';
+import { descriptors } from 'chart.js/dist/core/core.defaults';
+import { CategoryServiceEnum } from 'src/app/Utilities/enums/Enums';
 
 @Component({
   selector: 'app-customers',
@@ -20,6 +22,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   showFilter: boolean = true;
   searchTerm: string = '';
   selectedCategory?: number;
+  selectedCategories?: number[] = [];
   selectedZone?: number;
   profileCards: ProfileCard[] = [];
   filteredProfileCards: ProfileCard[] = [];
@@ -28,6 +31,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
   categories: any[] = [];
   isMobile: Observable<boolean>;
   currrentUserLoggedIn: boolean = true;
+  categoryGroups?: Group[];
+  selectedCategoryGroup?:number;
 
   constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute, private authService: AuthService, private router: Router, private favoriteProfilesService: FavoriteProfilesServiceComponent) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -64,18 +69,40 @@ export class CustomersComponent implements OnInit, OnDestroy {
           this.currentUserOldFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
           this.profileCards = response1;
           this.filteredProfileCards = response1;
-          this.applyFilters();
+          
           return this.apiService.getCategories();
         }),
         switchMap(response2 => {
           this.categories = response2
+          return this.apiService.getMainCategories();
+        }),
+        switchMap(response3 => {
+          this.categoryGroups = response3
           return this.apiService.getCounties();
-        })
-      ).subscribe(response3 => {
-        this.zones = response3;
+        }),
+      ).subscribe(response4 => {
+        this.zones = response4;
+        const urlId = Number(this.route.snapshot.paramMap.get('id')) ?? undefined
+        
+
+        const description = this.route.snapshot.paramMap.get('description') ?? undefined;
+
+        if (description != undefined && description == 'Serviciu' && urlId != undefined){
+          this.selectedCategories = [urlId];
+        }
+        else {
+          if (urlId != undefined)
+          this.selectedCategoryGroup = urlId;
+        }
+
+      if (this.selectedCategoryGroup != undefined){
+        this.onCategoryGroupRefreshValue(this.selectedCategoryGroup);
+      }
+
+      this.applyFilters();
       });
   
-      this.selectedCategory = Number(this.route.snapshot.paramMap.get('id')) ?? undefined;
+      
     }
 
 
@@ -86,13 +113,17 @@ export class CustomersComponent implements OnInit, OnDestroy {
         if (this.searchTerm != ''){
           this.filteredProfileCards = this.filteredProfileCards.filter(x => x.name.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()));
         }
+
+        if (this.selectedCategoryGroup != undefined && this.selectedCategoryGroup != 0){
+          this.onCategoryGroupRefreshValue(this.selectedCategoryGroup);
+        }
         
         if (this.selectedZone != undefined && this.selectedZone != 0){
           this.filteredProfileCards = this.filteredProfileCards.filter(x => x.areaOfInterest?.map(x => x.id).includes(this.selectedZone ?? 0) || x.areaOfInterest?.map(x => x.id).includes(this.zoneOfInterestRomania));
         }
 
-        if (this.selectedCategory != undefined && this.selectedCategory != 0) {
-          this.filteredProfileCards = this.filteredProfileCards.filter(x => x.category.id == this.selectedCategory);
+        if (this.selectedCategories != undefined && this.selectedCategories.length > 0) {
+          this.filteredProfileCards = this.filteredProfileCards.filter(x => this.selectedCategories?.includes(x.category.id ?? 0));
         }
 
       }
@@ -103,6 +134,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
         this.searchTerm = '';
         this.selectedCategory = undefined;
         this.selectedZone = undefined;
+        this.selectedCategories = undefined;
       }
 
       toggleFilter() {
@@ -152,5 +184,31 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
        formatProfileName(profileName: string): string {
         return profileName.replace(/\s+/g, '-');
+      }
+
+      onCategoryGroupChange(event: any){
+        const selectedCategoryGroupId = event.value;
+        this.selectedCategories = [];
+        this.onCategoryGroupRefreshValue(selectedCategoryGroupId);
+      }
+
+      onCategoryGroupRefreshValue(selectedCategoryGroupId: any){
+        const selectedCategoryGroup = this.categoryGroups?.find(group => group.id === selectedCategoryGroupId);
+
+        if (selectedCategoryGroup) {
+          const categoryIds = selectedCategoryGroup.categories.map(category => category.id);
+          if (categoryIds != undefined && categoryIds.length > 0){
+            this.selectedCategories = categoryIds;
+          }
+            
+        }
+      }
+
+      addUniqueCategories(categoryIds: number[]): void {
+        categoryIds.forEach(id => {
+          if (!this.selectedCategories?.includes(id)) {
+            this.selectedCategories?.push(id);
+          }
+        });
       }
 }

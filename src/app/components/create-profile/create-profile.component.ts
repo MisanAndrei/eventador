@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Category, City, County, CreateUser } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, catchError, map, of, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 import { ActivatedRoute, Route } from '@angular/router';
 import { ToastService } from 'src/app/Services/ToastService';
@@ -50,6 +50,10 @@ export class CreateProfileComponent implements OnInit {
     convertedSelectedImages: string[] = [];
     convertedSelectedProfileImage: string = '';
     maxAllowedFiles: number = 5;
+    partnerCode: string = '';
+    referralCodeByUrl: boolean = false;
+    showPartnerErrorCode: boolean = false;
+    showPartnerSuccessCode: boolean = false;
 
     //partner referral section
     partnerName: string = '';
@@ -82,13 +86,21 @@ export class CreateProfileComponent implements OnInit {
       });
 
       if (this.partnerIdentifier){
-        this.apiService.getPartnerByReferralGuid('asdgfahgerh').subscribe(x => {
-          if (x == 'e'){
-            this.partnerNameInvalid = true;
+        this.partnerCode = this.partnerIdentifier;
+        this.apiService.getPartnerByReferralGuid(this.partnerIdentifier).pipe(
+          catchError(error => {
+            // Handle the error here
+            this.showPartnerErrorCode = true;
+            return of(null);
+          })
+        ).subscribe(x => {
+          if (x) {
+            this.partnerId = x.id;
+            this.showPartnerSuccessCode = true;
+            this.referralCodeByUrl = true;
+            this.partnerNameValid = true;
           }
-          this.partnerName = x;
-          this.partnerNameValid = true;
-        })
+        });
       }
 
       this.apiService.getCategories().pipe(
@@ -251,6 +263,33 @@ export class CreateProfileComponent implements OnInit {
       }
 
       return false;
+    }
+
+    onPartnerCodeChange(value: string): void {
+      this.partnerCode = value;
+      
+      if (this.partnerCode.length != 4){
+        this.showPartnerErrorCode = true
+        this.showPartnerSuccessCode = false;
+      }else{
+        this.showPartnerErrorCode = false;
+        this.showPartnerSuccessCode = false;
+        this.apiService.getPartnerByReferralGuid(this.partnerCode).pipe(
+          catchError(error => {
+            // Handle the error here
+            this.showPartnerErrorCode = true;
+            this.showPartnerSuccessCode = false;
+            return of(null);
+          })
+        ).subscribe(x => {
+          if (x) {
+            this.partnerId = x.id;
+            this.showPartnerErrorCode = false;
+            this.showPartnerSuccessCode = true;
+            this.partnerNameValid = true;
+          }
+        });
+      }
     }
   }
 

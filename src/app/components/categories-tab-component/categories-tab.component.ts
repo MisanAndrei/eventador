@@ -1,7 +1,7 @@
 import {  Component, Input, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
-import { Category } from 'src/app/Models/Models';
+import { Category, Group } from 'src/app/Models/Models';
 
 @Component({
   selector: 'app-categories-tab',
@@ -9,7 +9,7 @@ import { Category } from 'src/app/Models/Models';
   styleUrls: ['./categories-tab.component.css']
 })
 export class CategoriesTabComponent implements OnInit {
-  @Input() categories?: Category[];
+  @Input() categories?: Group[];
     
   isMobile: Observable<boolean>;
   constructor(private breakpointObserver: BreakpointObserver) {
