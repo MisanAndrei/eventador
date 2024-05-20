@@ -1,0 +1,6 @@
+<div class="dialog-container">
+  <mat-icon class="status-icon" [ngClass]="{'success-icon': isSuccess, 'failure-icon': !isSuccess}">
+    {{ icon }}
+  </mat-icon>
+  <p>{{ message }}</p>
+</div>

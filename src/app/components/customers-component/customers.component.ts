@@ -113,10 +113,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
         if (this.searchTerm != ''){
           this.filteredProfileCards = this.filteredProfileCards.filter(x => x.name.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()));
         }
-
-        if (this.selectedCategoryGroup != undefined && this.selectedCategoryGroup != 0){
-          this.onCategoryGroupRefreshValue(this.selectedCategoryGroup);
-        }
         
         if (this.selectedZone != undefined && this.selectedZone != 0){
           this.filteredProfileCards = this.filteredProfileCards.filter(x => x.areaOfInterest?.map(x => x.id).includes(this.selectedZone ?? 0) || x.areaOfInterest?.map(x => x.id).includes(this.zoneOfInterestRomania));

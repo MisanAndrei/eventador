@@ -4,6 +4,8 @@ import { Observable, first, map } from 'rxjs';
 import { EditUserRequest } from 'src/app/Models/Models'; // Make sure to import the appropriate model
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
+import { DialogComponent } from '../dialog-component/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-personal-data',
@@ -20,7 +22,7 @@ export class EditPersonalDataComponent implements OnInit {
   dataChangedSuccessfully: boolean = false;
   
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -50,6 +52,7 @@ export class EditPersonalDataComponent implements OnInit {
           console.log('Personal data changed successfully:', response);
           this.authService.updateLoggedUser(this.firstName, this.lastName, this.phoneNumber)
           this.dataChangedSuccessfully = true;
+          this.openSuccessDialog();
         },
         error: (error) => {
           // Handle error
@@ -57,6 +60,7 @@ export class EditPersonalDataComponent implements OnInit {
           this.firstName = '';
           this.lastName = '';
           this.phoneNumber = '';
+          this.openFailureDialog();
           console.error('Error changing personal data:', error);
         }
       });
@@ -69,4 +73,24 @@ export class EditPersonalDataComponent implements OnInit {
     
     return false;
   } 
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Datele personale au fost schimbate cu succes!',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
+      }
+    });
+  }
 }

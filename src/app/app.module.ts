@@ -95,6 +95,7 @@ import { PersonalProfilesComponent } from './components/profile-components/perso
 import { RecoverPasswordComponent } from './components/recover-password-component/recover-password.component';
 import { AdminDashboardMainCategoriesComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-main-categories.component';
 import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
+import { DialogComponent } from './components/dialog-component/dialog.component';
 
 
 
@@ -147,7 +148,8 @@ import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-da
     PersonalProfilesComponent,
     RecoverPasswordComponent,
     AdminDashboardMainCategoriesComponent,
-    AdminDashboardUpsertMainCategoryComponent
+    AdminDashboardUpsertMainCategoryComponent,
+    DialogComponent
   ],
   imports: [
     AppRoutingModule,

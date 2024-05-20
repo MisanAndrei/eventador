@@ -74,8 +74,8 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteChanges(){
-
+  deleteChanges(profile: AdminDashboardProfilesChanged){
+    
   }
 
   showChanges(profile: AdminDashboardProfilesChanged){

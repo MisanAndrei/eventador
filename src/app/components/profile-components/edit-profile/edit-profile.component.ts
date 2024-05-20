@@ -265,7 +265,9 @@ export class EditProfileComponent implements OnInit {
 
     
 
-    this.apiService.editProfile(profile);
+    this.apiService.editProfile(profile).subscribe(x => {
+      console.log(x);
+    });
     }
 
     checkPasswordIncorrect(){

@@ -84,7 +84,7 @@ nav {
     top: 160; /* Specify a unit (e.g., pixels) */
     left: 0;
     width: 40%;
-    height: 600px;
+    height: 400px;
     background-color: white;
     justify-content: center;
     align-items: center;
@@ -131,6 +131,19 @@ nav {
   .subMenuLinks:hover {
     cursor: pointer;
     text-decoration: underline;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as needed */
+  }
+  
+  .category-item {
+    margin: 0px 5px;
+  }
+
+  .plinks {
+    margin: 10px;
   }
   
   

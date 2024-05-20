@@ -130,4 +130,11 @@
       align-content: center;
     }
 
+    .table-name{
+      font: bold;
+      cursor: pointer;
+    }
+
+
+
  
