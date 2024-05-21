@@ -4,6 +4,8 @@
   </div>
 </div>
 
-<div *ngIf="(isMobile | async)" class="container">
-  {{ content }}
+<div *ngIf="(isMobile | async)" class="mobile-outer-container">
+<div class="mobile-container">
+  <quill-view-html [content]="content" format="html" theme="snow"></quill-view-html>
+</div>
 </div>
