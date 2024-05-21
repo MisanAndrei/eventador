@@ -266,7 +266,7 @@
         </mat-form-field>
       </div>
       
-      <div class="form-group" *ngIf="cityId">
+      <div class="form-group" *ngIf="countyId">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Oras</mat-label>
           <mat-select [(ngModel)]="cityId">
@@ -331,6 +331,14 @@
         <label for="description">Descriere</label>
         <textarea style="width: 90%;" id="description" [(ngModel)]="description" name="description"></textarea>
       </div>
+
+      <div class="form-group">
+        <mat-form-field class="custom-input-mobile">
+        <input matInput placeholder="Cod Partener" [(ngModel)]="partnerCode" name="CodPartener" [disabled]="referralCodeByUrl" (ngModelChange)="onPartnerCodeChange($event)">
+      </mat-form-field>
+      <p class="code-error-message" *ngIf="showPartnerErrorCode">Codul de partener nu este valabil !</p>
+      <p class="code-success-message" *ngIf="showPartnerSuccessCode">Codul de partener este valabil !</p>
+    
   </div>
 
   <div class="save-button-container">
