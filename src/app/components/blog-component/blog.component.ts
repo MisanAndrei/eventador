@@ -16,6 +16,8 @@ export class BlogComponent implements OnInit {
   pdfSrc: string = '';
   selectedBlogName: string = '';
 
+  content!: string;
+
   constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
   this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
@@ -37,6 +39,7 @@ export class BlogComponent implements OnInit {
 
     this.apiService.getBlogById(this.selectedBlog).subscribe(response => {
       this.pdfSrc = response.content ?? "";
+      this.content = response.content ?? "";
     });
   }
 

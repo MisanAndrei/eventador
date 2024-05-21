@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
 import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { UpsertBlogRequest } from '../Requests/Requests';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,8 @@ export class ApiService {
     return this.http.get<LandingPage>(`${this.apiUrl}/Section/LandingPage`);
   }
 
-  addBlog(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Blog`, formData).pipe(
+  upsertBlog(request: UpsertBlogRequest): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Blog`, request).pipe(
       tap(x => {
         console.log(x);
       })

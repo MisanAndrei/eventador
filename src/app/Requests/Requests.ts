@@ -30,3 +30,11 @@ export interface CreateUserRequest {
     phoneNumber: string;
     role?: number;
   }
+
+  export interface UpsertBlogRequest {
+    title: string;
+    description:string;
+    content: string;
+    image: string;
+    minutesToRead: number;
+  }

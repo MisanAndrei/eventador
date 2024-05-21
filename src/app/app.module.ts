@@ -35,8 +35,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
-
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
@@ -96,6 +94,8 @@ import { RecoverPasswordComponent } from './components/recover-password-componen
 import { AdminDashboardMainCategoriesComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-main-categories.component';
 import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
 import { DialogComponent } from './components/dialog-component/dialog.component';
+import { QuillModule } from 'ngx-quill';
+
 
 
 
@@ -175,7 +175,6 @@ import { DialogComponent } from './components/dialog-component/dialog.component'
     MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
-    AngularEditorModule,
     PdfViewerModule,
     SlickCarouselModule,
     HammerModule,
@@ -183,42 +182,13 @@ import { DialogComponent } from './components/dialog-component/dialog.component'
     NgApexchartsModule,
     MatSnackBarModule,
     MatCheckbox,
-    NgxEditorModule.forRoot({
-      locals: {
-        // menu
-        bold: 'Bold',
-        italic: 'Italic',
-        code: 'Code',
-        blockquote: 'Blockquote',
-        underline: 'Underline',
-        strike: 'Strike',
-        bullet_list: 'Bullet List',
-        ordered_list: 'Ordered List',
-        heading: 'Heading',
-        h1: 'Header 1',
-        h2: 'Header 2',
-        h3: 'Header 3',
-        h4: 'Header 4',
-        h5: 'Header 5',
-        h6: 'Header 6',
-        align_left: 'Left Align',
-        align_center: 'Center Align',
-        align_right: 'Right Align',
-        align_justify: 'Justify',
-        text_color: 'Text Color',
-        background_color: 'Background Color',
-
-        // popups, forms, others...
-        url: 'URL',
-        text: 'Text',
-        openInNewTab: 'Open in new tab',
-        insert: 'Insert',
-        altText: 'Alt Text',
-        title: 'Title',
-        remove: 'Remove',
-        enterValidUrl: 'Please enter a valid URL',
-      },
-    })
+    NgxEditorModule,
+    QuillModule.forRoot({
+      customOptions: [{
+        import: 'formats/font',
+        whitelist: ['mirza', 'roboto', 'aref', 'serif', 'sansserif', 'monospace']
+      }]
+})
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
     provide: GALLERY_CONFIG,
