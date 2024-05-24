@@ -38,3 +38,10 @@ export interface CreateUserRequest {
     image: string;
     minutesToRead: number;
   }
+
+  export interface UpsertMainCategoryRequest{
+    id?: number;
+    name: string;
+    image: string;
+    categoryIds: number[];
+  }

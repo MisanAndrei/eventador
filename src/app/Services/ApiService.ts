@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
 import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
-import { UpsertBlogRequest } from '../Requests/Requests';
+import { UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,14 @@ export class ApiService {
 
   upsertCategory(category: Category): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategory`, category).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
+  }
+
+  upsertCategoryGroup(request: UpsertMainCategoryRequest): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategoryGroup`, request).pipe(
       tap(x => {
         console.log(x);
       })
@@ -106,7 +114,7 @@ export class ApiService {
   }
 
   getUnassingedCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategory`);
+    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategories`);
   }
 
   getMainCategories(): Observable<Group[]> {

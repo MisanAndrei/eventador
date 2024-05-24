@@ -1,27 +1,34 @@
 <div class="container">
-    <form [formGroup]="groupForm">
-      <div class="form-group">
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name">
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-checkbox formControlName="showOnLandingPage">Arata pe pagina principala</mat-checkbox>
-      </div>
-      <div class="form-group">
-        <input type="file" (change)="onFileSelected($event)" accept="image/*">
-      </div>
-      <div *ngIf="imageBase64" class="form-group">
-        <img [src]="imageBase64" alt="Selected Image" width="150">
-      </div>
-    </form>
-  </div>
-  
-  
-  
-  
-  
-  
-  
-  
+  <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-checkbox formControlName="showOnLandingPage">Arata pe pagina principala</mat-checkbox>
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+    <div *ngIf="imageBase64" class="form-group">
+      <img [src]="imageBase64" alt="Selected Image" width="150">
+    </div>
+    
+    <!-- Display categories -->
+    <div *ngFor="let category of categories">
+      <label>
+        <input type="checkbox" [formControlName]="category.id" [checked]="category.checked"> {{ category.name }}
+      </label>
+    </div>
+    <div *ngFor="let category of unassignedCategories">
+      <label>
+        <input type="checkbox" [formControlName]="category.id" [checked]="category.checked"> {{ category.name }}
+      </label>
+    </div>
+    
+    <!-- Submit button -->
+    <button type="submit">Submit</button>
+  </form>
+</div>
