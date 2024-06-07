@@ -95,6 +95,7 @@ import { AdminDashboardMainCategoriesComponent } from './components/admin-dashbo
 import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
 import { DialogComponent } from './components/dialogs/dialog-component/dialog.component';
 import { QuillModule } from 'ngx-quill';
+import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partner-upsert/admin-dashboard-partner-upsert.component';
 
 
 
@@ -149,7 +150,8 @@ import { QuillModule } from 'ngx-quill';
     RecoverPasswordComponent,
     AdminDashboardMainCategoriesComponent,
     AdminDashboardUpsertMainCategoryComponent,
-    DialogComponent
+    DialogComponent,
+    AdminDashboardPartnerUpsertComponent
   ],
   imports: [
     AppRoutingModule,

@@ -21,7 +21,7 @@
         <td mat-cell *matCellDef="let profile">
            <button (click)="showChanges(profile)" style="margin-right: 20px" mat-raised-button color="accent">Schimbari</button>  
            <button (click)="acceptChanges(profile)" style="margin-right: 20px" mat-raised-button color="accent">Accepta schimbari</button>
-           <button (click)="deleteChanges(profile)" mat-raised-button color="accent">Sterge schimbari</button></td>
+           <button (click)="rejectChanges(profile)" mat-raised-button color="accent">Sterge schimbari</button></td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumnsProfilesChanged"></tr>

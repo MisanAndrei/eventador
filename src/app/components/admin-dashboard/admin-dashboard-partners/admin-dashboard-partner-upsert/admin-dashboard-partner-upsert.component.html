@@ -1,0 +1,33 @@
+<form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" type="email" />
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input id="password" formControlName="password" type="password" />
+  </div>
+  <div>
+    <label for="verifyPassword">Verify Password:</label>
+    <input id="verifyPassword" formControlName="verifyPassword" type="password" />
+  </div>
+  <div>
+    <label for="firstName">First Name:</label>
+    <input id="firstName" formControlName="firstName" type="text" />
+  </div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" formControlName="lastName" type="text" />
+  </div>
+  <div>
+    <label for="phoneNumber">Phone Number:</label>
+    <input id="phoneNumber" formControlName="phoneNumber" type="text" />
+  </div>
+  <div>
+    <label for="role">Role:</label>
+    <select id="role" formControlName="role">
+      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+    </select>
+  </div>
+  <button type="submit">Submit</button>
+</form>

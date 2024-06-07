@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
 import { UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
@@ -76,12 +76,24 @@ export class ApiService {
     );
   }
 
+  rejectProfileChanges(profileId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Profile/RejectProfile`, profileId).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
+  }
+
   getReviewsByProfileId(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.apiUrl}/Review/GetProfileReviews/${id}`);
   }
 
   getPartnerSuppliers(id: number): Observable<PartnerSupplierUser[]> {
     return this.http.get<PartnerSupplierUser[]>(`${this.apiUrl}/User/GetPartnerSuppliers/${id}`);
+  }
+
+  getUserDetails(id: number): Observable<UserDetails>{
+    return this.http.get<UserDetails>(`${this.apiUrl}/User/GetUserDetails/${id}`);
   }
 
   saveReview(request: SendReview): Observable<any> {
