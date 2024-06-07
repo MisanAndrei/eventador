@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { ProfileCard } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
+import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
+
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
 
 @Component({
   selector: 'app-personal-profiles',
@@ -16,7 +20,7 @@ export class PersonalProfilesComponent implements OnInit {
   profileCards: ProfileCard[] = [];
     isMobile: Observable<boolean>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private apiService: ApiService, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private apiService: ApiService, private router: Router, private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -41,5 +45,52 @@ export class PersonalProfilesComponent implements OnInit {
   editProfile(event: Event, profileId: number){
     event.stopPropagation();
     this.router.navigate(['/EditareProfil', profileId]);
+  }
+
+  deleteProfile(event: Event, profileId: number) {
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
+      data: { text: 'Sunteți sigur că vreți să ștergeți profilul?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      this.handleDeleteResponse(result, profileId);
+    });
+  }
+
+  handleDeleteResponse(response: boolean, profileId: number) {
+    if (response) {
+      this.apiService.deleteProfile(profileId)
+      .subscribe({
+        next: (response) => {
+          // Handle successful response
+          this.openSuccessDialog();
+        },
+        error: (error) => {
+          // Handle error
+          this.openFailureDialog();
+        }
+      });
+
+    }
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Profilul a fost șters cu succes!',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
+      }
+    });
   }
 }

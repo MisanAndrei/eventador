@@ -81,6 +81,12 @@ export class CustomersComponent implements OnInit, OnDestroy {
           return this.apiService.getCounties();
         }),
       ).subscribe(response4 => {
+        let lastItem = response4.pop();
+
+          if (lastItem){
+            response4.unshift(lastItem);
+          }
+
         this.zones = response4;
         const urlId = Number(this.route.snapshot.paramMap.get('id')) ?? undefined
         

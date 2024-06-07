@@ -1,9 +1,9 @@
 <div *ngIf="!(isMobile | async)">
-  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Furnizori favoriti</h1></div>
-  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="filter-bar-favorite-message"><h2>Te invitam sa te inscrii in platforma eventador pentru a-ti pastra preferintele!</h2></div>
-  <div *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Nu ati adaugat la favorite nici un furnizor!</h1></div>
+  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Furnizori favoriți</h1></div>
+  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="filter-bar-favorite-message"><h2>Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h2></div>
+  <div *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Nu ați adăugat la favorite nici un furnizor!</h1></div>
   <div *ngIf="!favoriteProfilesPage" class="filter-bar">
-    <h1>Filtrati furnizorii dupa criteriile dorite</h1>
+    <h1>Filtrați furnizorii dupa criteriile dorite</h1>
     <div class="filter-controls">
       <mat-form-field class="custom-input">
         <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm">
@@ -60,9 +60,9 @@
   </ul>
 </div>
   <div *ngIf="(isMobile | async)" class="mobile-card-container">
-    <h2  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriti</h2>
-    <h3  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam sa te inscrii in platforma eventador pentru a-ti pastra preferintele!</h3>
-    <h2  *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ati adaugat la favorite nici un furnizor!</h2>
+    <h2  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriți</h2>
+    <h3  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h3>
+    <h2  *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ați adăugat la favorite nici un furnizor!</h2>
     <h2  *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
     <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">  
   <div class="mobile-filter-section">
@@ -70,11 +70,20 @@
       <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm" >
     </mat-form-field>
   </div>
-  
+
   <div class="mobile-filter-section">
     <mat-form-field>
       <mat-label>Categorie</mat-label>
-      <mat-select [(ngModel)]="selectedCategory">
+      <mat-select [(ngModel)]="selectedCategoryGroup"  (selectionChange)="onCategoryGroupChange($event)">
+        <mat-option *ngFor="let category of categoryGroups" [value]="category.id" >{{ category.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+  <div class="mobile-filter-section">
+    <mat-form-field>
+      <mat-label>Servicii</mat-label>
+      <mat-select [(ngModel)]="selectedCategories" multiple>
         <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -90,7 +99,7 @@
   </div>
   
   <div class="mobile-button-row">
-    <button class="moblele-filter-button" (click)="applyFilters()">Aplica filtre</button>  
+    <button class="mobile-filter-button" (click)="applyFilters()">Aplica filtre</button>  
     <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
   </div>
 </div>

@@ -9,6 +9,7 @@ export class DeleteAccountComponent {
   @Output() confirmation = new EventEmitter<boolean>();
 
   confirmDeletion(confirmed: boolean) {
+    //api call for deletion
     this.confirmation.emit(confirmed);
   }
 }

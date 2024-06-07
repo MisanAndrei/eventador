@@ -79,7 +79,7 @@ export class CreateProfileComponent implements OnInit {
       }
   
     ngOnInit(): void {
-      this.route.params.subscribe(params => {
+      this.route.params.subscribe((params: { [x: string]: string; }) => {
         // Extract profileId from route parameters
         this.partnerIdentifier = params['partnerIdentifier']; 
         

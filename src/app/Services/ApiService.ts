@@ -210,6 +210,30 @@ export class ApiService {
     );
   }
 
+  deleteUser(userId: number): Observable<any> {
+    const options = {
+      body: { userId: userId }
+    };
+  
+    return this.http.request<any>('DELETE', `${this.apiUrl}/User/DeleteUser`, options).pipe(
+      tap(response => {
+        console.log('User deleted successfully:', response);
+      })
+    );
+  }
+
+  deleteProfile(profileId: number): Observable<any> {
+    const options = {
+      body: { userId: profileId }
+    };
+  
+    return this.http.request<any>('DELETE', `${this.apiUrl}/User/DeleteUser`, options).pipe(
+      tap(response => {
+        console.log('Profile deleted successfully:', response);
+      })
+    );
+  }
+
   // Perform a GET request
   public get<T>(endpoint: string): Observable<T> {
     const url = `${this.apiUrl}/${endpoint}`;
