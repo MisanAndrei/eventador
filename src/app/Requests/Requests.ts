@@ -45,3 +45,11 @@ export interface CreateUserRequest {
     image: string;
     categoryIds: number[];
   }
+
+  export interface CustomersRequest {
+    page: number;
+    size: number;
+    name?: string;
+    categoryIds?: number[];
+    areaOfInterest?: number;
+  }

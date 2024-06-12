@@ -1,7 +1,13 @@
 <div *ngIf="!(isMobile | async)">
-  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Furnizori favoriți</h1></div>
-  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="filter-bar-favorite-message"><h2>Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h2></div>
-  <div *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="filter-bar-favorite"><h1>Nu ați adăugat la favorite nici un furnizor!</h1></div>
+  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="filter-bar-favorite">
+    <h1>Furnizori favoriți</h1>
+  </div>
+  <div *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="filter-bar-favorite-message">
+    <h2>Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h2>
+  </div>
+  <div *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="filter-bar-favorite">
+    <h1>Nu ați adăugat la favorite nici un furnizor!</h1>
+  </div>
   <div *ngIf="!favoriteProfilesPage" class="filter-bar">
     <h1>Filtrați furnizorii dupa criteriile dorite</h1>
     <div class="filter-controls">
@@ -12,31 +18,29 @@
       <mat-form-field class="custom-dropdown">
         <mat-label>Categorii</mat-label>
         <mat-select [(ngModel)]="selectedCategoryGroup" (selectionChange)="onCategoryGroupChange($event)">
-          <mat-option *ngFor="let category of categoryGroups" [value]="category.id" >{{ category.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      
-      <mat-form-field class="custom-dropdown">
-        <mat-label>Servicii</mat-label>
-        <mat-select [(ngModel)]="selectedCategories" multiple>
-          <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>
+          <mat-option *ngFor="let category of categoryGroups" [value]="category.id">{{ category.name }}</mat-option>
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field class="custom-dropdown">
+        <mat-label>Servicii</mat-label>
+        <mat-select [(ngModel)]="selectedCategories" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <mat-form-field class="custom-dropdown">
         <mat-label>Zona de activitate</mat-label>
         <mat-select [(ngModel)]="selectedZone">
-          <mat-option *ngFor="let zone of zones" [value]="zone.id" >{{ zone.name }}</mat-option>
+          <mat-option *ngFor="let zone of zones" [value]="zone.id">{{ zone.name }}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      
-      <button class="filter-button" (click)="applyFilters()">Aplica filtre</button>
+      <button class="filter-button" (click)="applyFilters()">Aplică filtre</button>
       <button class="filter-button" (click)="clearFilters()">Resetare filtre</button>
     </div>
   </div>
-<ul class="card-list">
+  <ul class="card-list">
     <li *ngFor="let card of filteredProfileCards" class="card-item">
       <div class="card" (click)="onCardClick(card)">
         <div class="favorite-icon" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
@@ -47,63 +51,66 @@
             <img src="{{ card.profileImage }}" alt="{{ card.name }} Logo" />
           </div>
           <div>
-          <h3 style="margin-bottom: 0px; margin-top: 15px; width: 85%">{{ card.name }}</h3>
-          <h5 style="margin-top: 5px;"><i class="fa fa-map-marker" style="font-size:20px"></i> {{ card.city }}</h5>
+            <h3 style="margin-bottom: 0px; margin-top: 15px; width: 85%">{{ card.name }}</h3>
+            <h5 style="margin-top: 5px;"><i class="fa fa-map-marker" style="font-size:20px"></i> {{ card.city }}</h5>
+          </div>
         </div>
-        </div>
-        
+
         <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
         <h4 style="margin-left: 10px;">{{ card.category.name }}</h4>
         <p style="margin-left: 10px;">{{ card.motto }}</p>
       </div>
     </li>
   </ul>
-</div>
-  <div *ngIf="(isMobile | async)" class="mobile-card-container">
-    <h2  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriți</h2>
-    <h3  *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h3>
-    <h2  *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ați adăugat la favorite nici un furnizor!</h2>
-    <h2  *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
-    <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">  
-  <div class="mobile-filter-section">
-    <mat-form-field>
-      <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm" >
-    </mat-form-field>
+  <div *ngIf="loading" class="loading-spinner">
+    <p>Se incarcă...</p>
   </div>
+</div>
+<div *ngIf="(isMobile | async)" class="mobile-card-container">
+  <h2 *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriți</h2>
+  <h3 *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h3>
+  <h2 *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ați adăugat la favorite nici un furnizor!</h2>
+  <h2 *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
+  <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">
+    <div class="mobile-filter-section">
+      <mat-form-field>
+        <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm">
+      </mat-form-field>
+    </div>
 
-  <div class="mobile-filter-section">
-    <mat-form-field>
-      <mat-label>Categorie</mat-label>
-      <mat-select [(ngModel)]="selectedCategoryGroup"  (selectionChange)="onCategoryGroupChange($event)">
-        <mat-option *ngFor="let category of categoryGroups" [value]="category.id" >{{ category.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="mobile-filter-section">
+      <mat-form-field>
+        <mat-label>Categorie</mat-label>
+        <mat-select [(ngModel)]="selectedCategoryGroup" (selectionChange)="onCategoryGroupChange($event)">
+          <mat-option *ngFor="let category of categoryGroups" [value]="category.id">{{ category.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mobile-filter-section">
+      <mat-form-field>
+        <mat-label>Servicii</mat-label>
+        <mat-select [(ngModel)]="selectedCategories" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mobile-filter-section">
+      <mat-form-field>
+        <mat-label>Zona de activitate</mat-label>
+        <mat-select [(ngModel)]="selectedZone">
+          <mat-option *ngFor="let zone of zones" [value]="zone.id">{{ zone.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mobile-button-row">
+      <button class="mobile-filter-button" (click)="applyFilters()">Aplică filtre</button>
+      <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
+    </div>
   </div>
-  
-  <div class="mobile-filter-section">
-    <mat-form-field>
-      <mat-label>Servicii</mat-label>
-      <mat-select [(ngModel)]="selectedCategories" multiple>
-        <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  
-  <div class="mobile-filter-section">
-    <mat-form-field>
-      <mat-label>Zona de activitate</mat-label>
-      <mat-select [(ngModel)]="selectedZone">
-        <mat-option *ngFor="let zone of zones" [value]="zone.id" >{{ zone.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  
-  <div class="mobile-button-row">
-    <button class="mobile-filter-button" (click)="applyFilters()">Aplica filtre</button>  
-    <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
-  </div>
-</div>
-  <div  *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card)">
+  <div *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card)">
     <div class="favorite-icon-mobile" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
       <i class="fa fa-heart"></i>
     </div>
@@ -112,13 +119,14 @@
       <p class="mobile-card-location"><i class="fa fa-map-marker" style="font-size:15px"></i> {{ card.city }}</p>
     </div>
     <div class="mobile-card-image">
-      <img src="{{ card.profileImage }}" alt="Image Description">
+      <img src="{{ card.profileImage }}" alt="{{ card.name }}">
     </div>
     <div class="mobile-card-details">
       <p class="mobile-card-category">{{ card.category.name }}</p>
       <p class="mobile-card-description">{{ card.motto }}</p>
     </div>
-  
+  </div>
+  <div *ngIf="loading" class="loading-spinner">
+    <p>Se incarcă...</p>
   </div>
 </div>
-

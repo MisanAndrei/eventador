@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
 import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
-import { UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
+import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
   providedIn: 'root'
@@ -147,8 +147,12 @@ export class ApiService {
     return this.http.get<County[]>(`${this.apiUrl}/County/GetAllCounties`);
   }
 
-  getProfileCards(): Observable<ProfileCard[]> {
-    return this.http.get<ProfileCard[]>(`${this.apiUrl}/Profile/ProfileCards`);
+  getProfileCards(request: CustomersRequest): Observable<ProfileCard[]> {
+    return this.http.post<ProfileCard[]>(`${this.apiUrl}/Profile/ProfileCards`, request).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
   }
 
   getProfileCardsByIds(profileIds: number[]): Observable<ProfileCard[]> {
