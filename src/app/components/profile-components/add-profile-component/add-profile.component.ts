@@ -4,6 +4,9 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
+import { Dialog } from '@angular/cdk/dialog';
+import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-profile',
@@ -57,7 +60,7 @@ export class AddProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private dialog: Dialog, private router: Router) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -190,6 +193,37 @@ export class AddProfileComponent implements OnInit {
         instagramUrl: this.instagramUrl
       } as unknown
 
-    this.apiService.addProfile(this.userId, profile as CreateProfile);
+    this.apiService.addProfile(this.userId, profile as CreateProfile)
+      .subscribe({
+        next: (response) => {
+          // Handle successful response
+          this.openSuccessDialog();
+          this.router.navigate(['/profil']);
+        },
+        error: (error) => {
+          // Handle error
+          this.openFailureDialog();
+        }
+      });
+    }
+
+    openSuccessDialog(): void {
+      this.dialog.open(DialogComponent, {
+        width: '400px',
+        data: {
+          message: 'Profilul a fost adăugat cu succes și a fost trimis spre aprobare!',
+          isSuccess: true
+        }
+      });
+    }
+  
+    openFailureDialog(): void {
+      this.dialog.open(DialogComponent, { 
+        width: '400px',
+        data: {
+          message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+          isSuccess: false
+        }
+      });
     }
   }

@@ -35,7 +35,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 import { NgApexchartsModule } from 'ng-apexcharts'; 
@@ -93,8 +93,9 @@ import { PersonalProfilesComponent } from './components/profile-components/perso
 import { RecoverPasswordComponent } from './components/recover-password-component/recover-password.component';
 import { AdminDashboardMainCategoriesComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-main-categories.component';
 import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
-import { DialogComponent } from './components/dialog-component/dialog.component';
+import { DialogComponent } from './components/dialogs/dialog-component/dialog.component';
 import { QuillModule } from 'ngx-quill';
+import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partner-upsert/admin-dashboard-partner-upsert.component';
 
 
 
@@ -149,7 +150,8 @@ import { QuillModule } from 'ngx-quill';
     RecoverPasswordComponent,
     AdminDashboardMainCategoriesComponent,
     AdminDashboardUpsertMainCategoryComponent,
-    DialogComponent
+    DialogComponent,
+    AdminDashboardPartnerUpsertComponent
   ],
   imports: [
     AppRoutingModule,
@@ -175,7 +177,6 @@ import { QuillModule } from 'ngx-quill';
     MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
-    PdfViewerModule,
     SlickCarouselModule,
     HammerModule,
     GalleryModule,

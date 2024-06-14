@@ -381,6 +381,18 @@ import { UserRole } from "../Utilities/enums/Enums";
     name: string;
   }
 
+  export interface UserDetails {
+    id?: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    password?: string;
+    phoneNumber: string;
+    role: UserRole;
+  }
+
+
+
 
   
 

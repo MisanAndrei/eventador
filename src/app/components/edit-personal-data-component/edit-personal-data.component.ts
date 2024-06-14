@@ -4,7 +4,7 @@ import { Observable, first, map } from 'rxjs';
 import { EditUserRequest } from 'src/app/Models/Models'; // Make sure to import the appropriate model
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
-import { DialogComponent } from '../dialog-component/dialog.component';
+import { DialogComponent } from '../dialogs/dialog-component/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

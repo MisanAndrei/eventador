@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Category, Group, MappedCategory } from 'src/app/Models/Models';
+import { UpsertMainCategoryRequest } from 'src/app/Requests/Requests';
 import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
@@ -13,14 +14,19 @@ import { ApiService } from 'src/app/Services/ApiService';
 export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
   @Input() group?: Group;
   groupForm: FormGroup;
-  imageBase64: string | ArrayBuffer | null = null;
+  imageBase64!: string;
   categories!: MappedCategory[];
+  unassignedCategories!: MappedCategory[];
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
     this.groupForm = this.formBuilder.group({
       name: [''],
       showOnLandingPage: [false]
     });
+  }
+
+  toggleCategoryChecked(category: MappedCategory): void {
+    category.checked = !category.checked;
   }
 
   ngOnInit(): void {
@@ -35,23 +41,51 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
       
     }
 
-    this.apiService.getCategories().subscribe((apiCategories: Category[]) => {
-      // Check if categories from API already exist in the list, if not, add them
-      apiCategories.forEach(apiCategory => {
-        const existingCategory = this.categories.find(category => category.id === apiCategory.id);
-        if (!existingCategory) {
-          //this.categories.push({ ...apiCategory, checked: false });
-        }
-      });
+    this.apiService.getUnassingedCategories().subscribe(apiCategories => {
+      this.unassignedCategories = apiCategories.map(category => ({ id: category.id ?? 0, name: category.name, checked: false }));
+     
     });
   }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = () => {
-      this.imageBase64 = reader.result;
+    reader.onload = (e: any) => {
+      // Extract the base64 data part
+      const base64Image = e.target.result as string;
+      const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
+      this.imageBase64 = base64Data;
     };
     reader.readAsDataURL(file);
   }
+
+  onSubmit(): void {
+    const formValue = this.groupForm.value;
+    const checkedCategoryIds = this.categories
+      .filter(category => category.checked)
+      .map(category => category.id);
+    checkedCategoryIds.push(...this.unassignedCategories
+      .filter(category => category.checked)
+      .map(category => category.id));
+
+    const upsertMainCategoryRequest: UpsertMainCategoryRequest = {
+      id: this.group?.id,
+      name: formValue.name,
+      image: this.imageBase64 ?? '',
+      categoryIds: checkedCategoryIds
+    };
+
+    this.apiService.upsertCategoryGroup(upsertMainCategoryRequest).subscribe({
+      next: (response) => {
+        console.log('Category group upserted successfully', response);
+        // Handle successful response
+      },
+      error: (error) => {
+        console.error('Error upserting category group:', error);
+        // Handle error
+      }
+    });
+  }
+
+  
 }

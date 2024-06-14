@@ -23,7 +23,7 @@
       </div>
 
       <div style="display: flex; justify-content: center; align-items: center;">
-        <button mat-raised-button class="mobile-action-button">Stergere profil</button>
+        <button mat-raised-button class="mobile-action-button" (click)="deleteProfile($event, card.id)">Stergere profil</button>
         
       </div>
       
@@ -46,7 +46,7 @@
           <p class="mobile-card-description">{{ card.motto }}</p>
         </div>
         <button mat-raised-button class="mobile-action-button" (click)="editProfile($event, card.id)">Editare profil</button>
-        <button mat-raised-button class="mobile-action-button">Stergere profil</button>
+        <button mat-raised-button class="mobile-action-button" (click)="deleteProfile($event, card.id)">Stergere profil</button>
 
       </div>
 </div>

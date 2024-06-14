@@ -1,8 +1,14 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/Services/AuthService';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
+import { DialogComponent } from '../dialogs/dialog-component/dialog.component';
+import { ApiService } from 'src/app/Services/ApiService';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../dialogs/delete-dialog-component/delete-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +34,7 @@ export class ProfileComponent implements OnInit {
   personalProfilesVisible: boolean = false;
   signUpLink: string = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: Dialog, private apiService: ApiService, private matDialog: MatDialog, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -62,14 +68,6 @@ export class ProfileComponent implements OnInit {
     this.personalProfilesVisible = false;
   }
 
-  deleteAccount() {
-    this.deleteAccountVisible = !this.deleteAccountVisible;
-    this.addProfileVisible = false;
-    this.changePasswordVisible = false;
-    this.editUserVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
   addProfile(){
     this.addProfileVisible = !this.addProfileVisible;
     this.deleteAccountVisible = false;
@@ -94,16 +92,7 @@ export class ProfileComponent implements OnInit {
     this.changePasswordVisible = false;
   }
 
-  handleConfirmation(confirmed: boolean) {
-    if (confirmed) {
-      // User confirmed deletion
-      console.log("User confirmed deletion");
-    } else {
-      // User canceled deletion
-      this.deleteAccountVisible = false;
-      console.log("User canceled deletion");
-    }
-  }
+  
 
   copyToClipboard(text: string) {
     const el = document.createElement('textarea');
@@ -112,5 +101,53 @@ export class ProfileComponent implements OnInit {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+  }
+
+  deleteAccount() {
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.matDialog.open(DeleteDialogComponent, {
+      data: { text: 'Sunteți sigur că vreți să ștergeți toate datele contului?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      this.handleDeleteResponse(result);
+    });
+  }
+
+  handleDeleteResponse(response: boolean) {
+    if (response) {
+      this.apiService.deleteUser(this.loggedUserId)
+      .subscribe({
+        next: (response) => {
+          // Handle successful response
+          this.authService.logOut();
+          this.openSuccessDialog();
+          this.router.navigate(['/acasa']);
+        },
+        error: (error) => {
+          // Handle error
+          this.openFailureDialog();
+        }
+      });
+    }
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Contul a fost șters cu succes!',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
+      }
+    });
   }
 }

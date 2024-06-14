@@ -1,9 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, map } from 'rxjs';
 import { ChangePasswordRequest } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
+import { DialogComponent } from '../dialogs/dialog-component/dialog.component';
 
 @Component({
   selector: 'app-change-password',
@@ -20,7 +22,7 @@ export class ChangePasswordComponent {
   passwordChangedSuccesfully: boolean = false;
   
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -41,14 +43,14 @@ export class ChangePasswordComponent {
         next: (response) => {
           // Handle successful response
           console.log('Password changed successfully:', response);
-          this.passwordChangedSuccesfully = true;
+          this.openSuccessDialog();
           this.oldPassword = '';
           this.newPassword = '';
           this.verifyPassword = '';
         },
         error: (error) => {
           // Handle error
-          this.incorrectPassword = true;
+          this.openFailureDialog();
           this.oldPassword = '';
           this.newPassword = '';
           this.verifyPassword = '';
@@ -63,6 +65,26 @@ export class ChangePasswordComponent {
     }
     
     return false;
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Parola a fost schimbată cu succes!',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
+      }
+    });
   }
 
   

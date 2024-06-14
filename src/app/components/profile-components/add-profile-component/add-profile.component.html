@@ -139,13 +139,13 @@
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Judet</mat-label>
-          <mat-select [(ngModel)]="countyId">
-            <mat-option *ngFor="let county of counties" [value]="county.id" (change)="onCountyChange()">{{ county.name }}</mat-option>
+          <mat-select [(ngModel)]="countyId" (selectionChange)="onCountyChange()">
+            <mat-option *ngFor="let county of counties" [value]="county.id" >{{ county.name }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       
-      <div class="form-group" *ngIf="cityId">
+      <div class="form-group" *ngIf="countyId">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Oras</mat-label>
           <mat-select [(ngModel)]="cityId">

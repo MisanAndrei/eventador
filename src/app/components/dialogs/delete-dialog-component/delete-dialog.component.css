@@ -1,0 +1,15 @@
+.delete-dialog {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adds space between the buttons */
+    margin-top: 20px;
+  }
+  
+  button {
+    min-width: 75px; /* Ensures buttons are of a reasonable size */
+  }

@@ -17,7 +17,7 @@ import { ApiService } from 'src/app/Services/ApiService';
   styleUrls: ['./admin-dashboard-main-categories.component.css']
 })
 export class AdminDashboardMainCategoriesComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'id', 'name', 'categories', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'categories', 'actions'];
   dataSource: MatTableDataSource<MappedGroup>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];

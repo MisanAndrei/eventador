@@ -95,7 +95,6 @@ export class NavigationBarComponent implements OnInit {
     this.showMenu = !this.showMenu;
     document.body.classList.toggle('no-scroll', this.showMenu); // Optional: Prevent scrolling in the background
     this.isCollapsed = !this.isCollapsed;
-    this.toggleScrolling(true);
   }
 
   onItemClick(link: string) {
@@ -113,12 +112,6 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigate(['/acasa']);
   }
   
-  toggleScrolling(disable: boolean): void {
-    if (disable) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-  }
+  
 }
 

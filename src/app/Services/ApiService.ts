@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserProfile } from '../Models/Models';
-import { UpsertBlogRequest } from '../Requests/Requests';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
+import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,14 @@ export class ApiService {
 
   upsertCategory(category: Category): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategory`, category).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
+  }
+
+  upsertCategoryGroup(request: UpsertMainCategoryRequest): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategoryGroup`, request).pipe(
       tap(x => {
         console.log(x);
       })
@@ -68,12 +76,24 @@ export class ApiService {
     );
   }
 
+  rejectProfileChanges(profileId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Profile/RejectProfile`, profileId).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
+  }
+
   getReviewsByProfileId(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.apiUrl}/Review/GetProfileReviews/${id}`);
   }
 
   getPartnerSuppliers(id: number): Observable<PartnerSupplierUser[]> {
     return this.http.get<PartnerSupplierUser[]>(`${this.apiUrl}/User/GetPartnerSuppliers/${id}`);
+  }
+
+  getUserDetails(id: number): Observable<UserDetails>{
+    return this.http.get<UserDetails>(`${this.apiUrl}/User/GetUserDetails/${id}`);
   }
 
   saveReview(request: SendReview): Observable<any> {
@@ -106,7 +126,7 @@ export class ApiService {
   }
 
   getUnassingedCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategory`);
+    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategories`);
   }
 
   getMainCategories(): Observable<Group[]> {
@@ -127,8 +147,12 @@ export class ApiService {
     return this.http.get<County[]>(`${this.apiUrl}/County/GetAllCounties`);
   }
 
-  getProfileCards(): Observable<ProfileCard[]> {
-    return this.http.get<ProfileCard[]>(`${this.apiUrl}/Profile/ProfileCards`);
+  getProfileCards(request: CustomersRequest): Observable<ProfileCard[]> {
+    return this.http.post<ProfileCard[]>(`${this.apiUrl}/Profile/ProfileCards`, request).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
   }
 
   getProfileCardsByIds(profileIds: number[]): Observable<ProfileCard[]> {
@@ -198,6 +222,30 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/User/FrogotPassword`, email).pipe(
       tap(x => {
         console.log(x);
+      })
+    );
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    const options = {
+      body: { userId: userId }
+    };
+  
+    return this.http.request<any>('DELETE', `${this.apiUrl}/User/DeleteUser`, options).pipe(
+      tap(response => {
+        console.log('User deleted successfully:', response);
+      })
+    );
+  }
+
+  deleteProfile(profileId: number): Observable<any> {
+    const options = {
+      body: { userId: profileId }
+    };
+  
+    return this.http.request<any>('DELETE', `${this.apiUrl}/User/DeleteUser`, options).pipe(
+      tap(response => {
+        console.log('Profile deleted successfully:', response);
       })
     );
   }

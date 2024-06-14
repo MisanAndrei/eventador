@@ -24,7 +24,7 @@ export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
 
 
-    profiles: AdminDashboardPartners[] = [{ id : 1, firstname: 'Misan', lastname: 'Andrei' },
+    profiles: AdminDashboardPartners[] = [{ id : 13, firstname: 'Misan', lastname: 'Andrei' },
                                                   { id : 2, firstname: 'Sechei', lastname: 'Radu' },
                                                   { id : 3, firstname: 'Varga', lastname: 'Alex' },
                                                   { id : 1, firstname: 'Misan', lastname: 'Andrei' },
@@ -36,6 +36,9 @@ export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
                                                 ];
 
     dataSource = new MatTableDataSource<AdminDashboardPartners>(this.profiles);
+
+    isUserFormVisible = false;
+  selectedUserId: number | null = null;
     
   constructor(private breakpointObserver: BreakpointObserver) {
     this._observer = breakpointObserver;
@@ -70,6 +73,20 @@ export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
 
   showChanges(){
     this.changesProfileId = 9;
+  }
+
+  editUser(userId: number): void {
+    this.selectedUserId = userId;
+    this.isUserFormVisible = true;
+  }
+
+  createUser(): void {
+    this.selectedUserId = null;
+    this.isUserFormVisible = true;
+  }
+
+  closeUserForm(): void {
+    this.isUserFormVisible = false;
   }
 
   
