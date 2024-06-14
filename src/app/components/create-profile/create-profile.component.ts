@@ -4,8 +4,11 @@ import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, catchError, map, of, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastService } from 'src/app/Services/ToastService';
+import { Dialog } from '@angular/cdk/dialog';
+import { DialogComponent } from '../dialogs/dialog-component/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-profile',
@@ -70,15 +73,21 @@ export class CreateProfileComponent implements OnInit {
     isBusinessAccount: boolean = false;
     isLegalPerson: boolean = false;
 
-    isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
-        this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
-          .pipe(
-            map(result => result.matches)
-          );
+    isMobile!: Observable<boolean>;
+      constructor(private breakpointObserver: BreakpointObserver, private router: Router, private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
+
       }
   
     ngOnInit(): void {
+      this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches)
+      );
+
+    this.isMobile.subscribe(isMobile => {
+      console.log('Is mobile:', isMobile);
+    });
+
       this.route.params.subscribe((params: { [x: string]: string; }) => {
         // Extract profileId from route parameters
         this.partnerIdentifier = params['partnerIdentifier']; 
@@ -247,11 +256,12 @@ export class CreateProfileComponent implements OnInit {
 
     this.apiService.createUser(user).subscribe({
       next: () => {
-
+        this.router.navigate(['/acasa']);
+        this.openSuccessDialog();
       },
       error: (error) => {
         console.error('Error saving review:', error);
-        // Handle error
+        this.openFailureDialog();
       }
     });
 
@@ -290,6 +300,26 @@ export class CreateProfileComponent implements OnInit {
           }
         });
       }
+    }
+
+    openSuccessDialog(): void {
+      this.dialog.open(DialogComponent, {
+        width: '400px',
+        data: {
+          message: 'Profilul a fost adăugat cu succes și a fost trimis spre aprobare, vă puteți autentifica !',
+          isSuccess: true
+        }
+      });
+    }
+  
+    openFailureDialog(): void {
+      this.dialog.open(DialogComponent, { 
+        width: '400px',
+        data: {
+          message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+          isSuccess: false
+        }
+      });
     }
   }
 

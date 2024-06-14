@@ -25,6 +25,10 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
     });
   }
 
+  toggleCategoryChecked(category: MappedCategory): void {
+    category.checked = !category.checked;
+  }
+
   ngOnInit(): void {
     if (this.group) {
       this.groupForm.patchValue({
@@ -56,11 +60,14 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Prepare data for UpsertMainCategoryRequest
     const formValue = this.groupForm.value;
-    const checkedCategoryIds = this.categories.filter(category => category.checked).map(category => category.id);
-    checkedCategoryIds.push(...this.unassignedCategories.filter(category => category.checked).map(category => category.id));
-  
+    const checkedCategoryIds = this.categories
+      .filter(category => category.checked)
+      .map(category => category.id);
+    checkedCategoryIds.push(...this.unassignedCategories
+      .filter(category => category.checked)
+      .map(category => category.id));
+
     const upsertMainCategoryRequest: UpsertMainCategoryRequest = {
       id: this.group?.id,
       name: formValue.name,
@@ -68,9 +75,16 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
       categoryIds: checkedCategoryIds
     };
 
-    this.apiService.upsertCategoryGroup(upsertMainCategoryRequest).subscribe(x => {
-      
-    })
+    this.apiService.upsertCategoryGroup(upsertMainCategoryRequest).subscribe({
+      next: (response) => {
+        console.log('Category group upserted successfully', response);
+        // Handle successful response
+      },
+      error: (error) => {
+        console.error('Error upserting category group:', error);
+        // Handle error
+      }
+    });
   }
 
   
