@@ -42,6 +42,10 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.authService.isAuthenticated()){
+      this.router.navigate(['/acasa']);
+    }
+
     const user = this.authService.getLoggedUser();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
@@ -55,7 +59,7 @@ export class ProfileComponent implements OnInit {
       this.personalProfiles = user.profilesIds ?? [];
     }
 
-    if (this.userRole == UserRole.partner){
+    if (this.userRole == UserRole.partner) {
       this.signUpLink = `${window.location.origin}/#/Inscriere/${user.referralCode}`;
     }
   }
