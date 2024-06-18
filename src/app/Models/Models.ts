@@ -166,6 +166,7 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface CreateProfile {
     businessName: string;
     businessCUI?: string;
+    businessEmail: string;
     motto?: string;
     cityId: number;
     areaOfInterest: number[];
@@ -194,6 +195,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     profileId: number;
     businessName: string;  //se poate schimba
     businessCUI: string;   //se poate schimba daca nu are valoare
+    businessEmail: string;
     motto?: string;  //se poate schimba
     countyId: number;
     cityId: number;

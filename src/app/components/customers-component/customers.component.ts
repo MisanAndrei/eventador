@@ -216,6 +216,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     this.selectedCategory = undefined;
     this.selectedZone = undefined;
     this.selectedCategories = [];
+    this.selectedCategoryGroup = undefined;
     this.stopGettingProfiles = false;
     this.page = 1;
     this.profileCards = [];

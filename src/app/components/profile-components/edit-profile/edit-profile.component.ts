@@ -45,6 +45,7 @@ export class EditProfileComponent implements OnInit {
     instagramUrl: string = '';
     youtubeUrl: string = '';
     businessName: string = '';
+    businessEmail: string = '';
     businessCUI: string = '';
     category: string = '';
     description: string = '';
@@ -121,6 +122,7 @@ export class EditProfileComponent implements OnInit {
 
           this.businessCUI = profile.businessCUI;
           this.businessName = profile.businessName;
+          this.businessEmail = profile.businessEmail;
           this.countyId = profile.countyId;
           this.cityId = profile.cityId;
           this.selectedAreas = profile.areaOfInterest;
@@ -152,6 +154,7 @@ export class EditProfileComponent implements OnInit {
       // Reset business info fields when toggled off
       if (!this.isBusinessAccount) {
         this.businessName = '';
+        this.businessEmail = '';
         this.category = '';
         this.description = '';
         this.motto = '';
@@ -225,7 +228,7 @@ export class EditProfileComponent implements OnInit {
     }
 
     saveButtonEnabled(){
-      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0){
+      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.businessEmail) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0){
         return false;
       }
 
@@ -248,6 +251,7 @@ export class EditProfileComponent implements OnInit {
     var profile = {
       profileId: this.currentProfileId,
       businessName: this.businessName,
+      businessEmail: this.businessEmail,
       businessCUI: this.businessCUI,
       categoryId: this.selectedCategory,
       motto: this.motto,
