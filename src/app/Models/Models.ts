@@ -120,6 +120,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     profilesIds?: number[];
     favourtieProfilesIds?: number[];
     token: string;
+    refreshToken: string;
     referralCode?: string;
   }
 

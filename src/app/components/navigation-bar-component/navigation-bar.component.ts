@@ -31,9 +31,7 @@ export class NavigationBarComponent implements OnInit {
 
   isLoggedIn(): boolean {
     // Check if the user is logged in by checking if the token is present in local storage
-    const token = localStorage.getItem('access_token');
-
-    return token !== null;
+    return this.authService.isAuthenticated();
   }
 
   isAdminOrMarketingLoggedIn(): boolean {
