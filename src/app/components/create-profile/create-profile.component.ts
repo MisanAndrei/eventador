@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CreateProfileComponent implements OnInit {
   selectedAreas: number[] = [];
-  selectedCategory: number[] = [];
+  selectedCategories: number[] = [];
   tooManyImages: boolean = false;
   tooManyImagesMessage: string = 'Prea multe imagini selectate, va rugam alegeti din nou!';
   
@@ -47,6 +47,7 @@ export class CreateProfileComponent implements OnInit {
     businessName: string = '';
     businessEmail: string = '';
     businessCUI: string = '';
+    businessRegCom: string = '';
     category: string = '';
     description: string = '';
     selectedImages: File[] = [];
@@ -143,6 +144,7 @@ export class CreateProfileComponent implements OnInit {
     toggleLegalPerson(){
       if(!this.isLegalPerson){
         this.businessCUI = '';
+        this.businessRegCom = '';
       }
     }
 
@@ -207,11 +209,11 @@ export class CreateProfileComponent implements OnInit {
         return false;
       }
 
-      if (this.isBusinessAccount && (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.businessEmail) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0 || this.convertedSelectedProfileImage == '' || this.phoneNumber == '')){
+      if (this.isBusinessAccount && (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.businessEmail) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedCategories.length == 0 || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0 || this.convertedSelectedProfileImage == '' || this.phoneNumber == '')){
         return false;
       }
 
-      if (this.isLegalPerson && this.nullOrEmpty(this.businessCUI)){
+      if (this.isLegalPerson && this.nullOrEmpty(this.businessCUI) && this.nullOrEmpty(this.businessRegCom)){
         return false;
       }
 
@@ -239,7 +241,8 @@ export class CreateProfileComponent implements OnInit {
         businessName: this.businessName,
         businessEmail: this.businessEmail,
         businessCUI: this.businessCUI,
-        categoryId: this.selectedCategory,
+        businessRegCom: this.businessRegCom,
+        categoryIds: this.selectedCategories,
         motto: this.motto,
         cityId: this.cityId,
         areaOfInterest: this.selectedAreas,

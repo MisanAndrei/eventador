@@ -7,7 +7,11 @@
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
       
-      <p class="card-category">{{ supplier.category.name }}</p>
+      <p *ngFor="let category of supplier.categories" class="card-category" style="display: inline;">
+        {{category.name}}
+      </p>
+
+      
       <p class="card-category">{{ supplier.name}}</p>
     </div>
   </div>
@@ -16,7 +20,6 @@
 </div>
 
 <div *ngIf="(isMobile | async)" class="container">
-
   <img style="width:350px;" src="https://evemtadorstorage.blob.core.windows.net/sections/toproviders_arrow.png">
   <h3 class="subtitle-mobile">{{section?.content}}</h3>
 
@@ -24,7 +27,9 @@
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
       
-      <p class="card-category">{{ supplier.category.name }}</p>
+      <p *ngFor="let category of supplier.categories" class="card-category" style="display: inline;">
+        {{category.name}}
+      </p>
       <p class="card-category">{{ supplier.name}}</p>
     </div>
   </div>

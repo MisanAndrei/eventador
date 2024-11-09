@@ -47,7 +47,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     //model
     profileImage?: string;
     profileName?:string;
-    categoryName?: string;
+    categories?: Category[];
     motto?: string;
     city?: string;
     location?: string;
@@ -98,7 +98,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
             this.location = response.cityName;
-            this.categoryName = response.categoryName;
+            this.categories = response.categories;
             this.phoneNumber = response.phoneNumber;
             this.email = response.email;
             this.description = response.description;
@@ -118,7 +118,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
             this.location = response.cityName;
-            this.categoryName = response.categoryName;
+            this.categories = response.categories;
             this.phoneNumber = response.phoneNumber;
             this.email = response.email;
             this.description = response.description;

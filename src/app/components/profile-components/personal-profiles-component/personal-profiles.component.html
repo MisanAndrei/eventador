@@ -13,7 +13,10 @@
         </div>
         
         <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
-        <h4 style="margin-left: 10px;">{{ card.category.name }}</h4>
+        <h4 *ngFor="let category of card.categories" style="margin-left: 10px; display: inline;">
+          {{ category.name }}
+        </h4>
+        
         <p style="margin-left: 10px;">{{ card.motto }}</p>
         
       </div>
@@ -42,7 +45,10 @@
           <img src="{{ card.profileImage }}" alt="Image Description">
         </div>
         <div class="mobile-card-details">
-          <p class="mobile-card-category">{{ card.category.name }}</p>
+          <p *ngFor="let category of card.categories" class="mobile-card-category">
+            {{ category.name }}
+          </p>
+          
           <p class="mobile-card-description">{{ card.motto }}</p>
         </div>
         <button mat-raised-button class="mobile-action-button" (click)="editProfile($event, card.id)">Editare profil</button>

@@ -162,9 +162,11 @@
   }
 
   .mobile-card-category {
-    color: gray;
     margin-top: 3px;
-    margin-bottom: 3px;
+    margin-right: 5px;
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 5px;
   }
 
   .mobile-card-description{

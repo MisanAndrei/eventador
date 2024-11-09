@@ -15,7 +15,15 @@
 
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
            
-                <button class="category-button"><p>{{categoryName}}</p></button>
+          <div style="text-align: center;">
+            <button
+              *ngFor="let category of categories"
+              class="category-button"
+              style="display: inline-block; margin-right: 10px;"
+            >
+              <p>{{ category.name }}</p>
+            </button>
+          </div>
        
         </div>
         <h4 style="margin-bottom: 5px;">Zone de Activitate</h4>
@@ -80,7 +88,13 @@
     <h3>{{ profileName }}</h3>
 
     <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-      <button class="category-button"><p>{{categoryName}}</p></button>
+      <button
+              *ngFor="let category of categories"
+              class="category-button"
+              style="display: inline-block; margin-right: 10px;"
+            >
+              <p>{{ category.name }}</p>
+            </button>
     </div>
 
 

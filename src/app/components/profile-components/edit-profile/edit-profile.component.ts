@@ -17,9 +17,11 @@ export class EditProfileComponent implements OnInit {
   imagesLimit: number = 5;
   maximumNumberAllowed: number = 5;
   alreadyExistingCUI: boolean = false;
+  alreadyExistingRegCom: boolean = false;
 
 
   selectedAreas: number[] = [];
+  selectedCategories: number[] = [];
   selectedCategory!: number;
   tooManyImages: boolean = false;
   tooManyImagesMessage: string = 'Prea multe imagini selectate, va rugam alegeti din nou!';
@@ -47,6 +49,7 @@ export class EditProfileComponent implements OnInit {
     businessName: string = '';
     businessEmail: string = '';
     businessCUI: string = '';
+    businessRegCom: string = '';
     category: string = '';
     description: string = '';
     selectedImages: File[] = [];
@@ -115,9 +118,10 @@ export class EditProfileComponent implements OnInit {
             this.cities = x;
           });
 
-          if (!this.nullOrEmpty(profile.businessCUI)){
+          if (!this.nullOrEmpty(profile.businessCUI) && !this.nullOrEmpty(profile.businessRegCom)){
             this.isLegalPerson = true;
             this.alreadyExistingCUI = true;
+            this.alreadyExistingRegCom = true;
           }
 
           this.businessCUI = profile.businessCUI;
@@ -126,7 +130,7 @@ export class EditProfileComponent implements OnInit {
           this.countyId = profile.countyId;
           this.cityId = profile.cityId;
           this.selectedAreas = profile.areaOfInterest;
-          this.selectedCategory = profile.categoryId;
+          this.selectedCategories = profile.categoryIds;
           this.motto = profile.motto ?? '';
           this.websiteUrl = profile.websiteUrl ?? '';
           this.facebookUrl = profile.facebookUrl ?? '';
@@ -153,22 +157,12 @@ export class EditProfileComponent implements OnInit {
     toggleBusinessInfo() {
       // Reset business info fields when toggled off
       if (!this.isBusinessAccount) {
-        this.businessName = '';
-        this.businessEmail = '';
-        this.category = '';
-        this.description = '';
-        this.motto = '';
-        this.websiteUrl = '';
-        this.facebookUrl = '';
-        this.instagramUrl = '';
-        this.youtubeUrl = '';
+        
       }
     }
 
     toggleLegalPerson(){
-      if(!this.isLegalPerson){
-        this.businessCUI = '';
-      }
+      
     }
 
     onImagesSelected(event: any) {
@@ -228,7 +222,7 @@ export class EditProfileComponent implements OnInit {
     }
 
     saveButtonEnabled(){
-      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.businessEmail) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0){
+      if (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.businessEmail) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.selectedCategories.length == 0){
         return false;
       }
 
@@ -237,7 +231,6 @@ export class EditProfileComponent implements OnInit {
       }
 
       return true;
-      
     }
 
     nullOrEmpty(value: string){
@@ -253,7 +246,7 @@ export class EditProfileComponent implements OnInit {
       businessName: this.businessName,
       businessEmail: this.businessEmail,
       businessCUI: this.businessCUI,
-      categoryId: this.selectedCategory,
+      categoryIds: this.selectedCategories,
       motto: this.motto,
       cityId: this.cityId,
       areaOfInterest: this.selectedAreas,
@@ -272,14 +265,6 @@ export class EditProfileComponent implements OnInit {
     this.apiService.editProfile(profile).subscribe(x => {
       console.log(x);
     });
-    }
-
-    checkPasswordIncorrect(){
-      if (this.password != '' && this.passwordVerified != '' && this.password != this.passwordVerified){
-        return true;
-      }
-
-      return false;
     }
 
     onCheckboxChange(existingImage: any){

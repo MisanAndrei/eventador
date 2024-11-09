@@ -74,6 +74,11 @@
     <div *ngIf="isLegalPerson" class="business-info">
       <div class="form-group">
         <mat-form-field class="custom-input">
+        <input matInput placeholder="Reg. Com.*" [(ngModel)]="businessRegCom" name="businessRegCom" required>
+      </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="custom-input">
         <input matInput placeholder="CUI*" [(ngModel)]="businessCUI" name="businessCUI" required>
       </mat-form-field>
       </div>
@@ -120,8 +125,8 @@
 
       <div class="form-group">
         <mat-form-field class="custom-dropdown">
-          <mat-label>Selectare categorie</mat-label>
-          <mat-select [(ngModel)]="selectedCategory" required>
+          <mat-label>Selectare categorii</mat-label>
+          <mat-select [(ngModel)]="selectedCategories" multiple required>
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -253,6 +258,11 @@
     <div *ngIf="isLegalPerson" class="business-info">
       <div class="form-group">
         <mat-form-field class="custom-input-mobile">
+        <input matInput placeholder="Reg. Com." [(ngModel)]="businessRegCom" name="businessRegCom">
+      </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="custom-input-mobile">
         <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI">
       </mat-form-field>
       </div>
@@ -300,7 +310,7 @@
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
           <mat-label>Selectare categorie</mat-label>
-          <mat-select [(ngModel)]="selectedCategory" >
+          <mat-select [(ngModel)]="selectedCategories" >
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>

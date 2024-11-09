@@ -7,7 +7,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     coverImage: string;
     motto: string;
     city: string;
-    category: Category;
+    categories: Category[];
     areaOfInterest?: County[];
   }
 
@@ -140,7 +140,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     businessName: string;
     email: string;
     phoneNumber: string;
-    categoryName: string;
+    categories: Category[];
     images: UserImage[];
     motto?: string;
     description: string;
@@ -167,11 +167,12 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface CreateProfile {
     businessName: string;
     businessCUI?: string;
+    businessRegCom?: string;
     businessEmail: string;
     motto?: string;
     cityId: number;
     areaOfInterest: number[];
-    categoryId: number;
+    categoryIds: number[];
     images: string[];
     profileImage: string;
     description: string;  
@@ -195,13 +196,14 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface EditProfile {
     profileId: number;
     businessName: string;  //se poate schimba
-    businessCUI: string;   //se poate schimba daca nu are valoare
+    businessCUI: string;    // se poate schimba daca nu are valoare
+    businessRegCom: string;  //se poate schimba daca nu are valoare
     businessEmail: string;
     motto?: string;  //se poate schimba
     countyId: number;
     cityId: number;
     areaOfInterest: number[];  //se poate schimba
-    categoryId: number;
+    categoryIds: number[];   //se poate schimba
     description: string; //se poate schimba
     websiteUrl?: string; //se poate schimba
     facebookUrl?: string; //se poate schimba

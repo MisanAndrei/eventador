@@ -57,7 +57,10 @@
         </div>
 
         <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
-        <h4 style="margin-left: 10px;">{{ card.category.name }}</h4>
+        <div style="text-align: center; margin-top: 5px;">
+        <h5 *ngFor="let category of card.categories" style="display: inline; margin-right: 10px; background-color: lightgray; padding: 5px; border-radius: 5px;">
+          {{ category.name }}
+        </h5></div>
         <p style="margin-left: 10px;">{{ card.motto }}</p>
       </div>
     </li>
@@ -122,7 +125,11 @@
       <img src="{{ card.profileImage }}" alt="{{ card.name }}">
     </div>
     <div class="mobile-card-details">
-      <p class="mobile-card-category">{{ card.category.name }}</p>
+      <div style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+      <h5 *ngFor="let category of card.categories" style="display: inline;" class="mobile-card-category">
+        {{ category.name }}
+      </h5>
+    </div>
       <p class="mobile-card-description">{{ card.motto }}</p>
     </div>
   </div>

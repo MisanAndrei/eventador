@@ -557,6 +557,9 @@ MIT
 ng-gallery
 MIT
 
+ngx-cookie-service
+MIT
+
 ngx-editor
 MIT
 MIT License
