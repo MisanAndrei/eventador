@@ -4,14 +4,12 @@
     <div class="left">
     
         <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
-    
-        <h3>{{ profileName }}</h3>
+      
+        <h3 style="text-align: center;">{{ profileName }}</h3>
     
         
     
-        <h3 style="margin:0px 5px 0px 5px; text-align: center;">{{motto}}</h3>
-    
-        <h4 style="align-self: left; margin-top: 2px !important; margin-bottom: 2px !important;"><i class="fa fa-map-marker" style="font-size:30px; width:20px !important; padding:2px;"></i> {{ location }}</h4>
+        <i style="margin:0px 5px 10px 5px; text-align: center;">{{motto}}</i>
 
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
            
@@ -25,15 +23,17 @@
             </button>
           </div>
        
+          <h4 style="align-self: left; margin-top: 2px !important; margin-bottom: 2px !important;"><i class="fa fa-map-marker" style="font-size:30px; width:20px !important; padding:2px;"></i> {{ location }}</h4>
+
         </div>
-        <h4 style="margin-bottom: 5px;">Zone de Activitate</h4>
+        <h4 style="margin-bottom: 5px; margin-top: -5px">Zone de Activitate</h4>
         <div>
           
           <button *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</button>
         </div>
         
         <p style="margin-bottom: 0px;">Numar telefon: {{phoneNumber}}</p>
-        <p style="margin-bottom: 0px;">E-mail: {{email}}</p>
+        <p style="margin-bottom: 0px; text-align: center;">E-mail: {{email}}</p>
         <div style="display:flex; justify-content: center; flex-wrap: wrap;">
           <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
           <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>

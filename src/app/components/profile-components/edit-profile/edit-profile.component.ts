@@ -6,6 +6,8 @@ import { Observable, map, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -75,7 +77,7 @@ export class EditProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -262,8 +264,16 @@ export class EditProfileComponent implements OnInit {
 
     
 
-    this.apiService.editProfile(profile).subscribe(x => {
-      console.log(x);
+    this.apiService.editProfile(profile).subscribe({
+      next: (response) => {
+        // Handle successful response
+        this.router.navigate(['/profil']);
+        this.openSuccessDialog();
+      },
+      error: (error) => { 
+        // Handle error
+        this.openFailureDialog();
+      }
     });
     }
 
@@ -274,6 +284,26 @@ export class EditProfileComponent implements OnInit {
         this.imagesToDelete = this.imagesToDelete.filter(x => x!== existingImage.imageId);
       }
       this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
+    }
+
+    openSuccessDialog(): void {
+      this.dialog.open(DialogComponent, {
+        width: '400px',
+        data: {
+          message: 'Schimbarile au fost salvate cu succes!',
+          isSuccess: true
+        }
+      });
+    }
+  
+    openFailureDialog(): void {
+      this.dialog.open(DialogComponent, {
+        width: '400px',
+        data: {
+          message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+          isSuccess: false
+        }
+      });
     }
 
 

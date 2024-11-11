@@ -44,7 +44,8 @@
 
   <div class="form-group">
     <mat-form-field class="custom-input">
-      <input matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon" required>
+      <input *ngIf="!isBusinessAccount" matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon">
+      <input *ngIf="isBusinessAccount" matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon*" required>
     </mat-form-field>
   </div>
 
@@ -92,7 +93,7 @@
 
     <div class="form-group">
       <mat-form-field class="custom-input">
-      <input matInput placeholder="Email business" [(ngModel)]="businessEmail" name="businessEmail" required>
+      <input matInput placeholder="Email business*" [(ngModel)]="businessEmail" name="businessEmail" required>
     </mat-form-field>
     </div>
 
@@ -158,11 +159,11 @@
     </mat-form-field>
     </div>
     <div class="form-group">
-      <label for="imageSelectorProfile">Imaginea de profil</label>
+      <label for="imageSelectorProfile">Imaginea de profil*</label>
       <input type="file" id="imageSelector" (change)="onProfileImageSelected($event)" accept="image/*">
     </div>
     <div class="form-group">
-        <label for="imageSelector">Imaginile profilului (maxim 5)</label>
+        <label for="imageSelector">Imaginile profilului (maxim 5)*</label>
         <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
         <p *ngIf="tooManyImages" style="color:red">{{ tooManyImagesMessage }}</p>
       </div>
@@ -228,7 +229,8 @@
 
   <div class="form-group">
     <mat-form-field class="custom-input-mobile">
-      <input matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon" required>
+      <input *ngIf="isBusinessAccount" matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon*" required>
+      <input *ngIf="!isBusinessAccount" matInput [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Numar de telefon">
     </mat-form-field>
   </div>
 
@@ -258,31 +260,31 @@
     <div *ngIf="isLegalPerson" class="business-info">
       <div class="form-group">
         <mat-form-field class="custom-input-mobile">
-        <input matInput placeholder="Reg. Com." [(ngModel)]="businessRegCom" name="businessRegCom">
+        <input matInput placeholder="Reg. Com.*" [(ngModel)]="businessRegCom" name="businessRegCom">
       </mat-form-field>
       </div>
       <div class="form-group">
         <mat-form-field class="custom-input-mobile">
-        <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI">
+        <input matInput placeholder="CUI*" [(ngModel)]="businessCUI" name="businessCUI">
       </mat-form-field>
       </div>
     </div>
 
     <div class="form-group">
       <mat-form-field class="custom-input-mobile">
-      <input matInput placeholder="Numele firmei" [(ngModel)]="businessName" name="businessName">
+      <input matInput placeholder="Numele firmei*" [(ngModel)]="businessName" name="businessName">
     </mat-form-field>
     </div>
 
     <div class="form-group">
       <mat-form-field class="custom-input-mobile">
-      <input matInput placeholder="Email business" [(ngModel)]="businessEmail" name="businessEmail">
+      <input matInput placeholder="Email business*" [(ngModel)]="businessEmail" name="businessEmail">
     </mat-form-field>
     </div>
 
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
-          <mat-label>Judet</mat-label>
+          <mat-label>Judet*</mat-label>
           <mat-select [(ngModel)]="countyId" (selectionChange)="onCountyChange()">
             <mat-option *ngFor="let county of counties" [value]="county.id">{{ county.name }}</mat-option>
           </mat-select>
@@ -291,7 +293,7 @@
       
       <div class="form-group" *ngIf="countyId">
         <mat-form-field class="custom-dropdown">
-          <mat-label>Oras</mat-label>
+          <mat-label>Oras*</mat-label>
           <mat-select [(ngModel)]="cityId" required>
             <mat-option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</mat-option>
           </mat-select>
@@ -300,7 +302,7 @@
       
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
-          <mat-label>Zona de acoperire</mat-label>
+          <mat-label>Zona de acoperire*</mat-label>
           <mat-select [(ngModel)]="selectedAreas" multiple>
             <mat-option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</mat-option>
           </mat-select>
@@ -309,7 +311,7 @@
 
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
-          <mat-label>Selectare categorie</mat-label>
+          <mat-label>Selectare categorie*</mat-label>
           <mat-select [(ngModel)]="selectedCategories" >
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
@@ -342,16 +344,16 @@
     </mat-form-field>
     </div>
     <div class="form-group">
-      <label for="imageSelectorProfile">Imaginea de profil</label>
+      <label for="imageSelectorProfile">Imaginea de profil*</label>
       <input type="file" id="imageSelector" (change)="onProfileImageSelected($event)" accept="image/*">
     </div>
     <div class="form-group">
-        <label for="imageSelector">Imaginile profilului (maxim 5)</label>
+        <label for="imageSelector">Imaginile profilului (maxim 5)*</label>
         <input type="file" id="imageSelector" (change)="onImagesSelected($event)" accept="image/*" multiple>
         <p *ngIf="tooManyImages" style="color:red">{{ tooManyImagesMessage }}</p>
       </div>
     <div class="form-group">
-        <label for="description">Descriere</label>
+        <label for="description">Descriere*</label>
         <textarea style="width: 90%;" id="description" [(ngModel)]="description" name="description"></textarea>
       </div>
   </div>

@@ -195,7 +195,9 @@ export class ApiService {
   }
 
   editProfile(profile: EditProfile): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/Profile/EditProfile`, profile).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/Profile/EditProfile`, profile, { headers }).pipe(
       tap(x => {
         console.log(x);
       })
