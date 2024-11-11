@@ -2,7 +2,18 @@
     border: 1px solid #ddd;
     margin: 20px;
     padding: 10px;
-    width: 300px;
+    width: 60%;
+    background-color: white;
+    border-radius: 5%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .rating-card-mobile {
+    border: 1px solid #ddd;
+    margin: 20px;
+    padding: 10px;
+    width: 100%;
     background-color: white;
     border-radius: 5%;
     cursor: pointer;
@@ -63,6 +74,15 @@
     justify-content: center;
   }
 
+  .rating-container-mobile {
+    width: 90%;
+    margin: 0 auto; /* This centers the container horizontally */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .show-Response{
     background: linear-gradient(to right, #FF63A4, #FE8962);
     color: white;
@@ -101,4 +121,8 @@
   .button-allReviews-section {
     width: 90%;
     text-align: center;
+  }
+
+  .mobile-category {
+    font-size: 18px;
   }

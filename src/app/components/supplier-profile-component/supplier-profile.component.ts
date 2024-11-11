@@ -38,6 +38,8 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     reviewSent: boolean = false;
     areasOfInterest: string[] = [];
     urlProfileName: string = '';
+    supplierCategories!: Category[];
+    selectedCategoryId: number | null = null;
 
     images!: GalleryItem[];
 
@@ -108,7 +110,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
             this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
-
+            this.supplierCategories = response.categories;
           })
         }
         else{
@@ -130,12 +132,17 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.reviews = response.reviews;
             this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.supplierCategories = response.categories;
           })
         }
       }
 
       
 
+    }
+
+    selectCategory(id: number): void {
+      this.selectedCategoryId = id;
     }
 
     setRating(rating: number): void {
@@ -147,7 +154,8 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
         score: this.selectedRating,
         reviewText: this.reviewText,
         userId: this.currentUserId,
-        profileId: Number(this.numberProfileId)
+        profileId: Number(this.numberProfileId),
+        categoryId: this.selectedCategoryId
       } as SendReview
 
       this.apiService.saveReview(review).subscribe({
@@ -165,7 +173,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     }
 
     isReviewIncomplete(){
-      if (this.reviewText == '' || this.selectedRating == 0){
+      if (this.reviewText == '' || this.selectedRating == 0 || this.selectedCategoryId == null || this.selectedCategoryId == undefined){
         return true;
       }
       return false;

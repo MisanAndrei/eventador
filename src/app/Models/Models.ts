@@ -244,6 +244,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     authorName: string;
     creationDate: Date;
     id: number;
+    category: Category;
     responseText?: string;
     reviewText: string;
     score: number;
@@ -256,6 +257,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     responseText?: string;
     reviewText: string;
     score: number;
+    categoryName: string;
     responseShown: boolean;
     responseInApproval: boolean;
     responseTextToSend: string;
@@ -313,6 +315,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     reviewText: string;
     userId: number;
     profileId: number;
+    categoryId: number;
   }
 
   export interface SendResponse {

@@ -73,7 +73,7 @@
   <h2 *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriți</h2>
   <h3 *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h3>
   <h2 *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ați adăugat la favorite nici un furnizor!</h2>
-  <h2 *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
+  <h2 *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori <i [ngClass]="showFilter ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></i></h2>
   <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">
     <div class="mobile-filter-section">
       <mat-form-field>

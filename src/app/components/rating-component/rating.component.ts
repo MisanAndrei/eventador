@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Review, ReviewMapped, SendResponse } from 'src/app/Models/Models';
+import { Category, Review, ReviewMapped, SendResponse } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
@@ -11,6 +11,7 @@ import { ApiService } from 'src/app/Services/ApiService';
 })
 export class RatingComponent implements OnInit {
   @Input() ratings!: Review[];
+  @Input() categories!: Category[];
   @Input() profileId!: number;
   @Input() currentProfileLoggedIn!: boolean;
 
@@ -43,6 +44,7 @@ export class RatingComponent implements OnInit {
         score: rating.score,
         creationDate: rating.creationDate,
         responseShown: false,
+        categoryName: rating.category.name,
         responseInApproval: false,
         responseSent: false
       };

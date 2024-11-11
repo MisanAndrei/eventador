@@ -61,7 +61,21 @@
 </div>
 <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
 <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
-  <h4 class="rating-title">Acorda o nota</h4>
+
+  <h4 class="rating-category">Alege categoria</h4>
+
+  <div class="category-bar">
+    <div
+      *ngFor="let category of categories"
+      class="category-segment"
+      [class.selected]="selectedCategoryId === category.id"
+      (click)="selectCategory(category.id)"
+    >
+      {{ category.name }}
+    </div>
+  </div>
+
+  <h4 class="rating-note">Acorda o nota</h4>
 
   <div class="rating-container">
     <span class="star" (click)="setRating(1)" [class.selected]="selectedRating >= 1">★</span>
@@ -73,7 +87,7 @@
 
   <textarea class="review-text" placeholder="Despre experienta ta" [(ngModel)]="reviewText"></textarea>
 
-  <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" (click)="submitReview()">Submit Review</button>
+  <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" (click)="submitReview()">Salveaza Review</button>
   <h4 *ngIf="reviewSent">Review-ul tau a fost trimis spre aprobare, multumim!</h4>
 </div>
 <div *ngIf="!changesProfileId && reviews">
@@ -138,7 +152,21 @@
     </div>
     <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
 <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
-  <h4 class="rating-title">Acorda o nota</h4>
+
+  <h4 class="rating-category">Alege categoria</h4>
+
+  <div class="category-bar">
+    <div
+      *ngFor="let category of categories"
+      class="category-segment"
+      [class.selected]="selectedCategoryId === category.id"
+      (click)="selectCategory(category.id)"
+    >
+      {{ category.name }}
+    </div>
+  </div>
+
+  <h4 class="rating-note">Acorda o nota</h4>
 
   <div class="rating-container">
     <span class="star" (click)="setRating(1)" [class.selected]="selectedRating >= 1">★</span>
@@ -150,11 +178,11 @@
 
   <textarea class="review-text" placeholder="Despre experienta ta" [(ngModel)]="reviewText"></textarea>
 
-  <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" (click)="submitReview()">Submit Review</button>
+  <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" (click)="submitReview()">Salveaza Review</button>
   <h4 *ngIf="reviewSent">Review-ul tau a fost trimis spre aprobare, multumim!</h4>
 </div>
     <div *ngIf="!changesProfileId && reviews">
-      <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
+      <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged" [categories]="supplierCategories"></app-rating>
       </div>
   </div>
 

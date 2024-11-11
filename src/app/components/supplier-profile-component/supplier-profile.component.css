@@ -136,8 +136,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .rating-title {
-    margin: 5px;
+  .rating-category {
+    margin-bottom: 10px;
+  }
+
+  
+  .rating-note {
+    margin-bottom: -5px;
   }
   
   .rating-container {
@@ -191,4 +196,36 @@
     margin: 5px;
     border: none;
     border-radius: 5%;
+  }
+
+
+
+  /* category bar*/
+  .category-bar {
+    display: flex;
+    width: 100%;
+    border: 1px solid #ccc;
+  }
+  
+  .category-segment {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #ccc;
+    transition: background-color 0.3s;
+  }
+  
+  .category-segment:last-child {
+    border-right: none;
+  }
+  
+  .category-segment:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .category-segment.selected {
+    background: linear-gradient(to right, #FF63A4, #FE8962);
+    color: white;
+    font-weight: bold;
   }

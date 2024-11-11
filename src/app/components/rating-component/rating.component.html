@@ -2,6 +2,7 @@
 <div *ngIf="!(isMobile | async)" class="rating-container">
   <div class="rating-card" *ngFor="let rating of ratingsMapped">
     <div class="user-rating">
+      <h4>{{ rating.categoryName }}</h4>
       <div class="username"><i class="fa fa-user"></i> {{ rating.authorName }}</div>
       
       <div class="star-rating">
@@ -25,9 +26,10 @@
 
 </div>
 
-<div *ngIf="(isMobile | async)" class="rating-container">
-    <div class="rating-card" *ngFor="let rating of ratingsMapped">
+<div *ngIf="(isMobile | async)" class="rating-container-mobile">
+    <div class="rating-card-mobile" *ngFor="let rating of ratingsMapped">
       <div class="user-rating">
+        <p class="mobile-category">{{ rating.categoryName }}</p>
         <div class="username"><i class="fa fa-user"></i> {{ rating.authorName }}</div>
         
         <div class="star-rating">
