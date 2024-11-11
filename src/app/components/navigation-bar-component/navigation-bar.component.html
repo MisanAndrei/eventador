@@ -23,12 +23,12 @@
   </nav>
   <nav class="secondnav">
     <ul class="second-menu">
-      <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori">Furnizori</a></li>
-      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/noutati">Blog</a></li>
-    <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/despre-noi">Despre Noi</a></li>
-      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/contact">Contact</a></li>
-      <li *ngIf="isPartnerLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard Partener</a></li>
-      <li *ngIf="isAdminOrMarketingLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
+      <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori"><b>FURNIZORI</b></a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/noutati"><b>BLOG</b></a></li>
+    <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/despre-noi"><b>DESPRE NOI</b></a></li>
+      <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/contact"><b>CONTACT</b></a></li>
+      <li *ngIf="isPartnerLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard"><b>DASHBOARD PARTENER</b></a></li>
+      <li *ngIf="isAdminOrMarketingLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard"><b>ADMIN DASHBOARD</b></a></li>
       
     </ul>
   </nav>   

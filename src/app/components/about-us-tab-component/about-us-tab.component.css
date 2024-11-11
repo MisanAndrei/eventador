@@ -2,6 +2,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: #eae8db;
+    margin-top: -10px !important;
+    background-color: #4c4d4f;
   }
   
   .main-section {
@@ -9,6 +12,7 @@
     justify-content: space-between;
     width: 70%;
     height: 500px;
+
   }
   
   img {
@@ -21,8 +25,9 @@
     width: 48%; /* Adjust as needed */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: left;
+    
+    align-items: center;
+    color: white
   }
   .right-section button {
     width: 150px;
@@ -55,7 +60,15 @@
   }
 
   button {
-    background-color: palevioletred;
+    background-color: transparent;
     color: black;
+    border: none;
+    font-size: 18px;
+    color:white;
     width: 30px;
   }
+
+  button :hover {
+    border-bottom: 2px solid white;
+  }
+
