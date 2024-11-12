@@ -91,7 +91,7 @@
       <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifica-te</a>
     </li>
     <li class="menu-item">
-      <a *ngIf="isLoggedIn()" (click)="logOut()">Deconecteaza-te</a>
+      <a *ngIf="isLoggedIn()" (click)="logOutMobile()">Deconecteaza-te</a>
     </li>
     <li *ngIf="!isLoggedIn()" class="menu-item">
       <a (click)="onItemClick('/Inscriere')">Inscrie-te</a>

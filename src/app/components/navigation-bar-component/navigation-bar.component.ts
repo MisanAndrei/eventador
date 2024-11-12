@@ -107,7 +107,7 @@ export class NavigationBarComponent implements OnInit {
     this.showCategoriesFromMenu = false;
   }
 
-  logOut(){
+  logOutMobile(){
     
     this.toggleCollapse();
     const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
@@ -121,6 +121,20 @@ export class NavigationBarComponent implements OnInit {
       }
     });
     
+  }
+
+  logOut(){
+
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
+      data: { text: 'Sunteți sigur că vreți să vă deconectați?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.authService.logOut();
+        this.router.navigate(['/acasa']);
+      }
+    });
   }
   
   

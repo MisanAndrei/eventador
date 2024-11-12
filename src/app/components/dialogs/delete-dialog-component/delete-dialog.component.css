@@ -17,11 +17,3 @@
     border: 2px solid blue;
     border-radius: 20px;
   }
-
-  .top-most-dialog {
-    z-index: 2000 !important; /* Set a high z-index */
-  }
-  
-  .top-most-backdrop {
-    z-index: 1999 !important; /* Backdrop should be just below the dialog */
-  }
