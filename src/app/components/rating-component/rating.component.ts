@@ -43,7 +43,8 @@ export class RatingComponent implements OnInit {
         reviewText: rating.reviewText,
         score: rating.score,
         creationDate: rating.creationDate,
-        responseShown: false,
+        responseToBeSent: false,
+        responseShown: true,
         categoryName: rating.category.name,
         responseInApproval: false,
         responseSent: false
@@ -99,5 +100,9 @@ export class RatingComponent implements OnInit {
       }
       return obj;
     });
+  }
+
+  showResponseArea(review: ReviewMapped){
+    review.responseToBeSent = true;
   }
 }

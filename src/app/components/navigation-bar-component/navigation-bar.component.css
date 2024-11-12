@@ -235,7 +235,7 @@ nav {
     left: 0;
     width: 100vw;
     height: calc(100vh - 60px); /* Subtract the navbar height from viewport height */
-    background: rgba(255, 255, 255, 0.9);
+    background: white;
     z-index: 9999;
 
   }
@@ -248,7 +248,7 @@ nav {
   
   .menu-item {
     font-size: 24px; /* Adjust the font size as needed */
-    margin-bottom: 10px; /* Add space between items */
+    margin-bottom: 30px !important; /* Add space between items */
     font-weight: bold;
   }
   
@@ -257,6 +257,7 @@ nav {
     color: black;
     padding: 5px 10px; /* Add padding for space around the text */
     border-radius: 5px;
+    border-bottom: 1px solid black;
   }
   
   .menu-item a:hover {

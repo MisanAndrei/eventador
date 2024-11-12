@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
 
 @Component({
   selector: 'app-admin-dashboard-reviews',
@@ -28,7 +30,7 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
     reviews: ApprovalReview[] = [];
     dataSource = new MatTableDataSource<ApprovalReview>(this.reviews);
     
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private dialog: MatDialog) {
     this._observer = breakpointObserver;
     
   }
@@ -41,7 +43,7 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
       );
   }
 
-  ngAfterViewInit(): void {
+  fetchData(){
     this.apiService.getApprovalReviews().subscribe(response => {
       this.reviews = response;
       this.dataSource = new MatTableDataSource<ApprovalReview>(this.reviews);
@@ -49,7 +51,11 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort;
       
      })
+  }
 
+  ngAfterViewInit(): void {
+    
+    this.fetchData();
     
     this.searchControl.valueChanges
       .pipe(
@@ -64,11 +70,12 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
   approveReview(review: ApprovalReview){
     this.apiService.approveOrRejectReview(review.reviewId, true).subscribe({
       next: () => {
-
+        this.openSuccessDialog();
+        this.fetchData();
       },
       error: (error) => {
         console.error('Error saving review:', error);
-        // Handle error
+        this.openFailureDialog();
       }
     });
   }
@@ -76,11 +83,32 @@ export class AdminDashboardReviewsComponent implements OnInit, AfterViewInit {
   rejectReview(review: ApprovalReview){
     this.apiService.approveOrRejectReview(review.reviewId, false).subscribe({
       next: () => {
-
+        this.openSuccessDialog();
+        this.fetchData();
       },
       error: (error) => {
         console.error('Error saving review:', error);
-        // Handle error
+        this.openFailureDialog();
+      }
+    });
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Review-ul a fost aprobat/respins cu succes !',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
       }
     });
   }

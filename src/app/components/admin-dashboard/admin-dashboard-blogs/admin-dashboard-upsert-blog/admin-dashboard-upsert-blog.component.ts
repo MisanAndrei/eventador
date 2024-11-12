@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/Services/ApiService';
 import { Editor } from 'ngx-editor';
 import { UpsertBlogRequest } from 'src/app/Requests/Requests';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/components/dialogs/dialog-component/dialog.component';
 
 @Component({
   selector: 'app-admin-dashboard-upsert-blog',
@@ -16,7 +18,7 @@ export class AdminDashboardBlogUpsertComponent implements OnInit, OnDestroy {
   editorContent = ''; // Property to hold the editor content
   editor!: Editor;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private dialog: MatDialog) {}
 
   ngOnDestroy(): void {
     this.editor.destroy();
@@ -51,8 +53,37 @@ export class AdminDashboardBlogUpsertComponent implements OnInit, OnDestroy {
       content: this.editorContent
     };
 
-    this.apiService.upsertBlog(upsertBlogRequest).subscribe(x => {
-      console.log(x)
+    this.apiService.upsertBlog(upsertBlogRequest).subscribe({
+      next: (response) => {
+        // Handle successful response
+        console.log(response);
+        this.openSuccessDialog();
+      },
+      error: (error) => {
+        // Handle error
+        console.error('Error upserting blog:', error);
+        this.openFailureDialog();
+      }
+    });
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Blog-ul a fost adaugat cu succes !',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
+      }
     });
   }
 

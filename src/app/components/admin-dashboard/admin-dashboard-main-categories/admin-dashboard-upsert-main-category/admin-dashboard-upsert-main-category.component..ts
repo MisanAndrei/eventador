@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/components/dialogs/dialog-component/dialog.component';
 import { Category, Group, MappedCategory } from 'src/app/Models/Models';
 import { UpsertMainCategoryRequest } from 'src/app/Requests/Requests';
 import { ApiService } from 'src/app/Services/ApiService';
@@ -18,7 +20,7 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
   categories!: MappedCategory[];
   unassignedCategories!: MappedCategory[];
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private dialog: MatDialog) {
     this.groupForm = this.formBuilder.group({
       name: [''],
       showOnLandingPage: [false]
@@ -78,11 +80,31 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
     this.apiService.upsertCategoryGroup(upsertMainCategoryRequest).subscribe({
       next: (response) => {
         console.log('Category group upserted successfully', response);
-        // Handle successful response
+        this.openSuccessDialog();
       },
       error: (error) => {
         console.error('Error upserting category group:', error);
-        // Handle error
+        this.openFailureDialog();
+      }
+    });
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Grupul a fost adaugat/modificat cu succes !',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
       }
     });
   }

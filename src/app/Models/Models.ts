@@ -259,6 +259,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     score: number;
     categoryName: string;
     responseShown: boolean;
+    responseToBeSent: boolean;
     responseInApproval: boolean;
     responseTextToSend: string;
     responseSent: boolean;

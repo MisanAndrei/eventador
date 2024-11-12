@@ -109,7 +109,7 @@ export class NavigationBarComponent implements OnInit {
 
   logOut(){
     
-
+    this.toggleCollapse();
     const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
       data: { text: 'Sunteți sigur că vreți să vă deconectați?' }
     });

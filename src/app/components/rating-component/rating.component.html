@@ -14,7 +14,8 @@
     <div class="review">{{ rating.reviewText }}</div>
     <button *ngIf="rating.responseText && !rating.responseShown" (click)="showResponse(rating)" class="show-Response">Arata Raspuns</button>
       <div class="response" *ngIf="rating.responseText && rating.responseShown">{{ rating.responseText }}</div>
-      <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn">
+    <button class="show-Response" (click)="showResponseArea(rating)" style="float: right;" *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn && !rating.responseToBeSent">Raspunde</button>
+      <div *ngIf="!rating.responseText && !rating.responseInApproval && !rating.responseSent && currentProfileLoggedIn && rating.responseToBeSent">
         <textarea class="response-area" [(ngModel)]="rating.responseTextToSend"></textarea>
         <button (click)="sendResponse(rating.id, rating.responseTextToSend)" class="show-Response">Trimite Raspuns</button>
     </div>

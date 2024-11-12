@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/components/dialogs/dialog-component/dialog.component';
 import { Category } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 
@@ -14,7 +16,7 @@ export class AdminDashboardCategoryUpsertComponent implements OnInit {
   categoryForm!: FormGroup;
   isEditing = false;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
@@ -40,10 +42,31 @@ export class AdminDashboardCategoryUpsertComponent implements OnInit {
     this.apiService.upsertCategory(category).subscribe({
       next: () => {
         console.log("a mers");
+        this.openSuccessDialog();
       },
       error: (error) => {
         console.error('Error saving review:', error);
-        // Handle error
+        this.openFailureDialog();
+      }
+    });
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'Categoria a fost adaugata cu succes !',
+        isSuccess: true
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        message: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+        isSuccess: false
       }
     });
   }
