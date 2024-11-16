@@ -15,6 +15,11 @@ import { ProfileComponent } from './components/profile-component/profile.compone
 import { EditProfileComponent } from './components/profile-components/edit-profile/edit-profile.component';
 import { FavoritesComponent } from './components/favorites-component/favorites.component';
 import { RecoverPasswordComponent } from './components/recover-password-component/recover-password.component';
+import { LegalAnpcComponent } from './components/legal-components/legal-anpc-component/legal-anpc.component';
+import { LegalGdprComponent } from './components/legal-components/legal-gdpr-component/legal-gdpr.component';
+import { LegalTermsComponent } from './components/legal-components/legal-terms-component/legal-terms.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { createApplication } from '@angular/platform-browser';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -24,8 +29,6 @@ const routes: Routes = [
 { path: 'acasa', component: DashboardComponent },
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
-{ path: 'Inscriere', component: CreateProfileComponent},
-{ path: 'Inscriere/:partnerIdentifier', component: CreateProfileComponent},
 { path: 'Favorite', component: FavoritesComponent},
 { path: 'EditareProfil/:id', component: EditProfileComponent},
 { path: 'blog/:id', component: BlogComponent},
@@ -35,6 +38,14 @@ const routes: Routes = [
 { path: 'furnizori', component: CustomersComponent},
 { path: 'furnizori/:id/:description', component: CustomersComponent },
 { path: 'RecuperareParola', component: RecoverPasswordComponent },
+{ path: 'ANPC', component: LegalAnpcComponent},
+{ path: 'GDPR', component: LegalGdprComponent},
+{ path: 'TermenisiConditii', component: LegalTermsComponent},
+{ path: 'Inscriere', component: CreateAccountComponent },
+{ path: 'Inscriere/client', component: CreateProfileComponent, data: { isBusinessAccount: false } },
+{ path: 'Inscriere/client/:partnerIdentifier', component: CreateProfileComponent, data: { isBusinessAccount: false } },
+{ path: 'Inscriere/furnizor/:partnerIdentifier', component: CreateProfileComponent, data: { isBusinessAccount: true } },
+{ path: 'Inscriere/furnizor', component: CreateProfileComponent, data: { isBusinessAccount: true } },
 { path: 'profil', component: ProfileComponent}];
 
 @NgModule({

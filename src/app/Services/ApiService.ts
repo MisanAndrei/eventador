@@ -264,4 +264,8 @@ export class ApiService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<T>(url, data, { headers });
   }
+
+  public checkEmailUnique(email: string){
+    return this.http.post<any>(`${this.apiUrl}/`, email);
+  }
 }

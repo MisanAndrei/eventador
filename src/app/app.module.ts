@@ -40,6 +40,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 import { NgApexchartsModule } from 'ng-apexcharts'; 
 import { NgxEditorModule } from 'ngx-editor';
+import { MatIcon } from '@angular/material/icon';
 
 
 
@@ -96,7 +97,11 @@ import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-da
 import { DialogComponent } from './components/dialogs/dialog-component/dialog.component';
 import { QuillModule } from 'ngx-quill';
 import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partner-upsert/admin-dashboard-partner-upsert.component';
-
+import { LegalAnpcComponent } from './components/legal-components/legal-anpc-component/legal-anpc.component';
+import { LegalCookiesComponent } from './components/legal-components/legal-cookies-component/legal-cookies.component';
+import { LegalGdprComponent } from './components/legal-components/legal-gdpr-component/legal-gdpr.component';
+import { LegalTermsComponent } from './components/legal-components/legal-terms-component/legal-terms.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 
 
@@ -151,7 +156,12 @@ import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboa
     AdminDashboardMainCategoriesComponent,
     AdminDashboardUpsertMainCategoryComponent,
     DialogComponent,
-    AdminDashboardPartnerUpsertComponent
+    AdminDashboardPartnerUpsertComponent,
+    LegalAnpcComponent,
+    LegalCookiesComponent,
+    LegalGdprComponent,
+    LegalTermsComponent,
+    CreateAccountComponent
   ],
   imports: [
     AppRoutingModule,
@@ -183,6 +193,7 @@ import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboa
     NgApexchartsModule,
     MatSnackBarModule,
     MatCheckbox,
+    MatIcon,
     NgxEditorModule,
     QuillModule.forRoot({
       customOptions: [{

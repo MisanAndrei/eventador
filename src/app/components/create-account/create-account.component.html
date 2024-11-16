@@ -1,0 +1,30 @@
+<div class="create-account-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1>Creează un cont pe cea mai mare platformă de furnizori pentru evenimente</h1>
+      <p>Alege tipul de cont și începe să explorezi cele mai bune soluții pentru evenimentele tale.</p>
+    </div>
+  
+    <!-- Account Type Cards -->
+    <div class="cards-container">
+      <!-- User Account Card -->
+      <div class="account-card" (click)="onSelectAccount('client')">
+        <div class="card-header">
+          <mat-icon class="card-icon user-icon">celebration</mat-icon>
+          <h2>Cont Utilizator</h2>
+        </div>
+        <p>Creează un cont de utilizator pentru a găsi rapid cei mai buni furnizori de evenimente.</p>
+        <button mat-raised-button color="primary" class="create-button">Creare cont</button>
+      </div>
+  
+      <!-- Supplier Account Card -->
+      <div class="account-card" (click)="onSelectAccount('furnizor')">
+        <div class="card-header">
+          <mat-icon class="card-icon supplier-icon">event</mat-icon>
+          <h2>Cont Furnizor</h2>
+        </div>
+        <p>Înscrie-te ca furnizor și extinde-ți vizibilitatea pe cea mai mare platforma de furnizori de evenimente din Romania</p>
+        <button mat-raised-button color="primary" class="create-button">Creare cont</button>
+      </div>
+    </div>
+  </div>

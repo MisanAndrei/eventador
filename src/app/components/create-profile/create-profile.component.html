@@ -8,14 +8,46 @@
 
   <div class="form-group">
     <mat-form-field class="custom-input">
-    <input matInput placeholder="Email*" type="email" id="email" [(ngModel)]="email" name="email" required>
-  </mat-form-field>
+      <input
+        matInput
+        placeholder="Email*"
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        (blur)="onEmailBlur()"
+      />
+    </mat-form-field>
+  
+    <!-- Display the email validation message -->
+    <p [class.success-message]="emailUnique" [class.error-message]="!emailUnique">
+      {{ emailErrorMessage }}
+    </p>
   </div>
 
   <div class="form-group">
     <mat-form-field class="custom-input">
-    <input matInput placeholder="Parola*" type="password" id="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
+      <input
+        matInput
+        placeholder="Parola*"
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        (input)="checkPasswordStrength(password)"
+      />
+    </mat-form-field>
+  
+    <!-- Password validation messages -->
+    <div *ngIf="showPasswordMessages && !isAllValid()" class="password-strength-container">
+      <p *ngIf="!passwordStrength.length" class="validation-message"><span class="icon">✖️</span> Minimum 8 caractere</p>
+      <p *ngIf="!passwordStrength.lowercase" class="validation-message"><span class="icon">✖️</span> Cel puțin o literă mică</p>
+      <p *ngIf="!passwordStrength.uppercase" class="validation-message"><span class="icon">✖️</span> Cel puțin o literă mare</p>
+      <p *ngIf="!passwordStrength.number" class="validation-message"><span class="icon">✖️</span> Cel puțin o cifră</p>
+      <p *ngIf="!passwordStrength.specialChar" class="validation-message"><span class="icon">✖️</span> Cel puțin un caracter special</p>
+    </div>
   </div>
 
   <div class="form-group">
@@ -55,6 +87,7 @@
     <mat-slide-toggle
           [checked]="isBusinessAccount"
           [(ngModel)]="isBusinessAccount"
+          [disabled] = true
           (change)="toggleBusinessInfo()">
       </mat-slide-toggle>
   </div>
@@ -93,8 +126,17 @@
 
     <div class="form-group">
       <mat-form-field class="custom-input">
-      <input matInput placeholder="Email business*" [(ngModel)]="businessEmail" name="businessEmail" required>
-    </mat-form-field>
+        <input
+          matInput
+          placeholder="Email business*"
+          [(ngModel)]="businessEmail"
+          name="businessEmail"
+          required
+          (blur)="validateBusinessEmail()"
+        />
+      </mat-form-field>
+      <!-- Display business email validation message -->
+      <p *ngIf="!businessEmailValid" class="error-message">{{ businessEmailErrorMessage }}</p>
     </div>
 
       <div class="form-group">
@@ -179,7 +221,12 @@
   </mat-form-field>
   <p class="code-error-message" *ngIf="showPartnerErrorCode">Codul de partener nu este valabil !</p>
   <p class="code-success-message" *ngIf="showPartnerSuccessCode">Codul de partener este valabil !</p>
-
+  <div class="terms-message">
+    <p>
+      Prin crearea unui cont, sunteți de acord cu
+      <a routerLink="/TermenisiConditii" target="_blank">Termenii și Condițiile</a>.
+    </p>
+  </div>
   <div class="save-button-container">
     <button class="save-button" mat-raised-button color="accent" [ngStyle]="{'cursor': saveButtonEnabled() ? 'pointer' : 'not-allowed'}" [disabled]="!saveButtonEnabled()" (click)="onSaveButtonClick()">Salveaza profil</button>
   </div>
@@ -200,8 +247,26 @@
 
   <div class="form-group">
     <mat-form-field class="custom-input-mobile">
-    <input matInput placeholder="Parola*" type="password" id="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
+      <input
+        matInput
+        placeholder="Parola*"
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        (input)="checkPasswordStrength(password)"
+      />
+    </mat-form-field>
+  
+    <!-- Password validation messages -->
+    <div *ngIf="showPasswordMessages && !isAllValid()" class="password-strength-container-mobile">
+      <p *ngIf="!passwordStrength.length" class="validation-message"><span class="icon">✖️</span> Minimum 8 caractere</p>
+      <p *ngIf="!passwordStrength.lowercase" class="validation-message"><span class="icon">✖️</span> Cel puțin o literă mică</p>
+      <p *ngIf="!passwordStrength.uppercase" class="validation-message"><span class="icon">✖️</span> Cel puțin o literă mare</p>
+      <p *ngIf="!passwordStrength.number" class="validation-message"><span class="icon">✖️</span> Cel puțin o cifră</p>
+      <p *ngIf="!passwordStrength.specialChar" class="validation-message"><span class="icon">✖️</span> Cel puțin un caracter special</p>
+    </div>
   </div>
 
   <div class="form-group">
@@ -240,6 +305,7 @@
     <mat-slide-toggle
           [checked]="isBusinessAccount"
           [(ngModel)]="isBusinessAccount"
+          [disabled] = true
           (change)="toggleBusinessInfo()">
       </mat-slide-toggle>
   </div>
@@ -278,8 +344,17 @@
 
     <div class="form-group">
       <mat-form-field class="custom-input-mobile">
-      <input matInput placeholder="Email business*" [(ngModel)]="businessEmail" name="businessEmail">
-    </mat-form-field>
+        <input
+          matInput
+          placeholder="Email business*"
+          [(ngModel)]="businessEmail"
+          name="businessEmail"
+          required
+          (blur)="validateBusinessEmail()"
+        />
+      </mat-form-field>
+      <!-- Display business email validation message -->
+      <p *ngIf="!businessEmailValid" class="error-message">{{ businessEmailErrorMessage }}</p>
     </div>
 
       <div class="form-group">
@@ -357,7 +432,12 @@
         <textarea style="width: 90%;" id="description" [(ngModel)]="description" name="description"></textarea>
       </div>
   </div>
-
+  <div class="terms-message">
+    <p>
+      Prin crearea unui cont, sunteți de acord cu
+      <a routerLink="/TermenisiConditii" target="_blank">Termenii și Condițiile</a>.
+    </p>
+  </div>
   <div class="save-button-container">
     <button class="save-button" mat-raised-button color="accent" [disabled]="!saveButtonEnabled()" (click)="onSaveButtonClick()">Salveaza profil</button>
   </div>
