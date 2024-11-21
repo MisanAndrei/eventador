@@ -34,11 +34,12 @@ export class DashboardComponent implements OnInit {
       this.section3 = response.sections[2];
       this.section4 = response.sections[3];
       this.profileCards = response.profileCards;
+      this.categories = response.categoryGroups;
 
-      this.isMobile.subscribe(isMobile => {
+      /*this.isMobile.subscribe(isMobile => {
         this.blogs = isMobile ? response.blogCards.slice(0, 4) : response.blogCards;
         this.categories = isMobile ? response.categoryGroups.slice(0, 4) : response.categoryGroups;
-      });
+      });*/
     })
   }
 }

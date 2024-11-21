@@ -7,6 +7,7 @@
     text-align: center;
     padding: 15px;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
   }
   
   .cookies-banner p {
