@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
   personalProfilesVisible: boolean = false;
   signUpLink: string = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: Dialog, private apiService: ApiService, private matDialog: MatDialog, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: MatDialog, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount() {
-    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.matDialog.open(DeleteDialogComponent, {
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
       data: { text: 'Sunteți sigur că vreți să ștergeți toate datele contului?' }
     });
   

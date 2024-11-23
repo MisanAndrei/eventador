@@ -225,7 +225,7 @@ export class ApiService {
   }
 
   recoverPassword(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/User/FrogotPassword`, email).pipe(
+    return this.http.post<any>(`${this.apiUrl}/User/ForgotPassword`, email).pipe(
       tap(x => {
         console.log(x);
       })
@@ -234,7 +234,7 @@ export class ApiService {
 
   deleteUser(userId: number): Observable<any> {
     const options = {
-      body: { userId: userId }
+      body: userId // Pass the raw integer as the body
     };
   
     return this.http.request<any>('DELETE', `${this.apiUrl}/User/DeleteUser`, options).pipe(
