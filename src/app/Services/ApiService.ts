@@ -177,6 +177,10 @@ export class ApiService {
     return this.http.get<AdminDashboardProfilesChanged[]>(`${this.apiUrl}/Profile/ProfilesToReview`);
   }
 
+  activateAccount(token: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/auth/ActivateAccount`, { params: { token } });
+  }
+
   createUser(user: CreateUser): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/User`, user).pipe(
       tap(x => {
@@ -266,6 +270,6 @@ export class ApiService {
   }
 
   public checkEmailUnique(email: string){
-    return this.http.post<any>(`${this.apiUrl}/`, email);
+    return this.http.get<any>(`${this.apiUrl}/User/IsEmailUnique`, { params: { email } });
   }
 }

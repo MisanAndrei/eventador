@@ -20,6 +20,7 @@ import { LegalGdprComponent } from './components/legal-components/legal-gdpr-com
 import { LegalTermsComponent } from './components/legal-components/legal-terms-component/legal-terms.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { createApplication } from '@angular/platform-browser';
+import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/acasa', pathMatch: 'full' },
@@ -41,6 +42,7 @@ const routes: Routes = [
 { path: 'ANPC', component: LegalAnpcComponent},
 { path: 'GDPR', component: LegalGdprComponent},
 { path: 'TermenisiConditii', component: LegalTermsComponent},
+{ path: 'ActivareCont', component: ActivateAccountComponent},
 { path: 'Inscriere', component: CreateAccountComponent },
 { path: 'Inscriere/client', component: CreateProfileComponent, data: { isBusinessAccount: false } },
 { path: 'Inscriere/client/:partnerIdentifier', component: CreateProfileComponent, data: { isBusinessAccount: false } },

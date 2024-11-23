@@ -161,6 +161,7 @@ export class CreateProfileComponent implements OnInit {
       // Update error message based on uniqueness check
       if (isUnique) {
         this.emailErrorMessage = 'Emailul este disponibil.';
+        this.emailUnique = true;
       } else {
         this.emailErrorMessage = 'Emailul este deja folosit!';
       }

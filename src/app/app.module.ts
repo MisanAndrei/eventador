@@ -102,6 +102,7 @@ import { LegalCookiesComponent } from './components/legal-components/legal-cooki
 import { LegalGdprComponent } from './components/legal-components/legal-gdpr-component/legal-gdpr.component';
 import { LegalTermsComponent } from './components/legal-components/legal-terms-component/legal-terms.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
 
 
 
@@ -161,7 +162,8 @@ import { CreateAccountComponent } from './components/create-account/create-accou
     LegalCookiesComponent,
     LegalGdprComponent,
     LegalTermsComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    ActivateAccountComponent
   ],
   imports: [
     AppRoutingModule,
