@@ -15,7 +15,9 @@ export class LoginComponent {
   isMobile: any;
   username: string = '';
   password: string = '';
-  errorWhenLogging: boolean = false;
+  errorCredentials: boolean = false;
+  errorNotActivated: boolean = false;
+  errorDefault: boolean = false;
 
   constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -25,21 +27,37 @@ export class LoginComponent {
    }
 
    async login() {
+    this.errorDefault = false;
+    this.errorCredentials = false;
+    this.errorNotActivated = false;
     this.authService.login(this.username, this.password).subscribe({
       next: result => {
         if (result) {
-          // Successful login logic, navigate, etc.
-          this.router.navigate(['/acasa']);
+          if (result.data){
+            this.authService.storeLoggedUser(result.data);
+            this.authService.storeFavoriteProfiles(result.data.favourtieProfilesIds ?? []);
+            this.router.navigate(['/acasa']);
+          }
+          else{
+            switch (result.statusCode) {
+              case 403:
+                this.errorNotActivated = true;
+                break;
+              case 404:
+                this.errorCredentials = true;
+                break;
+              default:
+                this.errorDefault = true;
+                break;
+            }
+          }
+          
         } else {
-          // Handle unsuccessful login
-          this.errorWhenLogging = true;
-          console.error('Login failed');
+          this.errorDefault = true;
         }
       },
       error: error => {
-        // Handle errors, if any
-        this.errorWhenLogging = true;
-        console.error('Error:', error);
+        this.errorDefault = true;
       }
     });
   }

@@ -110,6 +110,11 @@ import { UserRole } from "../Utilities/enums/Enums";
     isMaintained: boolean;
   }
 
+  export interface LoginResponse {
+    data?: LoggingUserResponse;
+    statusCode: number;
+  }
+
   export interface LoggingUserResponse {
     id: number;
     email: string;

@@ -28,28 +28,27 @@ export class ActivateAccountComponent implements OnInit {
   
       if (token) {
         this.apiService.activateAccount(token).subscribe({
-          next: () => {
-            // Successful activation (200)
-            this.openSuccessDialog('Contul a fost activat cu succes, vă puteți autentifica!');
-            setTimeout(() => {
-              this.router.navigate(['/acasa']); // Redirect to home after success
-            }, 2000); // Delay to show the success message
-          },
-          error: (error) => {
-            // Handle specific error status codes
-            switch (error.status) {
-              case 403: // Expired token
-                this.openFailureDialog(
-                  'Codul de activare a expirat, verifica email-ul pentru un nou link de activare, inbox sau spam.'
-                );
+          next: (response: { statusCode: number }) => {
+            // Handle cases based on numeric statusCode
+            switch (response.statusCode) {
+              case 200: // Successful activation
+                this.openSuccessDialog('Contul a fost activat cu succes, vă puteți autentifica!');
                 setTimeout(() => {
                   this.router.navigate(['/acasa']); // Redirect to home after success
+                }, 2000);
+                break;
+                case 400: 
+                this.openFailureDialog(
+                  'Codul de activare este invalid!'
+                );
+                setTimeout(() => {
+                  this.router.navigate(['/acasa']); // Redirect to home after failure
                 }, 2000);
                 break;
               case 404: // Token does not exist
                 this.openFailureDialog('Codul de activare nu există!');
                 setTimeout(() => {
-                  this.router.navigate(['/acasa']); // Redirect to home after success
+                  this.router.navigate(['/acasa']); // Redirect to home after failure
                 }, 2000);
                 break;
               case 409: // Already activated
@@ -57,23 +56,29 @@ export class ActivateAccountComponent implements OnInit {
                   'Codul de activare a fost deja folosit, contul dumneavoastră este activ!'
                 );
                 setTimeout(() => {
-                  this.router.navigate(['/acasa']); // Redirect to home after success
+                  this.router.navigate(['/acasa']); // Redirect to home after failure
                 }, 2000);
                 break;
-              default: // Generic error
-                this.openFailureDialog('O eroare a apărut în timpul activării contului.');
+              default: // Unexpected success response
+                this.openFailureDialog('A apărut o eroare, va rugam sa incercati din nou!');
                 setTimeout(() => {
-                  this.router.navigate(['/acasa']); // Redirect to home after success
+                  this.router.navigate(['/acasa']); // Redirect to home after failure
                 }, 2000);
                 break;
             }
-            console.error('Activation error:', error);
+          },
+          error: () => {
+            // Generic error case
+            this.openFailureDialog('O eroare a apărut în timpul activării contului. Va rugam sa incercati din nou!');
+            setTimeout(() => {
+              this.router.navigate(['/acasa']); // Redirect to home after failure
+            }, 2000);
           }
         });
       } else {
         this.openFailureDialog('Link-ul de activare nu este valid.');
         setTimeout(() => {
-          this.router.navigate(['/acasa']); // Redirect to home after success
+          this.router.navigate(['/acasa']); // Redirect to home after failure
         }, 2000);
       }
     });
@@ -90,7 +95,7 @@ export class ActivateAccountComponent implements OnInit {
   }
 
   openFailureDialog(message: string): void {
-    this.dialog.open(DialogComponent, { 
+    this.dialog.open(DialogComponent, {
       width: '400px',
       data: {
         message: message,

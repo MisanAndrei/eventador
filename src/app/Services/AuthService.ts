@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { LoggedUser, LoggingUserResponse } from '../Models/Models';
+import { LoggedUser, LoggingUserResponse, LoginResponse } from '../Models/Models';
 import { UserRole } from '../Utilities/enums/Enums';
 import { Observable, of } from 'rxjs';
 import { tap, catchError, switchMap } from 'rxjs/operators';
@@ -83,12 +83,11 @@ export class AuthService {
     return token ? this.jwtHelper.decodeToken(token) : null;
   }
 
-  login(email: string, password: string): Observable<LoggingUserResponse> {
+  login(email: string, password: string): Observable<LoginResponse> {
     const platform: string = "Web";
-    return this.http.post<LoggingUserResponse>(this.apiUrl, { email, password, platform }).pipe(
+    return this.http.post<LoginResponse>(this.apiUrl, { email, password, platform }).pipe(
       tap(response => {
-        this.storeLoggedUser(response);
-        this.storeFavoriteProfiles(response.favourtieProfilesIds ?? []);
+        
       })
     );
   }

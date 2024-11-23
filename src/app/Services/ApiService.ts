@@ -177,8 +177,8 @@ export class ApiService {
     return this.http.get<AdminDashboardProfilesChanged[]>(`${this.apiUrl}/Profile/ProfilesToReview`);
   }
 
-  activateAccount(token: string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/auth/ActivateAccount`, { params: { token } });
+  activateAccount(activationToken: string): Observable<any>{
+    return this.http.get<number>(`${this.apiUrl}/auth/ActivateAccount`, { params: { activationToken } });
   }
 
   createUser(user: CreateUser): Observable<any> {
