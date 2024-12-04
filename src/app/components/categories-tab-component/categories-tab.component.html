@@ -12,14 +12,11 @@
     <div class="category-carousel-mobile">
       <div
         class="category-card-mobile"
-        *ngFor="let category of categories"
-        [routerLink]="['/furnizori', category.id, 'Categorie']"
+        *ngFor="let group of categories"
+        [routerLink]="['/furnizori', group.id, 'Categorie']"
       >
-        <div class="category-image-mobile" [style.background-image]="'url(' + category.image + ')'">
-          <div class="category-details-mobile">
-            <h3>{{ category.name }}</h3>
-          </div>
-        </div>
+        <h3 class="category-title-mobile">{{ group.name }}</h3>
+        <div class="category-image-mobile" [style.background-image]="'url(' + group.image + ')'"></div>
       </div>
     </div>
   </div>

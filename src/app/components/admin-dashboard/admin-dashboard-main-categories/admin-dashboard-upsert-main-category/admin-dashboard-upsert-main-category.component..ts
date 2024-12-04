@@ -63,12 +63,21 @@ export class AdminDashboardUpsertMainCategoryComponent implements OnInit {
 
   onSubmit(): void {
     const formValue = this.groupForm.value;
-    const checkedCategoryIds = this.categories
+
+    let checkedCategoryIds: number[] = []
+
+    if (this.group) {
+      checkedCategoryIds = this.categories
       .filter(category => category.checked)
       .map(category => category.id);
-    checkedCategoryIds.push(...this.unassignedCategories
+      checkedCategoryIds.push(...this.unassignedCategories
       .filter(category => category.checked)
       .map(category => category.id));
+    }else{
+      checkedCategoryIds = this.unassignedCategories
+      .filter(category => category.checked)
+      .map(category => category.id);
+    }
 
     const upsertMainCategoryRequest: UpsertMainCategoryRequest = {
       id: this.group?.id,

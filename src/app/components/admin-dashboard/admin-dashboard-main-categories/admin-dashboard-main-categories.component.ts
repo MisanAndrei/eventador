@@ -103,7 +103,7 @@ export class AdminDashboardMainCategoriesComponent implements OnInit, AfterViewI
   
   // For example, adding a new group
   addGroup() {
-    this.router.navigate(['/AddGroup']);
+    this.showUpsertMainCategory = true;
   }
 
   editGroup(group: MappedGroup){

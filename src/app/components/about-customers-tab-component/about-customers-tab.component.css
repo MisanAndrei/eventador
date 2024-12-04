@@ -59,3 +59,10 @@
     color: black;
     width: 30px;
   }
+  
+  .team-icon {
+    color: black; /* Use your theme color */
+    height: 200px;
+    width: 200px;
+    font-size: 200px;
+  }

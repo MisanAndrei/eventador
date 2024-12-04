@@ -1,7 +1,9 @@
 <div class="header">
     <h1>Groups</h1>
   </div>
+  <button (click)="addGroup()">Adauga grup</button>
   <div class="mat-elevation-z8 table-container">
+    
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
       <!-- Checkbox Column -->
       

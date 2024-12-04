@@ -43,7 +43,6 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
 
     images!: GalleryItem[];
 
-
     imageObject: any = [];
     
     //model
@@ -59,7 +58,6 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     selectedRating: number = 0;
     reviewText: string = '';
     offerRating: boolean = false;
-
 
     constructor(private ref: ChangeDetectorRef, 
       private breakpointObserver: BreakpointObserver, 
@@ -115,7 +113,9 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
         }
         else{
           this.apiService.getUserProfile(Number(this.profileId)).subscribe(response => {
-
+            if (this.urlProfileName != response.businessName){
+              this.router.navigate(['/furnizori']);
+            }
             this.profileName = response.businessName;
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
@@ -136,9 +136,6 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
           })
         }
       }
-
-      
-
     }
 
     selectCategory(id: number): void {
@@ -195,6 +192,4 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
       // If already has a valid protocol, return the original URL
       return url;
     }
-
-    
   }
