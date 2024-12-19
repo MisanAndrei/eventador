@@ -1,71 +1,59 @@
-<div class="fullscreen-component">
-    <h1 class="title">Contact</h1>
-    <h2 class="subtitle">CONTACTEAZA ECHIPA EVENTADOR</h2>
-    <div class="image-list">
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://eventador.ro/images/eventador-purple.jpg" alt="Image 1">
-        <div class="contact-data">
-          <h3>Contact Name 1</h3>
-          <p>Email: contact1example.com</p>
-          <p>Phone: 1234567890</p>
-        </div>
-      </div>
-      <!-- Add more items here -->
+<div class="contact-page" [ngClass]="{ 'mobile-layout': isMobile | async }">
+  <!-- Page Title -->
+  <h1 class="page-title">Contact</h1>
+  <p class="attraction-text">
+    Fii parte din cea mai mare comunitate de evenimente! Devino <strong>Furnizor</strong> sau <strong>Affiliate</strong> și explorează oportunități unice.
+  </p>
+
+  <!-- Sections -->
+  <div class="contact-sections">
+    <!-- Supplier Section -->
+    <div class="section supplier">
+      <h2>Furnizori</h2>
+      <p>
+        Ai o afacere în domeniul evenimentelor și vrei să-ți crești vizibilitatea? Intră în cea mai mare comunitate dedicată evenimentelor din România! Alăturându-te platformei noastre ca furnizor, vei putea:
+      </p>
+      <ul>
+        <li>Să ajungi la mii de clienți care caută locații de vis, baruri de cocktailuri, candy bars, servicii de sunet și multe altele.</li>
+        <li>Să beneficiezi de un profil personalizat, recenzii reale și recomandări care îți vor crește credibilitatea.</li>
+        <li>Să colaborezi cu o rețea vastă de profesioniști pentru a oferi cele mai bune experiențe clienților.</li>
+      </ul>
+      <p>
+        Fii parte dintr-o comunitate care apreciază creativitatea și profesionalismul, și lasă-ți amprenta în industria evenimentelor!
+      </p>
     </div>
 
-    <div>
-        <h2 class="subtitle">NE GASESTI SI AICI</h2>
-    </div>
-    <div>
-      <a href="https://www.facebook.com/eventador.ro" class="fa fa-facebook"></a>
-      <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+    <!-- Affiliate Section -->
+    <div class="section affiliate">
+      <h2>Afiliați</h2>
+      <p>
+        Cauți o oportunitate de a-ți dezvolta cariera într-un mod unic? Devino Affiliate în platforma noastră și transformă pasiunea pentru evenimente într-o carieră de succes! Ca affiliate, vei avea șansa:
+      </p>
+      <ul>
+        <li>Să creezi o rețea de furnizori de top, promovând serviciile lor și ajutându-i să ajungă la mai mulți clienți.</li>
+        <li>Să câștigi recompense bazate pe performanță, devenind o parte esențială a succesului platformei.</li>
+        <li>Să contribui activ la îmbunătățirea industriei evenimentelor, identificând nevoi și soluții inovatoare.</li>
+      </ul>
+      <p>
+        Construiește-ți un nume în industria evenimentelor și ajută comunitatea să prospere! Viitorul industriei poate începe cu tine.
+      </p>
     </div>
   </div>
+
+  <div class="contact-info">
+    <p>Contact: Pacurar Alexandru</p>
+    <p>Email: <a href="mailto:eventadorromania@gmail.com">eventadorromania&#64;gmail.com</a></p>
+    <p>Telefon: <a href="tel:0740299643">0740 299 643</a></p>
+  </div>
+
+  <!-- Social Media Icons -->
+  <div class="social-icons">
+    <a href="https://www.facebook.com/eventador.ro" class="fa fa-facebook"></a>
+    <a href="https://www.instagram.com/eventador.ro" class="fa fa-instagram"></a>
+  </div>
+</div>
+
+
+
+
+
