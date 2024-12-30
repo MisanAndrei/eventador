@@ -57,10 +57,11 @@
         </div>
 
         <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
-        <div style="text-align: center; margin-top: 5px;">
-        <h5 *ngFor="let category of card.categories" style="display: inline; margin-right: 10px; background-color: lightgray; padding: 5px; border-radius: 5px;">
-          {{ category.name }}
-        </h5></div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; text-align: center; margin-top: 5px; width: 100%;">
+          <h5 *ngFor="let category of card.categories" style="margin: 2px 5px; background-color: lightgray; padding: 3px 8px; border-radius: 5px; white-space: nowrap; line-height: 1; overflow: hidden; text-overflow: ellipsis;">
+            {{ category.name }}
+          </h5>
+        </div>
         <p style="margin-left: 10px;">{{ card.motto }}</p>
       </div>
     </li>
