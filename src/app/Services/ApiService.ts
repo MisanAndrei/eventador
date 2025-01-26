@@ -258,6 +258,10 @@ export class ApiService {
     );
   }
 
+  getFavoriteProfiles(id: number): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiUrl}/User/GetFavouriteProfilesByUserId/${id}`);
+  }
+
   recoverPassword(email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/User/ForgotPassword`, email).pipe(
       tap(x => {

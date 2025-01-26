@@ -1,8 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/Services/ApiService';
-import { AuthService } from 'src/app/Services/AuthService';
-import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
+import { AuthService } from '../../Services/AuthService';
+
 
 @Component({
   selector: 'app-favorites',
