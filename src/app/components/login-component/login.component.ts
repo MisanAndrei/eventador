@@ -1,9 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { ApiService } from 'src/app/Services/ApiService';
-import { AuthService } from 'src/app/Services/AuthService';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { ApiService } from '../../Services/ApiService';
+import { AuthService } from '../../Services/AuthService';
 
 
 @Component({
@@ -18,6 +18,8 @@ export class LoginComponent {
   errorCredentials: boolean = false;
   errorNotActivated: boolean = false;
   errorDefault: boolean = false;
+  showPassword: boolean = false;
+  
 
   constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -25,6 +27,10 @@ export class LoginComponent {
         map(result => result.matches)
       );
    }
+
+   togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
    async login() {
     this.errorDefault = false;

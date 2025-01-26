@@ -126,11 +126,11 @@
       <img src="{{ card.profileImage }}" alt="{{ card.name }}">
     </div>
     <div class="mobile-card-details">
-      <div style="text-align: center; margin-top: 10px; margin-bottom: 10px">
-      <h5 *ngFor="let category of card.categories" style="display: inline;" class="mobile-card-category">
-        {{ category.name }}
-      </h5>
-    </div>
+      <div class="categories-container" style="text-align: center;">
+        <h5 *ngFor="let category of card.categories" class="mobile-card-category">
+          {{ category.name }}
+        </h5>
+      </div>
       <p class="mobile-card-description">{{ card.motto }}</p>
     </div>
   </div>

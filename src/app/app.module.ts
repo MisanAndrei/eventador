@@ -25,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -103,6 +103,7 @@ import { LegalGdprComponent } from './components/legal-components/legal-gdpr-com
 import { LegalTermsComponent } from './components/legal-components/legal-terms-component/legal-terms.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
+import { AuthInterceptor } from './Services/auth.interceptor';
 
 
 
@@ -212,6 +213,10 @@ import { ActivateAccountComponent } from './components/activate-account-componen
       autoPlay: true,
       itemAutosize: false
     } as GalleryConfig
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
   }],
   bootstrap: [AppComponent]
 })

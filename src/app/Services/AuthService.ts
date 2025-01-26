@@ -154,19 +154,16 @@ export class AuthService {
   }
 
   // Check if the refresh token is valid, and if not, refresh tokens
-  checkAndRefreshTokens(): Observable<boolean> {
+  RefreshTokens(): Observable<boolean> {
     const refreshToken = this.getRefreshToken();
-    if (!refreshToken || this.jwtHelper.isTokenExpired(refreshToken)) {
       return this.refreshTokens(refreshToken).pipe(
-        tap(response => {
+        tap(response => { 
           this.storeToken(response.token);
           this.storeRefreshToken(response.refreshToken);
         }),
         switchMap(() => of(true)),
         catchError(() => of(false))
       );
-    }
-    return of(false);
   }
 
   refreshTokens(refreshToken: string | null): Observable<{ token: string, refreshToken: string }> {

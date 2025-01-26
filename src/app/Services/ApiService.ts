@@ -251,7 +251,7 @@ export class ApiService {
   updateFavoriteProfiles(favoriteProfilesRequest: FavoriteProfilesRequest): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.apiUrl}/User/AddRemoveFavouriteProfile`, favoriteProfilesRequest).pipe(
+    return this.http.post<any>(`${this.apiUrl}/User/AddRemoveFavouriteProfile`, favoriteProfilesRequest, {headers}).pipe(
       tap(x => {
         console.log(x);
       })

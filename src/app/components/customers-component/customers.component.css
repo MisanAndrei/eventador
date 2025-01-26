@@ -163,15 +163,15 @@
   }
 
   .mobile-card-category {
-    margin-top: 3px;
-    margin-right: 5px;
+    display: inline-block; /* Allows spacing and behaves like a block element */
+    margin: 2px 2px; /* Add space around each category */
     padding: 5px;
     background-color: lightgray;
     border-radius: 5px;
   }
 
   .mobile-card-description{
-    margin-top: 0px;
+    margin-top: 5px;
   }
 
   .mobile-card-location{
