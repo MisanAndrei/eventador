@@ -9,6 +9,8 @@ import { UserRole } from "../Utilities/enums/Enums";
     city: string;
     categories: Category[];
     areaOfInterest?: County[];
+    averageNote?: number;
+    numberOfReviews?: number;
   }
 
   export interface City {
@@ -221,13 +223,6 @@ import { UserRole } from "../Utilities/enums/Enums";
     existingProfileImage: Image;
   }
 
-  export interface LandingPage {
-    sections: Section[]; 
-    blogs: Blog[];
-    categoryGroups: Group[];
-    popularSuppliers: ProfileCard[];
-  }
-
   export interface Section {
     id: number;
     name: string;
@@ -281,8 +276,9 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface LandingPage {
     sections: Section[];
     profileCards: ProfileCard[];
-    category: Category[]; 
+    categoryGroups: Category[]; 
     blogCards: Blog[];
+    popularProfileCards: ProfileCard[];
   }
 
   export interface SuppliersChanges {

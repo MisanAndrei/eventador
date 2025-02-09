@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProfileCard, Group } from 'src/app/Models/Models';
-import { ApiService } from 'src/app/Services/ApiService';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
-import { AuthService } from 'src/app/Services/AuthService';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, switchMap } from 'rxjs/operators';
-import { CustomersRequest } from 'src/app/Requests/Requests';
+import { Group, ProfileCard } from '../../Models/Models';
+import { ApiService } from '../../Services/ApiService';
+import { FavoriteProfilesServiceComponent } from '../../Services/FavoriteProfilesService';
+import { AuthService } from '../../Services/AuthService';
+import { CustomersRequest } from '../../Requests/Requests';
 
 @Component({
   selector: 'app-customers',
@@ -77,8 +77,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
       this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
     }
     
-   
-    
     if (!this.favoriteProfilesPage) {
       this.loadInitialData();
     } else {
@@ -92,14 +90,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
     }else{
       this.noFavoritesMessageVisible = true;
     }
-  
-       
-    
   }
-
-    
-    
-  }
+}
 
   ngOnDestroy(): void {
     if (!this.arraysHaveSameValues(this.currentUserFavoriteProfiles, this.currentUserOldFavoriteProfiles)) {
@@ -112,8 +104,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
     const buffer = 100; // Adjust this value as necessary
     const scrollPosition = window.innerHeight + window.scrollY;
     const pageHeight = document.documentElement.scrollHeight; // Use scrollHeight instead of offsetHeight
-    
-    
 
     if (scrollPosition >= pageHeight - buffer && !this.loading) {
       this.page++;
@@ -293,9 +283,5 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   private setServiceCategory(serviceCategoryId: number): void {
     this.selectedCategories?.push(serviceCategoryId);
-  }
-
-  loadInitialDataFavorites(){
-
   }
 }

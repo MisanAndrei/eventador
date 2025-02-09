@@ -1,81 +1,81 @@
 .container {
-  text-align: center;
-  background: #FAF2F6;
-  padding-top: 50px;
-  padding-bottom: 100px;
-}
-
-.title {
-  font-size: xx-large;
-  font-weight: 400;
-  margin-top: 0px;
-  margin-bottom: 5px;
-}
-
-.subtitle-mobile {
-  font-size: x-large;
-  margin-bottom: 40px;
-  font-weight: 200;
-  margin-top: -30px;
-}
-
-.subtitle-mobile {
-  font-size: x-large;
-  margin-bottom: 40px;
-  font-weight: 200;
-  margin-top: -10px;
-}
-
-.card-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.card {
-  width: 15%;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s ease; /* Added transition */
-}
-
-.card-image {
-  width: 100%;
-  height: 200px; /* Adjust as needed */
-  object-fit: cover; /* Keep aspect ratio */
+    text-align: center;
+    background: #FAF2F6;
+    padding-top: 50px;
+    padding-bottom: 100px;
+  }
   
-}
-
-.card:hover {
-  transform: scale(1.10); /* Scale up the card on hover */
-}
-
-.card-title {
-  margin: 10px 0;
-  font-size: 1.2em;
-}
-
-.card-category {
-  font-size: 0.9em;
-}
-
-h1 h3 h4 {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-p {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-@media (max-width: 767px) {
-  .card {
-    width: 60%; /* On smaller screens, cards take full width */
+  .title {
+    font-size: xx-large;
+    font-weight: 400;
+    margin-top: 0px;
+    margin-bottom: 5px;
   }
-}
-
-@media (max-width: 1000px) {
-  .card {
-    width: 40%; /* On smaller screens, cards take full width */
+  
+  .subtitle-mobile {
+    font-size: x-large;
+    margin-bottom: 40px;
+    font-weight: 200;
+    margin-top: -30px;
   }
-}
+  
+  .subtitle-mobile {
+    font-size: x-large;
+    margin-bottom: 40px;
+    font-weight: 200;
+    margin-top: -10px;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: 15%;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Added transition */
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 200px; /* Adjust as needed */
+    object-fit: cover; /* Keep aspect ratio */
+    
+  }
+  
+  .card:hover {
+    transform: scale(1.10); /* Scale up the card on hover */
+  }
+  
+  .card-title {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+  
+  .card-category {
+    font-size: 0.9em;
+  }
+  
+  h1 h3 h4 {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  @media (max-width: 767px) {
+    .card {
+      width: 60%; /* On smaller screens, cards take full width */
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .card {
+      width: 40%; /* On smaller screens, cards take full width */
+    }
+  }

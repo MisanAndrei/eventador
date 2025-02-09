@@ -4,14 +4,15 @@ import { Router } from "@angular/router";
 import { Observable, map } from "rxjs";
 import { ProfileCard, Section } from "../../Models/Models";
 
+
 @Component({
-    selector: 'app-popular-customers-tab',
-    templateUrl: './popular-customers-tab.component.html',
-    styleUrls: ['./popular-customers-tab.component.css'],
+    selector: 'app-top-customers-tab',
+    templateUrl: './top-customers-tab.component.html',
+    styleUrls: ['./top-customers-tab.component.css'],
     changeDetection: ChangeDetectionStrategy.Default
   })
 
-  export class PopularCustomersTabComponent implements OnInit {
+  export class TopCustomersTabComponent implements OnInit {
     @Input() cards?: ProfileCard[];
     @Input() section?: Section;
 

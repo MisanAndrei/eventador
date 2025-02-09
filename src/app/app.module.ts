@@ -1,28 +1,21 @@
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
-
-
 import {NgIf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
-
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-
 import { MatIconModule } from '@angular/material/icon';
-
-
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -41,11 +34,6 @@ import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 import { NgApexchartsModule } from 'ng-apexcharts'; 
 import { NgxEditorModule } from 'ngx-editor';
 import { MatIcon } from '@angular/material/icon';
-
-
-
-
-
 
 //Components
 import { ImageSliderComponent } from './components/image-slider-component/image-slider.component';
@@ -68,7 +56,7 @@ import { ApplicationContainerComponent } from './components/application-containe
 import { CustomersComponent } from './components/customers-component/customers.component';
 import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
-import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
+import { TopCustomersTabComponent } from './components/top-customers-tab/top-customers-tab.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AboutUsTabComponent } from './components/about-us-tab-component/about-us-tab.component';
 import { CategoriesTabComponent } from './components/categories-tab-component/categories-tab.component';
@@ -104,11 +92,7 @@ import { LegalTermsComponent } from './components/legal-components/legal-terms-c
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
 import { AuthInterceptor } from './Services/auth.interceptor';
-
-
-
-
-
+import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +115,7 @@ import { AuthInterceptor } from './Services/auth.interceptor';
     CustomersComponent,
     BlogsComponent,
     PartnerDashboardComponent,
+    TopCustomersTabComponent,
     PopularCustomersTabComponent,
     AdminDashboardComponent,
     AboutUsTabComponent,
