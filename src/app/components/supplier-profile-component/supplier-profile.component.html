@@ -48,7 +48,17 @@
   
   
    <div class="right">
-    <gallery [items]="images" thumbPosition="left"></gallery>
+    <gallery 
+    id="lightboxGallery"
+  [items]="images" 
+  [thumbs]="true" 
+  [thumbPosition]="'left'"
+  [imageSize]="'contain'"
+  [thumbImageSize]="'contain'"
+  [autoplay]="true"
+  (itemClick)="openLightbox($event)">
+</gallery>
+
     
         <h3 style="margin-left: 10px; text-align: left;">Descriere</h3>
         <p style="text-align: left; margin: 0px 10px; white-space: pre-wrap;">{{ description }}</p>
@@ -135,7 +145,17 @@
   </div>
 
 
-  <gallery [items]="images" thumbPosition="bottom" [thumbWidth]="60"></gallery>
+  <gallery 
+    id="lightboxGallery"
+  [items]="images" 
+  [thumbs]="true" 
+  [thumbPosition]="'bottom'"
+  [imageSize]="'contain'"
+  [thumbImageSize]="'cover'"
+  [autoplay]="true"
+  [thumbWidth]="60"
+  (itemClick)="openLightbox($event)">
+</gallery>
     
 
 

@@ -93,6 +93,7 @@ import { CreateAccountComponent } from './components/create-account/create-accou
 import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
 import { AuthInterceptor } from './Services/auth.interceptor';
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
+import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/lightbox';
 
 @NgModule({
   declarations: [
@@ -178,6 +179,7 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
     SlickCarouselModule,
     HammerModule,
     GalleryModule,
+    LightboxModule,
     NgApexchartsModule,
     MatSnackBarModule,
     MatCheckbox,
@@ -191,17 +193,15 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
 })
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
-    provide: GALLERY_CONFIG,
-    useValue: {
-      autoHeight: false,
-      imageSize: 'cover',
-      autoPlay: true,
-      itemAutosize: false
-    } as GalleryConfig
-  }, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
+  },{
+    provide: LIGHTBOX_CONFIG,
+    useValue: {
+      keyboardShortcuts: true,
+      exitAnimationTime: 1000
+    } as LightboxConfig
   }],
   bootstrap: [AppComponent]
 })

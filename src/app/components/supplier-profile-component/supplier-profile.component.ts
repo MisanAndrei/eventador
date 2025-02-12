@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
-import { Category, Review, SendReview } from 'src/app/Models/Models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/Services/ApiService';
-import { AuthService } from 'src/app/Services/AuthService';
-import { UserRole } from 'src/app/Utilities/enums/Enums';
-import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gallery';
+import { GalleryModule, ImageItem, GalleryItem, GalleryComponent, Gallery } from 'ng-gallery';
+import { Review, Category, SendReview } from '../../Models/Models';
+import { ApiService } from '../../Services/ApiService';
+import { AuthService } from '../../Services/AuthService';
+import { UserRole } from '../../Utilities/enums/Enums';
+import { Lightbox } from 'ng-gallery/lightbox';
 
 @Component({
     selector: 'app-supplier-profile',
@@ -17,7 +18,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
 
   export class SupplierProfileComponent implements OnInit  {
     @Input() changesProfileId: number | undefined;
-    @ViewChild('myGallery') gallery!: GalleryComponent;
+    images: GalleryItem[] = [];
 
     profileId: string = '';
     profileSlug: string ='';
@@ -41,8 +42,6 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     supplierCategories!: Category[];
     selectedCategoryId: number | null = null;
 
-    images!: GalleryItem[];
-
     imageObject: any = [];
     
     //model
@@ -64,6 +63,8 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
       private route: ActivatedRoute, 
       private router: Router, 
       private apiService: ApiService, 
+      private gallery: Gallery,
+      private lightbox: Lightbox,
       private authService: AuthService){
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -109,6 +110,9 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
             this.supplierCategories = response.categories;
+
+            const galleryRef = this.gallery.ref('lightboxGallery');
+            galleryRef.load(this.images);
           })
         }
         else{
@@ -133,6 +137,9 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
             this.supplierCategories = response.categories;
+
+            const galleryRef = this.gallery.ref('lightboxGallery');
+            galleryRef.load(this.images);
           })
         }
       }
@@ -191,5 +198,18 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     
       // If already has a valid protocol, return the original URL
       return url;
+    }
+
+    openLightbox(index: number): void {
+      const galleryRef = this.gallery.ref('lightboxGallery');
+      if (index >= 0 && index < this.images.length) {
+        console.log(`Opening Lightbox at index: ${index}`);
+        galleryRef.set(index);
+        this.lightbox.open(index, 'lightboxGallery', {
+          panelClass: 'fullscreen', // ✅ Makes it full-screen
+        });
+      } else {
+        console.warn(`[NgGallery]: Invalid index ${index}.`);
+      }
     }
   }
