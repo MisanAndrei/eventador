@@ -21,7 +21,6 @@
       <button (click)="copyToClipboard(signUpLink)">Salveaza</button>
     </div>
     <button mat-raised-button class="action-buttons" (click)="changePassword()"><b>Schimbă Parola</b></button>
-    <button *ngIf="userRole == 4" mat-raised-button class="action-buttons" (click)="addProfile()"><b>Adaugă Profil</b></button>
     <button mat-raised-button class="action-buttons" (click)="editUser()"><b>Editare date personale</b></button>
     <button mat-raised-button class="action-buttons" (click)="deleteAccount()"><b>Șterge Cont</b></button>
     <button *ngIf="userRole == 4" mat-raised-button class="action-buttons" (click)="viewPersonalProfiles()"><b>Profile Personale</b></button>
@@ -31,7 +30,6 @@
 <app-change-password *ngIf="changePasswordVisible && !(isMobile | async)"></app-change-password>
 <app-edit-personal-data *ngIf="editUserVisible && !(isMobile | async)"></app-edit-personal-data>
 <app-delete-account *ngIf="deleteAccountVisible && !(isMobile | async)"></app-delete-account>
-<app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible && !(isMobile | async)"></app-add-profile>
 
 
 <div *ngIf="isMobile | async" class="mobile-profile-container">
@@ -59,8 +57,6 @@
     <app-edit-personal-data *ngIf="editUserVisible"></app-edit-personal-data>
     <button mat-raised-button class="mobile-action-button" (click)="changePassword()">Schimbă Parola</button>
     <app-change-password *ngIf="changePasswordVisible"></app-change-password>
-    <button *ngIf="userRole == 4" mat-raised-button class="mobile-action-button" (click)="addProfile()">Adaugă Profil</button>
-    <app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible"></app-add-profile>
     <button mat-raised-button class="mobile-action-button" (click)="deleteAccount()">Șterge Cont</button>
     <app-delete-account *ngIf="deleteAccountVisible"></app-delete-account>  
     <button *ngIf="userRole == 4" mat-raised-button class="mobile-action-button" (click)="viewPersonalProfiles()">Profile Personale</button>

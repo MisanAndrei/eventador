@@ -1,19 +1,24 @@
+body {
+  background: linear-gradient(to bottom, #f4f5f7, #eaecef);
+}
+
 .card {
     width: 300px; /* Adjust the width as needed */
     height:500px; /* Twice the width */
-    background-color: #fff;
+    background-color: white;
     border: 1px solid #f2f2f2;
     text-align: left;
-    border-radius: 5%;
+    border-radius: 12px;
     cursor: pointer;
-    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
     overflow: hidden;
   }
 
   .card:hover{
-    transform: scale(1.05);
+    transform: translateY(-3px); /* Slight lift effect */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   }
   
   .card img {
@@ -28,7 +33,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #f8f8f8;
     margin-top: 0px;
   }
   
@@ -57,11 +61,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f8f8f8;
-    height: 150px;
-    padding: 0 20px;
-    margin: 0 0;
     flex-direction: column;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .filter-bar h1 {
+    font-size: 22px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
   }
 
   .filter-bar-favorite {
@@ -123,7 +136,6 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  background-color: #f8f8f8;
 
   }
 
@@ -131,9 +143,9 @@
     width: 60%;
     height: auto;
     margin: 10px auto;
-    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid #f2f2f2;
-    border-radius: 5%;
+    border-radius: 12px;
     background-color: white;
     position: relative;
   }
@@ -212,7 +224,7 @@
   }
 
   .mobile-filter-container{
-    background-color: #f8f8f8;
+    background-color: white;
     max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease;
@@ -287,37 +299,4 @@
       transform: rotate(360deg);
     }
   }
-
-  /* Rating Section */
-.rating-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5px;
-}
-
-.stars {
-  display: flex;
-  gap: 2px;
-}
-
-/* Full Stars */
-.star-full {
-  color: gold;
-  font-size: 18px;
-}
-
-/* Empty Stars */
-.star-empty {
-  color: lightgray;
-  font-size: 18px;
-}
-
-/* Half Stars (Gold gradient effect) */
-.star-half {
-  font-size: 18px;
-  background: linear-gradient(to right, gold 50%, lightgray 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-}
+  
