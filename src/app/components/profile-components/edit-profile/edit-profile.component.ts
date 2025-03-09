@@ -291,7 +291,7 @@ export class EditProfileComponent implements OnInit {
       this.dialog.open(DialogComponent, {
         width: '400px',
         data: {
-          message: 'Schimbarile au fost salvate cu succes!',
+          message: 'Schimbarile au fost salvate cu succes si au fost trimise spre aprobare!',
           isSuccess: true
         }
       });
