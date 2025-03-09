@@ -57,6 +57,22 @@
         </div>
 
         <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
+        <div class="rating-container">
+          <div class="stars">
+            <ng-container *ngFor="let star of getStarsArray(card.averageRating)">
+              <!-- Full Star -->
+              <i class="fa fa-star star-full" *ngIf="star.full"></i>
+        
+              <!-- Half Star -->
+              <i class="fa fa-star star-half" *ngIf="star.half"></i>
+        
+              <!-- Empty Star -->
+              <i class="fa fa-star star-empty" *ngIf="star.empty"></i>
+            </ng-container>
+          </div>
+          <span class="rating-text">{{ card.averageRating.toFixed(1) }} ({{ card.numberOfReviews }})</span>
+        </div>
+
         <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; text-align: center; margin-top: 5px; width: 100%;">
           <h5 *ngFor="let category of card.categories" style="margin: 2px 5px; background-color: lightgray; padding: 3px 8px; border-radius: 5px; white-space: nowrap; line-height: 1; overflow: hidden; text-overflow: ellipsis;">
             {{ category.name }}
@@ -124,6 +140,21 @@
     </div>
     <div class="mobile-card-image">
       <img src="{{ card.profileImage }}" alt="{{ card.name }}">
+    </div>
+    <div class="rating-container">
+      <div class="stars">
+        <ng-container *ngFor="let star of getStarsArray(card.averageRating)">
+          <!-- Full Star -->
+          <i class="fa fa-star star-full" *ngIf="star.full"></i>
+    
+          <!-- Half Star -->
+          <i class="fa fa-star star-half" *ngIf="star.half"></i>
+    
+          <!-- Empty Star -->
+          <i class="fa fa-star star-empty" *ngIf="star.empty"></i>
+        </ng-container>
+      </div>
+      <span class="rating-text">{{ card.averageRating.toFixed(1) }} ({{ card.numberOfReviews }})</span>
     </div>
     <div class="mobile-card-details">
       <div class="categories-container" style="text-align: center;">

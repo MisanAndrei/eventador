@@ -9,8 +9,8 @@ import { UserRole } from "../Utilities/enums/Enums";
     city: string;
     categories: Category[];
     areaOfInterest?: County[];
-    averageNote?: number;
-    numberOfReviews?: number;
+    averageRating: number;
+    numberOfReviews: number;
   }
 
   export interface City {

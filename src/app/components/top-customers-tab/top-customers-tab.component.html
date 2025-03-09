@@ -1,12 +1,25 @@
 <div *ngIf="!(isMobile | async)" class="container">
 
   <img style="width:600px;" src="https://evemtadorstorage.blob.core.windows.net/sections/toproviders_arrow.png">
-  <h3 class="subtitle">{{section?.content}}</h3>
 
   <div class="card-container">
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
+      <div class="rating-container">
+        <div class="stars">
+          <ng-container *ngFor="let star of getStarsArray(supplier.averageRating)">
+            <!-- Full Star -->
+            <i class="fa fa-star star-full" *ngIf="star.full"></i>
       
+            <!-- Half Star -->
+            <i class="fa fa-star star-half" *ngIf="star.half"></i>
+      
+            <!-- Empty Star -->
+            <i class="fa fa-star star-empty" *ngIf="star.empty"></i>
+          </ng-container>
+        </div>
+        <span class="rating-text">{{ supplier.averageRating.toFixed(1) }} ({{ supplier.numberOfReviews }})</span>
+      </div>
       <p *ngFor="let category of supplier.categories" class="card-category" style="display: inline;">
         {{category.name}}
       </p>
@@ -21,11 +34,25 @@
 
 <div *ngIf="(isMobile | async)" class="container">
   <img style="width:350px;" src="https://evemtadorstorage.blob.core.windows.net/sections/toproviders_arrow.png">
-  <h3 class="subtitle-mobile">{{section?.content}}</h3>
 
   <div class="card-container">
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
+      <div class="rating-container">
+        <div class="stars">
+          <ng-container *ngFor="let star of getStarsArray(supplier.averageRating)">
+            <!-- Full Star -->
+            <i class="fa fa-star star-full" *ngIf="star.full"></i>
+      
+            <!-- Half Star -->
+            <i class="fa fa-star star-half" *ngIf="star.half"></i>
+      
+            <!-- Empty Star -->
+            <i class="fa fa-star star-empty" *ngIf="star.empty"></i>
+          </ng-container>
+        </div>
+        <span class="rating-text">{{ supplier.averageRating.toFixed(1) }} ({{ supplier.numberOfReviews }})</span>
+      </div>
       
       <p *ngFor="let category of supplier.categories" class="card-category" style="display: inline;">
         {{category.name}}

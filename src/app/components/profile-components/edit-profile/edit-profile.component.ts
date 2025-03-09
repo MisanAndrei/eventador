@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Category, City, County, CreateUser, EditProfile, EditUser, Image, UsedImage } from 'src/app/Models/Models';
-import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
-import { ApiService } from 'src/app/Services/ApiService';
-import { AuthService } from 'src/app/Services/AuthService';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
+import { UsedImage, Category, City, County, CreateUser, EditProfile, EditUser, Image } from '../../../Models/Models';
+import { ApiService } from '../../../Services/ApiService';
+import { AuthService } from '../../../Services/AuthService';
+import { UserRole } from '../../../Utilities/enums/Enums';
 
 @Component({
   selector: 'app-edit-profile',

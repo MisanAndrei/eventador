@@ -47,4 +47,26 @@ import { ProfileCard, Section } from "../../Models/Models";
       return profileName.replace(/\s+/g, '-');
     }
 
+    getStarsArray(rating: number): Array<{ full: boolean; half: boolean; empty: boolean }> {
+      const stars: Array<{ full: boolean; half: boolean; empty: boolean }> = [];
+      
+      const wholeStars = Math.floor(rating); // Number of fully filled stars
+    const hasHalfStar = rating % 1 !== 0; // Check if we need a half star
+    const emptyStars = 5 - Math.ceil(rating); // Remaining empty stars
+  
+    for (let i = 0; i < wholeStars; i++) {
+      stars.push({ full: true, half: false, empty: false });
+    }
+  
+    if (hasHalfStar) {
+      stars.push({ full: false, half: true, empty: false });
+    }
+  
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push({ full: false, half: false, empty: true });
+    }
+  
+    return stars;
+    }
+
   }

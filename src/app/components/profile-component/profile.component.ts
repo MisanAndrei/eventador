@@ -2,13 +2,13 @@ import { Dialog } from '@angular/cdk/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { AuthService } from 'src/app/Services/AuthService';
-import { UserRole } from 'src/app/Utilities/enums/Enums';
+import { AuthService } from '../../Services/AuthService';
 import { DialogComponent } from '../dialogs/dialog-component/dialog.component';
-import { ApiService } from 'src/app/Services/ApiService';
+import { ApiService } from '../../Services/ApiService';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../dialogs/delete-dialog-component/delete-dialog.component';
 import { Router } from '@angular/router';
+import { UserRole } from '../../Utilities/enums/Enums';
 
 @Component({
   selector: 'app-profile',
