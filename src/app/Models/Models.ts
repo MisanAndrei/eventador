@@ -401,6 +401,20 @@ import { UserRole } from "../Utilities/enums/Enums";
     role: UserRole;
   }
 
+  export interface UserAnalytics {
+    id: number;
+    name: string;
+    email: string;
+  }
+
+  export interface ProfilesAnalytics
+  {
+    users: UserAnalytics[];
+    lastMonth: number;
+    lastThreeMonths: number;
+    lastSixMonths: number;
+  }
+
 
 
 

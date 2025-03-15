@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ProfilesAnalytics, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
 import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
@@ -260,6 +260,18 @@ export class ApiService {
 
   getFavoriteProfiles(id: number): Observable<number[]> {
     return this.http.get<number[]>(`${this.apiUrl}/User/GetFavouriteProfilesByUserId/${id}`);
+  }
+
+  getProfileAnalytics(): Observable<ProfilesAnalytics> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ProfilesAnalytics>('/Profile/GetProfilesAnalytics', { headers });
+  }
+  
+  changeUserEmail(userid: number, newEmail: string): Observable<void> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<void>('/admin/ChangeUserEmail', { userid, newEmail }, { headers });
   }
 
   recoverPassword(email: string): Observable<any> {

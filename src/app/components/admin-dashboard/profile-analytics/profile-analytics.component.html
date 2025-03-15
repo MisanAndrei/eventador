@@ -1,0 +1,51 @@
+<div class="profile-analytics-container">
+  
+    <!-- Statistic Cards -->
+    <div class="analytics-cards">
+      <div class="card">
+        <h3>Ultima lună</h3>
+        <p>{{ profileAnalytics?.lastMonth || 0 }} utilizatori</p>
+      </div>
+      <div class="card">
+        <h3>Ultimele 3 luni</h3>
+        <p>{{ profileAnalytics?.lastThreeMonths || 0 }} utilizatori</p>
+      </div>
+      <div class="card">
+        <h3>Ultimele 6 luni</h3>
+        <p>{{ profileAnalytics?.lastSixMonths || 0 }} utilizatori</p>
+      </div>
+    </div>
+  
+    <!-- Users Table -->
+    <div class="users-table">
+      <h2>Lista Utilizatori</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nume</th>
+            <th>Email</th>
+            <th>Acțiune</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of profileAnalytics?.users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button (click)="openEditUserEmail(user)" class="edit-button">Editează Email</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Edit User Email Component -->
+  <app-edit-user-email 
+    *ngIf="editUserEmailVisible" 
+    [user]="selectedUser" 
+    (close)="editUserEmailVisible = false">
+  </app-edit-user-email>
+  

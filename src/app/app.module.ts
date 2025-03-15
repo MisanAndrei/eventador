@@ -94,6 +94,8 @@ import { ActivateAccountComponent } from './components/activate-account-componen
 import { AuthInterceptor } from './Services/auth.interceptor';
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/lightbox';
+import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component.css/edit-user-email.component';
+import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-analytics/profile-analytics.component';
 
 @NgModule({
   declarations: [
@@ -150,7 +152,9 @@ import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/ligh
     LegalGdprComponent,
     LegalTermsComponent,
     CreateAccountComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    ProfileAnalyticsComponent,
+    EditUserEmailComponent
   ],
   imports: [
     AppRoutingModule,

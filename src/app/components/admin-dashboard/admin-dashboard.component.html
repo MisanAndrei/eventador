@@ -34,6 +34,11 @@
       <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
     </mat-tab>
 
+    <mat-tab *ngIf="currentUserRole === 1" label="Profile Analytics">
+
+      <app-profile-analytics></app-profile-analytics>
+    </mat-tab>
+
 
     </mat-tab-group>
   </div>
@@ -73,6 +78,11 @@
     <mat-tab *ngIf="currentUserRole === 1" label="Review">
       <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
       
+    </mat-tab>
+
+    <mat-tab *ngIf="currentUserRole === 1" label="Profile Analytics">
+
+      <app-profile-analytics></app-profile-analytics>
     </mat-tab>
 
     </mat-tab-group>
