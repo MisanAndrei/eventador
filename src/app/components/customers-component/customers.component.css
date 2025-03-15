@@ -299,4 +299,38 @@ body {
       transform: rotate(360deg);
     }
   }
+
+  /* Rating Section */
+  .rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+  
+  /* Full Stars */
+  .star-full {
+    color: gold;
+    font-size: 18px;
+  }
+  
+  /* Empty Stars */
+  .star-empty {
+    color: lightgray;
+    font-size: 18px;
+  }
+  
+  /* Half Stars (Gold gradient effect) */
+  .star-half {
+    font-size: 18px;
+    background: linear-gradient(to right, gold 50%, lightgray 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+  }
   

@@ -126,23 +126,23 @@
       <i class="fa fa-map-marker"></i> {{ location }}
     </div>
     <div class="area-of-interest-container">
-      <span *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</span>
+      <span *ngFor="let area of areasOfInterest" class="area-of-interest-button-mobile">{{ area }}</span>
     </div>
 
     <!-- Contact Info -->
     <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
     <div class="section-divider"></div>
-    <p>📞 {{ phoneNumber }}</p>
-    <p>✉ {{ email }}</p>
+    <p class="contact-info-mobile">📞 {{ phoneNumber }}</p>
+    <p class="contact-info-mobile">✉ {{ email }}</p>
 
     <!-- Social Links -->
     <p class="section-description">Găsește-l pe rețelele sociale.</p>
     <div class="section-divider"></div>
     <div class="social-links">
-      <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
-      <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>
-      <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="fa fa-globe"></a>
-      <a *ngIf="youtubeUrl" href="{{ youtubeUrl }}" target="_blank" class="fa fa-youtube-play"></a>
+      <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="mobile-social-fa fa fa-facebook"></a>
+      <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class=" mobile-social-fafa fa-instagram"></a>
+      <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="mobile-social-fa fa fa-globe"></a>
+      <a *ngIf="youtubeUrl" href="{{ youtubeUrl }}" target="_blank" class="mobile-social-fa fa fa-youtube-play"></a>
     </div>
 
     <!-- Gallery -->
