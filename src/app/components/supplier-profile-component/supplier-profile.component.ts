@@ -108,7 +108,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
             this.instagramUrl = response.instagramUrl ? this.addHttpPrefix(response.instagramUrl) : undefined;
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
             this.areasOfInterest = response.areaOfInterestNames;
-            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.images = response.images.filter(x => x.isProfileImage == false).map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
             this.supplierCategories = response.categories;
 
             const galleryRef = this.gallery.ref('lightboxGallery');
@@ -135,7 +135,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
             this.numberProfileId = Number(this.profileId);
             this.reviews = response.reviews;
             this.areasOfInterest = response.areaOfInterestNames;
-            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.images = response.images.filter(x => x.isProfileImage == false).map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
             this.supplierCategories = response.categories;
 
             const galleryRef = this.gallery.ref('lightboxGallery');

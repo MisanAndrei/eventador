@@ -265,20 +265,23 @@ export class ApiService {
   getProfileAnalytics(): Observable<ProfilesAnalytics> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<ProfilesAnalytics>('/Profile/GetProfilesAnalytics', { headers });
+    return this.http.get<ProfilesAnalytics>(`${this.apiUrl}/Profile/GetProfilesAnalytics`, { headers });
   }
   
-  changeUserEmail(userid: number, newEmail: string): Observable<void> {
+  changeUserEmail(id: number, email: string): Observable<void> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<void>('/admin/ChangeUserEmail', { userid, newEmail }, { headers });
+    return this.http.put<void>(`${this.apiUrl}/admin/ChangeUserEmail`, { id, email }, { headers });
   }
 
   recoverPassword(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/User/ForgotPassword`, email).pipe(
-      tap(x => {
-        console.log(x);
-      })
+    const body = JSON.stringify(email);
+    return this.http.post<any>(
+      `${this.apiUrl}/User/ForgotPassword`, 
+      body, 
+      { headers: { 'Content-Type': 'application/json' } }
+    ).pipe(
+      tap(response => console.log(response))
     );
   }
 
