@@ -17,8 +17,8 @@ export class AuthService {
   private readonly favoriteProfilesKey: string = 'favoriteProfiles';
   private tokenKey = 'access_token';
   private refreshTokenKey = 'refresh_token';
-  private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api/Auth/login';
-  private refreshUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api/Auth/refresh';
+  private apiUrl = 'https://eventador-prd.azurewebsites.net/api/Auth/login';
+  private refreshUrl = 'https://eventador-prd.azurewebsites.net/api/Auth/refresh';
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
