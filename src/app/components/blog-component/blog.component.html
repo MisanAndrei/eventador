@@ -1,11 +1,11 @@
 <div *ngIf="!(isMobile | async)" class="outer-container">
   <div class="container">
-    <quill-view-html [content]="content" format="html" theme="snow"></quill-view-html>
+    <quill-view-html class="custom-quill" [content]="content" format="html" theme="snow"></quill-view-html>
   </div>
 </div>
 
 <div *ngIf="(isMobile | async)" class="mobile-outer-container">
-<div class="mobile-container">
-  <quill-view-html [content]="content" format="html" theme="snow"></quill-view-html>
-</div>
+  <div class="mobile-container">
+    <quill-view-html class="custom-quill-mobile" [content]="content" format="html" theme="snow"></quill-view-html>
+  </div>
 </div>

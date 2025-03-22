@@ -59,6 +59,7 @@ export class CreateProfileComponent implements OnInit {
     referralCodeByUrl: boolean = false;
     showPartnerErrorCode: boolean = false;
     showPartnerSuccessCode: boolean = false;
+    saving: boolean = false;
 
     //partner referral section
     partnerName: string = '';
@@ -339,6 +340,7 @@ export class CreateProfileComponent implements OnInit {
     }
 
     onSaveButtonClick() {
+      this.saving = true;
     var user = {
       email: this.email,
       firstName: this.firstName,

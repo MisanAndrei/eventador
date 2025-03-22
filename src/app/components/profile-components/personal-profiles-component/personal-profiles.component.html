@@ -1,58 +1,64 @@
+<!-- ✅ Desktop Version -->
 <div *ngIf="!(isMobile | async)">
-<ul class="card-list">
+  <ul class="card-list">
     <li *ngFor="let card of profileCards" class="card-item">
-      <div class="card" (click)="onCardClick(card.id)">
+      <div class="card" (click)="onCardClick(card)">
+        <!-- Profile Header -->
         <div class="header">
           <div class="logo">
-            <img src="{{ card.profileImage }}" alt="{{ card.name }} Logo" />
+            <img [src]="card.profileImage" [alt]="card.name + ' Logo'" />
           </div>
           <div>
-          <h3 style="margin-bottom: 0px; margin-top: 15px;">{{ card.name }}</h3>
-          <h5 style="margin-top: 5px;"><i class="fa fa-map-marker" style="font-size:20px"></i> {{ card.city }}</h5>
+            <h3>{{ card.name }}</h3>
+            <h5><i class="fa fa-map-marker"></i> {{ card.city }}</h5>
+          </div>
         </div>
+
+        <!-- Profile Image -->
+        <img [src]="card.profileImage" [alt]="card.name" class="profile-banner" />
+
+        <!-- Categories -->
+        <div class="category-container">
+          <h4 *ngFor="let category of card.categories" class="category-badge">
+            {{ category.name }}
+          </h4>
         </div>
-        
-        <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
-        <h4 *ngFor="let category of card.categories" style="margin-left: 10px; display: inline;">
-          {{ category.name }}
-        </h4>
-        
-        <p style="margin-left: 10px;">{{ card.motto }}</p>
-        
-      </div>
 
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <button mat-raised-button class="mobile-action-button" (click)="editProfile($event, card.id)">Editare profil</button>
-      </div>
+        <!-- Motto -->
+        <p class="card-motto">{{ card.motto }}</p>
 
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <button mat-raised-button class="mobile-action-button" (click)="deleteProfile($event, card.id)">Stergere profil</button>
-        
+        <!-- Action Buttons -->
+        <div class="card-actions">
+          <button mat-raised-button class="edit-button" (click)="editProfile($event, card.id)">Editare profil</button>
+          <button mat-raised-button class="delete-button" (click)="deleteProfile($event, card.id)">Ștergere profil</button>
+        </div>
       </div>
-      
     </li>
   </ul>
 </div>
 
-
+<!-- ✅ Mobile Version -->
 <div *ngIf="(isMobile | async)" class="mobile-card-container">
-    <div  *ngFor="let card of profileCards" class="mobile-card" (click)="onCardClick(card.id)">
-        <div class="mobile-card-header">
-          <p class="mobile-card-name">{{ card.name }}</p>
-          <p class="mobile-card-location"><i class="fa fa-map-marker" style="font-size:15px"></i> {{ card.city }}</p>
-        </div>
-        <div class="mobile-card-image">
-          <img src="{{ card.profileImage }}" alt="Image Description">
-        </div>
-        <div class="mobile-card-details">
-          <p *ngFor="let category of card.categories" class="mobile-card-category">
-            {{ category.name }}
-          </p>
-          
-          <p class="mobile-card-description">{{ card.motto }}</p>
-        </div>
-        <button mat-raised-button class="mobile-action-button" (click)="editProfile($event, card.id)">Editare profil</button>
-        <button mat-raised-button class="mobile-action-button" (click)="deleteProfile($event, card.id)">Stergere profil</button>
+  <div *ngFor="let card of profileCards" class="mobile-card" (click)="onCardClick(card)">
+    <div class="mobile-card-header">
+      <p class="mobile-card-name">{{ card.name }}</p>
+      <p class="mobile-card-location"><i class="fa fa-map-marker"></i> {{ card.city }}</p>
+    </div>
 
-      </div>
+    <div class="mobile-card-image">
+      <img [src]="card.profileImage" [alt]="card.name">
+    </div>
+
+    <div class="mobile-card-details">
+      <p *ngFor="let category of card.categories" class="mobile-card-category">
+        {{ category.name }}
+      </p>
+      <p class="mobile-card-description">{{ card.motto }}</p>
+    </div>
+
+    <div class="mobile-card-actions">
+      <button mat-raised-button class="edit-button" (click)="editProfile($event, card.id)">Editare profil</button>
+      <button mat-raised-button class="delete-button" (click)="deleteProfile($event, card.id)">Ștergere profil</button>
+    </div>
+  </div>
 </div>

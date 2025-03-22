@@ -42,7 +42,7 @@ export class ApiService {
 
   getBlogs(): Observable<Blog[]> {
     return this.http.get<Blog[]>(`${this.apiUrl}/Blog/GetAllBlogsCards`);
-  }
+  } 
 
   getApprovalReviews(): Observable<ApprovalReview[]> {
     const token = this.authService.getToken();

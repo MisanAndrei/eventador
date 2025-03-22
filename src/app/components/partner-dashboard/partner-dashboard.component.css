@@ -1,140 +1,111 @@
+/* ✅ General Styles */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
 
+.cards {
+  display: flex;
+  gap: 20px;
+}
 
-  
-  /* Additional styling for name, date added, category, and location */
-  
-  .cards-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
+/* ✅ Modernized Cards */
+.card, .initials-card {
+  width: 160px;
+  height: 70px;
+  border-bottom: 4px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
 
-  .cards {
-    display: flex;
-    gap: 20px; /* Space between cards */
-  }
+.card:hover {
+  transform: scale(1.05);
+}
 
-  .card {
-    width: 150px;
-    height: 60px;
-    border-bottom: 5px solid black;
-    border-radius: 5%;
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center; /* Center content horizontally */
-    align-items: center;
-  }
+.card-text {
+  font-size: 16px;
+  font-weight: bold;
+}
 
-  .initials-card {
-    width: 150px;
-    height: 60px;
-    border-bottom: 5px solid black;
-    font-weight: bold;
-    font-size: 50px;
-    display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    border-radius: 5%;
-  }
-  
+/* ✅ Chart */
+.chart-container, .mobile-chart-container {
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
 
-  .table-section {
-    margin-top: 50px !important;
-    justify-content: center;
-    width: 70%;
-    margin: 20px auto; /* Adjust margin as needed */
-  }
-  
-  .table-container {
-    width: 100%; /* Ensure the table takes full width */
-    overflow-x: auto; /* Enable horizontal scrolling if needed */
-  }
+/* ✅ Table */
+.table-section {
+  width: 75%;
+  margin: 30px auto;
+  text-align: center;
+}
 
-  .table-title {
-    text-align: center;
-    margin-bottom: 20px; /* Adjust margin as needed */
-    
-  }
+.search-bar {
+  width: 50%;
+  margin-bottom: 20px;
+}
 
-  .chart-section {
-    margin-top: 50px !important;
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .card-text {
-    font-size: 16px;
-  }
-  
-  .chart-container {
-      width: 400px;
-      height: 400px;
-      margin: auto;
-      align-content: center;
-    }
-  
+/* ✅ Mobile Cards */
+.mobile-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-    /* mobile section */
-    .mobile-cards-container {
-      display: flex;
-      justify-content: center; /* Center horizontally */
-      align-items: center; /* Center vertically */
-      margin-top: 20px;
-      margin-bottom: 40px;
-    }
-  
-    .mobile-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 20px; /* Space between cards */
-    }
-  
-    .mobile-card {
-      width: 120px;
-      height: 50px;
-      border-bottom: 5px solid black;
-      border-radius: 5%;
-      display: flex;
-      flex-direction: column; /* Stack content vertically */
-      justify-content: center; /* Center content horizontally */
-      align-items: center;
-    }
-  
-    .mobile-initials-card {
-      width: 120px;
-      height: 50px;
-      border: 5px solid black;
-      font-weight: bold;
-      font-size: 50px;
-      display: flex;
-      justify-content: center; /* Center content horizontally */
-      align-items: center; /* Center content vertically */
-      font-family: Roboto, "Helvetica Neue", sans-serif;
-      border-radius: 5%;
-    }
-  
-    .mobile-table {
-      margin-top: 10px;
-    }
+.mobile-card, .mobile-initials-card {
+  width: 140px;
+  height: 60px;
+  border-bottom: 4px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
 
-    .mobile-chart-container {
-      width: 90%;
-      margin-top: 50px;
-      margin-bottom: 50px;
-      margin: auto;
-      align-content: center;
-    }
+.mobile-card-text {
+  font-size: 14px;
+  font-weight: bold;
+}
 
-    .table-name{
-      font: bold;
-      cursor: pointer;
-    }
+/* ✅ Mobile Table */
+.mobile-table {
+  width: 90%;
+  margin: auto;
+}
 
+/* ✅ Table Styling */
+.mat-elevation-z8 {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
 
+.table-name {
+  font-weight: bold;
+  cursor: pointer;
+  color: #ff63a4;
+}
 
- 
+.table-name:hover {
+  text-decoration: underline;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}
+
+/* ✅ Paginator */
+.mat-paginator {
+  margin-top: 10px;
+}

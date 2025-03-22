@@ -29,9 +29,9 @@ export class ProfileComponent implements OnInit {
   changePasswordVisible: boolean = false;
   deleteAccountVisible: boolean = false;
   addProfileVisible: boolean = false;
-  editUserVisible: boolean = false;
+  editUserVisible: boolean = true;
   personalProfiles!: number[];
-  personalProfilesVisible: boolean = false;
+  personalProfilesVisible: boolean = true;
   signUpLink: string = '';
 
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: MatDialog, private apiService: ApiService, private router: Router) {
@@ -62,38 +62,6 @@ export class ProfileComponent implements OnInit {
     if (this.userRole == UserRole.partner) {
       this.signUpLink = `${window.location.origin}/#/Inscriere/${user.referralCode}`;
     }
-  }
-
-  changePassword(){
-    this.changePasswordVisible = !this.changePasswordVisible;
-    this.deleteAccountVisible = false;
-    this.addProfileVisible = false;
-    this.editUserVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
-  addProfile(){
-    this.addProfileVisible = !this.addProfileVisible;
-    this.deleteAccountVisible = false;
-    this.changePasswordVisible = false;
-    this.editUserVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
-  editUser(){
-    this.editUserVisible = !this.editUserVisible;
-    this.addProfileVisible = false;
-    this.deleteAccountVisible = false;
-    this.changePasswordVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
-  viewPersonalProfiles(){
-    this.personalProfilesVisible = !this.personalProfilesVisible;
-    this.editUserVisible = false;
-    this.addProfileVisible = false;
-    this.deleteAccountVisible = false;
-    this.changePasswordVisible = false;
   }
 
   

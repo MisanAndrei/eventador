@@ -1,33 +1,54 @@
-<form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email">Email:</label>
-    <input id="email" formControlName="email" type="email" />
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input id="password" formControlName="password" type="password" />
-  </div>
-  <div>
-    <label for="verifyPassword">Verify Password:</label>
-    <input id="verifyPassword" formControlName="verifyPassword" type="password" />
-  </div>
-  <div>
-    <label for="firstName">First Name:</label>
-    <input id="firstName" formControlName="firstName" type="text" />
-  </div>
-  <div>
-    <label for="lastName">Last Name:</label>
-    <input id="lastName" formControlName="lastName" type="text" />
-  </div>
-  <div>
-    <label for="phoneNumber">Phone Number:</label>
-    <input id="phoneNumber" formControlName="phoneNumber" type="text" />
-  </div>
-  <div>
-    <label for="role">Role:</label>
-    <select id="role" formControlName="role">
-      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
-    </select>
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="form-container">
+  <form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
+    
+    <h2 class="form-title">Înregistrare Partener</h2>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" placeholder="Introduceți email-ul">
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Parolă:</label>
+      <input id="password" formControlName="password" type="password" placeholder="Introduceți parola">
+    </div>
+
+    <!-- Verify Password -->
+    <div class="form-group">
+      <label for="verifyPassword">Confirmare Parolă:</label>
+      <input id="verifyPassword" formControlName="verifyPassword" type="password" placeholder="Reintroduceți parola">
+    </div>
+
+    <!-- First Name -->
+    <div class="form-group">
+      <label for="firstName">Prenume:</label>
+      <input id="firstName" formControlName="firstName" type="text" placeholder="Introduceți prenumele">
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-group">
+      <label for="lastName">Nume:</label>
+      <input id="lastName" formControlName="lastName" type="text" placeholder="Introduceți numele">
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-group">
+      <label for="phoneNumber">Număr de Telefon:</label>
+      <input id="phoneNumber" formControlName="phoneNumber" type="text" placeholder="Introduceți numărul de telefon">
+    </div>
+
+    <!-- Role Dropdown -->
+    <div class="form-group">
+      <label for="role">Rol:</label>
+      <select id="role" formControlName="role">
+        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn">Înregistrează-te</button>
+
+  </form>
+</div>

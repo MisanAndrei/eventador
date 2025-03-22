@@ -38,9 +38,10 @@ export class PersonalProfilesComponent implements OnInit {
     
   }
 
-  onCardClick(profileId: number){
-    this.router.navigate(['/furnizor', profileId]);
-  }
+  onCardClick(profile: ProfileCard): void {
+    const formattedProfileName = this.formatProfileName(profile.name);
+    this.router.navigate([`/furnizor`, `${formattedProfileName}-${profile.id}`]);
+  }  
 
   editProfile(event: Event, profileId: number){
     event.stopPropagation();
@@ -72,6 +73,10 @@ export class PersonalProfilesComponent implements OnInit {
       });
 
     }
+  }
+
+  formatProfileName(profileName: string): string {
+    return profileName.replace(/\s+/g, '-');
   }
 
   openSuccessDialog(): void {

@@ -21,6 +21,7 @@ export class EditProfileComponent implements OnInit {
   maximumNumberAllowed: number = 5;
   alreadyExistingCUI: boolean = false;
   alreadyExistingRegCom: boolean = false;
+  saving: boolean = false;
 
 
   selectedAreas: number[] = [];
@@ -244,6 +245,7 @@ export class EditProfileComponent implements OnInit {
     }
 
     onSaveButtonClick() {
+      this.saving = true;
     var profile = {
       profileId: this.currentProfileId,
       businessName: this.businessName,

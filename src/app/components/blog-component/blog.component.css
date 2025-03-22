@@ -12,17 +12,47 @@
   overflow: hidden; /* Hide any overflow content */
 }
 
+/* ✅ Ensure text is readable on desktop */
+.ql-editor {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ✅ Apply larger text and better spacing for mobile */
+.ql-editor {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+/* ✅ Ensure styles are applied properly */
+.custom-quill .ql-editor {
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  padding: 15px !important;
+}
+
+/* ✅ Mobile-specific adjustments */
+@media screen and (max-width: 768px) {
+  .custom-quill-mobile .ql-editor {
+    font-size: 20px !important;
+    line-height: 2 !important;
+    padding: 20px !important;
+  }
+}
+
+/* ✅ Adjust Quill container for mobile */
 .mobile-container {
-  overflow: hidden;
   width: 90%;
+  height: auto; /* Allows flexible height */
+  padding: 10px;
 }
 
 .mobile-outer-container {
   display: flex;
   justify-content: center;
-
+  align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: auto;
 }
 
 

@@ -13,7 +13,6 @@ import { ApiService } from 'src/app/Services/ApiService';
 export class BlogComponent implements OnInit {
   isMobile: Observable<boolean>;
   selectedBlog!: number;
-  pdfSrc: string = '';
   selectedBlogName: string = '';
 
   content!: string;
@@ -38,7 +37,6 @@ export class BlogComponent implements OnInit {
     }
 
     this.apiService.getBlogById(this.selectedBlog).subscribe(response => {
-      this.pdfSrc = response.content ?? "";
       this.content = response.content ?? "";
     });
   }

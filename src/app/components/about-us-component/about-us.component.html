@@ -1,33 +1,27 @@
-  <div *ngIf="!(isMobile | async)"> 
-  <div class="second-section">
-    <h2 class="section-title">Salut și bine ai venit pe eventador.ro!</h2>
-    <p class="section-text">{{ secondSectionDescription }}</p>
-  </div>
-  
-  <div class="third-section">
-    <div class="left-subsection">
-      <h3 class="subsection-title">Orice Tipuri de Evenimente</h3>
-      <p class="subsection-text">Indiferent de tematica petrecerii tale (botez, nuntă, majorat, petrecere privată, etc), noi ținem cont de toate necesitățile tale și ți le punem la dispoziție GRATUIT!</p>
-      <p class="subsection-text">De la locații, artiști, trupe, foto / video, aranjamente, barmani, gheată carbonică/artificii, limuzine, la exclusivități feminine cum ar fi flori, bijuterii, rochii de mireasă, saloane de înfrumusețare și tot indispensabilul pentru confortul tău!</p>
-    
-      <h3 class="subsection-title">Tu Alegi</h3>
-      <p class="subsection-text">Alege singur tot ceea ce consideri că este potrivit pentru tine și invitații tăi. Acum ai ocazia să faci acest lucru!</p>
-    
-    </div>
-    <div class="right-subsection">
-      <h3 class="subsection-title">Profile Furnizori Evenimente</h3>
-      <p class="subsection-text">Îți punem la dispoziție site-urile de prezentare și link-urile către rețelele de socializare ale celor mai de seama prestatori de servicii din domeniul evenimentelor precum și contactele actualizate ale acestora, prin intermediul cărora poți lua legătura chiar tu cu ei, evitând astfel intermediarii și comisioanele.</p>
-      <p class="subsection-text">De asemenea poți verifica disponibilitatea, tarifele precum și urmări activitatea furnizorului dorit prin intermediul rețelelor de socializare.</p>
-    
-      <h3>Acces Gratuit</h3>
-      <p class="subsection-text">Accesul este gratuit și așa va rămâne. În cel mai scurt timp, vei avea și posibilitatea să descarci și aplicația EVENTADOR disponibilă pentru IOS/Android.</p>
-    </div>
-  </div>
-</div> 
-
-<div *ngIf="(isMobile | async)" class="mobile-container">
-  <div class="mobile-section" *ngFor="let section of sections">
-    <h2><strong>{{ section.title }}</strong></h2>
-    <p>{{ section.text }}</p>
-  </div>
+<div class="intro-container" [ngClass]="{ 'mobile-layout': isMobile | async }">
+  <h1 class="intro-title">Bun venit pe Eventador, locul unde fiecare eveniment devine o experiență memorabilă!</h1>
+  <p class="intro-text">
+    Aici, nu ne dorim să fim doar o simplă platformă de organizare de evenimente, ci un adevărat motor de căutare dedicat universului evenimentelor, atât private, cât și publice.
+  </p>
+  <p class="intro-text">
+    Viziunea noastră este de a transforma Eventador în destinația preferată pentru toți cei care doresc să exploreze și să participe la evenimente fascinante, la nivel național într-o primă etapă, iar ulterior, și internațional.
+  </p>
+  <p class="intro-text">
+    Te invităm să explorezi cele mai căutate locații, furnizori de elită și cele mai creative servicii, toate concepute pentru a transforma fiecare petrecere, nuntă sau botez într-o experiență memorabilă!
+  </p>
+  <p class="intro-text">
+    Eventador este locul ideal pentru cei care doresc să organizeze sau să participe la diverse evenimente unice. Indiferent dacă este vorba de petreceri private, evenimente publice sau activități culturale, Eventador îți pune la dispoziție diferite opțiuni pentru a te bucura de momente de neuitat!
+  </p>
+  <p class="intro-text">
+    Imaginați-vă un loc unde poți să navighezi dintr-o parte în alta, să identifici evenimente cu impact mare în societate, să te conectezi direct cu furnizorii preferați și să îți pui în practică cele mai îndrăznețe idei.
+  </p>
+  <p class="intro-text">
+    Pe scurt, Eventador îți va oferi o experiență de căutare completă de la A-Z în lumea evenimentelor.
+  </p>
+  <p class="intro-text">
+    Împreună, putem transforma acest proiect într-o platformă care să unească pasiunile și dorințele comunității noastre, făcând fiecare eveniment nu doar o simplă întâlnire, ci un prilej de celebrare și conectare.
+  </p>
+  <p class="intro-text">
+    <strong>Vino alături de noi și descoperă cum putem transforma împreună viitorul evenimentelor!</strong>
+  </p>
 </div>
