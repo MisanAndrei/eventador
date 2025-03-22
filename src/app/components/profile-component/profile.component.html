@@ -1,73 +1,72 @@
+<!-- Desktop Profile -->
 <div *ngIf="!(isMobile | async)" class="profile-container">
-  <div class="user-logo">
-    <div class="user-logo">{{ nameInitials }}</div>
-  </div>
+  <div class="user-logo">{{ nameInitials }}</div>
+  
   <div class="profile-details">
     <h1>Profil Personal</h1>
-    <div>
-      <strong>Prenume:</strong> {{ firstName }}
-    </div>
-    <div>
-      <strong>Nume:</strong> {{ lastName }}
-    </div>
-    <div>
-      <strong>Email:</strong> {{ email }}
-    </div> 
-    <div>
-      <strong>Numar de telefon:</strong> {{ phoneNumber }}
-    </div>
+    <div><strong>Prenume:</strong> {{ firstName }}</div>
+    <div><strong>Nume:</strong> {{ lastName }}</div>
+    <div><strong>Email:</strong> {{ email }}</div>
+    <div><strong>Numar de telefon:</strong> {{ phoneNumber }}</div>
+
+    <!-- Affiliate (userRole == 3) -->
     <div *ngIf="userRole == 3">
-      <strong>Link de inscriere:</strong> {{ signUpLink }}
-      <button (click)="copyToClipboard(signUpLink)">Salveaza</button>
+      <strong>Link de înscriere:</strong> {{ signUpLink }}
+      <button (click)="copyToClipboard(signUpLink)">Salvează</button>
     </div>
-    <button mat-raised-button class="action-buttons" (click)="changePassword()"><b>Schimbă Parola</b></button>
-    <button *ngIf="userRole == 4" mat-raised-button class="action-buttons" (click)="addProfile()"><b>Adaugă Profil</b></button>
-    <button mat-raised-button class="action-buttons" (click)="editUser()"><b>Editare date personale</b></button>
-    <button mat-raised-button class="action-buttons" (click)="deleteAccount()"><b>Șterge Cont</b></button>
-    <button *ngIf="userRole == 4" mat-raised-button class="action-buttons" (click)="viewPersonalProfiles()"><b>Profile Personale</b></button>
+
+    <!-- Buttons for desktop -->
+    <button mat-raised-button class="action-buttons" (click)="deleteAccount()" *ngIf="!deleteAccountVisible">
+      <b>Șterge Cont</b>
+    </button>
   </div>
+
+  <!-- ✅ Show delete component first when clicked -->
+  <app-delete-account *ngIf="deleteAccountVisible"></app-delete-account>
+
+  <!-- Child components always visible -->
+  <app-change-password></app-change-password>
+  <app-edit-personal-data></app-edit-personal-data>
 </div>
 
-<app-change-password *ngIf="changePasswordVisible && !(isMobile | async)"></app-change-password>
-<app-edit-personal-data *ngIf="editUserVisible && !(isMobile | async)"></app-edit-personal-data>
-<app-delete-account *ngIf="deleteAccountVisible && !(isMobile | async)"></app-delete-account>
-<app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible && !(isMobile | async)"></app-add-profile>
-
-
+<!-- Mobile Profile -->
 <div *ngIf="isMobile | async" class="mobile-profile-container">
-  <div class="mobile-user-logo"><p>{{ nameInitials }}</p></div>
-  <div>
-    <h1 class="mobile-title">Profil Personal</h1>
-    <div>
-      <strong>Prenume:</strong> {{ firstName }}
-    </div>
-    <div>
-      <strong>Nume:</strong> {{ lastName }}
-    </div>
-    <div>
-      <strong>Email:</strong> {{ email }}
-    </div>
-    <div>
-      <strong>Numar de telefon:</strong> {{ phoneNumber }}
-    </div>
-    <div *ngIf="userRole == 3">
-      <strong>Link de inscriere:</strong> {{ signUpLink }}
-      <button (click)="copyToClipboard(signUpLink)">Salveaza</button>
-    </div>
-    <div class="mobile-action-buttons">
-    <button mat-raised-button class="mobile-action-button" (click)="editUser()">Editare date personale</button>
-    <app-edit-personal-data *ngIf="editUserVisible"></app-edit-personal-data>
-    <button mat-raised-button class="mobile-action-button" (click)="changePassword()">Schimbă Parola</button>
-    <app-change-password *ngIf="changePasswordVisible"></app-change-password>
-    <button *ngIf="userRole == 4" mat-raised-button class="mobile-action-button" (click)="addProfile()">Adaugă Profil</button>
-    <app-add-profile [userId]="loggedUserId" *ngIf="addProfileVisible"></app-add-profile>
-    <button mat-raised-button class="mobile-action-button" (click)="deleteAccount()">Șterge Cont</button>
-    <app-delete-account *ngIf="deleteAccountVisible"></app-delete-account>  
-    <button *ngIf="userRole == 4" mat-raised-button class="mobile-action-button" (click)="viewPersonalProfiles()">Profile Personale</button>
-    
-    </div>
-    
+  
+  <!-- User Info Card -->
+  <div class="mobile-profile-card">
+    <div class="mobile-user-logo"><p>{{ nameInitials }}</p></div>
+    <h2 class="mobile-user-name">{{ firstName }} {{ lastName }}</h2>
   </div>
-</div>
-<app-personal-profiles *ngIf="personalProfilesVisible" [personalProfiles]="personalProfiles" [forApprovalPersonalProfiles]="false"></app-personal-profiles>
 
+  <!-- Personal Details -->
+  <div class="mobile-profile-details">
+    <div class="mobile-info"><strong>Email:</strong> {{ email }}</div>
+    <div class="mobile-info"><strong>Numar de telefon:</strong> {{ phoneNumber }}</div>
+
+    <!-- Affiliate (userRole == 3) -->
+    <div *ngIf="userRole == 3" class="mobile-info">
+      <strong>Link de înscriere:</strong> {{ signUpLink }}
+      <button (click)="copyToClipboard(signUpLink)">Salvează</button>
+    </div>
+  </div>
+
+  <!-- Delete Account Button -->
+  <button mat-raised-button class="mobile-delete-button" (click)="deleteAccount()" *ngIf="!deleteAccountVisible">
+    Șterge Cont
+  </button>
+
+  <!-- Show delete component first when clicked -->
+  <app-delete-account *ngIf="deleteAccountVisible"></app-delete-account>
+
+  <!-- Other components always visible -->
+  <app-edit-personal-data></app-edit-personal-data>
+  <app-change-password></app-change-password>
+</div>
+
+<!-- Always visible -->
+<div *ngIf="personalProfiles" class="centered-profile-container">
+  <app-personal-profiles 
+    [personalProfiles]="personalProfiles" 
+    [forApprovalPersonalProfiles]="false">
+  </app-personal-profiles>
+</div>

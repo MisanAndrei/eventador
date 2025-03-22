@@ -6,6 +6,8 @@ import { Category } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { AuthService } from 'src/app/Services/AuthService';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../dialogs/delete-dialog-component/delete-dialog.component';
 
 
 
@@ -31,9 +33,7 @@ export class NavigationBarComponent implements OnInit {
 
   isLoggedIn(): boolean {
     // Check if the user is logged in by checking if the token is present in local storage
-    const token = localStorage.getItem('access_token');
-
-    return token !== null;
+    return this.authService.isAuthenticated();
   }
 
   isAdminOrMarketingLoggedIn(): boolean {
@@ -71,7 +71,7 @@ export class NavigationBarComponent implements OnInit {
 
 
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService, private authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -107,9 +107,34 @@ export class NavigationBarComponent implements OnInit {
     this.showCategoriesFromMenu = false;
   }
 
+  logOutMobile(){
+    
+    this.toggleCollapse();
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
+      data: { text: 'Sunteți sigur că vreți să vă deconectați?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.authService.logOut();
+        this.router.navigate(['/acasa']);
+      }
+    });
+    
+  }
+
   logOut(){
-    this.authService.logOut();
-    this.router.navigate(['/acasa']);
+
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
+      data: { text: 'Sunteți sigur că vreți să vă deconectați?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.authService.logOut();
+        this.router.navigate(['/acasa']);
+      }
+    });
   }
   
   

@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CreateProfileComponent implements OnInit {
   selectedAreas: number[] = [];
-  selectedCategory: number[] = [];
+  selectedCategories: number[] = [];
   tooManyImages: boolean = false;
   tooManyImagesMessage: string = 'Prea multe imagini selectate, va rugam alegeti din nou!';
   
@@ -45,7 +45,9 @@ export class CreateProfileComponent implements OnInit {
     instagramUrl: string = '';
     youtubeUrl: string = '';
     businessName: string = '';
+    businessEmail: string = '';
     businessCUI: string = '';
+    businessRegCom: string = '';
     category: string = '';
     description: string = '';
     selectedImages: File[] = [];
@@ -57,6 +59,7 @@ export class CreateProfileComponent implements OnInit {
     referralCodeByUrl: boolean = false;
     showPartnerErrorCode: boolean = false;
     showPartnerSuccessCode: boolean = false;
+    saving: boolean = false;
 
     //partner referral section
     partnerName: string = '';
@@ -73,12 +76,122 @@ export class CreateProfileComponent implements OnInit {
     isBusinessAccount: boolean = false;
     isLegalPerson: boolean = false;
 
+    businessEmailValid: boolean = true;
+    businessEmailErrorMessage: string = '';
+
+    passwordStrength: {
+      length: boolean;
+      lowercase: boolean;
+      uppercase: boolean;
+      number: boolean;
+      specialChar: boolean;
+    } = {
+      length: false,
+      lowercase: false,
+      uppercase: false,
+      number: false,
+      specialChar: false,
+    };
+    
+    showPasswordMessages: boolean = false;
+    typingTimeout: any;
+
+    checkPasswordStrength(password: string): void {
+  // Reset typing timeout
+  clearTimeout(this.typingTimeout);
+
+  // Delay showing validation messages until the user stops typing
+  this.typingTimeout = setTimeout(() => {
+    this.showPasswordMessages = true;
+
+    // Update validation states
+    this.passwordStrength.length = password.length >= 8;
+    this.passwordStrength.lowercase = /[a-z]/.test(password);
+    this.passwordStrength.uppercase = /[A-Z]/.test(password);
+    this.passwordStrength.number = /\d/.test(password);
+    this.passwordStrength.specialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  }, 500);
+}
+
+    emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    businessEmailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    phoneRegex: RegExp = /^(?:\+40|0)[1-9][0-9]{8}$/;
+
+    emailUnique: boolean = true;
+    checkingEmail: boolean = false;
+    emailErrorMessage: string = '';
+
+    validateBusinessEmail(): void {
+      if (this.businessEmail && !this.businessEmailRegex.test(this.businessEmail)) {
+        this.businessEmailValid = false;
+        this.businessEmailErrorMessage = 'Formatul emailului de business nu este valid!';
+      } else {
+        this.businessEmailValid = true;
+        this.businessEmailErrorMessage = '';
+      }
+    }
+
+    isAllValid(): boolean {
+      return (
+        this.passwordStrength.length &&
+        this.passwordStrength.lowercase &&
+        this.passwordStrength.uppercase &&
+        this.passwordStrength.number &&
+        this.passwordStrength.specialChar
+      );
+    }
+
+    onEmailBlur(): void {
+  // Check if the email format is valid
+  if (!this.emailRegex.test(this.email)) {
+    this.emailUnique = false;
+    this.emailErrorMessage = 'Formatul emailului nu este valid!';
+    return;
+  }
+
+  // Reset error message and show checking status
+  this.checkingEmail = true;
+  this.emailErrorMessage = 'Verificare email...';
+
+  // Call API to check email uniqueness
+  this.apiService.checkEmailUnique(this.email).subscribe({
+    next: (isUnique: boolean) => {
+      this.checkingEmail = false;
+      this.emailUnique = isUnique;
+
+      // Update error message based on uniqueness check
+      if (isUnique) {
+        this.emailErrorMessage = 'Emailul este disponibil.';
+        this.emailUnique = true;
+      } else {
+        this.emailErrorMessage = 'Emailul este deja folosit!';
+      }
+    },
+    error: () => {
+      this.checkingEmail = false;
+      this.emailUnique = false;
+      this.emailErrorMessage = 'Eroare la verificarea emailului. Vă rugăm să încercați din nou.';
+    },
+  });
+}
+
     isMobile!: Observable<boolean>;
       constructor(private breakpointObserver: BreakpointObserver, private router: Router, private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
 
       }
   
     ngOnInit(): void {
+       // Check if the 'isBusinessAccount' data is present in the route
+    const isBusinessAccount = this.route.snapshot.data['isBusinessAccount'];
+
+    if (isBusinessAccount !== undefined) {
+      // Set the value if it exists
+      this.isBusinessAccount = isBusinessAccount;
+    } else {
+      // Redirect to 'CreareCont' if 'isBusinessAccount' is not provided
+      this.router.navigate(['/Inscriere']);
+    }
+
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -128,6 +241,7 @@ export class CreateProfileComponent implements OnInit {
       // Reset business info fields when toggled off
       if (!this.isBusinessAccount) {
         this.businessName = '';
+        this.businessEmail = '';
         this.category = '';
         this.description = '';
         this.motto = '';
@@ -141,6 +255,7 @@ export class CreateProfileComponent implements OnInit {
     toggleLegalPerson(){
       if(!this.isLegalPerson){
         this.businessCUI = '';
+        this.businessRegCom = '';
       }
     }
 
@@ -205,11 +320,11 @@ export class CreateProfileComponent implements OnInit {
         return false;
       }
 
-      if (this.isBusinessAccount && (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0 || this.convertedSelectedProfileImage == '' || this.phoneNumber == '')){
+      if (this.isBusinessAccount && (this.nullOrEmpty(this.businessName) || this.nullOrEmpty(this.businessEmail) || this.nullOrEmpty(this.description) || this.cityId == null || this.countyId == null || this.selectedCategories.length == 0 || this.selectedAreas.length == 0 || this.convertedSelectedImages.length == 0 || this.convertedSelectedProfileImage == '' || this.phoneNumber == '')){
         return false;
       }
 
-      if (this.isLegalPerson && this.nullOrEmpty(this.businessCUI)){
+      if (this.isLegalPerson && this.nullOrEmpty(this.businessCUI) && this.nullOrEmpty(this.businessRegCom)){
         return false;
       }
 
@@ -225,6 +340,7 @@ export class CreateProfileComponent implements OnInit {
     }
 
     onSaveButtonClick() {
+      this.saving = true;
     var user = {
       email: this.email,
       firstName: this.firstName,
@@ -235,8 +351,10 @@ export class CreateProfileComponent implements OnInit {
       partnerId: this.partnerId,
       profile: {
         businessName: this.businessName,
+        businessEmail: this.businessEmail,
         businessCUI: this.businessCUI,
-        categoryId: this.selectedCategory,
+        businessRegCom: this.businessRegCom,
+        categoryIds: this.selectedCategories,
         motto: this.motto,
         cityId: this.cityId,
         areaOfInterest: this.selectedAreas,

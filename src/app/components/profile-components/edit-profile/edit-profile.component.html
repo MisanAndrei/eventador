@@ -22,7 +22,12 @@
     <div *ngIf="isLegalPerson" class="business-info">
       <div class="form-group">
         <mat-form-field class="custom-input">
-        <input matInput placeholder="CUI*" [(ngModel)]="businessCUI" name="businessCUI" required [disabled]="alreadyExistingCUI">
+        <input matInput placeholder="Reg. Com. *" [(ngModel)]="businessRegCom" name="businessRegCom" [disabled]="alreadyExistingRegCom" required>
+      </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="custom-input">
+        <input matInput placeholder="CUI*" [(ngModel)]="businessCUI" name="businessCUI" [disabled]="alreadyExistingCUI" required>
       </mat-form-field>
       </div>
     </div>
@@ -30,6 +35,12 @@
     <div class="form-group">
       <mat-form-field class="custom-input">
       <input matInput placeholder="Numele firmei*" [(ngModel)]="businessName" name="businessName" required>
+    </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="custom-input">
+      <input matInput placeholder="Email business*" [(ngModel)]="businessEmail" name="businessEmail" required>
     </mat-form-field>
     </div>
 
@@ -62,8 +73,8 @@
 
       <div class="form-group">
         <mat-form-field class="custom-dropdown">
-          <mat-label>Selectare categorie</mat-label>
-          <mat-select [(ngModel)]="selectedCategory" required disabled>
+          <mat-label>Selectare categorii</mat-label>
+          <mat-select [(ngModel)]="selectedCategories" multiple required>
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -134,7 +145,7 @@
   </div>
 
   <div class="save-button-container">
-    <button class="save-button" mat-raised-button color="accent" [ngStyle]="{'cursor': saveButtonEnabled() ? 'pointer' : 'not-allowed'}" [disabled]="!saveButtonEnabled()" (click)="onSaveButtonClick()">Salveaza profil</button>
+    <button class="save-button" mat-raised-button color="accent" [ngStyle]="{'cursor': saveButtonEnabled() ? 'pointer' : 'not-allowed'}" [disabled]="!saveButtonEnabled() || saving" (click)="onSaveButtonClick()">Salveaza profil</button>
   </div>
 </div>
 
@@ -156,7 +167,12 @@
     <div *ngIf="isLegalPerson" class="business-info">
       <div class="form-group">
         <mat-form-field class="custom-input-mobile">
-        <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI">
+        <input matInput placeholder="Reg. Com." [(ngModel)]="businessRegCom" name="businessRegCom" [disabled]="alreadyExistingRegCom" required>
+      </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="custom-input-mobile">
+        <input matInput placeholder="CUI" [(ngModel)]="businessCUI" name="businessCUI" [disabled]="alreadyExistingCUI" required>
       </mat-form-field>
       </div>
     </div>
@@ -164,6 +180,12 @@
     <div class="form-group">
       <mat-form-field class="custom-input-mobile">
       <input matInput placeholder="Numele firmei" [(ngModel)]="businessName" name="businessName">
+    </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="custom-input-mobile">
+      <input matInput placeholder="Email business" [(ngModel)]="businessEmail" name="businessEmail">
     </mat-form-field>
     </div>
 
@@ -196,8 +218,8 @@
 
       <div class="form-group">
         <mat-form-field class="custom-dropdown-mobile">
-          <mat-label>Selectare categorie</mat-label>
-          <mat-select [(ngModel)]="selectedCategory" >
+          <mat-label>Selectare categorii</mat-label>
+          <mat-select [(ngModel)]="selectedCategories" multiple>
             <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -265,7 +287,7 @@
   </div>
 
   <div class="save-button-container">
-    <button class="save-button" mat-raised-button color="accent" [disabled]="!saveButtonEnabled()" (click)="onSaveButtonClick()">Salveaza profil</button>
+    <button class="save-button" mat-raised-button color="accent" [disabled]="!saveButtonEnabled() || saving" (click)="onSaveButtonClick()">Salveaza profil</button>
   </div>
 </div>
 

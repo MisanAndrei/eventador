@@ -1,104 +1,209 @@
+/* ======== DESKTOP REVIEW CARD ======== */
 .rating-card {
-    border: 1px solid #ddd;
-    margin: 20px;
-    padding: 10px;
-    width: 300px;
-    background-color: white;
-    border-radius: 5%;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .user-rating {
-    display: flex;
-    flex-direction: column; /* Change this property */
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .rating-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .stars-and-name {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .star-rating {
-    font-size: 24px;
-  }
-  
-  .star {
-    margin-right: 5px;
-  }
-  
-  .filled {
-    color: gold;
-  }
-  
-  .username {
-    font-weight: bold;
-  }
-  
-  .review {
-    margin-bottom: 10px;
-  }
-  
-  .response {
-    font-style: italic;
-    color: #666;
-    text-align: right;
-  }
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px auto;
+  width: 60%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease-in-out;
+}
 
-  .rating-container {
-    width: 70%;
-    margin: 0 auto; /* This centers the container horizontally */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+.rating-card:hover {
+  transform: scale(1.03);
+}
 
-  .show-Response{
-    background: linear-gradient(to right, #FF63A4, #FE8962);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    display: block;
-    margin-right: 5px;
-    margin-left: auto;
-  }
+/* ======== MOBILE REVIEW CARD (Fixed Borders & Shadows) ======== */
+.rating-card-mobile {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px auto;
+  width: 90%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  border: 2px solid #ddd; /* More visible border */
+  transition: transform 0.3s ease-in-out;
+}
 
-  .show-all-reviews {
-    background: linear-gradient(to right, #FF63A4, #FE8962);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer !important;
-    margin-top: 5px;
-  }
+/* ======== HEADER WITH USER INFO ======== */
+.rating-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-  .response-area-mobile {
-    margin-left: 10px;
-    width: 200px;
-    height: 50px;
-    margin-top: 5px;
-  }
+/* DESKTOP PROFILE ICON */
+.profile-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #FF63A4, #FE8962);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  margin-right: 15px;
+}
 
-  .response-area {
-    margin-left: 10px;
-    margin-top: 5px;
-    width: 270px;
-    height: 60px;
-  }
+/* MOBILE PROFILE ICON (Fixed Circle & Size) */
+.profile-icon-mobile {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #FF63A4, #FE8962);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  margin-right: 12px;
+  border: 2px solid white; /* Ensure it looks properly separated */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds depth */
+}
 
-  .button-allReviews-section {
-    width: 90%;
-    text-align: center;
-  }
+/* ======== USER & CATEGORY NAME ======== */
+.username {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.username-mobile {
+  font-size: 16px;
+}
+
+.category-name {
+  font-size: 14px;
+  color: #888;
+}
+
+.category-name-mobile {
+  font-size: 12px;
+}
+
+/* ======== STAR RATING SYSTEM ======== */
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.star {
+  color: lightgray;
+  transition: color 0.3s ease-in-out;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.review-score {
+  font-size: 14px;
+  color: #666;
+  margin-left: 5px;
+}
+
+/* MOBILE STAR RATING */
+.star-rating-mobile {
+  font-size: 16px;
+}
+
+/* ======== REVIEW TEXT ======== */
+.review-text {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.review-text-mobile {
+  font-size: 14px;
+}
+
+/* ======== RESPONSE SECTION ======== */
+.response {
+  background: #f9f9f9;
+  border-left: 3px solid #FF63A4;
+  padding: 10px;
+  font-style: italic;
+  color: #444;
+  margin-top: 10px;
+}
+
+.response-label {
+  font-weight: bold;
+  color: #FE8962;
+}
+
+/* ======== BUTTONS (General) ======== */
+button {
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* ======== SHOW RESPONSE & REPLY BUTTONS ======== */
+.show-response, 
+.reply-button, 
+.send-reply, 
+.show-all-reviews {
+  background: linear-gradient(to right, #FF63A4, #FE8962);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.show-response:hover, 
+.reply-button:hover, 
+.send-reply:hover, 
+.show-all-reviews:hover {
+  opacity: 0.85;
+}
+
+/* MOBILE BUTTONS */
+.show-response-mobile, 
+.reply-button-mobile, 
+.send-reply-mobile, 
+.show-all-reviews-mobile {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+
+/* ======== RESPONSE INPUT AREA ======== */
+.response-area {
+  width: 100%;
+  height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* MOBILE RESPONSE AREA */
+.response-area-mobile {
+  height: 60px;
+  font-size: 13px;
+}
+
+/* ======== PENDING RESPONSE MESSAGE ======== */
+.pending-message {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* MOBILE PENDING MESSAGE */
+.pending-message-mobile {
+  font-size: 13px;
+}
+
+/* ======== SHOW ALL REVIEWS BUTTON ======== */
+.button-allReviews-section {
+  text-align: center;
+  margin-top: 10px;
+}

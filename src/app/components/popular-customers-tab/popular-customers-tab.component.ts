@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, map } from "rxjs";
-import { ProfileCard, Section } from "src/app/Models/Models";
+import { ProfileCard, Section } from "../../Models/Models";
 
 @Component({
     selector: 'app-popular-customers-tab',

@@ -203,3 +203,66 @@ body {
   .code-success-message {
     margin-top: -15px;
   }
+
+  .terms-message {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .terms-message a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  
+  .terms-message a:hover {
+    color: #0056b3;
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 5px;
+  }
+  
+  .success-message {
+    color: green;
+    margin-top: 5px;
+  }
+
+  .password-strength-container {
+    width: 30vw;
+    margin: 0 auto;
+    text-align: left;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .password-strength-container-mobile {
+    width: 90vw;
+    margin: 0 auto;
+    text-align: left;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Validation message styling */
+  .validation-message {
+    color: red;
+    font-size: 0.9rem;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Icon styling */
+  .icon {
+    margin-right: 8px;
+    font-size: 0.8rem;
+  }

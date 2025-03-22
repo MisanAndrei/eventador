@@ -10,14 +10,14 @@
     <ul class="menu">
       <ng-container *ngIf="!isLoggedIn(); else loggedIn">
         <li><a routerLink="/Favorite">Favorite</a></li>
-        <li><a routerLink="/autentificare">Autentifica-te</a></li>
-        <li><a routerLink="/Inscriere">Inscrie-te</a></li>
+        <li><a routerLink="/autentificare">Autentifică-te</a></li>
+        <li><a routerLink="/Inscriere">Înscrie-te</a></li>
       </ng-container>
       <ng-template #loggedIn>
         <!-- Display something else when logged in, e.g., an icon -->
         <li><a routerLink="/Favorite">Favorite</a></li>
         <li><a routerLink="/profil"><i class="fa fa-user"></i> Profil</a></li>
-        <li class="logout" (click)="logOut()"><a> Deconecteaza-te</a></li>
+        <li class="logout" (click)="logOut()"><a>Deconectează-te</a></li>
       </ng-template>
     </ul>
   </nav>
@@ -64,7 +64,7 @@
   <ul class="menu-list">
    
     <li class="menu-item">
-      <a (click)="onItemClick('/acasa')">Acasa</a>
+      <a (click)="onItemClick('/acasa')">Acasă</a>
     </li>
     <li class="menu-item">
       <a (click)="onItemClick('/despre-noi')">Despre noi</a>
@@ -88,13 +88,13 @@
       <a (click)="onItemClick('/admin-dashboard')">Admin Dashboard</a>
     </li>
     <li class="menu-item">
-      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifica-te</a>
+      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifică-te</a>
     </li>
     <li class="menu-item">
-      <a *ngIf="isLoggedIn()" (click)="logOut()">Deconecteaza-te</a>
+      <a *ngIf="isLoggedIn()" (click)="logOutMobile()">Deconectează-te</a>
     </li>
     <li *ngIf="!isLoggedIn()" class="menu-item">
-      <a (click)="onItemClick('/Inscriere')">Inscrie-te</a>
+      <a (click)="onItemClick('/Inscriere')">Înscrie-te</a>
     </li>
   </ul>
 </div>

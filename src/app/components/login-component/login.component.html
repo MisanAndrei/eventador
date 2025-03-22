@@ -15,10 +15,21 @@
       <div class="form-group">
         <input type="text" [(ngModel)]="username" class="form-control" placeholder="Username">
       </div>
-      <div class="form-group">
-        <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password">
+      <div class="form-group relative">
+        <input 
+          [type]="showPassword ? 'text' : 'password'" 
+          [(ngModel)]="password" 
+          class="form-control" 
+          placeholder="Password">
+        <i 
+          class="eye-icon" 
+          (click)="togglePasswordVisibility()"
+          [ngClass]="showPassword ? 'icon-eye-slash' : 'icon-eye'">
+        </i>
       </div>
-      <p *ngIf="errorWhenLogging" class="error-message">Datele de logare sunt incorecte!</p>
+      <p *ngIf="errorCredentials" class="error-message">Datele de logare sunt incorecte!</p>
+      <p *ngIf="errorNotActivated" class="error-message">Contul dumneavoastra nu a fost activat!</p>
+      <p *ngIf="errorDefault" class="error-message">A aparut o eroare, incercati din nou!</p>
   
       <!-- Login button -->
       <button class="btn btn-primary" (click)="login()">Autentificare</button>
@@ -46,8 +57,10 @@
       <div class="form-group">
         <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password">
       </div>
-      <p *ngIf="errorWhenLogging" class="error-message">Datele de logare sunt incorecte!</p>
-  
+      <p *ngIf="errorCredentials" class="error-message">Datele de logare sunt incorecte!</p>
+      <p *ngIf="errorNotActivated" class="error-message">Contul dumneavoastra nu a fost activat!</p>
+      <p *ngIf="errorDefault" class="error-message">A aparut o eroare, incercati din nou!</p>
+      
       <!-- Login button -->
       <button class="btn btn-primary" (click)="login()">Autentificare</button>
       <a [routerLink]="['/Inscriere']" class="additional-links"><p class="create-account">Nu ai cont? Inscrie-te si tu!</p></a>

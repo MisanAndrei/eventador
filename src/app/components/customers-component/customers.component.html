@@ -9,7 +9,7 @@
     <h1>Nu ați adăugat la favorite nici un furnizor!</h1>
   </div>
   <div *ngIf="!favoriteProfilesPage" class="filter-bar">
-    <h1>Filtrați furnizorii dupa criteriile dorite</h1>
+    <h1>Filtrați furnizorii după criteriile dorite</h1>
     <div class="filter-controls">
       <mat-form-field class="custom-input">
         <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm">
@@ -57,7 +57,26 @@
         </div>
 
         <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
-        <h4 style="margin-left: 10px;">{{ card.category.name }}</h4>
+        <div class="rating-container">
+          <div class="stars">
+            <ng-container *ngFor="let star of getStarsArray(card.averageRating)">
+              <!-- Full Star -->
+              <i class="fa fa-star star-full" *ngIf="star.full"></i>
+        
+              <!-- Half Star -->
+              <i class="fa fa-star star-half" *ngIf="star.half"></i>
+        
+              <!-- Empty Star -->
+              <i class="fa fa-star star-empty" *ngIf="star.empty"></i>
+            </ng-container>
+          </div>
+          <span class="rating-text">{{ card.averageRating.toFixed(1) }} ({{ card.numberOfReviews }})</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; text-align: center; margin-top: 5px; width: 100%;">
+          <h5 *ngFor="let category of card.categories" style="margin: 2px 5px; background-color: lightgray; padding: 3px 8px; border-radius: 5px; white-space: nowrap; line-height: 1; overflow: hidden; text-overflow: ellipsis;">
+            {{ category.name }}
+          </h5>
+        </div>
         <p style="margin-left: 10px;">{{ card.motto }}</p>
       </div>
     </li>
@@ -70,7 +89,7 @@
   <h2 *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible" class="mobile-filter-heading">Furnizori favoriți</h2>
   <h3 *ngIf="favoriteProfilesPage && !noFavoritesMessageVisible && !currrentUserLoggedIn" class="mobile-filter-heading">Te invitam să te înscrii în platforma eventador pentru a-ți păstra preferințele!</h3>
   <h2 *ngIf="favoriteProfilesPage && noFavoritesMessageVisible" class="mobile-filter-heading">Nu ați adăugat la favorite nici un furnizor!</h2>
-  <h2 *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori</h2>
+  <h2 *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori <i [ngClass]="showFilter ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></i></h2>
   <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">
     <div class="mobile-filter-section">
       <mat-form-field>
@@ -121,8 +140,27 @@
     <div class="mobile-card-image">
       <img src="{{ card.profileImage }}" alt="{{ card.name }}">
     </div>
+    <div class="rating-container">
+      <div class="stars">
+        <ng-container *ngFor="let star of getStarsArray(card.averageRating)">
+          <!-- Full Star -->
+          <i class="fa fa-star star-full" *ngIf="star.full"></i>
+    
+          <!-- Half Star -->
+          <i class="fa fa-star star-half" *ngIf="star.half"></i>
+    
+          <!-- Empty Star -->
+          <i class="fa fa-star star-empty" *ngIf="star.empty"></i>
+        </ng-container>
+      </div>
+      <span class="rating-text">{{ card.averageRating.toFixed(1) }} ({{ card.numberOfReviews }})</span>
+    </div>
     <div class="mobile-card-details">
-      <p class="mobile-card-category">{{ card.category.name }}</p>
+      <div class="categories-container" style="text-align: center;">
+        <h5 *ngFor="let category of card.categories" class="mobile-card-category">
+          {{ category.name }}
+        </h5>
+      </div>
       <p class="mobile-card-description">{{ card.motto }}</p>
     </div>
   </div>

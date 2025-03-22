@@ -9,7 +9,7 @@
   
   .login-box {
     width: 30vw;
-    height: 45vh;
+    height: 55vh;
     padding: 40px;
     background-color: #fff;
     border-radius: 8px;
@@ -111,4 +111,24 @@
 
   .forgotten-password {
     color: blue;
+  }
+
+  .relative {
+    position: relative;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .icon-eye::before {
+    content: '👁️'; /* Replace with an icon from a library or use custom content */
+  }
+  
+  .icon-eye-slash::before {
+    content: '🚫'; /* Eye with a slash or similar */
   }

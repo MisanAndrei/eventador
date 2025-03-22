@@ -7,8 +7,10 @@ import { UserRole } from "../Utilities/enums/Enums";
     coverImage: string;
     motto: string;
     city: string;
-    category: Category;
+    categories: Category[];
     areaOfInterest?: County[];
+    averageRating: number;
+    numberOfReviews: number;
   }
 
   export interface City {
@@ -110,6 +112,11 @@ import { UserRole } from "../Utilities/enums/Enums";
     isMaintained: boolean;
   }
 
+  export interface LoginResponse {
+    data?: LoggingUserResponse;
+    statusCode: number;
+  }
+
   export interface LoggingUserResponse {
     id: number;
     email: string;
@@ -120,6 +127,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     profilesIds?: number[];
     favourtieProfilesIds?: number[];
     token: string;
+    refreshToken: string;
     referralCode?: string;
   }
 
@@ -139,7 +147,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     businessName: string;
     email: string;
     phoneNumber: string;
-    categoryName: string;
+    categories: Category[];
     images: UserImage[];
     motto?: string;
     description: string;
@@ -166,10 +174,12 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface CreateProfile {
     businessName: string;
     businessCUI?: string;
+    businessRegCom?: string;
+    businessEmail: string;
     motto?: string;
     cityId: number;
     areaOfInterest: number[];
-    categoryId: number;
+    categoryIds: number[];
     images: string[];
     profileImage: string;
     description: string;  
@@ -193,12 +203,14 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface EditProfile {
     profileId: number;
     businessName: string;  //se poate schimba
-    businessCUI: string;   //se poate schimba daca nu are valoare
+    businessCUI: string;    // se poate schimba daca nu are valoare
+    businessRegCom: string;  //se poate schimba daca nu are valoare
+    businessEmail: string;
     motto?: string;  //se poate schimba
     countyId: number;
     cityId: number;
     areaOfInterest: number[];  //se poate schimba
-    categoryId: number;
+    categoryIds: number[];   //se poate schimba
     description: string; //se poate schimba
     websiteUrl?: string; //se poate schimba
     facebookUrl?: string; //se poate schimba
@@ -209,13 +221,6 @@ import { UserRole } from "../Utilities/enums/Enums";
     images?: string[];  //se poate schimba
     profileImage?: string;  //se poate schimba
     existingProfileImage: Image;
-  }
-
-  export interface LandingPage {
-    sections: Section[]; 
-    blogs: Blog[];
-    categoryGroups: Group[];
-    popularSuppliers: ProfileCard[];
   }
 
   export interface Section {
@@ -239,6 +244,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     authorName: string;
     creationDate: Date;
     id: number;
+    category: Category;
     responseText?: string;
     reviewText: string;
     score: number;
@@ -251,7 +257,9 @@ import { UserRole } from "../Utilities/enums/Enums";
     responseText?: string;
     reviewText: string;
     score: number;
+    categoryName: string;
     responseShown: boolean;
+    responseToBeSent: boolean;
     responseInApproval: boolean;
     responseTextToSend: string;
     responseSent: boolean;
@@ -268,8 +276,9 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface LandingPage {
     sections: Section[];
     profileCards: ProfileCard[];
-    category: Category[]; 
+    categoryGroups: Category[]; 
     blogCards: Blog[];
+    popularProfileCards: ProfileCard[];
   }
 
   export interface SuppliersChanges {
@@ -308,6 +317,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     reviewText: string;
     userId: number;
     profileId: number;
+    categoryId: number;
   }
 
   export interface SendResponse {
@@ -389,6 +399,20 @@ import { UserRole } from "../Utilities/enums/Enums";
     password?: string;
     phoneNumber: string;
     role: UserRole;
+  }
+
+  export interface UserAnalytics {
+    id: number;
+    name: string;
+    email: string;
+  }
+
+  export interface ProfilesAnalytics
+  {
+    users: UserAnalytics[];
+    lastMonth: number;
+    lastThreeMonths: number;
+    lastSixMonths: number;
   }
 
 

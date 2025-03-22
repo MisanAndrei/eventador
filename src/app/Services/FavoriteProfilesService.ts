@@ -42,19 +42,44 @@ export class FavoriteProfilesServiceComponent {
   }
 
   addProfileToFavorite(profileId: number){
-    const favoriteProfiles = this.loadFavoriteProfiles() as number[];
+    let favoriteProfiles = this.loadFavoriteProfiles() as number[];
     if (!favoriteProfiles.includes(profileId)) {
       favoriteProfiles.push(profileId);
       this.saveFavoriteProfiles(favoriteProfiles);
     }
+
+    if (this.authService.isUserLogged()){
+      let user = this.authService.getLoggedUser();
+      const favoriteProfilesRequest = {
+        userId: user.id,
+        profileIds: favoriteProfiles
+    } as FavoriteProfilesRequest
+
+    this.apiService.updateFavoriteProfiles(favoriteProfilesRequest);
+    }
   }
 
   removeProfileFromFavorite(profileId: number){
-    const favoriteProfiles = this.loadFavoriteProfiles() as number[];
-    const index = favoriteProfiles.indexOf(profileId);
+    let favoriteProfiles = this.loadFavoriteProfiles() as number[];
+    let index = favoriteProfiles.indexOf(profileId);
     if (index !== -1) {
       favoriteProfiles.splice(index, 1);
       this.saveFavoriteProfiles(favoriteProfiles);
     }
+
+    if (this.authService.isUserLogged()){
+      let user = this.authService.getLoggedUser();
+      const favoriteProfilesRequest = {
+        userId: user.id,
+        profileIds: favoriteProfiles
+    } as FavoriteProfilesRequest
+
+    this.apiService.updateFavoriteProfiles(favoriteProfilesRequest);
+    }
+  }
+
+  clearFavoriteProfiles(favoriteProfileIds: number[]){
+    let favoriteProfiles = favoriteProfileIds;
+    this.saveFavoriteProfiles(favoriteProfiles);
   }
 }

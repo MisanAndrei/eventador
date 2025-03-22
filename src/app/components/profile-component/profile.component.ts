@@ -2,13 +2,13 @@ import { Dialog } from '@angular/cdk/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { AuthService } from 'src/app/Services/AuthService';
-import { UserRole } from 'src/app/Utilities/enums/Enums';
+import { AuthService } from '../../Services/AuthService';
 import { DialogComponent } from '../dialogs/dialog-component/dialog.component';
-import { ApiService } from 'src/app/Services/ApiService';
+import { ApiService } from '../../Services/ApiService';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../dialogs/delete-dialog-component/delete-dialog.component';
 import { Router } from '@angular/router';
+import { UserRole } from '../../Utilities/enums/Enums';
 
 @Component({
   selector: 'app-profile',
@@ -29,12 +29,12 @@ export class ProfileComponent implements OnInit {
   changePasswordVisible: boolean = false;
   deleteAccountVisible: boolean = false;
   addProfileVisible: boolean = false;
-  editUserVisible: boolean = false;
+  editUserVisible: boolean = true;
   personalProfiles!: number[];
-  personalProfilesVisible: boolean = false;
+  personalProfilesVisible: boolean = true;
   signUpLink: string = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: Dialog, private apiService: ApiService, private matDialog: MatDialog, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: MatDialog, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -42,6 +42,10 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.authService.isAuthenticated()){
+      this.router.navigate(['/acasa']);
+    }
+
     const user = this.authService.getLoggedUser();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
@@ -55,41 +59,9 @@ export class ProfileComponent implements OnInit {
       this.personalProfiles = user.profilesIds ?? [];
     }
 
-    if (this.userRole == UserRole.partner){
+    if (this.userRole == UserRole.partner) {
       this.signUpLink = `${window.location.origin}/#/Inscriere/${user.referralCode}`;
     }
-  }
-
-  changePassword(){
-    this.changePasswordVisible = !this.changePasswordVisible;
-    this.deleteAccountVisible = false;
-    this.addProfileVisible = false;
-    this.editUserVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
-  addProfile(){
-    this.addProfileVisible = !this.addProfileVisible;
-    this.deleteAccountVisible = false;
-    this.changePasswordVisible = false;
-    this.editUserVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
-  editUser(){
-    this.editUserVisible = !this.editUserVisible;
-    this.addProfileVisible = false;
-    this.deleteAccountVisible = false;
-    this.changePasswordVisible = false;
-    this.personalProfilesVisible = false;
-  }
-
-  viewPersonalProfiles(){
-    this.personalProfilesVisible = !this.personalProfilesVisible;
-    this.editUserVisible = false;
-    this.addProfileVisible = false;
-    this.deleteAccountVisible = false;
-    this.changePasswordVisible = false;
   }
 
   
@@ -104,7 +76,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount() {
-    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.matDialog.open(DeleteDialogComponent, {
+    const dialogRef: MatDialogRef<DeleteDialogComponent> = this.dialog.open(DeleteDialogComponent, {
       data: { text: 'Sunteți sigur că vreți să ștergeți toate datele contului?' }
     });
   

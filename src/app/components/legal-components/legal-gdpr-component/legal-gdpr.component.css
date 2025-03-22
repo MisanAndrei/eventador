@@ -1,0 +1,26 @@
+.legal-gdpr {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  .legal-gdpr h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .legal-gdpr h2 {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .legal-gdpr p {
+    margin-bottom: 15px;
+  }
+  
+  .legal-gdpr a {
+    color: #007bff;
+    text-decoration: none;
+  }

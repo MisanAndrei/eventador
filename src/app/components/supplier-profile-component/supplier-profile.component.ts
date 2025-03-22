@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
-import { Category, Review, SendReview } from 'src/app/Models/Models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/Services/ApiService';
-import { AuthService } from 'src/app/Services/AuthService';
-import { UserRole } from 'src/app/Utilities/enums/Enums';
-import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gallery';
+import { GalleryModule, ImageItem, GalleryItem, GalleryComponent, Gallery } from 'ng-gallery';
+import { Review, Category, SendReview } from '../../Models/Models';
+import { ApiService } from '../../Services/ApiService';
+import { AuthService } from '../../Services/AuthService';
+import { UserRole } from '../../Utilities/enums/Enums';
+import { Lightbox } from 'ng-gallery/lightbox';
 
 @Component({
     selector: 'app-supplier-profile',
@@ -17,7 +18,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
 
   export class SupplierProfileComponent implements OnInit  {
     @Input() changesProfileId: number | undefined;
-    @ViewChild('myGallery') gallery!: GalleryComponent;
+    images: GalleryItem[] = [];
 
     profileId: string = '';
     profileSlug: string ='';
@@ -38,16 +39,15 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     reviewSent: boolean = false;
     areasOfInterest: string[] = [];
     urlProfileName: string = '';
-
-    images!: GalleryItem[];
-
+    supplierCategories!: Category[];
+    selectedCategoryId: number | null = null;
 
     imageObject: any = [];
     
     //model
     profileImage?: string;
     profileName?:string;
-    categoryName?: string;
+    categories?: Category[];
     motto?: string;
     city?: string;
     location?: string;
@@ -58,12 +58,13 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     reviewText: string = '';
     offerRating: boolean = false;
 
-
     constructor(private ref: ChangeDetectorRef, 
       private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
       private router: Router, 
       private apiService: ApiService, 
+      private gallery: Gallery,
+      private lightbox: Lightbox,
       private authService: AuthService){
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -98,7 +99,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
             this.location = response.cityName;
-            this.categoryName = response.categoryName;
+            this.categories = response.categories;
             this.phoneNumber = response.phoneNumber;
             this.email = response.email;
             this.description = response.description;
@@ -107,18 +108,23 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.instagramUrl = response.instagramUrl ? this.addHttpPrefix(response.instagramUrl) : undefined;
             this.youtubeUrl = response.youtubeUrl ? this.addHttpPrefix(response.youtubeUrl) : undefined;
             this.areasOfInterest = response.areaOfInterestNames;
-            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.images = response.images.filter(x => x.isProfileImage == false).map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.supplierCategories = response.categories;
 
+            const galleryRef = this.gallery.ref('lightboxGallery');
+            galleryRef.load(this.images);
           })
         }
         else{
           this.apiService.getUserProfile(Number(this.profileId)).subscribe(response => {
-
+            if (this.urlProfileName != response.businessName){
+              this.router.navigate(['/furnizori']);
+            }
             this.profileName = response.businessName;
             this.profileImage = response.images.filter(x => x.isProfileImage == true).map(x => x.imageUrl)[0];
             this.motto = response.motto;
             this.location = response.cityName;
-            this.categoryName = response.categoryName;
+            this.categories = response.categories;
             this.phoneNumber = response.phoneNumber;
             this.email = response.email;
             this.description = response.description;
@@ -129,13 +135,18 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
             this.numberProfileId = Number(this.profileId);
             this.reviews = response.reviews;
             this.areasOfInterest = response.areaOfInterestNames;
-            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.images = response.images.filter(x => x.isProfileImage == false).map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.supplierCategories = response.categories;
+
+            const galleryRef = this.gallery.ref('lightboxGallery');
+            galleryRef.load(this.images);
           })
         }
       }
+    }
 
-      
-
+    selectCategory(id: number): void {
+      this.selectedCategoryId = id;
     }
 
     setRating(rating: number): void {
@@ -147,7 +158,8 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
         score: this.selectedRating,
         reviewText: this.reviewText,
         userId: this.currentUserId,
-        profileId: Number(this.numberProfileId)
+        profileId: Number(this.numberProfileId),
+        categoryId: this.selectedCategoryId
       } as SendReview
 
       this.apiService.saveReview(review).subscribe({
@@ -165,7 +177,7 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
     }
 
     isReviewIncomplete(){
-      if (this.reviewText == '' || this.selectedRating == 0){
+      if (this.reviewText == '' || this.selectedRating == 0 || this.selectedCategoryId == null || this.selectedCategoryId == undefined){
         return true;
       }
       return false;
@@ -188,5 +200,16 @@ import { GalleryModule, ImageItem, GalleryItem, GalleryComponent } from 'ng-gall
       return url;
     }
 
-    
+    openLightbox(index: number): void {
+      const galleryRef = this.gallery.ref('lightboxGallery');
+      if (index >= 0 && index < this.images.length) {
+        console.log(`Opening Lightbox at index: ${index}`);
+        galleryRef.set(index);
+        this.lightbox.open(index, 'lightboxGallery', {
+          panelClass: 'fullscreen', // ✅ Makes it full-screen
+        });
+      } else {
+        console.warn(`[NgGallery]: Invalid index ${index}.`);
+      }
+    }
   }

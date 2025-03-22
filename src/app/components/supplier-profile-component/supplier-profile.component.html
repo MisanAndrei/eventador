@@ -1,146 +1,201 @@
-
+<!-- DESKTOP VIEW -->
 <div *ngIf="!(isMobile | async)" class="my-container">
-<div class="container">
+  <div class="container">
+    
+    <!-- LEFT SECTION -->
     <div class="left">
+      <img class="card-image" src="{{profileImage}}" alt="Profile Image">
     
-        <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
-    
+      <!-- Profile Info -->
+      <div class="section-container profile-info">
+        <p class="section-description">Descoperă rapid cine este acest furnizor.</p>
+        <div class="section-divider"></div>
         <h3>{{ profileName }}</h3>
+        <p class="motto">{{ motto }}</p>
+      </div>
     
-        
-    
-        <h3 style="margin:0px 5px 0px 5px; text-align: center;">{{motto}}</h3>
-    
-        <h4 style="align-self: left; margin-top: 2px !important; margin-bottom: 2px !important;"><i class="fa fa-map-marker" style="font-size:30px; width:20px !important; padding:2px;"></i> {{ location }}</h4>
-
-        <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-           
-                <button class="category-button"><p>{{categoryName}}</p></button>
-       
+      <!-- Location & Area of Interests -->
+      <div class="section-container">
+        <p class="section-description">Locația și zonele unde își desfășoară activitatea.</p>
+        <div class="section-divider"></div>
+        <h4><i class="fa fa-map-marker"></i> {{ location }}</h4>
+        <div class="area-of-interest-container">
+          <span *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</span>
         </div>
-        <h4 style="margin-bottom: 5px;">Zone de Activitate</h4>
-        <div>
-          
-          <button *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</button>
-        </div>
-        
-        <p style="margin-bottom: 0px;">Numar telefon: {{phoneNumber}}</p>
-        <p style="margin-bottom: 0px;">E-mail: {{email}}</p>
-        <div style="display:flex; justify-content: center; flex-wrap: wrap;">
+      </div>
+    
+      <!-- Contact Info -->
+      <div class="section-container contact-info">
+        <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
+        <div class="section-divider"></div>
+        <p><i class="fa fa-phone"></i> {{ phoneNumber }}</p>
+        <p><i class="fa fa-envelope"></i> {{ email }}</p>
+      </div>
+    
+      <!-- Social Links -->
+      <div class="section-container">
+        <p class="section-description">Găsește-l pe rețelele sociale.</p>
+        <div class="section-divider"></div>
+        <div class="social-links">
           <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
           <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>
           <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="fa fa-globe"></a>
           <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
         </div>
-
-        <!--icons section-->
-        
-   
-    </div>
-  
-  
-   <div class="right">
-    <gallery [items]="images" thumbPosition="left"></gallery>
-    
-        <h3 style="margin-left: 10px; text-align: left;">Descriere</h3>
-        <p style="text-align: left; margin: 0px 10px; white-space: pre-wrap;">{{ description }}</p>
-        
-    </div>
-    
-  
-  
-
-</div>
-<button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
-<div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
-  <h4 class="rating-title">Acorda o nota</h4>
-
-  <div class="rating-container">
-    <span class="star" (click)="setRating(1)" [class.selected]="selectedRating >= 1">★</span>
-    <span class="star" (click)="setRating(2)" [class.selected]="selectedRating >= 2">★</span>
-    <span class="star" (click)="setRating(3)" [class.selected]="selectedRating >= 3">★</span>
-    <span class="star" (click)="setRating(4)" [class.selected]="selectedRating >= 4">★</span>
-    <span class="star" (click)="setRating(5)" [class.selected]="selectedRating >= 5">★</span>
-  </div>
-
-  <textarea class="review-text" placeholder="Despre experienta ta" [(ngModel)]="reviewText"></textarea>
-
-  <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" (click)="submitReview()">Submit Review</button>
-  <h4 *ngIf="reviewSent">Review-ul tau a fost trimis spre aprobare, multumim!</h4>
-</div>
-<div *ngIf="!changesProfileId && reviews">
-<app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
-</div>
-</div>
-<!--                  Mobile               -->
-
-<div *ngIf="(isMobile | async)" class="mobile-container">
-    <div class="mobile-profile">
-    <img class="card-image" src="{{profileImage}}" alt="Photo of a Shiba Inu">
-    <h3>{{ profileName }}</h3>
-
-    <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-      <button class="category-button"><p>{{categoryName}}</p></button>
-    </div>
-
-
-    <p><i class="fa fa-map-marker" style="font-size:30px; width:20px !important; padding:2px;"></i> {{location}}</p>
-    
-    <h4 style="margin-bottom: 5px;">Zone de Activitate</h4>
-        <div>
-          
-          <button *ngFor="let area of areasOfInterest" class="area-of-interest-button">{{ area }}</button>
-        </div>
-
-    <p class="motto">{{motto}}</p>
-
-    <p style="margin-bottom: 0px; margin-top:2px;">Numar telefon: {{phoneNumber}}</p>
-  <p style="margin-bottom: 2px; margin-top:3px;">E-mail: {{email}}</p>
-
-
-
-  <div style="display:flex; justify-content: center; flex-wrap: wrap;">
-    <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="fa fa-facebook"></a>
-    <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class="fa fa-instagram"></a>
-    <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="fa fa-globe"></a>
-    <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
-  </div>
-
-
-  <gallery [items]="images" thumbPosition="bottom" [thumbWidth]="60"></gallery>
-    
-
-
-    
-
-    
-
-  <h3 style="text-align: left; margin-left: 5px;">Descriere</h3>
-  <p style="margin-right: 5px; margin-left: 5px; text-align: left; white-space: pre-wrap;">{{description}}</p>
-
-  
-
-  
-    </div>
-    <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" (click)="showRatingInput()" mat-raised-button>Ofera rating</button>
-<div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
-  <h4 class="rating-title">Acorda o nota</h4>
-
-  <div class="rating-container">
-    <span class="star" (click)="setRating(1)" [class.selected]="selectedRating >= 1">★</span>
-    <span class="star" (click)="setRating(2)" [class.selected]="selectedRating >= 2">★</span>
-    <span class="star" (click)="setRating(3)" [class.selected]="selectedRating >= 3">★</span>
-    <span class="star" (click)="setRating(4)" [class.selected]="selectedRating >= 4">★</span>
-    <span class="star" (click)="setRating(5)" [class.selected]="selectedRating >= 5">★</span>
-  </div>
-
-  <textarea class="review-text" placeholder="Despre experienta ta" [(ngModel)]="reviewText"></textarea>
-
-  <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" (click)="submitReview()">Submit Review</button>
-  <h4 *ngIf="reviewSent">Review-ul tau a fost trimis spre aprobare, multumim!</h4>
-</div>
-    <div *ngIf="!changesProfileId && reviews">
-      <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
       </div>
+    </div>
+
+    <!-- RIGHT SECTION -->
+    <div class="right">
+      <gallery 
+        id="lightboxGallery"
+        [items]="images"
+        [thumbs]="true"
+        [thumbPosition]="'left'"
+        [imageSize]="'contain'"
+        [thumbImageSize]="'contain'"
+        [autoplay]="true"
+        (itemClick)="openLightbox($event)">
+      </gallery>
+
+      <h3>Descriere</h3>
+      <p>{{ description }}</p>
+    </div>
+
   </div>
+
+  <!-- Give Review Section -->
+  <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
+          (click)="showRatingInput()">Ofera rating</button>
+
+  <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
+    
+    <h4 class="rating-category">Alege categoria</h4>
+    <div class="category-bar">
+      <div *ngFor="let category of categories" class="category-segment" 
+           [class.selected]="selectedCategoryId === category.id" 
+           (click)="selectCategory(category.id)">
+        {{ category.name }}
+      </div>
+    </div>
+
+    <h5 class="rating-note">Acorda o nota</h5>
+    <div class="rating-container">
+      <span class="star" (click)="setRating(1)" [class.selected]="selectedRating >= 1">★</span>
+      <span class="star" (click)="setRating(2)" [class.selected]="selectedRating >= 2">★</span>
+      <span class="star" (click)="setRating(3)" [class.selected]="selectedRating >= 3">★</span>
+      <span class="star" (click)="setRating(4)" [class.selected]="selectedRating >= 4">★</span>
+      <span class="star" (click)="setRating(5)" [class.selected]="selectedRating >= 5">★</span>
+    </div>
+
+    <textarea class="review-text" placeholder="Despre experienta ta" [(ngModel)]="reviewText"></textarea>
+
+    <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" 
+            (click)="submitReview()">Salveaza Review</button>
+    <h4 *ngIf="reviewSent">Review-ul tau a fost trimis spre aprobare, multumim!</h4>
+  </div>
+
+  <!-- Display Existing Reviews -->
+  <div *ngIf="!changesProfileId && reviews">
+    <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
+  </div>
+</div>
+
+<!-- MOBILE VIEW -->
+<div *ngIf="(isMobile | async)" class="mobile-container">
+  <div class="mobile-profile">
+    <img class="card-image" src="{{profileImage}}" alt="{{ profileName }}">
+
+    <!-- Profile Info -->
+    <p class="section-description">Descoperă rapid cine este acest furnizor.</p>
+    <div class="section-divider"></div>
+    <h3>{{ profileName }}</h3>
+    <p class="motto">{{ motto }}</p>
+
+    <!-- Categories -->
+    <p class="section-description">Ce servicii oferă furnizorul?</p>
+    <div class="section-divider"></div>
+    <div class="categories">
+      <button *ngFor="let category of categories" class="category-button">{{ category.name }}</button>
+    </div>
+
+    <!-- Location & Area of Interests -->
+    <p class="section-description">Locația și zonele unde își desfășoară activitatea.</p>
+    <div class="section-divider"></div>
+    <div class="location">
+      <i class="fa fa-map-marker"></i> {{ location }}
+    </div>
+    <div class="area-of-interest-container">
+      <span *ngFor="let area of areasOfInterest" class="area-of-interest-button-mobile">{{ area }}</span>
+    </div>
+
+    <!-- Contact Info -->
+    <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
+    <div class="section-divider"></div>
+    <p class="contact-info-mobile">📞 {{ phoneNumber }}</p>
+    <p class="contact-info-mobile">✉ {{ email }}</p>
+
+    <!-- Social Links -->
+    <p class="section-description">Găsește-l pe rețelele sociale.</p>
+    <div class="section-divider"></div>
+    <div class="social-links">
+      <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="mobile-social-fa fa fa-facebook"></a>
+      <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class=" mobile-social-fafa fa-instagram"></a>
+      <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="mobile-social-fa fa fa-globe"></a>
+      <a *ngIf="youtubeUrl" href="{{ youtubeUrl }}" target="_blank" class="mobile-social-fa fa fa-youtube-play"></a>
+    </div>
+
+    <!-- Gallery -->
+    <gallery 
+      id="lightboxGallery"
+      [items]="images"
+      [thumbs]="true"
+      [thumbPosition]="'bottom'"
+      [imageSize]="'contain'"
+      [thumbImageSize]="'cover'"
+      [autoplay]="true"
+      [thumbWidth]="60"
+      (itemClick)="openLightbox($event)">
+    </gallery>
+  </div>
+
+  <!-- Offer Review Button -->
+  <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
+          (click)="showRatingInput()">Oferă rating</button>
+
+  <!-- Review Section -->
+  <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
+    <p class="section-description">Lasă un review pentru acest furnizor.</p>
+    <div class="section-divider"></div>
+
+    <h4 class="rating-category">Alege categoria</h4>
+    <div class="category-bar">
+      <div *ngFor="let category of categories" class="category-segment" 
+           [class.selected]="selectedCategoryId === category.id" 
+           (click)="selectCategory(category.id)">
+        {{ category.name }}
+      </div>
+    </div>
+
+    <h4 class="rating-note">Acordă o notă</h4>
+    <div class="rating-container">
+      <span class="star" (click)="setRating(1)" [class.selected]="selectedRating >= 1">★</span>
+      <span class="star" (click)="setRating(2)" [class.selected]="selectedRating >= 2">★</span>
+      <span class="star" (click)="setRating(3)" [class.selected]="selectedRating >= 3">★</span>
+      <span class="star" (click)="setRating(4)" [class.selected]="selectedRating >= 4">★</span>
+      <span class="star" (click)="setRating(5)" [class.selected]="selectedRating >= 5">★</span>
+    </div>
+
+    <textarea class="review-text" placeholder="Despre experiența ta" [(ngModel)]="reviewText"></textarea>
+
+    <button *ngIf="!reviewSent" class="submit-btn" [disabled]="isReviewIncomplete()" 
+            (click)="submitReview()">Salvează Review</button>
+    <h4 *ngIf="reviewSent">Review-ul tău a fost trimis spre aprobare, mulțumim!</h4>
+  </div>
+
+  <!-- Reviews -->
+  <div *ngIf="!changesProfileId && reviews">
+    <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
+  </div>
+</div>
 

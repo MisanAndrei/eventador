@@ -1,8 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/Services/ApiService';
-import { AuthService } from 'src/app/Services/AuthService';
+import { AuthService } from '../../Services/AuthService';
 import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
+import { ApiService } from 'src/app/Services/ApiService';
+
 
 @Component({
   selector: 'app-favorites',
@@ -12,11 +13,16 @@ import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfi
 export class FavoritesComponent implements OnInit {
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private favoriteProfilesService: FavoriteProfilesServiceComponent, private apiService: ApiService) {
     
   }
 
   ngOnInit(): void {
-
+    if (this.authService.isUserLogged()){
+      let userId = this.authService.getLoggedUser().id;
+      this.apiService.getFavoriteProfiles(userId).subscribe(favoriteUsersDb => {
+        this.favoriteProfilesService.clearFavoriteProfiles(favoriteUsersDb);
+      })
+    }
   }
 }

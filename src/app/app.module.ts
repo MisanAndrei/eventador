@@ -1,31 +1,24 @@
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
-
-
 import {NgIf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
-
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-
 import { MatIconModule } from '@angular/material/icon';
-
-
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -40,11 +33,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 import { NgApexchartsModule } from 'ng-apexcharts'; 
 import { NgxEditorModule } from 'ngx-editor';
-
-
-
-
-
+import { MatIcon } from '@angular/material/icon';
 
 //Components
 import { ImageSliderComponent } from './components/image-slider-component/image-slider.component';
@@ -67,7 +56,7 @@ import { ApplicationContainerComponent } from './components/application-containe
 import { CustomersComponent } from './components/customers-component/customers.component';
 import { BlogsComponent } from './components/blogs-component/blogs.component';
 import { PartnerDashboardComponent } from './components/partner-dashboard/partner-dashboard.component';
-import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
+import { TopCustomersTabComponent } from './components/top-customers-tab/top-customers-tab.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AboutUsTabComponent } from './components/about-us-tab-component/about-us-tab.component';
 import { CategoriesTabComponent } from './components/categories-tab-component/categories-tab.component';
@@ -96,12 +85,17 @@ import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-da
 import { DialogComponent } from './components/dialogs/dialog-component/dialog.component';
 import { QuillModule } from 'ngx-quill';
 import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partner-upsert/admin-dashboard-partner-upsert.component';
-
-
-
-
-
-
+import { LegalAnpcComponent } from './components/legal-components/legal-anpc-component/legal-anpc.component';
+import { LegalCookiesComponent } from './components/legal-components/legal-cookies-component/legal-cookies.component';
+import { LegalGdprComponent } from './components/legal-components/legal-gdpr-component/legal-gdpr.component';
+import { LegalTermsComponent } from './components/legal-components/legal-terms-component/legal-terms.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
+import { AuthInterceptor } from './Services/auth.interceptor';
+import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
+import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/lightbox';
+import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component.css/edit-user-email.component';
+import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-analytics/profile-analytics.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +118,7 @@ import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboa
     CustomersComponent,
     BlogsComponent,
     PartnerDashboardComponent,
+    TopCustomersTabComponent,
     PopularCustomersTabComponent,
     AdminDashboardComponent,
     AboutUsTabComponent,
@@ -151,7 +146,15 @@ import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboa
     AdminDashboardMainCategoriesComponent,
     AdminDashboardUpsertMainCategoryComponent,
     DialogComponent,
-    AdminDashboardPartnerUpsertComponent
+    AdminDashboardPartnerUpsertComponent,
+    LegalAnpcComponent,
+    LegalCookiesComponent,
+    LegalGdprComponent,
+    LegalTermsComponent,
+    CreateAccountComponent,
+    ActivateAccountComponent,
+    ProfileAnalyticsComponent,
+    EditUserEmailComponent
   ],
   imports: [
     AppRoutingModule,
@@ -180,9 +183,11 @@ import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboa
     SlickCarouselModule,
     HammerModule,
     GalleryModule,
+    LightboxModule,
     NgApexchartsModule,
     MatSnackBarModule,
     MatCheckbox,
+    MatIcon,
     NgxEditorModule,
     QuillModule.forRoot({
       customOptions: [{
@@ -192,13 +197,15 @@ import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboa
 })
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
-    provide: GALLERY_CONFIG,
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },{
+    provide: LIGHTBOX_CONFIG,
     useValue: {
-      autoHeight: false,
-      imageSize: 'cover',
-      autoPlay: true,
-      itemAutosize: false
-    } as GalleryConfig
+      keyboardShortcuts: true,
+      exitAnimationTime: 1000
+    } as LightboxConfig
   }],
   bootstrap: [AppComponent]
 })

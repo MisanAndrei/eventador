@@ -1,76 +1,188 @@
+/* ✅ Modernized Web Profile */
 .profile-container {
-  width: 50%;
-  margin: 0 auto;
+  width: 60%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile initials */
+.user-logo {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, #FF63A4, #FE8962);
+  border-radius: 50%;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile details */
+.profile-details {
+  font-size: 1.2em;
+  line-height: 1.8;
+  max-width: 600px;
+  text-align: center;
+}
+
+.profile-details h1 {
+  font-size: 1.8em;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.action-buttons {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 8px;
+  background: linear-gradient(to right, #FF63A4, #FE8962);
+  color: white !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-buttons:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 99, 164, 0.3);
+}
+
+/* Child components always visible */
+app-change-password,
+app-edit-personal-data,
+app-delete-account,
+app-personal-profiles {
+  display: block !important;
+  width: 90%;
+  margin-top: 20px;
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Mobile Profile - Clean, Elegant & Modern */
+.mobile-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* User Card */
+.mobile-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* User initials */
+.mobile-user-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(to right, #FF63A4, #FE8962);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* User Name */
+.mobile-user-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* Profile details section */
+.mobile-profile-details {
+  width: 90%;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
-.user-logo {
-  font-size: 50px;
-  margin: 30px;
-  background-color: #FE8962;
-  border-radius: 5%;
+.mobile-info {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
-.profile-details {
-  font-size: 1.2em;
-  line-height: 1.5;
-  max-width: 600px; /* Adjust as needed */
-}
-
-h1 {
-  color: #333;
-  font-size: 1.5em;
-}
-
-strong {
-  margin-right: 20px;
-}
-
-button {
-  margin-top: 20px; /* Add spacing between buttons and details */
-}
-
-.action-buttons {
-  margin-right: 10px;
-  background: linear-gradient(to right, #FF63A4, #FE8962);
+/* ✅ Mobile Delete Button */
+.mobile-delete-button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 8px;
+  background: linear-gradient(to right, #ff4e50, #ff7c6b);
   color: white !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  width: 90%;
+  max-width: 250px;
+  box-shadow: 0 4px 12px rgba(255, 78, 80, 0.4);
 }
 
-/*mobile css*/
-.mobile-profile-container {
+/* ✅ Hover Effect */
+.mobile-delete-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #ff1e1e, #ff5f5f);
+}
+
+.centered-profile-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: 100%;
+  margin-top: 30px; /* Adds spacing above */
+  margin-bottom: 30px; /* Adds spacing below */
+}
+
+/* Ensure the profile component does not stretch too wide */
+.centered-profile-container app-personal-profiles {
+  max-width: 75%;
+  
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.mobile-action-buttons{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.mobile-action-button {
-  width: 200px;
-  background: linear-gradient(to right, #FF63A4, #FE8962);
-  color: white !important;
-}
-
-.mobile-user-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.mobile-user-logo p {
-  padding: 30px;
-  background-color: #FE8962;
-  border-radius: 5%;
-  font-size: xx-large;
-}
-
-.mobile-title {
-  margin-top: 0px;
 }

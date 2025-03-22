@@ -3,14 +3,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
+import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ProfilesAnalytics, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
 import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api';
+  private apiUrl = 'https://https://eventador-prd.azurewebsites.net/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -21,7 +21,9 @@ export class ApiService {
   }
 
   upsertCategory(category: Category): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategory`, category).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategory`, category, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -29,7 +31,9 @@ export class ApiService {
   }
 
   upsertCategoryGroup(request: UpsertMainCategoryRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategoryGroup`, request).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Category/AddOrUpdateCategoryGroup`, request, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -38,10 +42,12 @@ export class ApiService {
 
   getBlogs(): Observable<Blog[]> {
     return this.http.get<Blog[]>(`${this.apiUrl}/Blog/GetAllBlogsCards`);
-  }
+  } 
 
   getApprovalReviews(): Observable<ApprovalReview[]> {
-    return this.http.get<ApprovalReview[]>(`${this.apiUrl}/Review/GetApprovalReviews`);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ApprovalReview[]>(`${this.apiUrl}/Review/GetApprovalReviews`, {headers});
   }
 
   getBlogById(id: number): Observable<Blog> {
@@ -53,7 +59,9 @@ export class ApiService {
   }
 
   upsertBlog(request: UpsertBlogRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Blog`, request).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Blog`, request, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -61,7 +69,9 @@ export class ApiService {
   }
 
   markCategoriesOnLandingPage(ids: number[]): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Category/MarkCategoriesToShow`, ids).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Category/MarkCategoriesToShow`, ids, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -69,7 +79,9 @@ export class ApiService {
   }
 
   acceptProfileChanges(profileId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Profile/ApproveProfile`, profileId).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Profile/ApproveProfile`, profileId, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -77,7 +89,9 @@ export class ApiService {
   }
 
   rejectProfileChanges(profileId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Profile/RejectProfile`, profileId).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Profile/RejectProfile`, profileId, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -89,7 +103,9 @@ export class ApiService {
   }
 
   getPartnerSuppliers(id: number): Observable<PartnerSupplierUser[]> {
-    return this.http.get<PartnerSupplierUser[]>(`${this.apiUrl}/User/GetPartnerSuppliers/${id}`);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<PartnerSupplierUser[]>(`${this.apiUrl}/User/GetPartnerSuppliers/${id}`, {headers});
   }
 
   getUserDetails(id: number): Observable<UserDetails>{
@@ -97,7 +113,9 @@ export class ApiService {
   }
 
   saveReview(request: SendReview): Observable<any> {
-    return this.http.post<any>(this.apiUrl + '/Review/AddReview', request).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(this.apiUrl + '/Review/AddReview', request, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -106,7 +124,9 @@ export class ApiService {
 
   approveOrRejectReview(reviewId: number, isApproved: boolean): Observable<any> {
     const request = { reviewId: reviewId, isApproved: isApproved };
-    return this.http.post<any>(`${this.apiUrl}/Review/ApproveOrRejectReview`, request).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Review/ApproveOrRejectReview`, request, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -114,7 +134,9 @@ export class ApiService {
   }
 
   saveResponse(request: SendResponse): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Review/AddResponse`, request).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/Review/AddResponse`, request, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
@@ -126,7 +148,9 @@ export class ApiService {
   }
 
   getUnassingedCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategories`);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Category[]>(`${this.apiUrl}/Category/GetUnassignedCategories`, {headers});
   }
 
   getMainCategories(): Observable<Group[]> {
@@ -169,12 +193,20 @@ export class ApiService {
   }
 
   getProfileToBeEdited(id: number): Observable<EditProfile> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const url = `${this.apiUrl}/Profile/EditProfileById/${id}`;
-    return this.http.get<EditProfile>(url);
+    return this.http.get<EditProfile>(url, {headers});
   }
 
   getProfilesWithChanges(): Observable<AdminDashboardProfilesChanged[]> {
-    return this.http.get<AdminDashboardProfilesChanged[]>(`${this.apiUrl}/Profile/ProfilesToReview`);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<AdminDashboardProfilesChanged[]>(`${this.apiUrl}/Profile/ProfilesToReview`, {headers});
+  }
+
+  activateAccount(activationToken: string): Observable<any>{
+    return this.http.get<number>(`${this.apiUrl}/auth/ActivateAccount`, { params: { activationToken } });
   }
 
   createUser(user: CreateUser): Observable<any> {
@@ -195,7 +227,9 @@ export class ApiService {
   }
 
   editProfile(profile: EditProfile): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/Profile/EditProfile`, profile).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/Profile/EditProfile`, profile, { headers }).pipe(
       tap(x => {
         console.log(x);
       })
@@ -203,32 +237,57 @@ export class ApiService {
   }
 
   changePassword(changePasswordRequest: ChangePasswordRequest): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/User/ChangePassword`, changePasswordRequest);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/User/ChangePassword`, changePasswordRequest, {headers});
   }
 
   editPersonalData(personalData: EditUserRequest): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/User/EditUser`, personalData);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/User/EditUser`, personalData, {headers});
   }
 
   updateFavoriteProfiles(favoriteProfilesRequest: FavoriteProfilesRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/User/AddRemoveFavouriteProfile`, favoriteProfilesRequest).pipe(
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}/User/AddRemoveFavouriteProfile`, favoriteProfilesRequest, {headers}).pipe(
       tap(x => {
         console.log(x);
       })
     );
   }
 
+  getFavoriteProfiles(id: number): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiUrl}/User/GetFavouriteProfilesByUserId/${id}`);
+  }
+
+  getProfileAnalytics(): Observable<ProfilesAnalytics> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ProfilesAnalytics>(`${this.apiUrl}/Profile/GetProfilesAnalytics`, { headers });
+  }
+  
+  changeUserEmail(id: number, email: string): Observable<void> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<void>(`${this.apiUrl}/admin/ChangeUserEmail`, { id, email }, { headers });
+  }
+
   recoverPassword(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/User/FrogotPassword`, email).pipe(
-      tap(x => {
-        console.log(x);
-      })
+    const body = JSON.stringify(email);
+    return this.http.post<any>(
+      `${this.apiUrl}/User/ForgotPassword`, 
+      body, 
+      { headers: { 'Content-Type': 'application/json' } }
+    ).pipe(
+      tap(response => console.log(response))
     );
   }
 
   deleteUser(userId: number): Observable<any> {
     const options = {
-      body: { userId: userId }
+      body: userId // Pass the raw integer as the body
     };
   
     return this.http.request<any>('DELETE', `${this.apiUrl}/User/DeleteUser`, options).pipe(
@@ -261,5 +320,9 @@ export class ApiService {
     const url = `${this.apiUrl}/${endpoint}`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<T>(url, data, { headers });
+  }
+
+  public checkEmailUnique(email: string){
+    return this.http.get<any>(`${this.apiUrl}/User/IsEmailUnique`, { params: { email } });
   }
 }

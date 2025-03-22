@@ -5,7 +5,7 @@
   }
   
   .category-card {
-    width: 25%; /* 4 cards in a row */
+    width: 20%; /* 4 cards in a row */
     margin: 0; /* Remove margin */
     cursor: pointer;
     position: relative; /* Added relative positioning for absolute positioning of title */
@@ -14,7 +14,7 @@
   
   @media (max-width: 1000px) {
     .category-card {
-      width: 50%; /* 2 cards in a row on smaller screens */
+      width: 33%; /* 2 cards in a row on smaller screens */
     }
   }
   
@@ -58,4 +58,66 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2); /* Adjust the alpha value for darkness */
+  }
+
+  .category-carousel-mobile-wrapper {
+    max-width: 100vw; /* Restrict to the screen width */
+    overflow-x: hidden; /* Prevent content from overflowing the viewport */
+    margin: 0 auto; /* Center the wrapper */
+  }
+  
+  /* Scrollable Container */
+  .category-carousel-mobile {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 10px;
+    padding: 10px;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+  
+  .category-carousel-mobile::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .category-carousel-mobile::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 4px;
+  }
+  
+  /* Mobile Category Card */
+  .category-card-mobile {
+    min-width: 150px; /* Fixed card width */
+    height: 200px; /* Fixed card height */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .category-card-mobile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  /* Image within Mobile Card */
+  .category-image-mobile {
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Details within Mobile Card */
+  .category-details-mobile {
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
   }

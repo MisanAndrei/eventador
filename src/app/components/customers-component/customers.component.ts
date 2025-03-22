@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProfileCard, Group } from 'src/app/Models/Models';
-import { ApiService } from 'src/app/Services/ApiService';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FavoriteProfilesServiceComponent } from 'src/app/Services/FavoriteProfilesService';
-import { AuthService } from 'src/app/Services/AuthService';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, switchMap } from 'rxjs/operators';
-import { CustomersRequest } from 'src/app/Requests/Requests';
+import { Group, ProfileCard } from '../../Models/Models';
+import { ApiService } from '../../Services/ApiService';
+import { FavoriteProfilesServiceComponent } from '../../Services/FavoriteProfilesService';
+import { AuthService } from '../../Services/AuthService';
+import { CustomersRequest } from '../../Requests/Requests';
 
 @Component({
   selector: 'app-customers',
@@ -39,6 +39,9 @@ export class CustomersComponent implements OnInit, OnDestroy {
   size: number = 21;
   loading: boolean = false;
 
+  type?: string;
+  urlId?: number;
+
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -49,15 +52,46 @@ export class CustomersComponent implements OnInit, OnDestroy {
   ) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(map(result => result.matches));
+
+      this.route.params.subscribe((params: Params) => {
+        this.type = params['description'];
+        this.urlId = +params['id'];
+  
+        if (this.type && this.urlId) {
+          if (this.type === 'Categorie') {
+            this.onCategoryGroupRefreshValue(this.urlId);
+          } else if (this.type === 'Serviciu') {
+            this.setServiceCategory(this.urlId);
+          }
+        }
+      });
   }
 
   ngOnInit(): void {
     this.currrentUserLoggedIn = this.authService.isAuthenticated();
+    if (this.currrentUserLoggedIn){
+      this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+    this.currentUserOldFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+    }else{
+      this.authService.checkFavoriteProfilesKey();
+      this.currentUserFavoriteProfiles = this.favoriteProfilesService.loadFavoriteProfiles();
+    }
     
     if (!this.favoriteProfilesPage) {
       this.loadInitialData();
+    } else {
+      this.stopGettingProfiles = true;
+        
+    if (this.currentUserFavoriteProfiles.length > 0){
+      this.apiService.getProfileCardsByIds(this.currentUserFavoriteProfiles).subscribe(x => {
+        this.profileCards = x;
+        this.filteredProfileCards = x;
+      })
+    }else{
+      this.noFavoritesMessageVisible = true;
     }
   }
+}
 
   ngOnDestroy(): void {
     if (!this.arraysHaveSameValues(this.currentUserFavoriteProfiles, this.currentUserOldFavoriteProfiles)) {
@@ -70,8 +104,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
     const buffer = 100; // Adjust this value as necessary
     const scrollPosition = window.innerHeight + window.scrollY;
     const pageHeight = document.documentElement.scrollHeight; // Use scrollHeight instead of offsetHeight
-    
-    console.log(`Scroll Position: ${scrollPosition}, Page Height: ${pageHeight}, Buffer: ${buffer}, Loading: ${this.loading}`);
 
     if (scrollPosition >= pageHeight - buffer && !this.loading) {
       this.page++;
@@ -106,7 +138,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
         requestAnimationFrame(() => {
           this.loading = false;
-          console.log(`New page height: ${document.body.offsetHeight}`);
+
         });
       },
       error: (error) => {
@@ -133,6 +165,20 @@ export class CustomersComponent implements OnInit, OnDestroy {
           counties.unshift(lastItem);
         }
         this.zones = counties;
+
+        this.route.params.subscribe((params: Params) => {
+          this.type = params['description'];
+          this.urlId = +params['id'];
+    
+          if (this.type && this.urlId) {
+            if (this.type === 'Categorie') {
+              this.onCategoryGroupRefreshValue(this.urlId);
+            } else if (this.type === 'Serviciu') {
+              this.setServiceCategory(this.urlId);
+            }
+          }
+        });
+
         return this.apiService.getProfileCards(this.getRequestObject());
       })
     ).subscribe({
@@ -160,6 +206,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     this.selectedCategory = undefined;
     this.selectedZone = undefined;
     this.selectedCategories = [];
+    this.selectedCategoryGroup = undefined;
     this.stopGettingProfiles = false;
     this.page = 1;
     this.profileCards = [];
@@ -176,8 +223,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   onCardClick(profile: ProfileCard): void {
     const formattedProfileName = this.formatProfileName(profile.name);
-    this.router.navigate(['/furnizor', `${formattedProfileName}-${profile.id}`]);
-  }
+    this.router.navigate([`/furnizor`, `${formattedProfileName}-${profile.id}`]);
+  }  
 
   onHeartClick(event: Event, profileId: number): void {
     event.stopPropagation();
@@ -216,6 +263,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   onCategoryGroupRefreshValue(selectedCategoryGroupId: any): void {
     const selectedCategoryGroup = this.categoryGroups?.find(group => group.id === selectedCategoryGroupId);
     if (selectedCategoryGroup) {
+      this.selectedCategoryGroup = selectedCategoryGroup.id;
       const categoryIds = selectedCategoryGroup.categories.map(category => category.id);
       if (categoryIds && categoryIds.length > 0) {
         this.selectedCategories = categoryIds;
@@ -230,4 +278,33 @@ export class CustomersComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  
+
+  private setServiceCategory(serviceCategoryId: number): void {
+    this.selectedCategories?.push(serviceCategoryId);
+  }
+
+  getStarsArray(rating: number): Array<{ full: boolean; half: boolean; empty: boolean }> {
+    const stars: Array<{ full: boolean; half: boolean; empty: boolean }> = [];
+    
+    const wholeStars = Math.floor(rating); // Number of fully filled stars
+  const hasHalfStar = rating % 1 !== 0; // Check if we need a half star
+  const emptyStars = 5 - Math.ceil(rating); // Remaining empty stars
+
+  for (let i = 0; i < wholeStars; i++) {
+    stars.push({ full: true, half: false, empty: false });
+  }
+
+  if (hasHalfStar) {
+    stars.push({ full: false, half: true, empty: false });
+  }
+
+  for (let i = 0; i < emptyStars; i++) {
+    stars.push({ full: false, half: false, empty: true });
+  }
+
+  return stars;
+  }
+  
 }
