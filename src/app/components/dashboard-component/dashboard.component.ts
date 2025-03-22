@@ -36,9 +36,18 @@ export class DashboardComponent implements OnInit {
       this.section3 = response.sections[2];
       this.section4 = response.sections[3];
       this.section5 = response.sections[4];
-      this.profileCards = response.profileCards;
-      this.popularProfileCards = response.popularProfileCards;
-      this.categories = response.categoryGroups;
+      this.profileCards = response.profileCards.map(card => ({
+        ...card, 
+        image: encodeURI(card.profileImage) // Encode spaces and special characters
+      }));
+      this.popularProfileCards = response.popularProfileCards.map(card => ({
+        ...card, 
+        image: encodeURI(card.profileImage) // Encode spaces and special characters
+      }));
+      this.categories = response.categoryGroups.map(card => ({
+        ...card, 
+        image: encodeURI(card.image ?? "") // Encode spaces and special characters
+      }));
 
       /*this.isMobile.subscribe(isMobile => {
         this.blogs = isMobile ? response.blogCards.slice(0, 4) : response.blogCards;
