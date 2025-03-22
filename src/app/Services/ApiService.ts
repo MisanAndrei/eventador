@@ -10,7 +10,7 @@ import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://https://eventador-prd.azurewebsites.net/api';
+  private apiUrl = 'https://eventador-prd.azurewebsites.net/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
