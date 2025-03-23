@@ -96,6 +96,8 @@ import { PopularCustomersTabComponent } from './components/popular-customers-tab
 import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/lightbox';
 import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component.css/edit-user-email.component';
 import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-analytics/profile-analytics.component';
+import { LegalCookiesPoliticsComponent } from './components/legal-components/legal-cookies-politics-component/legal-cookies-politics.component';
+import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
 
 @NgModule({
   declarations: [
@@ -154,7 +156,9 @@ import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-
     CreateAccountComponent,
     ActivateAccountComponent,
     ProfileAnalyticsComponent,
-    EditUserEmailComponent
+    EditUserEmailComponent,
+    LegalCookiesPoliticsComponent,
+    LegalConfidentialityComponent
   ],
   imports: [
     AppRoutingModule,

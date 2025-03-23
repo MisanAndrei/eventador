@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/Models/Models';
+import { Category, Group } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { AuthService } from 'src/app/Services/AuthService';
@@ -26,8 +26,9 @@ export class NavigationBarComponent implements OnInit {
   isMobile: Observable<boolean>;
   showCategoriesFromLink: boolean = false;
   showCategoriesFromMenu: boolean = false;
+  selectedGroup: any = null;
 
-  categories: Category[] = [];
+  categoryGroups: Group[] = [];
 
   
 
@@ -55,20 +56,6 @@ export class NavigationBarComponent implements OnInit {
     return false;
   }
 
-  menuItems = [
-    { link: '/acasa', description: 'Acasa' },
-    { link: '/despre-noi', description: 'Despre Noi' },
-    { link: '/contact', description: 'Contact' },
-    { link: '/dashboard', description: 'Dashboard' },
-    { link: '/noutati', description: 'Blog complet' },
-    { link: '/autentificare', description: 'Autentifica-te' },
-    { link: '/blog', description: 'Blog Simplu' },
-    { link: '/furnizori', description: 'Furnizori'},
-    { link: '/colaborator', description: 'Colaborator'},
-    { link: '/creare-profil', description: 'Creare Profil'}
-    // Add more items as needed
-  ];
-
 
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
@@ -77,8 +64,8 @@ export class NavigationBarComponent implements OnInit {
         map(result => result.matches)
       );
 
-      apiService.getCategories().subscribe(response => {
-        this.categories = response;
+      apiService.getMainCategories().subscribe(response => {
+        this.categoryGroups = response;
       })
   }
   ngOnInit(): void {
@@ -135,6 +122,14 @@ export class NavigationBarComponent implements OnInit {
         this.router.navigate(['/acasa']);
       }
     });
+  }
+
+  showCategories(group: any): void {
+    this.selectedGroup = group;
+  }
+
+  hideCategories(): void {
+    this.selectedGroup = null;
   }
   
   

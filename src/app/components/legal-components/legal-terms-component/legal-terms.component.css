@@ -1,21 +1,4 @@
-.legal-terms {
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  }
-  
-  .legal-terms h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .legal-terms h2 {
-    margin-top: 20px;
-    color: #333;
-  }
-  
-  .legal-terms p {
-    margin-bottom: 15px;
-  }
+.container {
+  width: 90%;
+  margin: 0 auto;
+}

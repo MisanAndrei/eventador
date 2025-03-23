@@ -158,6 +158,8 @@
       (itemClick)="openLightbox($event)">
     </gallery>
   </div>
+  <h3>Descriere</h3>
+      <p>{{ description }}</p>
 
   <!-- Offer Review Button -->
   <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
