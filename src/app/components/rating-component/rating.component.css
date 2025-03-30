@@ -1,9 +1,14 @@
 /* ======== DESKTOP REVIEW CARD ======== */
+.rating-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .rating-card {
   background: white;
   border-radius: 12px;
   padding: 20px;
-  margin: 15px auto;
+  margin: 15px 0px;
   width: 60%;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid #ddd;

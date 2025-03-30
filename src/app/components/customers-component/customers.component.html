@@ -135,12 +135,12 @@
     </div>
 
     <div class="mobile-button-row">
-      <button class="mobile-filter-button" (click)="applyFilters()">Aplică filtre</button>
       <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
+      <button class="mobile-filter-button" (click)="applyFilters()">Aplică filtre</button>
     </div>
   </div>
   <div *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card)">
-    <div class="favorite-icon-mobile" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
+    <div class="favorite-icon-mobile" style="z-index: 1000;" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
       <i class="fa fa-heart"></i>
     </div>
     <div class="mobile-card-header">

@@ -74,10 +74,21 @@ import { Lightbox } from 'ng-gallery/lightbox';
     
     ngOnInit(): void {
       this.route.params.subscribe(params => {
-        const profileInfo = params['profileId'];
-        const lastDashIndex = profileInfo.lastIndexOf('-');
-        this.urlProfileName = profileInfo.substring(0, lastDashIndex).replace(/-/g, ' ');
-        this.profileId = profileInfo.substring(lastDashIndex + 1);
+        const profileInfo: string = params['profileId'];
+      
+        const match = profileInfo.match(/^(.*)-(\d+)$/);
+      
+        if (match) {
+          const namePart = match[1]; // everything before the last -digits
+          const idPart = match[2];   // the numeric ID
+      
+          this.urlProfileName = namePart.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+          this.profileId = idPart;
+        } else {
+          // fallback in case URL is malformed
+          this.urlProfileName = '';
+          this.profileId = '';
+        }
       });
       
       if (this.authService.isUserLogged()){
@@ -117,7 +128,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
         }
         else{
           this.apiService.getUserProfile(Number(this.profileId)).subscribe(response => {
-            if (this.urlProfileName != response.businessName){
+            if (this.urlProfileName != this.sanitizeBusinessName(response.businessName)){
               this.router.navigate(['/furnizori']);
             }
             this.profileName = response.businessName;
@@ -211,5 +222,12 @@ import { Lightbox } from 'ng-gallery/lightbox';
       } else {
         console.warn(`[NgGallery]: Invalid index ${index}.`);
       }
+    }
+
+    sanitizeBusinessName(slug: string): string {
+      return slug
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
     }
   }

@@ -38,8 +38,15 @@
       <div class="section-container contact-info">
         <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
         <div class="section-divider"></div>
-        <p><i class="fa fa-phone"></i> {{ phoneNumber }}</p>
-        <p><i class="fa fa-envelope"></i> {{ email }}</p>
+        <p>
+          <i class="fa fa-phone"></i>
+          <a style="text-decoration: none; color:black; margin-left:3px;" [href]="'tel:' + phoneNumber">{{ phoneNumber }}</a>
+        </p>
+        
+        <p>
+          <i class="fa fa-envelope"></i>
+          <a style="text-decoration: none; color: black; margin-left: 3px;" [href]="'mailto:' + email">{{ email }}</a>
+        </p>
       </div>
     
       <!-- Social Links -->
@@ -53,6 +60,11 @@
           <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
         </div>
       </div>
+
+      <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
+          (click)="showRatingInput()">Ofera rating</button>
+
+          
     </div>
 
     <!-- RIGHT SECTION -->
@@ -75,8 +87,7 @@
   </div>
 
   <!-- Give Review Section -->
-  <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
-          (click)="showRatingInput()">Ofera rating</button>
+  
 
   <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
     
@@ -142,8 +153,13 @@
     <!-- Contact Info -->
     <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
     <div class="section-divider"></div>
-    <p class="contact-info-mobile">📞 {{ phoneNumber }}</p>
-    <p class="contact-info-mobile">✉ {{ email }}</p>
+    <p class="contact-info-mobile">
+      <a style="text-decoration: none; color: black;" [href]="'tel:' + phoneNumber">📞 {{ phoneNumber }}</a>
+    </p>
+    
+    <p class="contact-info-mobile">
+      <a style="text-decoration: none; color: black;" [href]="'mailto:' + email">✉ {{ email }}</a>
+    </p>
 
     <!-- Social Links -->
     <p class="section-description">Găsește-l pe rețelele sociale.</p>

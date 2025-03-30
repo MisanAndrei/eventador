@@ -46,6 +46,10 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/acasa']);
     }
 
+    this.getData();
+  }
+
+   getData(){
     const user = this.authService.getLoggedUser();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
@@ -62,9 +66,7 @@ export class ProfileComponent implements OnInit {
     if (this.userRole == UserRole.partner) {
       this.signUpLink = `${window.location.origin}/#/Inscriere/${user.referralCode}`;
     }
-  }
-
-  
+   }
 
   copyToClipboard(text: string) {
     const el = document.createElement('textarea');

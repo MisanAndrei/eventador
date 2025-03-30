@@ -74,6 +74,14 @@ export class NavigationBarComponent implements OnInit {
     }
   }
 
+  navigateToGroup(group: any): void {
+    this.router.navigate(['/furnizori', group.id, 'Categorie']);
+  }
+
+  navigateToCategory(category: any): void {
+    this.router.navigate(['/furnizori', category.id, 'Serviciu']);
+  }
+
   
 
   toggleCollapse() {

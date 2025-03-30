@@ -36,23 +36,23 @@
   <!-- Left side: Category Groups -->
   <ul class="category-groups">
     <li 
-      *ngFor="let group of categoryGroups" 
-      (mouseover)="showCategories(group)"
-      (mouseleave)="hideCategories()"
-      class="category-group-item"
+    *ngFor="let group of categoryGroups" 
+    class="category-group-item"
+    (mouseover)="showCategories(group)"
+    (mouseleave)="hideCategories()"
+    (click)="navigateToGroup(group)"
     >
-      <a [routerLink]="['/furnizori', group.id, 'Categorie']">{{ group.name }}</a>
+      <a>{{ group.name }}</a>
       
       <!-- Right Side: Categories appear dynamically when hovering -->
       <ul class="category-list" *ngIf="selectedGroup?.id === group.id">
         <li 
-          *ngFor="let category of selectedGroup.categories" 
-          class="category-item"
-        >
-          <a [routerLink]="['/furnizori', category.id, 'Serviciu']">
-            {{ category.name }}
-          </a>
-        </li>
+  *ngFor="let category of selectedGroup.categories" 
+  class="category-item"
+  (click)="navigateToCategory(category)"
+>
+  <a>{{ category.name }}</a>
+</li>
       </ul>
     </li>
   </ul>

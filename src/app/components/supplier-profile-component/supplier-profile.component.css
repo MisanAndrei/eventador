@@ -10,7 +10,6 @@
   display: flex;
   width: 80%;
   margin: 40px auto;
-  overflow: hidden;
   gap: 20px;
   align-items: stretch; /* Ensures both sections have the same height */
 }
@@ -23,8 +22,9 @@
   text-align: center;
   background-color: #f8f8f8;
   padding: 20px;
+  padding-bottom: 10px;
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
   flex: 1;
 }
 
@@ -96,7 +96,9 @@
   background-color: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #f8f8f8;
 }
 
 /* Categories & Areas of Interest */
@@ -429,7 +431,6 @@
 /* Oferă Rating Button - Clean & Modern */
 .center-button {
   display: block;
-  margin: 30px auto;
   padding: 12px 22px;
   font-size: 14px;
   border-radius: 8px;
