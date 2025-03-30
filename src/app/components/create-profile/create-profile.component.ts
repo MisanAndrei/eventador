@@ -53,7 +53,9 @@ export class CreateProfileComponent implements OnInit {
     selectedImages: File[] = [];
     selectedProfileImage: File[] = [];
     convertedSelectedImages: string[] = [];
+    convertedSelectedImagesToShow: string[] = [];
     convertedSelectedProfileImage: string = '';
+    convertedSelectedProfileImageToShow: string = '';
     maxAllowedFiles: number = 5;
     partnerCode: string = '';
     referralCodeByUrl: boolean = false;
@@ -151,7 +153,7 @@ export class CreateProfileComponent implements OnInit {
 
   // Reset error message and show checking status
   this.checkingEmail = true;
-  this.emailErrorMessage = 'Verificare email...';
+  this.emailErrorMessage = '';
 
   // Call API to check email uniqueness
   this.apiService.checkEmailUnique(this.email).subscribe({
@@ -161,7 +163,7 @@ export class CreateProfileComponent implements OnInit {
 
       // Update error message based on uniqueness check
       if (isUnique) {
-        this.emailErrorMessage = 'Emailul este disponibil.';
+        this.emailErrorMessage = '';
         this.emailUnique = true;
       } else {
         this.emailErrorMessage = 'Emailul este deja folosit!';
@@ -270,6 +272,7 @@ export class CreateProfileComponent implements OnInit {
       this.tooManyImages = false;
 
       this.convertedSelectedImages = [];
+      this.convertedSelectedImagesToShow = [];
     
       files.forEach(file => {
         const reader = new FileReader();
@@ -277,6 +280,7 @@ export class CreateProfileComponent implements OnInit {
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedImagesToShow.push(base64Image);
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedImages.push(base64Data);
         };
@@ -292,12 +296,14 @@ export class CreateProfileComponent implements OnInit {
       this.tooManyImages = false;
 
       this.convertedSelectedProfileImage = '';
+      this.convertedSelectedProfileImageToShow = '';
     
         const reader = new FileReader();
     
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedProfileImageToShow = base64Image;
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedProfileImage = base64Data;
         };

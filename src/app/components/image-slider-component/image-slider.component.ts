@@ -28,7 +28,20 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit(): void {   
+  sliderImages: string[] = [
+    'assets/imagesandvideos/slider1.jpg',
+    'assets/imagesandvideos/slider2.jpg',
+    'assets/imagesandvideos/slider3.jpg',
+    'assets/imagesandvideos/slider4.jpg',
+    'assets/imagesandvideos/slider5.jpg'
+  ];
+  
+  currentImageIndex = 0;
+  
+  ngOnInit(): void {
+    setInterval(() => {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.sliderImages.length;
+    }, 5000); // Change image every 3 seconds
   }
 }
 

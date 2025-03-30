@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
 
   private saveDataToStorage(data: any): void {
     const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + 1); 
+    expiryDate.setHours(expiryDate.getHours() + 1);
 
     localStorage.setItem(this.storageKey, JSON.stringify(data));
     localStorage.setItem(this.storageExpiryKey, expiryDate.toISOString());

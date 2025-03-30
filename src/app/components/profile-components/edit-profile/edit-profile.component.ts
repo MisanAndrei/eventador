@@ -60,6 +60,8 @@ export class EditProfileComponent implements OnInit {
     selectedProfileImage: File[] = [];
     convertedSelectedImages: string[] = [];
     convertedSelectedProfileImage: string = '';
+    convertedSelectedImagesToShow: string[] = [];
+    convertedSelectedProfileImageToShow: string = '';
     
     imagesToDelete: number[] = [];
 
@@ -180,13 +182,15 @@ export class EditProfileComponent implements OnInit {
       this.tooManyImages = false;
 
       this.convertedSelectedImages = [];
-    
+      this.convertedSelectedImagesToShow = [];
+
       files.forEach(file => {
         const reader = new FileReader();
     
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedImagesToShow.push(base64Image);
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedImages.push(base64Data);
         };
@@ -208,6 +212,7 @@ export class EditProfileComponent implements OnInit {
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedProfileImageToShow = base64Image;
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedProfileImage = base64Data;
         };
@@ -287,6 +292,18 @@ export class EditProfileComponent implements OnInit {
         this.imagesToDelete = this.imagesToDelete.filter(x => x!== existingImage.imageId);
       }
       this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
+    }
+
+    onDeleteImage(existingImage: any){
+      this.imagesToDelete.push(existingImage.imageId);
+      this.existingImages = this.existingImages.filter(x => x.imageId !== existingImage.imageId);
+      this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
+    }
+
+    onDeleteAddedImage(addedImage: any){
+      const base64Data = addedImage.split(',')[1];
+      this.convertedSelectedImagesToShow = this.convertedSelectedImagesToShow.filter(img => img != addedImage);
+      this.convertedSelectedImages = this.convertedSelectedImages.filter(img => img != base64Data);
     }
 
     openSuccessDialog(): void {
