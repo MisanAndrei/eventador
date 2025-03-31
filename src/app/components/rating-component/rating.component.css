@@ -158,6 +158,7 @@ button {
   padding: 8px 15px;
   border-radius: 6px;
   font-size: 14px;
+  margin-bottom: 15px;
 }
 
 .show-response:hover, 
@@ -174,6 +175,7 @@ button {
 .show-all-reviews-mobile {
   font-size: 13px;
   padding: 6px 12px;
+  margin-bottom: 15px;
 }
 
 /* ======== RESPONSE INPUT AREA ======== */

@@ -3,7 +3,7 @@
   justify-content: center;
   height: 250px;
   width: 100%;
-  background-color: black !important;
+  background-color: #FAF2F6 !important;
 }
 
 .column {
@@ -31,23 +31,23 @@
 /* Add additional styling as needed */
 h2 {
   margin-top: 0px;
-  color: white;
+  color: black;
   font-weight: 400;
 }
 
 p {
-  color: white;
+  color: black;
   cursor: pointer;
 }
 
 .fa-facebook {
-  background: black;
-  color: white;
+  background: #FAF2F6;
+  color: black;
 }
 
 .fa-instagram {
-  background:black;
-  color: white ;
+  background:#FAF2F6;
+  color: black ;
 }
 
 .fa {
@@ -64,9 +64,9 @@ p {
 }
 
 .mobile-contact-tab {
-  border-left: 10px solid black;
+  border-left: 10px solid #FAF2F6;
   padding-top: 10px;
-  background-color: black;
+  background-color: #FAF2F6;
 }
 
 
