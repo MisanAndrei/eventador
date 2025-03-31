@@ -74,38 +74,57 @@
   <div *ngIf="isLoggedIn()" class="right-content"><a routerLink="/profil"><i class="fa fa-user-circle-o" style="font-size:36px"></i></a></div>
 </div>
 
-<div *ngIf="showMenu" class="overlay">
+<div *ngIf="showMenu" class="overlay-menu">
   <ul class="menu-list">
-   
     <li class="menu-item">
-      <a (click)="onItemClick('/acasa')">Acasă</a>
+      <a (click)="onItemClick('/acasa')">
+        <i class="fa fa-home"></i> Acasă
+      </a>
     </li>
     <li class="menu-item">
-      <a (click)="onItemClick('/despre-noi')">Despre noi</a>
+      <a (click)="onItemClick('/despre-noi')">
+        <i class="fa fa-info-circle"></i> Despre noi
+      </a>
     </li>
     <li class="menu-item">
-      <a (click)="onItemClick('/contact')">Contact</a>
+      <a (click)="onItemClick('/contact')">
+        <i class="fa fa-envelope"></i> Contact
+      </a>
     </li>
     <li *ngIf="isPartnerLoggedIn()" class="menu-item">
-      <a (click)="onItemClick('/dashboard')">Dashboard Partener</a>
+      <a (click)="onItemClick('/dashboard')">
+        <i class="fa fa-briefcase"></i> Dashboard Partener
+      </a>
     </li>
     <li class="menu-item">
-      <a (click)="onItemClick('/furnizori')">Furnizori</a>
+      <a (click)="onItemClick('/furnizori')">
+        <i class="fa fa-users"></i> Furnizori
+      </a>
     </li>
     <li class="menu-item">
-      <a (click)="onItemClick('/Favorite')">Favorite</a>
+      <a (click)="onItemClick('/Favorite')">
+        <i class="fa fa-heart"></i> Favorite
+      </a>
     </li>
     <li *ngIf="isAdminOrMarketingLoggedIn()" class="menu-item">
-      <a (click)="onItemClick('/admin-dashboard')">Admin Dashboard</a>
+      <a (click)="onItemClick('/admin-dashboard')">
+        <i class="fa fa-cogs"></i> Admin Dashboard
+      </a>
     </li>
     <li class="menu-item">
-      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">Autentifică-te</a>
+      <a *ngIf="!isLoggedIn()" (click)="onItemClick('/autentificare')">
+        <i class="fa fa-sign-in"></i> Autentifică-te
+      </a>
     </li>
     <li class="menu-item">
-      <a *ngIf="isLoggedIn()" (click)="logOutMobile()">Deconectează-te</a>
+      <a *ngIf="isLoggedIn()" (click)="logOutMobile()">
+        <i class="fa fa-sign-out"></i> Deconectează-te
+      </a>
     </li>
     <li *ngIf="!isLoggedIn()" class="menu-item">
-      <a (click)="onItemClick('/Inscriere')">Înscrie-te</a>
+      <a (click)="onItemClick('/Inscriere')">
+        <i class="fa fa-user-plus"></i> Înscrie-te
+      </a>
     </li>
   </ul>
 </div>
