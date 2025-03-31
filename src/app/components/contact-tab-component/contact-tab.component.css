@@ -65,6 +65,7 @@ p {
 
 .mobile-contact-tab {
   border-left: 10px solid black;
+  padding-top: 10px;
   background-color: black;
 }
 

@@ -241,7 +241,7 @@ button {
 .review-text-mobile,
 .response-wrapper-mobile {
   display: flex;
-  align-items: flex-start;
+  align-items: left;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -251,13 +251,13 @@ button {
 .row-two-mobile,
 .review-text-mobile,
 .response-wrapper-mobile {
-  padding-left: 44px; /* same as avatar + gap */
+  padding-left: 8px; /* same as avatar + gap */
   position: relative;
 }
 
 /* Avatar circle */
 .avatar-mobile {
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
   width: 36px;
@@ -279,7 +279,8 @@ button {
 }
 
 .creation-date-mobile {
-  font-size: 12px;
+
+  font-size: 14px;
   color: #999;
 }
 
@@ -300,13 +301,13 @@ button {
 }
 
 .score-mobile {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   margin-left: 6px;
 }
 
 .category-name-mobile {
-  font-size: 13px;
+  font-size: 14px;
   color: #777;
 }
 
