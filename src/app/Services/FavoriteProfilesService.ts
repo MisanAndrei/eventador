@@ -14,7 +14,7 @@ export class FavoriteProfilesServiceComponent {
   constructor(private http: HttpClient, private authService: AuthService, private apiService: ApiService) { }
 
   updateFavoriteProfiles() {
-    if (this.authService.isUserLogged()){
+    if (this.authService.isAuthenticated()){
       const user = this.authService.getLoggedUser();
       const favoriteProfiles = this.authService.getFavoriteProfiles();
       const favoriteProfilesRequest = {
@@ -48,7 +48,7 @@ export class FavoriteProfilesServiceComponent {
       this.saveFavoriteProfiles(favoriteProfiles);
     }
 
-    if (this.authService.isUserLogged()){
+    if (this.authService.isAuthenticated()){
       let user = this.authService.getLoggedUser();
       const favoriteProfilesRequest = {
         userId: user.id,
@@ -67,7 +67,7 @@ export class FavoriteProfilesServiceComponent {
       this.saveFavoriteProfiles(favoriteProfiles);
     }
 
-    if (this.authService.isUserLogged()){
+    if (this.authService.isAuthenticated()){
       let user = this.authService.getLoggedUser();
       const favoriteProfilesRequest = {
         userId: user.id,

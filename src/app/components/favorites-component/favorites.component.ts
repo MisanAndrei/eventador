@@ -18,7 +18,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.isUserLogged()){
+    if (this.authService.isAuthenticated()){
       let userId = this.authService.getLoggedUser().id;
       this.apiService.getFavoriteProfiles(userId).subscribe(favoriteUsersDb => {
         this.favoriteProfilesService.clearFavoriteProfiles(favoriteUsersDb);

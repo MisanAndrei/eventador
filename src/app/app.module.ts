@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -200,7 +200,7 @@ import { LegalConfidentialityComponent } from './components/legal-components/leg
       }]
 })
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy  }, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

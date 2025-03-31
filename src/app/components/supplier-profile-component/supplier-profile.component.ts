@@ -91,7 +91,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
         }
       });
       
-      if (this.authService.isUserLogged()){
+      if (this.authService.isAuthenticated()){
         this.userLoggedIn = true;
         var user = this.authService.getLoggedUser();
         this.currentUserRole = user.role;

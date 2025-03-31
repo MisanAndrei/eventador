@@ -121,10 +121,6 @@ export class AuthService {
     localStorage.setItem(this.userKey, this.encodeObject(user));
   }
 
-  isUserLogged(): boolean {
-    return !!localStorage.getItem(this.userKey);
-  }
-
   getLoggedUserRole(): UserRole {
     const user = this.getLoggedUser();
     return user.role;

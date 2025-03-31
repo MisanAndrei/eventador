@@ -98,7 +98,7 @@ export class EditProfileComponent implements OnInit {
         this.router.navigate(['/acasa']);
       }
 
-        if (!this.authService.isUserLogged()){
+        if (!this.authService.isAuthenticated()){
           this.router.navigate(['/acasa']);
         }
 
