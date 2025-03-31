@@ -176,6 +176,7 @@ button {
   font-size: 13px;
   padding: 6px 12px;
   margin-bottom: 15px;
+  background: linear-gradient(to right, #FF63A4, #FE8962);
 }
 
 /* ======== RESPONSE INPUT AREA ======== */
