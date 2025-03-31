@@ -369,12 +369,12 @@ nav {
   .menu-list {
     list-style: none;
     padding: 0;
-    margin-top: 40px;
+    margin-top: 20px;
     width: 90%;
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
   }
   
   .menu-item a {
