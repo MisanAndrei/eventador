@@ -396,4 +396,8 @@ nav {
     text-align: center;
     color: #FE8962; /* or use #FF63A4 */
   }
+
+  .profile-icon {
+    color: black;
+  }
   

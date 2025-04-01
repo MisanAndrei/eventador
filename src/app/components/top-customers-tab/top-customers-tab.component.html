@@ -5,6 +5,9 @@
   <div class="card-container">
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
+      
+      <p class="card-category">{{ supplier.name}}</p>
+
       <div class="rating-container">
         <div class="stars">
           <ng-container *ngFor="let star of getStarsArray(supplier.averageRating)">
@@ -23,9 +26,6 @@
       <p *ngFor="let category of supplier.categories" class="card-category" style="display: inline;">
         {{category.name}}
       </p>
-
-      
-      <p class="card-category">{{ supplier.name}}</p>
     </div>
   </div>
 
@@ -38,6 +38,9 @@
   <div class="card-container">
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
       <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
+      
+      <p class="card-category">{{ supplier.name}}</p>
+
       <div class="rating-container">
         <div class="stars">
           <ng-container *ngFor="let star of getStarsArray(supplier.averageRating)">
@@ -57,7 +60,6 @@
       <p *ngFor="let category of supplier.categories" class="card-category" style="display: inline;">
         {{category.name}}
       </p>
-      <p class="card-category">{{ supplier.name}}</p>
     </div>
   </div>
 

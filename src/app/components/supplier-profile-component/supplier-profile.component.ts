@@ -8,7 +8,6 @@ import { ApiService } from '../../Services/ApiService';
 import { AuthService } from '../../Services/AuthService';
 import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-supplier-profile',
@@ -66,7 +65,7 @@ import { Meta, Title } from '@angular/platform-browser';
       private apiService: ApiService, 
       private gallery: Gallery,
       private lightbox: Lightbox,
-      private authService: AuthService,private meta: Meta, private titleService: Title){
+      private authService: AuthService){
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -149,15 +148,6 @@ import { Meta, Title } from '@angular/platform-browser';
             this.areasOfInterest = response.areaOfInterestNames;
             this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
             this.supplierCategories = response.categories;
-
-            this.meta.updateTag({ name: 'title', content: this.profileName || '' });
-            this.meta.updateTag({ name: 'description', content: this.motto || '' });
-
-            // Open Graph (OG) Meta Tags for Social Sharing
-            this.meta.updateTag({ property: 'og:title', content: this.profileName || '' });
-            this.meta.updateTag({ property: 'og:description', content: this.motto || '' });
-            this.meta.updateTag({ property: 'og:image', content: this.profileImage || '' });
-            this.meta.updateTag({ property: 'og:url', content: window.location.href || '' });
 
             const galleryRef = this.gallery.ref('lightboxGallery');
             galleryRef.load(this.images);
