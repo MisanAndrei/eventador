@@ -80,8 +80,9 @@
       <div class="star-rating-mobile">
         <span *ngFor="let value of getStarValues()" class="star-mobile" [class.filled-mobile]="value <= rating.score">★</span>
         <span class="score-mobile">{{ rating.score }}/5</span>
+        <span class="category-name-mobile">{{ rating.categoryName }}</span>
       </div>
-      <div class="category-name-mobile">{{ rating.categoryName }}</div>
+      
     </div>
 
     <!-- Row 3: Review -->

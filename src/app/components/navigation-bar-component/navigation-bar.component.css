@@ -319,14 +319,7 @@ nav {
     margin-bottom: 20px !important; /* Add space between items */
     font-weight: bold;
   }
-  
-  .menu-item a {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: black;
-    padding: 5px 10px; /* Add padding for space around the text */
-    border-radius: 5px;
-    border-bottom: 1px solid black;
-  }
+
   
   .menu-item a:hover {
     font-weight: bold;
