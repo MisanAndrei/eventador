@@ -415,6 +415,16 @@ import { UserRole } from "../Utilities/enums/Enums";
     lastSixMonths: number;
   }
 
+  export interface AdminProfileTopProvider {
+    id: number;
+    businessName: string;
+    isTopProvider: true;
+  }
+
+  export interface AdminProfileTopProviders {
+    profiles: AdminProfileTopProvider[];
+  }
+
 
 
 
