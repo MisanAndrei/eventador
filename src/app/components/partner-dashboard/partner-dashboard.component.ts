@@ -29,6 +29,8 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     profilesNumber: number = 0;
     nameinitials: string = "";
     partnerName: string = "";
+    suppliersCosts: number = 0;
+    affiliateRevenue: number = 0;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -61,6 +63,8 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
         this.profilesNumber += user.profiles.reduce((sum, profile) => sum + (profile.categoryNames?.length || 0), 0);
       })
       this.usersNumber = response.length;
+      this.suppliersCosts = this.profilesNumber * 100;
+      this.affiliateRevenue = this.suppliersCosts / 4;
       const profileCounts = this.countProfilesByMonth(response);
       this.createChart(profileCounts);
       this.dataSource = new MatTableDataSource<PartnerSupplierUserProfile>(this.profiles);
