@@ -25,11 +25,11 @@ import { LegalCookiesPoliticsComponent } from './components/legal-components/leg
 import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/acasa', pathMatch: 'full' },
+{ path: '', component: DashboardComponent },
+{ path: 'acasa', redirectTo: '', pathMatch: 'full' },
 { path: 'contact', component: ContactComponent},
 { path: 'furnizor', component: SupplierProfileComponent },
 { path: 'furnizor/:profileId', component: SupplierProfileComponent },
-{ path: 'acasa', component: DashboardComponent },
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
 { path: 'Favorite', component: FavoritesComponent},

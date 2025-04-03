@@ -1,0 +1,40 @@
+<div class="p-4">
+    <mat-form-field appearance="outline">
+      <mat-label>Caută după nume</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Nume afacere">
+    </mat-form-field>
+    <p class="font-semibold mb-2">
+        {{ topCount }} profil{{ topCount === 1 ? '' : 'uri' }} sunt în top acum
+      </p>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mt-4">
+  
+      <!-- Business Name -->
+      <ng-container matColumnDef="businessName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nume Afacere</th>
+        <td mat-cell *matCellDef="let element">{{ element.businessName }}</td>
+      </ng-container>
+  
+      <!-- Top Provider -->
+      <ng-container matColumnDef="isTopProvider">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Top Provider</th>
+        <td mat-cell *matCellDef="let element">{{ element.isTopProvider ? 'Da' : 'Nu' }}</td>
+      </ng-container>
+  
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acțiuni</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button color="{{ element.isTopProvider ? 'warn' : 'primary' }}"
+                  (click)="toggleTopProvider(element)">
+            {{ element.isTopProvider ? 'Șterge din top' : 'Adaugă în top' }}
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  

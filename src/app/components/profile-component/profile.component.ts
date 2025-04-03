@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
     }
 
     if (this.userRole == UserRole.partner) {
-      this.signUpLink = `${window.location.origin}/#/Inscriere/${user.referralCode}`;
+      this.signUpLink = `${window.location.origin}/Inscriere/furnizor/${user.referralCode}`;
     }
    }
 

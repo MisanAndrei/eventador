@@ -3,7 +3,10 @@
   <!-- Stats Cards -->
   <div class="cards-container">
     <div class="cards">
-      <div class="initials-card">{{ nameinitials }}</div>
+      <div class="card">
+        <span class="card-text">Nume Afiliat</span>
+        <span class="card-text">{{ partnerName }}</span>
+      </div>
       <div class="card">
         <span class="card-text">Furnizori</span>
         <span class="card-text">{{ usersNumber }}</span>
@@ -37,8 +40,8 @@
         </ng-container>
 
         <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </th>
-          <td mat-cell *matCellDef="let profile"> {{profile.category}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorii </th>
+          <td mat-cell *matCellDef="let profile"> {{ profile.categoryNames.join(', ') }} </td>
         </ng-container>
 
         <ng-container matColumnDef="dateAdded">
@@ -59,7 +62,10 @@
 <div *ngIf="(isMobile | async)">
   <div class="cards-container">
     <div class="mobile-cards">
-      <div class="mobile-initials-card">{{ nameinitials }}</div>
+      <div class="mobile-card">
+        <span class="mobile-card-text">Nume Afiliat</span>
+        <span class="mobile-card-text">{{ partnerName }}</span>
+      </div>
       <div class="mobile-card">
         <span class="mobile-card-text">Furnizori</span>
         <span class="mobile-card-text">{{ usersNumber }}</span>
@@ -92,8 +98,8 @@
         </ng-container>
 
         <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </th>
-          <td mat-cell *matCellDef="let profile"> {{profile.category}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorii </th>
+          <td mat-cell *matCellDef="let profile"> {{ profile.categoryNames.join(', ') }} </td>
         </ng-container>
 
         <ng-container matColumnDef="dateAdded">

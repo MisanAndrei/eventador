@@ -94,10 +94,11 @@ import { ActivateAccountComponent } from './components/activate-account-componen
 import { AuthInterceptor } from './Services/auth.interceptor';
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/lightbox';
-import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component.css/edit-user-email.component';
+import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component/edit-user-email.component';
 import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-analytics/profile-analytics.component';
 import { LegalCookiesPoliticsComponent } from './components/legal-components/legal-cookies-politics-component/legal-cookies-politics.component';
 import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
+import { AdminDashboardTopProvidersComponent } from './components/admin-dashboard/admin-dashboard-top-providers/admin-dashboard-top-providers.component';
 
 @NgModule({
   declarations: [
@@ -158,7 +159,8 @@ import { LegalConfidentialityComponent } from './components/legal-components/leg
     ProfileAnalyticsComponent,
     EditUserEmailComponent,
     LegalCookiesPoliticsComponent,
-    LegalConfidentialityComponent
+    LegalConfidentialityComponent,
+    AdminDashboardTopProvidersComponent
   ],
   imports: [
     AppRoutingModule,

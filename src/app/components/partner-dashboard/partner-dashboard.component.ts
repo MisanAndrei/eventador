@@ -28,6 +28,7 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
     usersNumber: number = 0;
     profilesNumber: number = 0;
     nameinitials: string = "";
+    partnerName: string = "";
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -50,17 +51,21 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     const user = this.authService.getLoggedUser();
     this.nameinitials = user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase();
+    this.partnerName = user.firstName + " " + user.lastName;
     this.apiService.getPartnerSuppliers(this.authService.getLoggedUser().id).subscribe(response => {
       response.forEach(user => {
         user.profiles.forEach(profile => {
           profile.formattedDate = this.convertDate(profile.createdAt);
           this.profiles.push(profile);
         })
-        this.profilesNumber = this.profilesNumber + user.profiles.length;
+        this.profilesNumber += user.profiles.reduce((sum, profile) => sum + (profile.categoryNames?.length || 0), 0);
       })
       this.usersNumber = response.length;
       const profileCounts = this.countProfilesByMonth(response);
       this.createChart(profileCounts);
+      this.dataSource = new MatTableDataSource<PartnerSupplierUserProfile>(this.profiles);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       
     })
 
@@ -155,7 +160,8 @@ export class PartnerDashboardComponent implements OnInit, AfterViewInit {
 
   goToProfile(profile: PartnerSupplierUserProfile) {
     const formattedProfileName = this.formatProfileName(profile.name);
-    this.router.navigate(['/furnizor', `${formattedProfileName}-${profile.id}`]);
+    const url = `/furnizor/${formattedProfileName}-${profile.id}`;
+    window.open(url, '_blank');
     }
 
   formatProfileName(profileName: string): string {

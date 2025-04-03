@@ -1,7 +1,7 @@
 import {  AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
-import { AdminDashboardBlog, AdminDashboardPartners, AdminDashboardProfilesChanged, ApprovalReview, Blog, DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
+import { AdminDashboardBlog, AdminDashboardPartner, AdminDashboardProfilesChanged, ApprovalReview, Blog, DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';

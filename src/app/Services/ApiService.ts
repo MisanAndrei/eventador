@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
-import { AdminDashboardProfilesChanged, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ProfilesAnalytics, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
+import { AdminDashboardPartner, AdminDashboardProfilesChanged, AdminProfileTopProvider, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ProfilesAnalytics, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
 import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
 
 @Injectable({
@@ -106,6 +106,28 @@ export class ApiService {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<PartnerSupplierUser[]>(`${this.apiUrl}/User/GetPartnerSuppliers/${id}`, {headers});
+  }
+
+  getPartners(): Observable<AdminDashboardPartner[]>{
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<AdminDashboardPartner[]>(`${this.apiUrl}/User/GetPartners`, {headers});
+  }
+
+  getAdminTopProviders(): Observable<AdminProfileTopProvider[]>{
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<AdminProfileTopProvider[]>(`${this.apiUrl}/Profile/GetAdminProfiles`, {headers});
+  }
+
+  setAdminTopProvider(request: AdminProfileTopProvider): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(this.apiUrl + '/Profile/UpdateTopProviders', request, {headers}).pipe(
+      tap(x => {
+        
+      })
+    );
   }
 
   getUserDetails(id: number): Observable<UserDetails>{

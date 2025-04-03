@@ -15,7 +15,9 @@ import { DialogComponent } from 'src/app/components/dialogs/dialog-component/dia
 export class AdminDashboardPartnerUpsertComponent implements OnInit {
   @Input() id: number | null = null;
   partnerForm!: FormGroup;
-  roles = Object.keys(UserRole).filter(key => isNaN(Number(key))); // Enum values for the dropdown
+  roles = Object.entries(UserRole)
+  .filter(([key, value]) => typeof value === 'number')
+  .map(([key, value]) => ({ label: key, value })); // Enum values for the dropdown
   isEditMode = false;
   userRoles = UserRole;
 

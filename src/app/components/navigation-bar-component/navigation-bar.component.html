@@ -26,7 +26,7 @@
       <li (mouseover)="showCategoriesFromLink = true"><a class="menuLink" routerLink="/furnizori">Furnizori</a></li>
       <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/despre-noi">Despre Noi</a></li>
       <li (mouseover)="showCategoriesFromLink = false"><a routerLink="/contact">Contact</a></li>
-      <li *ngIf="isPartnerLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard Partener</a></li>
+      <li *ngIf="isPartnerLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/dashboard">Dashboard Afiliat</a></li>
       <li *ngIf="isAdminOrMarketingLoggedIn()" (mouseover)="showCategoriesFromLink = false"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
       
     </ul>
@@ -93,7 +93,7 @@
     </li>
     <li *ngIf="isPartnerLoggedIn()" class="menu-item" (click)="onItemClick('/dashboard')">
       <a>
-        <i class="fa fa-briefcase"></i> Dashboard Partener
+        <i class="fa fa-briefcase"></i> Dashboard Afiliat
       </a>
     </li>
     <li class="menu-item">
