@@ -8,6 +8,7 @@ import { ApiService } from '../../Services/ApiService';
 import { AuthService } from '../../Services/AuthService';
 import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
+import { NgxAngularMetaService } from 'ngx-angular-meta-service';
 
 @Component({
     selector: 'app-supplier-profile',
@@ -59,6 +60,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
     offerRating: boolean = false;
 
     constructor(private ref: ChangeDetectorRef, 
+      private metaService: NgxAngularMetaService,
       private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
       private router: Router, 
@@ -151,6 +153,8 @@ import { Lightbox } from 'ng-gallery/lightbox';
 
             const galleryRef = this.gallery.ref('lightboxGallery');
             galleryRef.load(this.images);
+
+            this.updateMetaTags();
           })
         }
       }
@@ -229,5 +233,18 @@ import { Lightbox } from 'ng-gallery/lightbox';
         .replace(/-/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
+    }
+
+    updateMetaTags() {
+      const imagePath = 'https://eventador.ro/assets/imagesandvideos/slider5.jpg';
+      // You can add other meta tags dynamically as needed
+      this.metaService.update(
+        this.profileName || 'Default Title', // Title (Required for SEO and Social Media)
+        this.motto || '', // Description (Required for SEO)
+        this.profileImage || imagePath, // Image for SEO (Optional)
+        '@twitterUsername',  // Optional Twitter username for the page creator
+        '@creatorHandle',    // Optional creator handle (for Twitter)
+        'Publisher Name'    // Optional publisher (for SEO)
+      );
     }
   }

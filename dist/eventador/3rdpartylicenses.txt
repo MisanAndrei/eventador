@@ -557,6 +557,9 @@ MIT
 ng-gallery
 MIT
 
+ngx-angular-meta-service
+MIT
+
 ngx-cookie-service
 MIT
 
