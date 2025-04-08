@@ -9,6 +9,7 @@ import { AuthService } from '../../Services/AuthService';
 import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { NgxAngularMetaService } from 'ngx-angular-meta-service';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-supplier-profile',
@@ -60,6 +61,7 @@ import { NgxAngularMetaService } from 'ngx-angular-meta-service';
     offerRating: boolean = false;
 
     constructor(private ref: ChangeDetectorRef, 
+      private meta: Meta,
       private metaService: NgxAngularMetaService,
       private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
@@ -247,6 +249,18 @@ import { NgxAngularMetaService } from 'ngx-angular-meta-service';
         '@creatorHandle',    // Optional creator handle (for Twitter)
         'Publisher Name'    // Optional publisher (for SEO)
       );
+
+      // Open Graph meta tags for Facebook
+  this.meta.updateTag({ property: 'og:title', content: this.profileName || 'Eventador' });
+  this.meta.updateTag({ property: 'og:description', content: this.motto || '' });
+  this.meta.updateTag({ property: 'og:image', content: this.profileImage || imagePath });
+  this.meta.updateTag({ property: 'og:url', content: pageUrl });
+
+  // Twitter meta tags for Twitter cards
+  this.meta.updateTag({ name: 'twitter:title', content: this.profileName || 'Eventador' });
+  this.meta.updateTag({ name: 'twitter:description', content: this.motto || '' });
+  this.meta.updateTag({ name: 'twitter:image', content: this.profileImage || imagePath });
+  this.meta.updateTag({ name: 'twitter:card', content: imagePath });  // Ensure the summary_large_image is set for better image preview
 
       
     }
