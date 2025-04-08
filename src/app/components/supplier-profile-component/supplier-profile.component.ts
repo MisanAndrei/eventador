@@ -237,6 +237,7 @@ import { NgxAngularMetaService } from 'ngx-angular-meta-service';
 
     updateMetaTags() {
       const imagePath = 'https://eventador.ro/assets/imagesandvideos/slider5.jpg';
+      const pageUrl = window.location.href;
       // You can add other meta tags dynamically as needed
       this.metaService.update(
         this.profileName || 'Default Title', // Title (Required for SEO and Social Media)
@@ -246,5 +247,7 @@ import { NgxAngularMetaService } from 'ngx-angular-meta-service';
         '@creatorHandle',    // Optional creator handle (for Twitter)
         'Publisher Name'    // Optional publisher (for SEO)
       );
+
+      
     }
   }
