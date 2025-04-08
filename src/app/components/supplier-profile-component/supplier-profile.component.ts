@@ -238,30 +238,6 @@ import { Meta } from '@angular/platform-browser';
     }
 
     updateMetaTags() {
-      const imagePath = 'https://eventador.ro/assets/imagesandvideos/slider5.jpg';
-      const pageUrl = window.location.href;
-      // You can add other meta tags dynamically as needed
-      this.metaService.update(
-        this.profileName || 'Default Title', // Title (Required for SEO and Social Media)
-        this.motto || '', // Description (Required for SEO)
-        this.profileImage || imagePath, // Image for SEO (Optional)
-        '@twitterUsername',  // Optional Twitter username for the page creator
-        '@creatorHandle',    // Optional creator handle (for Twitter)
-        'Publisher Name'    // Optional publisher (for SEO)
-      );
 
-      // Open Graph meta tags for Facebook
-  this.meta.updateTag({ property: 'og:title', content: this.profileName || 'Eventador' });
-  this.meta.updateTag({ property: 'og:description', content: this.motto || '' });
-  this.meta.updateTag({ property: 'og:image', content: this.profileImage || imagePath });
-  this.meta.updateTag({ property: 'og:url', content: pageUrl });
-
-  // Twitter meta tags for Twitter cards
-  this.meta.updateTag({ name: 'twitter:title', content: this.profileName || 'Eventador' });
-  this.meta.updateTag({ name: 'twitter:description', content: this.motto || '' });
-  this.meta.updateTag({ name: 'twitter:image', content: this.profileImage || imagePath });
-  this.meta.updateTag({ name: 'twitter:card', content: imagePath });  // Ensure the summary_large_image is set for better image preview
-
-      
     }
   }
