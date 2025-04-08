@@ -18,4 +18,10 @@ export class ContactComponent implements OnInit {
     ngOnInit(): void {
         // Additional initialization if needed
     }
+
+    openWhatsApp(): void {
+        const phone = '40740299643'; // no +, no spaces
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent('Bună ziua! Am o întrebare legată de serviciile dvs.')}`;
+        window.open(url, '_blank');
+      }
 }
