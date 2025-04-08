@@ -21,7 +21,7 @@
       <p>
         Fii parte dintr-o comunitate care apreciază creativitatea și profesionalismul, și lasă-ți amprenta în industria evenimentelor!
       </p>
-      <button [routerLink]="['/Inscriere']" mat-raised-button color="accent">Înscrie-te și tu</button>
+      <button *ngIf="!userLoggedIn" [routerLink]="['/Inscriere']" mat-raised-button color="accent">Înscrie-te și tu</button>
     </div>
 
     <!-- Affiliate Section -->
