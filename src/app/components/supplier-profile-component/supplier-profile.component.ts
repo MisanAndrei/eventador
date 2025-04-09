@@ -8,7 +8,6 @@ import { ApiService } from '../../Services/ApiService';
 import { AuthService } from '../../Services/AuthService';
 import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
-import { NgxAngularMetaService } from 'ngx-angular-meta-service';
 import { Meta } from '@angular/platform-browser';
 
 @Component({
@@ -62,7 +61,6 @@ import { Meta } from '@angular/platform-browser';
 
     constructor(private ref: ChangeDetectorRef, 
       private meta: Meta,
-      private metaService: NgxAngularMetaService,
       private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
       private router: Router, 

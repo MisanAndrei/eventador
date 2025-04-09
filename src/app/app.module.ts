@@ -99,7 +99,6 @@ import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-
 import { LegalCookiesPoliticsComponent } from './components/legal-components/legal-cookies-politics-component/legal-cookies-politics.component';
 import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
 import { AdminDashboardTopProvidersComponent } from './components/admin-dashboard/admin-dashboard-top-providers/admin-dashboard-top-providers.component';
-import { NgxAngularMetaServiceModule } from 'ngx-angular-meta-service';
 
 @NgModule({
   declarations: [
@@ -196,7 +195,6 @@ import { NgxAngularMetaServiceModule } from 'ngx-angular-meta-service';
     MatCheckbox,
     MatIcon,
     NgxEditorModule,
-    NgxAngularMetaServiceModule,
     QuillModule.forRoot({
       customOptions: [{
         import: 'formats/font',

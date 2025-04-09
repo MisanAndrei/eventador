@@ -35,7 +35,6 @@
     "jspdf": "^2.5.1",
     "ng-apexcharts": "^1.9.0",
     "ng-gallery": "^12.0.0",
-    "ngx-angular-meta-service": "^0.1.19",
     "ngx-cookie-service": "^18.0.0",
     "ngx-editor": "^17.5.4",
     "ngx-quill": "^25.3.2",
