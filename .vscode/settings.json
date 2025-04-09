@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/eb32ae64-ee10-4e4c-b8ab-d393732dcbc5/resourceGroups/EventadorApi20240303141425ResourceGroup/providers/Microsoft.Web/sites/EventadorWebFrontend",
+    "appService.deploySubpath": "dist\\eventador"
+}
