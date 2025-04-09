@@ -223,7 +223,10 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   onCardClick(profile: ProfileCard): void {
     const formattedProfileName = this.formatProfileName(profile.name);
-    this.router.navigate([`/furnizor`, `${formattedProfileName}-${profile.id}`]);
+    const url = this.router.serializeUrl(
+    this.router.createUrlTree([`/furnizor`, `${formattedProfileName}-${profile.id}`]));
+    window.open(url, '_blank');
+
   }  
 
   onHeartClick(event: Event, profileId: number): void {
