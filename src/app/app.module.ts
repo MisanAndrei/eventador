@@ -40,7 +40,7 @@ import { ImageSliderComponent } from './components/image-slider-component/image-
 import { NavigationBarComponent } from './components/navigation-bar-component/navigation-bar.component';
 import { DashboardComponent } from './components/dashboard-component/dashboard.component';
 import { SupplierProfileComponent } from './components/supplier-profile-component/supplier-profile.component';
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact-component/contact.component';
 import { AboutUsComponent } from './components/about-us-component/about-us.component';
@@ -99,6 +99,7 @@ import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-
 import { LegalCookiesPoliticsComponent } from './components/legal-components/legal-cookies-politics-component/legal-cookies-politics.component';
 import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
 import { AdminDashboardTopProvidersComponent } from './components/admin-dashboard/admin-dashboard-top-providers/admin-dashboard-top-providers.component';
+import { ProfileResolver } from './resolvers/profile.resolver';
 
 @NgModule({
   declarations: [
@@ -202,7 +203,7 @@ import { AdminDashboardTopProvidersComponent } from './components/admin-dashboar
       }]
 })
   ],
-  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy  }, {
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy  }, ProfileResolver, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
@@ -212,7 +213,7 @@ import { AdminDashboardTopProvidersComponent } from './components/admin-dashboar
       keyboardShortcuts: true,
       exitAnimationTime: 1000
     } as LightboxConfig
-  }],
+  }, provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

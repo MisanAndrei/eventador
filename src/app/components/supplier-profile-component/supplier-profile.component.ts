@@ -9,6 +9,8 @@ import { AuthService } from '../../Services/AuthService';
 import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { Meta } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
     selector: 'app-supplier-profile',
@@ -61,6 +63,7 @@ import { Meta } from '@angular/platform-browser';
 
     constructor(private ref: ChangeDetectorRef, 
       private meta: Meta,
+      private title: Title,
       private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
       private router: Router, 
@@ -75,6 +78,31 @@ import { Meta } from '@angular/platform-browser';
     }
     
     ngOnInit(): void {
+      this.route.data.subscribe(({ profile }) => {
+        this.profileName = profile.businessName;
+        this.profileImage = profile.images.find((x: { isProfileImage: any; }) => x.isProfileImage)?.imageUrl;
+        this.motto = profile.motto;
+        this.location = profile.cityName;
+        this.categories = profile.categories;
+        this.phoneNumber = profile.phoneNumber;
+        this.email = profile.email;
+        this.description = profile.description;
+        this.websiteUrl = this.addHttpPrefix(profile.websiteUrl);
+        this.facebookUrl = this.addHttpPrefix(profile.facebookUrl);
+        this.instagramUrl = this.addHttpPrefix(profile.instagramUrl);
+        this.youtubeUrl = this.addHttpPrefix(profile.youtubeUrl);
+        this.numberProfileId = Number(this.profileId);
+        this.reviews = profile.reviews;
+        this.areasOfInterest = profile.areaOfInterestNames;
+        this.images = profile.images.map((img: { imageUrl: any; }) => new ImageItem({ src: img.imageUrl, thumb: img.imageUrl }));
+        this.supplierCategories = profile.categories;
+    
+        const galleryRef = this.gallery.ref('lightboxGallery');
+        galleryRef.load(this.images);
+    
+        this.updateMetaTags();
+      });
+
       this.route.params.subscribe(params => {
         const profileInfo: string = params['profileId'];
       
@@ -236,6 +264,23 @@ import { Meta } from '@angular/platform-browser';
     }
 
     updateMetaTags() {
-
+      const fullUrl = `https://www.eventador.ro/furnizor/${this.urlProfileName.replace(/\s+/g, '-')}-${this.profileId}`;
+      this.title.setTitle(`${this.profileName} | Eventador`);
+      this.meta.updateTag({ name: 'description', content: this.motto || '' });
+      this.meta.updateTag({ name: 'robots', content: 'index, follow' });
+    
+      // OpenGraph tags (for Facebook)
+      this.meta.updateTag({ property: 'og:title', content: this.profileName || '' });
+      this.meta.updateTag({ property: 'og:description', content: this.motto || '' });
+      this.meta.updateTag({ property: 'og:image', content: this.profileImage || '' });
+      this.meta.updateTag({ property: 'og:url', content: fullUrl });
+      this.meta.updateTag({ property: 'og:type', content: 'website' });
+    
+      // Twitter meta (optional, good for sharing)
+      this.meta.updateTag({ name: 'twitter:title', content: this.profileName || '' });
+      this.meta.updateTag({ name: 'twitter:description', content: this.motto || '' });
+      this.meta.updateTag({ name: 'twitter:image', content: this.profileImage || '' });
+      this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     }
+    
   }

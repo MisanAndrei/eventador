@@ -23,13 +23,20 @@ import { createApplication } from '@angular/platform-browser';
 import { ActivateAccountComponent } from './components/activate-account-component/activate-account.component';
 import { LegalCookiesPoliticsComponent } from './components/legal-components/legal-cookies-politics-component/legal-cookies-politics.component';
 import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
+import { ProfileResolver } from './resolvers/profile.resolver';
 
 const routes: Routes = [
 { path: '', component: DashboardComponent },
 { path: 'acasa', redirectTo: '', pathMatch: 'full' },
 { path: 'contact', component: ContactComponent},
 { path: 'furnizor', component: SupplierProfileComponent },
-{ path: 'furnizor/:profileId', component: SupplierProfileComponent },
+{
+  path: 'furnizor/:profileId',
+  component: SupplierProfileComponent,
+  resolve: {
+    profile: ProfileResolver
+  }
+},
 { path: 'despre-noi', component: AboutUsComponent},
 { path: 'autentificare', component: LoginComponent},
 { path: 'Favorite', component: FavoritesComponent},
