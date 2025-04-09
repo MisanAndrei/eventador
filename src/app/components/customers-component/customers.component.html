@@ -49,7 +49,7 @@
       <div class="card" (click)="onCardClick(card)">
         <div class="header">
           <div class="logo">
-            <img src="{{ card.profileImage }}" alt="{{ card.name }} Logo" />
+            <img src="{{ card.profileImage }}" />
           </div>
           <div style="flex: 1; min-width: 0;">
             <h3 style="
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <img src="{{ card.profileImage }}" alt="{{ card.name }}" />
+        <img src="{{ card.profileImage }}" />
         <div class="rating-container">
           <div class="stars">
             <ng-container *ngFor="let star of getStarsArray(card.averageRating)">
@@ -149,7 +149,7 @@
       <p class="mobile-card-location"><i class="fa fa-map-marker" style="font-size:15px"></i> {{ card.city }}</p>
     </div>
     <div class="mobile-card-image">
-      <img src="{{ card.profileImage }}" alt="{{ card.name }}">
+      <img src="{{ card.profileImage }}">
     </div>
     <div class="rating-container">
       <div class="stars">

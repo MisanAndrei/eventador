@@ -19,7 +19,7 @@
   <h2 class="font-used" style="text-align: center;">Un blog cu și despre evenimente reușite.</h2>
   <div class="mobile-blog-list">
     <div (click)="onCardClick(blog)" *ngFor="let blog of blogs" class="mobile-blog">
-      <img [src]="blog.image" alt="{{ blog.title }}" class="mobile-blog-image" />
+      <img [src]="blog.image" class="mobile-blog-image" />
       <div class="mobile-blog-details">
         <div class="font-used mobile-blog-title">{{ blog.title }}</div>
         <div class="font-used mobile-blog-content">{{ blog.content }}</div>

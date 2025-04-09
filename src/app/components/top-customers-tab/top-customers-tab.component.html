@@ -4,7 +4,7 @@
 
   <div class="card-container">
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
-      <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
+      <img [src]="supplier.profileImage" class="card-image">
       
       <p class="card-category">{{ supplier.name}}</p>
 
@@ -37,7 +37,7 @@
 
   <div class="card-container">
     <div *ngFor="let supplier of cards" (click)="onCardClick(supplier)" class="card">
-      <img [src]="supplier.profileImage" alt="{{ supplier.name }}" class="card-image">
+      <img [src]="supplier.profileImage" class="card-image">
       
       <p class="card-category">{{ supplier.name}}</p>
 
