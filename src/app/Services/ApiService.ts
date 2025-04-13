@@ -88,10 +88,14 @@ export class ApiService {
     );
   }
 
-  rejectProfileChanges(profileId: number): Observable<any> {
+  rejectProfileChanges(profileId: number, reason: string): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.apiUrl}/Profile/RejectProfile`, profileId, {headers}).pipe(
+    const body = {
+      profileId,
+      reason
+    };
+    return this.http.post<any>(`${this.apiUrl}/Profile/RejectProfile`, body, {headers}).pipe(
       tap(x => {
         console.log(x);
       })

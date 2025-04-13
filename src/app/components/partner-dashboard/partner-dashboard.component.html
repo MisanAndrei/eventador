@@ -15,7 +15,7 @@
         <span class="card-text">Servicii oferite</span>
         <span class="card-text">{{ profilesNumber }}</span>
       </div>
-      <div class="card">
+      <div *ngIf="showMoney" class="card">
         <span class="card-text">Cheltuieli furnizori: {{suppliersCosts}} EUR</span>
         <span class="card-text">Profit afiliat: {{affiliateRevenue}} EUR</span>
       </div>
@@ -78,7 +78,7 @@
         <span class="mobile-card-text">Servicii oferite</span>
         <span class="mobile-card-text">{{ profilesNumber }}</span>
       </div>
-      <div class="mobile-card">
+      <div *ngIf="showMoney" class="mobile-card">
         <span class="mobile-card-text">Cheltuieli furnizori: {{suppliersCosts}} EUR</span>
         <span class="mobile-card-text">Profit afiliat: {{affiliateRevenue}} EUR</span>
       </div>

@@ -74,8 +74,13 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  rejectChanges(profile: AdminDashboardProfilesChanged){
-    this.apiService.rejectProfileChanges(profile.id).subscribe({
+  rejectChanges(profile: AdminDashboardProfilesChanged) {
+    const reason = prompt('Motivul respingerii profilului:');
+    if (!reason?.trim()) {
+      return; // User cancelled or left it empty
+    }
+  
+    this.apiService.rejectProfileChanges(profile.id, reason).subscribe({
       next: () => {
         this.openSuccessDialog(false);
         this.fetchData();

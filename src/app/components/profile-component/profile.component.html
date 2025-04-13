@@ -11,13 +11,11 @@
     <!-- Affiliate (userRole == 3) -->
     <div *ngIf="userRole == 3">
       <strong>Link de înscriere:</strong> {{ signUpLink }}
-      <button (click)="copyToClipboard(signUpLink)">Copiază link</button>
+      <button mat-raised-button class="action-buttons" (click)="copyToClipboard(signUpLink)">Copiază link</button>
     </div>
 
     <!-- Buttons for desktop -->
-    <button mat-raised-button class="action-buttons" (click)="deleteAccount()" *ngIf="!deleteAccountVisible">
-      <b>Șterge Cont</b>
-    </button>
+
   </div>
 
   <!-- ✅ Show delete component first when clicked -->
@@ -26,6 +24,9 @@
   <!-- Child components always visible -->
   <app-change-password></app-change-password>
   <app-edit-personal-data></app-edit-personal-data>
+  <button mat-raised-button class="action-buttons" (click)="deleteAccount()" *ngIf="!deleteAccountVisible">
+    <b>Șterge Cont</b>
+  </button>
 </div>
 
 <!-- Mobile Profile -->
@@ -45,14 +46,12 @@
     <!-- Affiliate (userRole == 3) -->
     <div *ngIf="userRole == 3" class="mobile-info">
       <strong>Link de înscriere:</strong> {{ signUpLink }}
-      <button (click)="copyToClipboard(signUpLink)">Salvează</button>
+      <button mat-raised-button class="mobile-delete-button" (click)="copyToClipboard(signUpLink)">Copiază link</button>
     </div>
   </div>
 
   <!-- Delete Account Button -->
-  <button mat-raised-button class="mobile-delete-button" (click)="deleteAccount()" *ngIf="!deleteAccountVisible">
-    Șterge Cont
-  </button>
+
 
   <!-- Show delete component first when clicked -->
   <app-delete-account *ngIf="deleteAccountVisible"></app-delete-account>
@@ -61,7 +60,12 @@
 
     <app-edit-personal-data></app-edit-personal-data>
   <app-change-password></app-change-password>
+  <button mat-raised-button class="mobile-delete-button" (click)="deleteAccount()" *ngIf="!deleteAccountVisible">
+    Șterge Cont
+  </button>
 </div>
+
+
 
 <!-- Always visible -->
 <div *ngIf="personalProfiles" class="centered-profile-container">

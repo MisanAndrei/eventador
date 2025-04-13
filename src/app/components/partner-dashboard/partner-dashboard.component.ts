@@ -40,6 +40,8 @@ export class PartnerDashboardComponent implements OnInit, OnDestroy {
   partnerName = '';
   suppliersCosts = 0;
   affiliateRevenue = 0;
+  eventadorAffiliateId = 203;
+  showMoney: boolean = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -50,6 +52,9 @@ export class PartnerDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const user = this.authService.getLoggedUser();
+    if (user.id == this.eventadorAffiliateId) {
+      this.showMoney = true;
+    }
     this.nameinitials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`;
     this.partnerName = `${user.firstName} ${user.lastName}`;
 
