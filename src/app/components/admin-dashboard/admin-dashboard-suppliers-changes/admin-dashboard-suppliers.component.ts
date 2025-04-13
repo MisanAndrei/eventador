@@ -26,6 +26,10 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     displayedColumnsProfilesChanged: string[] = ['name', 'category', 'actions'];
     searchControl = new FormControl('');
     changesProfileId?: number;
+    rejectInput: string = '';
+    showRejectSection: boolean = false;
+    rejectProfileId?: number; // <--- separate from changesProfileId
+
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -74,25 +78,33 @@ export class AdminDashboardSuppliersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  rejectChanges(profile: AdminDashboardProfilesChanged) {
-    const reason = prompt('Motivul respingerii profilului:');
-    if (!reason?.trim()) {
-      return; // User cancelled or left it empty
-    }
+  rejectChanges() {
+    const reason = this.rejectInput.trim();
+    if (!this.rejectProfileId || !reason) return;
   
-    this.apiService.rejectProfileChanges(profile.id, reason).subscribe({
+    this.apiService.rejectProfileChanges(this.rejectProfileId, reason).subscribe({
       next: () => {
         this.openSuccessDialog(false);
+        this.rejectInput = '';
+        this.showRejectSection = false;
+        this.rejectProfileId = undefined;
         this.fetchData();
       },
-      error: (error) => {
+      error: () => {
         this.openFailureDialog();
       }
     });
   }
+  
 
   showChanges(profile: AdminDashboardProfilesChanged){
     this.changesProfileId = profile.id;
+  }
+
+  startReject(profile: AdminDashboardProfilesChanged) {
+    this.rejectProfileId = profile.id;
+    this.rejectInput = '';
+    this.showRejectSection = true;
   }
 
   openSuccessDialog(accept: boolean): void {
