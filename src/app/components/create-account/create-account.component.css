@@ -60,9 +60,8 @@
   
   /* Card Icon */
   .card-icon {
-    font-size: 50px; /* Increase icon size */
+    font-size: 40px; /* Increase icon size */
   color: #FF63A4;
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

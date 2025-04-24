@@ -12,6 +12,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ImageSliderComponent implements OnInit, AfterViewInit {
   isMobile: Observable<boolean>;
+  useImages: boolean = false;
   constructor(private breakpointObserver: BreakpointObserver, private el: ElementRef) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
