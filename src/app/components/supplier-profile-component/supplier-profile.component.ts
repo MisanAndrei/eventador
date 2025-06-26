@@ -176,7 +176,7 @@ import { Title } from '@angular/platform-browser';
             this.numberProfileId = Number(this.profileId);
             this.reviews = response.reviews;
             this.areasOfInterest = response.areaOfInterestNames;
-            this.images = response.images.map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
+            this.images = response.images.filter(x => x.isProfileImage == false).map(x => new ImageItem({ src: x.imageUrl, thumb: x.imageUrl }));
             this.supplierCategories = response.categories;
 
             const galleryRef = this.gallery.ref('lightboxGallery');
