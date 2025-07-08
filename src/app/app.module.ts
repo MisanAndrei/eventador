@@ -100,6 +100,7 @@ import { LegalCookiesPoliticsComponent } from './components/legal-components/leg
 import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
 import { AdminDashboardTopProvidersComponent } from './components/admin-dashboard/admin-dashboard-top-providers/admin-dashboard-top-providers.component';
 import { ProfileResolver } from './resolvers/profile.resolver';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -164,6 +165,7 @@ import { ProfileResolver } from './resolvers/profile.resolver';
     AdminDashboardTopProvidersComponent
   ],
   imports: [
+    QRCodeModule,
     AppRoutingModule,
     MatButtonModule,
     MatMenuModule,

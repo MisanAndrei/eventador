@@ -61,6 +61,40 @@
         </div>
       </div>
 
+      <!-- QR generator (desktop) -->
+<!-- QR generator (desktop) -->
+<div class="section-container" *ngIf="isCurrentProfileLogged && !changesProfileId">
+  <div class="qr-button-wrapper">
+    <button class="center-button" (click)="generateQR()">Generează QR-code</button>
+  </div>
+
+  <section *ngIf="qrData" class="qr-wrapper" #qrCanvas>
+    <qrcode
+      [qrdata]="qrData"
+      [elementType]="'canvas'"
+      [width]="256"
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+    <div class="qr-profile-name">{{ profileName }}</div>
+
+    <!-- Powered-by footer -->
+    <div class="qr-footer">
+      <span class="powered-by">Powered&nbsp;by</span>
+      <img class="qr-logo"
+           src="assets/imagesandvideos/pinklogo.png"
+           alt="Eventador logo" />
+    </div>
+
+    <div class="qr-actions">
+      <button class="center-button" (click)="downloadQR()">Descarcă PNG</button>
+      <button class="center-button" (click)="printQR()">Printează</button>
+    </div>
+  </section>
+</div>
+
+
+
       <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
           (click)="showRatingInput()">Ofera rating</button>
 
@@ -170,6 +204,38 @@
       <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="mobile-social-fa fa fa-globe"></a>
       <a *ngIf="youtubeUrl" href="{{ youtubeUrl }}" target="_blank" class="mobile-social-fa fa fa-youtube-play"></a>
     </div>
+
+   <!-- QR generator (mobile) -->
+<div class="section-description" *ngIf="isCurrentProfileLogged && !changesProfileId">
+  <div class="qr-button-wrapper">
+    <button class="center-button" (click)="generateQR()">Generează QR-code</button>
+  </div>
+
+  <section *ngIf="qrData" class="qr-wrapper" #qrCanvas>
+    <qrcode
+      [qrdata]="qrData"
+      [elementType]="'canvas'"
+      [width]="220"
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+    <div class="qr-profile-name">{{ profileName }}</div>
+
+    <!-- Powered-by footer -->
+    <div class="qr-footer">
+      <span class="powered-by">Powered&nbsp;by</span>
+      <img class="qr-logo"
+           src="assets/imagesandvideos/pinklogo.png"
+           alt="Eventador logo" />
+    </div>
+
+    <div class="qr-actions">
+      <button class="center-button" (click)="downloadQR()">Descarcă PNG</button>
+      <button class="center-button" (click)="printQR()">Printează</button>
+    </div>
+  </section>
+</div>
+
 
     <!-- Gallery -->
     <gallery 

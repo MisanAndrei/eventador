@@ -375,6 +375,7 @@
   color: #777;
   font-style: italic;
   margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 /* Stylish Divider */
@@ -478,4 +479,64 @@
   background: linear-gradient(to right, #FF63A4, #FE8962);
   margin: 8px auto 12px;
   border-radius: 2px;
+}
+
+
+/* Centers the Generate-button */
+.qr-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px; /* or even 2px for tighter spacing */
+  margin-top: 10px;
+}
+
+
+.qr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* --- Powered-by footer --- */
+.qr-footer {
+  /*  start under the middle of the QR  */
+  display: flex;
+  justify-content: center; /* center the combo */
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #888;   
+  margin-bottom: 10px;          /* keep it tight – adjust if you need space     */
+}
+
+.qr-logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* optional subtle border around the QR */
+.qr-wrapper canvas {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.qr-profile-name {
+  font-size: 16px;          /* bump as you like */
+  font-weight: 600;
+  text-align: center;
+  margin-top: 6px;
+  color: #222;
 }
