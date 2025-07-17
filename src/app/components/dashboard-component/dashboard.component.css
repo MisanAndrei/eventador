@@ -1,3 +1,33 @@
-body{
-    background-color: red;
-}
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+  }
+  
+  .loading-spinner p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+  }
+  
+  .loading-spinner::before {
+    content: '';
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border-top: 2px solid #FF63A4; /* your accent */
+    border-right: 2px solid transparent;
+    animation: spinner 0.6s linear infinite;
+    margin-right: 10px;
+  }
+  
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

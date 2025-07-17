@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   section3: any;
   section4: any;
   section5!: any;
+  loading = true;
 
   private storageKey = 'landingPageData';
   private storageExpiryKey = 'landingPageExpiry';
@@ -37,11 +38,18 @@ export class DashboardComponent implements OnInit {
       // Load data from local storage
       const cachedData = JSON.parse(localStorage.getItem(this.storageKey)!);
       this.assignData(cachedData);
+      this.loading = false;
     } else {
       // Fetch from API and store in local storage
-      this.apiService.getLandingPage().subscribe(response => {
-        this.assignData(response);
-        this.saveDataToStorage(response);
+      this.apiService.getLandingPage().subscribe({
+        next: (response) => {
+          this.assignData(response);
+          this.saveDataToStorage(response);
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+        }
       });
     }
   }

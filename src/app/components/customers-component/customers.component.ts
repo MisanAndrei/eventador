@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { Group, ProfileCard } from '../../Models/Models';
 import { ApiService } from '../../Services/ApiService';
 import { FavoriteProfilesServiceComponent } from '../../Services/FavoriteProfilesService';
@@ -33,7 +33,13 @@ export class CustomersComponent implements OnInit, OnDestroy {
   currrentUserLoggedIn: boolean = true;
   categoryGroups?: Group[];
   selectedCategoryGroup?: number;
-  stopGettingProfiles: boolean = false;;
+  stopGettingProfiles: boolean = false;
+  dropdownVisible: boolean = false;
+
+
+  filteredResults: { id: number, name: string }[] = [];
+
+  private searchSubject = new Subject<string>();
 
   page: number = 1;
   size: number = 21;
@@ -91,12 +97,34 @@ export class CustomersComponent implements OnInit, OnDestroy {
       this.noFavoritesMessageVisible = true;
     }
   }
+
+  this.searchSubject
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap(term => {
+          if (term.length <= 3) {
+            this.filteredResults = [];
+            return [];
+          }
+          const request = this.getRequestObjectForInput(term)
+          return this.apiService.getProfileCards(request);
+        })
+      )
+      .subscribe((results: any[]) => {
+        this.filteredResults = results.map(item => ({
+          id: item.id,
+          name: item.name
+        }));
+      });
 }
 
   ngOnDestroy(): void {
     if (!this.arraysHaveSameValues(this.currentUserFavoriteProfiles, this.currentUserOldFavoriteProfiles)) {
       this.favoriteProfilesService.updateFavoriteProfiles();
     }
+
+    this.searchSubject.complete();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -118,6 +146,16 @@ export class CustomersComponent implements OnInit, OnDestroy {
       name: this.searchTerm,
       categoryIds: this.selectedCategories,
       areaOfInterest: this.selectedZone
+    };
+  }
+
+  getRequestObjectForInput(searchInput: string): CustomersRequest {
+    return {
+      page: 1,
+      size: 1000,
+      name: searchInput,
+      categoryIds: undefined,
+      areaOfInterest: undefined
     };
   }
 
@@ -308,6 +346,28 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   return stars;
+  }
+
+  onSearchTermChanged(term: string): void {
+    this.searchSubject.next(term);
+  }
+
+  onItemSelected(item: { id: number, name: string }): void {
+    const formattedProfileName = this.formatProfileName(item.name);
+    const url = this.router.serializeUrl(
+    this.router.createUrlTree([`/furnizor`, `${formattedProfileName}-${item.id}`]));
+    window.open(url, '_blank');
+  }
+
+  onInputFocus(): void {
+    this.dropdownVisible = true;
+  }
+  
+  onInputBlur(): void {
+    // Delay hiding to allow click on dropdown item
+    setTimeout(() => {
+      this.dropdownVisible = false;
+    }, 200);
   }
   
 }

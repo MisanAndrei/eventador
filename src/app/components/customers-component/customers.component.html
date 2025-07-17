@@ -13,9 +13,20 @@
     
     <form class="filter-controls" (ngSubmit)="applyFilters()" #filterForm="ngForm">
       
-      <mat-form-field class="custom-input">
-        <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm">
-      </mat-form-field>
+      <div class="autocomplete-wrapper">
+        <mat-form-field class="custom-input">
+          <input matInput placeholder="Caută furnizor" [(ngModel)]="searchTerm" name="searchTerm" (ngModelChange)="onSearchTermChanged($event)" (blur)="onInputBlur()" (focus)="onInputFocus()">
+        </mat-form-field>
+      
+        <div *ngIf="dropdownVisible && filteredResults.length > 0" class="autocomplete-dropdown">
+          <div 
+            *ngFor="let item of filteredResults" 
+            class="autocomplete-item" 
+            (click)="onItemSelected(item)">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
   
       <mat-form-field class="custom-dropdown">
         <mat-label>Categorii</mat-label>
@@ -43,6 +54,9 @@
       <button class="filter-button" type="submit">Aplică filtre</button>
       <button class="filter-button" type="button" (click)="clearFilters()">Resetare filtre</button>
     </form>
+  </div>
+  <div *ngIf="!loading && filteredProfileCards.length === 0 && !favoriteProfilesPage" class="no-results-message">
+    Nu există furnizori pentru filtrele selectate.
   </div>
   <ul class="card-list">
     <li *ngFor="let card of filteredProfileCards" class="card-item">
@@ -101,9 +115,29 @@
   <h2 *ngIf="!favoriteProfilesPage" class="mobile-filter-heading" (click)="toggleFilter()">Filtrare furnizori <i [ngClass]="showFilter ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></i></h2>
   <div *ngIf="!favoriteProfilesPage" [ngClass]="{'mobile-filter-container': true, 'show-container': showFilter}">
     <div class="mobile-filter-section">
-      <mat-form-field>
-        <input matInput placeholder="Cautare dupa nume" [(ngModel)]="searchTerm" name="searchTerm">
-      </mat-form-field>
+      <div class="autocomplete-wrapper-mobile">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Caută furnizor"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchTermChanged($event)"
+            (blur)="dropdownVisible = false"
+            (focus)="dropdownVisible = true"
+          />
+        </mat-form-field>
+      
+        <div *ngIf="dropdownVisible && filteredResults.length > 0" class="autocomplete-dropdown-mobile">
+          <div
+            *ngFor="let item of filteredResults"
+            class="autocomplete-item-mobile"
+            (mousedown)="onItemSelected(item)"
+          >
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+      
     </div>
 
     <div class="mobile-filter-section">
@@ -138,6 +172,9 @@
       <button class="mobile-filter-button" (click)="clearFilters()">Resetare filtre</button>
       <button class="mobile-filter-button" (click)="applyFilters()">Aplică filtre</button>
     </div>
+  </div>
+  <div *ngIf="!loading && filteredProfileCards.length === 0 && !favoriteProfilesPage" class="no-results-message-mobile">
+    Nu există furnizori pentru filtrele selectate.
   </div>
   <div *ngFor="let card of filteredProfileCards" class="mobile-card" (click)="onCardClick(card)">
     <div class="favorite-icon-mobile" style="z-index: 1000;" (click)="onHeartClick($event, card.id)" [ngClass]="{'favorited': isFavorite(card.id)}">
