@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -21,7 +21,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
@@ -31,9 +31,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
-import { NgApexchartsModule } from 'ng-apexcharts'; 
-import { NgxEditorModule } from 'ngx-editor';
-import { MatIcon } from '@angular/material/icon';
 
 //Components
 import { ImageSliderComponent } from './components/image-slider-component/image-slider.component';
@@ -83,7 +80,6 @@ import { RecoverPasswordComponent } from './components/recover-password-componen
 import { AdminDashboardMainCategoriesComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-main-categories.component';
 import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
 import { DialogComponent } from './components/dialogs/dialog-component/dialog.component';
-import { QuillModule } from 'ngx-quill';
 import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partner-upsert/admin-dashboard-partner-upsert.component';
 import { LegalAnpcComponent } from './components/legal-components/legal-anpc-component/legal-anpc.component';
 import { LegalCookiesComponent } from './components/legal-components/legal-cookies-component/legal-cookies.component';
@@ -165,46 +161,42 @@ import { QRCodeModule } from 'angularx-qrcode';
     AdminDashboardTopProvidersComponent
   ],
   imports: [
-    QRCodeModule,
-    AppRoutingModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatCardModule,
-    NgIf,
-    FormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    AlertModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    CarouselModule,
-    JwtModule,
-    HttpClientModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    ReactiveFormsModule,
-    MatChipsModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatTabsModule,
-    SlickCarouselModule,
-    HammerModule,
-    GalleryModule,
-    LightboxModule,
-    NgApexchartsModule,
-    MatSnackBarModule,
-    MatCheckbox,
-    MatIcon,
-    NgxEditorModule,
-    QuillModule.forRoot({
-      customOptions: [{
-        import: 'formats/font',
-        whitelist: ['mirza', 'roboto', 'aref', 'serif', 'sansserif', 'monospace']
-      }]
-})
-  ],
+  BrowserModule,
+  BrowserAnimationsModule,
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  HttpClientModule,
+  AppRoutingModule,
+  RouterModule,
+
+  // Angular Material
+  MatButtonModule,
+  MatMenuModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatChipsModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatTabsModule,
+  MatSnackBarModule,
+  MatCheckboxModule,
+  // Third-party modules
+  QRCodeModule,
+  AlertModule,
+  CarouselModule,
+  JwtModule,
+  SlickCarouselModule,
+  HammerModule,
+  GalleryModule,
+  LightboxModule
+]
+,
   providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy  }, ProfileResolver, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

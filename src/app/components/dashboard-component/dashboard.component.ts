@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { FavoriteProfilesServiceComponent } from '../../Services/FavoriteProfilesService';
 import { ToastService } from '../../Services/ToastService';
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   private storageKey = 'landingPageData';
   private storageExpiryKey = 'landingPageExpiry';
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent, private toastService: ToastService) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent, private toastService: ToastService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

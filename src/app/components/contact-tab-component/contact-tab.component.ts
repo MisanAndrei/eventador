@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import {  Component, Inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ContactTabComponent implements OnInit {
   isMobile: Observable<boolean>;
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

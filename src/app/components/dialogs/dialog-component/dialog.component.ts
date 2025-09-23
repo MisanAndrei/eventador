@@ -13,7 +13,7 @@ export class DialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { message: string, isSuccess: boolean },
-    public dialogRef: MatDialogRef<DialogComponent>
+    @Inject(MatDialogRef) public dialogRef: MatDialogRef<DialogComponent>
   ) {}
 
   ngOnInit(): void {

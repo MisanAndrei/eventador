@@ -1,4 +1,4 @@
-import {  ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {  ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { Blog } from 'src/app/Models/Models';
@@ -14,7 +14,7 @@ export class BlogsTabComponent implements OnInit {
   @Input() blogs?: Blog[];
   
   isMobile: Observable<boolean>;
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

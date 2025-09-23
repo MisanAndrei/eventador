@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import {  Component, Inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService';
@@ -15,7 +15,7 @@ export class BlogsComponent implements OnInit {
   allBlogs?: Blog[];
   blogs?: MainBlog[];
   
-  constructor(private breakpointObserver: BreakpointObserver, private ApiService: ApiService, private router: Router) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private ApiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

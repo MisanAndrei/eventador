@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable, first, map } from 'rxjs';
 import { EditUserRequest } from 'src/app/Models/Models'; // Make sure to import the appropriate model
 import { ApiService } from 'src/app/Services/ApiService';
@@ -22,7 +22,7 @@ export class EditPersonalDataComponent implements OnInit {
   dataChangedSuccessfully: boolean = false;
   
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

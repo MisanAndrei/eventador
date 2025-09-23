@@ -1,4 +1,4 @@
-import {  NgModule, Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import {  NgModule, Component, OnInit, ViewChild, AfterViewInit, ElementRef, Inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 
@@ -13,7 +13,7 @@ import { Observable, map } from 'rxjs';
 export class ImageSliderComponent implements OnInit, AfterViewInit {
   isMobile: Observable<boolean>;
   useImages: boolean = false;
-  constructor(private breakpointObserver: BreakpointObserver, private el: ElementRef) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private el: ElementRef) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

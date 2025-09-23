@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { Category, City, County, CreateProfile, CreateUser } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/Services/ApiService';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-profile',
@@ -61,7 +62,7 @@ export class AddProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private dialog: Dialog, private router: Router) {
+      constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, @Inject(Dialog) public dialog: Dialog, private router: Router) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)

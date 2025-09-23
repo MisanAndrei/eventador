@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Category, City, County, CreateUser } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -178,7 +178,7 @@ export class CreateProfileComponent implements OnInit {
 }
 
     isMobile!: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private router: Router, private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
+      constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
 
       }
   

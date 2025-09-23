@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Section } from 'src/app/Models/Models';
 
@@ -11,7 +11,7 @@ import { Section } from 'src/app/Models/Models';
 export class AboutUsTabComponent {
   @Input() section?: Section;
   isMobile: Observable<boolean>;
-  constructor(private breakpointObserver: BreakpointObserver){
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver){
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Category, MenuLinks } from 'src/app/Models/Models';
 import { ApiService } from 'src/app/Services/ApiService';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -18,7 +18,7 @@ export class SideMenuComponent implements OnInit {
   customersLink: MenuLinks = {link: '/furnizori', description: 'Toti furnizorii'};
 
   isMobile: Observable<boolean>;
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

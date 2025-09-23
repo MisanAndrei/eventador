@@ -9,6 +9,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../dialogs/delete-dialog-component/delete-dialog.component';
 import { Router } from '@angular/router';
 import { UserRole } from '../../Utilities/enums/Enums';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -34,7 +36,7 @@ export class ProfileComponent implements OnInit {
   personalProfilesVisible: boolean = true;
   signUpLink: string = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private dialog: MatDialog, private apiService: ApiService, private router: Router) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -64,7 +66,9 @@ export class ProfileComponent implements OnInit {
     }
 
     if (this.userRole == UserRole.partner) {
-      this.signUpLink = `${window.location.origin}/Inscriere/furnizor/${user.referralCode}`;
+      if (isPlatformBrowser(this.platformId)) {
+        this.signUpLink = `${window.location.origin}/Inscriere/furnizor/${user.referralCode}`;
+      }
     }
    }
 

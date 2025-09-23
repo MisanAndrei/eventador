@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from '../../Services/ApiService';
@@ -21,7 +21,7 @@ export class LoginComponent {
   showPassword: boolean = false;
   
 
-  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
+  constructor(private authService: AuthService,@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

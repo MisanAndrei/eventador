@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions } from '@angular/material/dialog';
 import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
 import { UsedImage, Category, City, County, CreateUser, EditProfile, EditUser, Image } from '../../../Models/Models';
 import { ApiService } from '../../../Services/ApiService';
@@ -81,7 +81,7 @@ export class EditProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
+      constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, @Inject(MatDialog) private dialog: MatDialog) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -89,7 +89,7 @@ export class EditProfileComponent implements OnInit {
       }
   
     ngOnInit(): void {
-      this.route.params.subscribe(params => {
+      this.route.params.subscribe((params: { [x: string]: string | number; }) => {
         // Extract profileId from route parameters
         this.currentProfileId = +params['id']; // Assuming 'id' is the parameter name in the route
         // You may need to use a different parameter name based on your route configuration

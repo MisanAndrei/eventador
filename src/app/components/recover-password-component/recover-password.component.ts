@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ApiService } from 'src/app/Services/ApiService';
 import { AuthService } from 'src/app/Services/AuthService';
 import { map } from 'rxjs';
@@ -18,7 +18,7 @@ export class RecoverPasswordComponent {
   username: string = '';
   errorWhenLogging: boolean = false;
 
-  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router, private dialog: Dialog) {
+  constructor(private authService: AuthService, @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router, @Inject(Dialog) private dialog: Dialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

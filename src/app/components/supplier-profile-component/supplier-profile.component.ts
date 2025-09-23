@@ -10,6 +10,8 @@ import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { Meta } from '@angular/platform-browser';
 import { Title } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 
 @Component({
@@ -67,15 +69,17 @@ import { Title } from '@angular/platform-browser';
     qr!: ElementRef<HTMLDivElement>;
 
 
-    constructor(private ref: ChangeDetectorRef, 
+    constructor(
+      @Inject(PLATFORM_ID) private platformId: Object,
+      private ref: ChangeDetectorRef, 
       private meta: Meta,
       private title: Title,
-      private breakpointObserver: BreakpointObserver, 
+      @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
       private router: Router, 
       private apiService: ApiService, 
-      private gallery: Gallery,
-      private lightbox: Lightbox,
+      @Inject(Gallery) private gallery: Gallery,
+      @Inject(Lightbox) private lightbox: Lightbox,
       private authService: AuthService){
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -109,7 +113,7 @@ import { Title } from '@angular/platform-browser';
         this.updateMetaTags();
       });
 
-      this.route.params.subscribe(params => {
+      this.route.params.subscribe((params: { [x: string]: string; }) => {
         const profileInfo: string = params['profileId'];
       
         const match = profileInfo.match(/^(.*)-(\d+)$/);
@@ -292,6 +296,9 @@ import { Title } from '@angular/platform-browser';
 
     /** Build the absolute profile URL and reveal the QR */
 generateQR(): void {
+   if (!isPlatformBrowser(this.platformId)) {
+      return; // skip if running on server
+    }
   this.qrData = window.location.origin + this.router.url;
 }
 
@@ -307,6 +314,9 @@ downloadQR(): void {
 
 /** Print QR + footer in a clean popup */
 printQR(): void {
+   if (!isPlatformBrowser(this.platformId)) {
+      return; // skip if running on server
+    }
   this.renderQrWithFooter((canvas) => {
     const imgUrl = canvas.toDataURL('image/png');
 

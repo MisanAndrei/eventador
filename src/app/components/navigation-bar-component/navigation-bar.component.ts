@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
@@ -58,7 +58,7 @@ export class NavigationBarComponent implements OnInit {
 
 
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router, private apiService: ApiService, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

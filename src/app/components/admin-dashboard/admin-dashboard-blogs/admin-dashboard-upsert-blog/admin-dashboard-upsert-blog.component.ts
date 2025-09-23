@@ -1,11 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/Services/ApiService';
 import { UpsertBlogRequest } from 'src/app/Requests/Requests';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialogs/dialog-component/dialog.component';
 
-import { Editor } from 'ngx-editor';
 import { Blog } from 'src/app/Models/Models';
 
 @Component({
@@ -18,31 +17,15 @@ export class AdminDashboardBlogUpsertComponent implements OnInit, OnDestroy {
   blogForm!: FormGroup;
   isEditing = false;
   editorContent = ''; // Content for Quill Editor
-  editor!: Editor;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private dialog: MatDialog) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, @Inject(MatDialog) private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    // ✅ Initialize form
-    this.blogForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      image: [''],
-      minutesToRead: [0, Validators.min(0)],
-    });
-
-    // ✅ Initialize Quill Editor
-    this.editor = new Editor();
-
-    // ✅ If blogId exists, load blog for editing
-    if (this.blogId) {
-      this.isEditing = true;
-      this.loadBlogForEditing();
-    }
+  
   }
 
   ngOnDestroy(): void {
-    this.editor.destroy();
+   
   }
 
   // ✅ Load existing blog data into form & editor

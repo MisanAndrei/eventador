@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { ProfileCard } from 'src/app/Models/Models';
@@ -20,7 +20,7 @@ export class PersonalProfilesComponent implements OnInit {
   profileCards: ProfileCard[] = [];
     isMobile: Observable<boolean>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private apiService: ApiService, private router: Router, private dialog: MatDialog) {
+  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private apiService: ApiService, private router: Router, @Inject(MatDialog) private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

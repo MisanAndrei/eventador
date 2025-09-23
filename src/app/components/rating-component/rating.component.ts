@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Category, Review, ReviewMapped, SendResponse } from '../../Models/Models';
 import { ApiService } from '../../Services/ApiService';
@@ -22,7 +22,7 @@ export class RatingComponent implements OnInit {
 
 
     isMobile: Observable<boolean>;
-    constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
           map(result => result.matches)

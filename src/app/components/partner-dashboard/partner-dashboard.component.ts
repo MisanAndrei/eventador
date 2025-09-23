@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Chart } from 'chart.js/auto';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 import {
   PartnerSupplierUser,
@@ -44,7 +46,8 @@ export class PartnerDashboardComponent implements OnInit, OnDestroy {
   showMoney: boolean = false;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router
@@ -181,7 +184,9 @@ export class PartnerDashboardComponent implements OnInit, OnDestroy {
   goToProfile(profile: PartnerSupplierUserProfile): void {
     const formattedProfileName = this.formatProfileName(profile.name);
     const url = `/furnizor/${formattedProfileName}-${profile.id}`;
-    window.open(url, '_blank');
+     if (!isPlatformBrowser(this.platformId)) {
+      window.open(url, '_blank');
+     }
   }
 
   formatProfileName(profileName: string): string {

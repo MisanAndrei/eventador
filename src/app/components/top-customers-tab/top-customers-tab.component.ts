@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, map } from "rxjs";
 import { ProfileCard, Section } from "../../Models/Models";
@@ -17,7 +17,7 @@ import { ProfileCard, Section } from "../../Models/Models";
     @Input() section?: Section;
 
     isMobile: Observable<boolean>;
-    constructor(private breakpointObserver: BreakpointObserver, private router: Router){
+    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router){
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
