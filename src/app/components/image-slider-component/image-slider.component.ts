@@ -13,7 +13,7 @@ import { Observable, map } from 'rxjs';
 export class ImageSliderComponent implements OnInit, AfterViewInit {
   isMobile: Observable<boolean>;
   useImages: boolean = false;
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private el: ElementRef) {
+  constructor(private breakpointObserver: BreakpointObserver, private el: ElementRef) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)
@@ -29,20 +29,12 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  sliderImages: string[] = [
-    'assets/imagesandvideos/slider1.jpg',
-    'assets/imagesandvideos/slider2.jpg',
-    'assets/imagesandvideos/slider3.jpg',
-    'assets/imagesandvideos/slider4.jpg',
-    'assets/imagesandvideos/slider5.jpg'
-  ];
   
-  currentImageIndex = 0;
+  
+
   
   ngOnInit(): void {
-    setInterval(() => {
-      this.currentImageIndex = (this.currentImageIndex + 1) % this.sliderImages.length;
-    }, 5000); // Change image every 3 seconds
+    
   }
 }
 
