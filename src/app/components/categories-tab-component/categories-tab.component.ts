@@ -12,7 +12,7 @@ export class CategoriesTabComponent implements OnInit {
   @Input() categories?: Group[];
     
   isMobile: Observable<boolean>;
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

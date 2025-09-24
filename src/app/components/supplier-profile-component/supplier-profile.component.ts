@@ -74,7 +74,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
       private ref: ChangeDetectorRef, 
       private meta: Meta,
       private title: Title,
-      @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, 
+      private breakpointObserver: BreakpointObserver, 
       private route: ActivatedRoute, 
       private router: Router, 
       private apiService: ApiService, 

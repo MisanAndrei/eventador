@@ -16,7 +16,7 @@ import { ProfileCard, Section } from "../../Models/Models";
     @Input() section?: Section;
 
     isMobile: Observable<boolean>;
-    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router){
+    constructor(private breakpointObserver: BreakpointObserver, private router: Router){
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)

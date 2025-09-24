@@ -81,7 +81,7 @@ export class EditProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, @Inject(MatDialog) private dialog: MatDialog) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, @Inject(MatDialog) private dialog: MatDialog) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)

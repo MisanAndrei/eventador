@@ -1,4 +1,4 @@
-import {  NgModule, Component, OnInit, ViewChild, AfterViewInit, ElementRef, Inject } from '@angular/core';
+import {  NgModule, Component, OnInit, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
 

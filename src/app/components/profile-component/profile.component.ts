@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   personalProfilesVisible: boolean = true;
   signUpLink: string = '';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private router: Router) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private breakpointObserver: BreakpointObserver, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

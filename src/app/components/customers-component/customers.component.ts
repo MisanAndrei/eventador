@@ -57,7 +57,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private favoriteProfilesService: FavoriteProfilesServiceComponent,
-    @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver
   ) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(map(result => result.matches));

@@ -18,7 +18,7 @@ export class RecoverPasswordComponent {
   username: string = '';
   errorWhenLogging: boolean = false;
 
-  constructor(private authService: AuthService, @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router, @Inject(Dialog) private dialog: Dialog) {
+  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router, @Inject(Dialog) private dialog: Dialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

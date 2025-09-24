@@ -21,7 +21,7 @@ export class LoginComponent {
   showPassword: boolean = false;
   
 
-  constructor(private authService: AuthService,@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
+  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver, private apiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

@@ -14,7 +14,7 @@ export class BlogsTabComponent implements OnInit {
   @Input() blogs?: Blog[];
   
   isMobile: Observable<boolean>;
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

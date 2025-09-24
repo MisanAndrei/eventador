@@ -178,7 +178,7 @@ export class CreateProfileComponent implements OnInit {
 }
 
     isMobile!: Observable<boolean>;
-      constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private router: Router, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
+      constructor(private breakpointObserver: BreakpointObserver, private router: Router, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
 
       }
   

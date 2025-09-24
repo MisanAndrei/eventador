@@ -17,7 +17,7 @@ export class BlogComponent implements OnInit {
 
   content!: string;
 
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
   this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
     map(result => result.matches)

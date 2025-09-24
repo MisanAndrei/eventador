@@ -47,7 +47,7 @@ export class PartnerDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver,
+    private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router

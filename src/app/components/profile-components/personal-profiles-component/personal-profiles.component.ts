@@ -20,7 +20,7 @@ export class PersonalProfilesComponent implements OnInit {
   profileCards: ProfileCard[] = [];
     isMobile: Observable<boolean>;
 
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private apiService: ApiService, private router: Router, @Inject(MatDialog) private dialog: MatDialog) {
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private apiService: ApiService, private router: Router, @Inject(MatDialog) private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

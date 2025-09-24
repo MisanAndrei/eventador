@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ContactTabComponent implements OnInit {
   isMobile: Observable<boolean>;
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

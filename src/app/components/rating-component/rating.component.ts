@@ -22,7 +22,7 @@ export class RatingComponent implements OnInit {
 
 
     isMobile: Observable<boolean>;
-    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
+    constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
       this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
           map(result => result.matches)

@@ -15,7 +15,7 @@ export class BlogsComponent implements OnInit {
   allBlogs?: Blog[];
   blogs?: MainBlog[];
   
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private ApiService: ApiService, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private ApiService: ApiService, private router: Router) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   private storageKey = 'landingPageData';
   private storageExpiryKey = 'landingPageExpiry';
 
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent, private toastService: ToastService) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private favoriteProfilesService: FavoriteProfilesServiceComponent, private toastService: ToastService) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

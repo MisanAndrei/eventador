@@ -14,7 +14,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 export class AffiliateTabComponent {
   @Input() section?: Section;
   isMobile: Observable<boolean>;
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, @Inject(PLATFORM_ID) private platformId: Object){
+  constructor(private breakpointObserver: BreakpointObserver, @Inject(PLATFORM_ID) private platformId: Object){
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

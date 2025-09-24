@@ -22,7 +22,7 @@ export class EditPersonalDataComponent implements OnInit {
   dataChangedSuccessfully: boolean = false;
   
 
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

@@ -13,7 +13,7 @@ export class AboutCustomersTabComponent implements OnInit {
   isMobile: Observable<boolean>;
   userLoggedIn: boolean = true;
   @Input() section?: Section;
-  constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private authService: AuthService){
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService){
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

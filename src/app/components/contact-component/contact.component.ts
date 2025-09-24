@@ -14,7 +14,7 @@ export class ContactComponent implements OnInit {
     isMobile: Observable<boolean>;
     userLoggedIn: boolean = true;
 
-    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver, private authService: AuthService, @Inject(PLATFORM_ID) private platformId: Object) {
+    constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, @Inject(PLATFORM_ID) private platformId: Object) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
             .pipe(map(result => result.matches));
     }

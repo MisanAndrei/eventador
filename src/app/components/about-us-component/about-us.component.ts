@@ -16,7 +16,7 @@ sections: any[] = [{id: 1, title: 'Salut si bine ai venit pe eventador.ro!', tex
                     {id: 4, title: 'Tu Alegi', text: 'Alege singur tot ceea ce consideri că este potrivit pentru tine și invitații tăi. Acum ai ocazia să faci acest lucru!'},
                     {id: 5, title: 'Acces Gratuit', text: 'Accesul este gratuit și așa va rămâne. În cel mai scurt timp, vei avea și posibilitatea să descarci și aplicația EVENTADOR disponibilă pentru IOS/Android.'}];
 
-    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver){
+    constructor(private breakpointObserver: BreakpointObserver){
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
