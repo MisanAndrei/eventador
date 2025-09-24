@@ -10,8 +10,7 @@ import { UserRole } from '../../Utilities/enums/Enums';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { Meta } from '@angular/platform-browser';
 import { Title } from '@angular/platform-browser';
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
+import { Inject } from '@angular/core';
 
 
 @Component({
@@ -70,7 +69,6 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 
 
     constructor(
-      @Inject(PLATFORM_ID) private platformId: Object,
       private ref: ChangeDetectorRef, 
       private meta: Meta,
       private title: Title,
@@ -296,9 +294,6 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 
     /** Build the absolute profile URL and reveal the QR */
 generateQR(): void {
-   if (!isPlatformBrowser(this.platformId)) {
-      return; // skip if running on server
-    }
   this.qrData = window.location.origin + this.router.url;
 }
 
@@ -314,9 +309,6 @@ downloadQR(): void {
 
 /** Print QR + footer in a clean popup */
 printQR(): void {
-   if (!isPlatformBrowser(this.platformId)) {
-      return; // skip if running on server
-    }
   this.renderQrWithFooter((canvas) => {
     const imgUrl = canvas.toDataURL('image/png');
 

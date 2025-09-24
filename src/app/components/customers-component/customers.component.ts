@@ -8,8 +8,6 @@ import { ApiService } from '../../Services/ApiService';
 import { FavoriteProfilesServiceComponent } from '../../Services/FavoriteProfilesService';
 import { AuthService } from '../../Services/AuthService';
 import { CustomersRequest } from '../../Requests/Requests';
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-customers',
@@ -51,7 +49,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
   urlId?: number;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private apiService: ApiService,
     private route: ActivatedRoute,
     private authService: AuthService,
@@ -132,9 +129,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any): void {
-        if (!isPlatformBrowser(this.platformId)) {
-      return; // skip if running on server
-    }
     const buffer = 100; // Adjust this value as necessary
     const scrollPosition = window.innerHeight + window.scrollY;
     const pageHeight = document.documentElement.scrollHeight; // Use scrollHeight instead of offsetHeight
@@ -269,10 +263,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     const formattedProfileName = this.formatProfileName(profile.name);
     const url = this.router.serializeUrl(
     this.router.createUrlTree([`/furnizor`, `${formattedProfileName}-${profile.id}`]));
-     if (isPlatformBrowser(this.platformId)) {
-      window.open(url, '_blank');
-     }
-
+    window.open(url, '_blank');
   }  
 
   onHeartClick(event: Event, profileId: number): void {
@@ -364,9 +355,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     const formattedProfileName = this.formatProfileName(item.name);
     const url = this.router.serializeUrl(
     this.router.createUrlTree([`/furnizor`, `${formattedProfileName}-${item.id}`]));
-     if (isPlatformBrowser(this.platformId)) {
       window.open(url, '_blank');
-     }
   }
 
   onInputFocus(): void {
