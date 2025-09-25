@@ -1,7 +1,44 @@
+<!-- Desktop Carousel -->
+ <div *ngIf="useImages">
+<div *ngIf="!(isMobile | async)">
+  <div class="carousel-container">
+    <img *ngFor="let img of sliderImages; let i = index"
+         [src]="img"
+         [class.active]="i === currentImageIndex"
+         class="carousel-image"
+         alt="slider image" />
+
+    <div class="carousel-overlay-text">
+      <h2>Cheia evenimentelor reușite.</h2>
+      <h3>Tu ce eveniment pregătești?</h3>
+      <p class="carousel-subtext">Toți furnizorii de care ai nevoie, într-un singur loc.</p>
+    <p class="carousel-subtext-alt">Platforma unde încep evenimentele de neuitat.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Carousel -->
+<div *ngIf="(isMobile | async)" class="mobile">
+  <div class="carousel-container">
+    <img *ngFor="let img of sliderImages; let i = index"
+         [src]="img"
+         [class.active]="i === currentImageIndex"
+         class="carousel-image"
+         alt="slider image" />
+
+    <div class="carousel-overlay-text">
+      <h2>Cheia evenimentelor reușite.</h2>
+      <h3>Tu ce eveniment pregătești?</h3>
+      <p class="carousel-subtext">Toți furnizorii de care ai nevoie, într-un singur loc.</p>
+      <p class="carousel-subtext-alt">Platforma unde încep evenimentele de neuitat.</p>
+    </div>
+  </div>
+</div>
+</div>
 <div *ngIf="!useImages">
   <!-- Desktop -->
   <div *ngIf="!(isMobile | async)" class="video-wrapper">
-    <video #videoPlayer autoplay loop muted playsinline preload="auto" class="video-element">
+    <video autoplay loop [muted]="true" playsinline preload="auto" class="video-element">
       <source src="assets/imagesandvideos/landingvideo.mp4" type="video/mp4">
     </video>
 
@@ -15,7 +52,7 @@
 
   <!-- Mobile -->
   <div *ngIf="(isMobile | async)" class="video-wrapper video-mobile">
-    <video #videoPlayer autoplay loop muted playsinline preload="auto" class="video-element">
+    <video id="myVideo" autoplay loop [muted]="true" playsinline preload="auto" class="video-element">
       <source src="assets/imagesandvideos/landingvideo.mp4" type="video/mp4">
     </video>
 

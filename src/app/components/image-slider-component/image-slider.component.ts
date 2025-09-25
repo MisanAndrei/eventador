@@ -1,6 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import {  NgModule, Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-image-slider',
@@ -10,29 +13,37 @@ import { Observable, map } from 'rxjs';
 export class ImageSliderComponent implements OnInit, AfterViewInit {
   isMobile: Observable<boolean>;
   useImages: boolean = false;
-
-  @ViewChildren('videoPlayer') videoPlayers!: QueryList<ElementRef<HTMLVideoElement>>;
-
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private el: ElementRef) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
-      .pipe(map(result => result.matches));
+      .pipe(
+        map(result => result.matches)
+      );
   }
-
-  ngOnInit(): void {}
-
   ngAfterViewInit(): void {
-    this.playActiveVideo();
-    //this.videoPlayers.changes.subscribe(() => this.playActiveVideo());
+    const videoElement = this.el.nativeElement.querySelector('#myVideo');
+    this.el.nativeElement.querySelector('#myVideo').play();
+    videoElement.play();
+
+    videoElement.addEventListener('play', () => {
+      // Your code to handle the play event goes here
+    });
   }
 
-  private playActiveVideo(): void {
-    const video = this.videoPlayers.first?.nativeElement;
-    if (video) {
-      video.muted = true; // required for autoplay everywhere
-      video.setAttribute('playsinline', 'true'); // iOS Safari fix
-      video.play().catch(err => {
-        console.warn('Autoplay blocked or interrupted:', err);
-      });
-    }
+  sliderImages: string[] = [
+    'assets/imagesandvideos/slider1.jpg',
+    'assets/imagesandvideos/slider2.jpg',
+    'assets/imagesandvideos/slider3.jpg',
+    'assets/imagesandvideos/slider4.jpg',
+    'assets/imagesandvideos/slider5.jpg'
+  ];
+  
+  currentImageIndex = 0;
+  
+  ngOnInit(): void {
+    setInterval(() => {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.sliderImages.length;
+    }, 5000); // Change image every 3 seconds
   }
 }
+
+
