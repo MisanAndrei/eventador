@@ -22,7 +22,7 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.playActiveVideo();
-    this.videoPlayers.changes.subscribe(() => this.playActiveVideo());
+    //this.videoPlayers.changes.subscribe(() => this.playActiveVideo());
   }
 
   private playActiveVideo(): void {
