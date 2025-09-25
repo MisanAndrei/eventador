@@ -15,7 +15,7 @@ export class ProfileAnalyticsComponent implements OnInit {
   selectedUser!: UserAnalytics;
   editUserEmailVisible: boolean = false;
 
-  displayedColumns: string[] = ['id', 'name', 'email', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'updatedAt', 'actions'];
   dataSource = new MatTableDataSource<UserAnalytics>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

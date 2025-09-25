@@ -415,6 +415,7 @@ import { UserRole } from "../Utilities/enums/Enums";
     lastMonth: number;
     lastThreeMonths: number;
     lastSixMonths: number;
+    updatedAt?: Date;
   }
 
   export interface AdminProfileTopProvider {
