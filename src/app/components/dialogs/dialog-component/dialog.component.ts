@@ -26,6 +26,6 @@ export class DialogComponent implements OnInit {
   autoCloseDialog(): void {
     setTimeout(() => {
       this.dialogRef.close();
-    }, 3000); // Close the dialog after 3 seconds (adjust as needed)
+    }, 10000); // Close the dialog after 3 seconds (adjust as needed)
   }
 }

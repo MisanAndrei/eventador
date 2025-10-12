@@ -427,13 +427,27 @@ export class CreateProfileComponent implements OnInit {
     }
 
     openSuccessDialog(): void {
-      this.dialog.open(DialogComponent, {
-        width: '400px',
-        data: {
-          message: 'Profilul a fost adăugat cu succes și a fost trimis spre aprobare, vă puteți autentifica !',
-          isSuccess: true
-        }
-      });
+      if (this.isBusinessAccount){
+        this.dialog.open(DialogComponent, {
+                width: '400px',
+                data: {
+                  message: 'Profilul tău a fost trimis spre aprobare. Te rugăm să verifici căsuța de e-mail și să urmezi linkul de validare pentru a confirma înregistrarea !',
+                  isSuccess: true
+                }
+              });
+      }
+      else
+        {
+        this.dialog.open(DialogComponent, {
+                width: '400px',
+                data: {
+                  message: 'Contul a fost creat cu succes. Te rugăm să verifici căsuța de e-mail și să urmezi linkul de validare pentru a confirma înregistrarea !',
+                  isSuccess: true
+                }
+              });
+      }
+
+      
     }
   
     openFailureDialog(): void {
