@@ -47,7 +47,8 @@
   }
   
   .category-card:hover {
-    transform: scale(1.10); /* Scale up the card on hover */
+    transform: scale(1.05); /* Scale up the card on hover */
+    z-index: 10;
   }
 
   .category-image::before {

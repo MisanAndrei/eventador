@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/eventador",
+            "outputPath": "dist/eventador/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -22,10 +22,10 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/routes.json"
             ],
-            "styles": ["./node_modules/quill/dist/quill.core.css",
-            "./node_modules/quill/dist/quill.snow.css",
+            "styles": [
               "src/custom-theme.scss",
               "src/styles.css"
             ],
@@ -41,8 +41,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "5kb",
-                  "maximumError": "8kb"
+                  "maximumWarning": "78kb",
+                  "maximumError": "10kb"
                 }
               ],
               "outputHashing": "all"
@@ -98,6 +98,60 @@
               "node_modules/slick-carousel/slick/slick.min.js"
             ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/eventador/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "eventador:build:development",
+              "serverTarget": "eventador:server:development"
+            },
+            "production": {
+              "browserTarget": "eventador:build:production",
+              "serverTarget": "eventador:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "eventador:build:production",
+              "serverTarget": "eventador:server:production"
+            },
+            "development": {
+              "browserTarget": "eventador:build:development",
+              "serverTarget": "eventador:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

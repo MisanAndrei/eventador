@@ -1,7 +1,13 @@
-<app-navigation-bar></app-navigation-bar>
-<div class="container">
+<div class="app-wrapper">
+  <app-navigation-bar></app-navigation-bar>
+
+  <div class="container">
     <app-legal-cookies></app-legal-cookies>
+
     <div class="content">
       <router-outlet></router-outlet>
     </div>
+
+    <app-contact-tab></app-contact-tab> <!-- Stays at the bottom -->
   </div>
+</div>

@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map, switchMap } from 'rxjs';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions } from '@angular/material/dialog';
 import { DialogComponent } from '../../dialogs/dialog-component/dialog.component';
 import { UsedImage, Category, City, County, CreateUser, EditProfile, EditUser, Image } from '../../../Models/Models';
 import { ApiService } from '../../../Services/ApiService';
@@ -60,6 +60,8 @@ export class EditProfileComponent implements OnInit {
     selectedProfileImage: File[] = [];
     convertedSelectedImages: string[] = [];
     convertedSelectedProfileImage: string = '';
+    convertedSelectedImagesToShow: string[] = [];
+    convertedSelectedProfileImageToShow: string = '';
     
     imagesToDelete: number[] = [];
 
@@ -79,7 +81,7 @@ export class EditProfileComponent implements OnInit {
     isLegalPerson: boolean = false;
 
     isMobile: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
+      constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, @Inject(MatDialog) private dialog: MatDialog) {
         this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
           .pipe(
             map(result => result.matches)
@@ -87,7 +89,7 @@ export class EditProfileComponent implements OnInit {
       }
   
     ngOnInit(): void {
-      this.route.params.subscribe(params => {
+      this.route.params.subscribe((params: { [x: string]: string | number; }) => {
         // Extract profileId from route parameters
         this.currentProfileId = +params['id']; // Assuming 'id' is the parameter name in the route
         // You may need to use a different parameter name based on your route configuration
@@ -96,7 +98,7 @@ export class EditProfileComponent implements OnInit {
         this.router.navigate(['/acasa']);
       }
 
-        if (!this.authService.isUserLogged()){
+        if (!this.authService.isAuthenticated()){
           this.router.navigate(['/acasa']);
         }
 
@@ -180,13 +182,15 @@ export class EditProfileComponent implements OnInit {
       this.tooManyImages = false;
 
       this.convertedSelectedImages = [];
-    
+      this.convertedSelectedImagesToShow = [];
+
       files.forEach(file => {
         const reader = new FileReader();
     
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedImagesToShow.push(base64Image);
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedImages.push(base64Data);
         };
@@ -208,6 +212,7 @@ export class EditProfileComponent implements OnInit {
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedProfileImageToShow = base64Image;
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedProfileImage = base64Data;
         };
@@ -287,6 +292,18 @@ export class EditProfileComponent implements OnInit {
         this.imagesToDelete = this.imagesToDelete.filter(x => x!== existingImage.imageId);
       }
       this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
+    }
+
+    onDeleteImage(existingImage: any){
+      this.imagesToDelete.push(existingImage.imageId);
+      this.existingImages = this.existingImages.filter(x => x.imageId !== existingImage.imageId);
+      this.maximumNumberAllowed = this.imagesLimit - this.existingImages.filter(x => x.isMaintained == true).length;
+    }
+
+    onDeleteAddedImage(addedImage: any){
+      const base64Data = addedImage.split(',')[1];
+      this.convertedSelectedImagesToShow = this.convertedSelectedImagesToShow.filter(img => img != addedImage);
+      this.convertedSelectedImages = this.convertedSelectedImages.filter(img => img != base64Data);
     }
 
     openSuccessDialog(): void {

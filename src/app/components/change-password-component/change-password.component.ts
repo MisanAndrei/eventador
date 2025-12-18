@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, map } from 'rxjs';
 import { ChangePasswordRequest } from 'src/app/Models/Models';
@@ -22,7 +22,7 @@ export class ChangePasswordComponent {
   passwordChangedSuccesfully: boolean = false;
   
 
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, private dialog: MatDialog) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService, private authService: AuthService, @Inject(MatDialog) private dialog: MatDialog) {
     this.isMobile = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches)

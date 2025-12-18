@@ -86,7 +86,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://eventador.ro/images/slider/3.jpg');
+    background-image: url('/assets/imagesandvideos/slider3.jpg');
     overflow: hidden;
     background-attachment: fixed;
     background-position: center;

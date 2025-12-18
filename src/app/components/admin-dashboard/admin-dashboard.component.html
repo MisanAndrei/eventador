@@ -1,44 +1,49 @@
 <div class="centered-tabs" *ngIf="!(isMobile | async)">
     <mat-tab-group class="scrollable-tabs">
       <!--Tabul de schimbari-->
-    <mat-tab *ngIf="currentUserRole === 1" label="Schimbari furnizori">
-      <app-admin-dashboard-suppliers></app-admin-dashboard-suppliers>
-    </mat-tab>
+      <mat-tab *ngIf="currentUserRole === 1" label="Schimbari furnizori">
+        <app-admin-dashboard-suppliers></app-admin-dashboard-suppliers>
+        
+      </mat-tab>
+  
+      <mat-tab *ngIf="currentUserRole === 1" label="Review">
+        <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
+        
+      </mat-tab>
+  
+      <mat-tab *ngIf="currentUserRole === 1" label="Statistici Profile">
+  
+        <app-profile-analytics></app-profile-analytics>
+      </mat-tab>
+  
       
-    <mat-tab *ngIf="currentUserRole === 1" label="Parteneri">
-    <app-admin-dashboard-partners></app-admin-dashboard-partners>
-      
-    </mat-tab>
-      
-    <mat-tab *ngIf="currentUserRole === 1" label="Pachete">
+      <mat-tab *ngIf="currentUserRole === 1" label="Top Providers">
+        <app-admin-dashboard-top-providers></app-admin-dashboard-top-providers>
+      </mat-tab>
+        
+      <mat-tab *ngIf="currentUserRole === 1" label="Parteneri">
+        <app-admin-dashboard-partners></app-admin-dashboard-partners>
+        
+      </mat-tab>
+        
+      <mat-tab label="Categorii" *ngIf="currentUserRole === 1">
+        <app-admin-dashboard-main-categories></app-admin-dashboard-main-categories>
+      </mat-tab>
+        
+      <mat-tab *ngIf="currentUserRole === 1" label="Servicii">
     
+        <app-admin-dashboard-categories></app-admin-dashboard-categories>
+      </mat-tab>
+  
+      <mat-tab *ngIf="currentUserRole === 1" label="Pachete">
       
-    </mat-tab>
-      
-    <mat-tab *ngIf="currentUserRole === 1" label="Categorii">
-  <app-admin-dashboard-categories></app-admin-dashboard-categories>
-      
-    </mat-tab>
-      
-    <mat-tab label="Grupuri">
-      <app-admin-dashboard-main-categories></app-admin-dashboard-main-categories>
-    </mat-tab>
-
-    <mat-tab label="Bloguri">
-      <app-admin-dashboard-blogs></app-admin-dashboard-blogs>
-      
-    </mat-tab>
-
-    <mat-tab *ngIf="currentUserRole === 1" label="Review">
-
-      <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
-    </mat-tab>
-
-    <mat-tab *ngIf="currentUserRole === 1" label="Profile Analytics">
-
-      <app-profile-analytics></app-profile-analytics>
-    </mat-tab>
-
+        
+      </mat-tab>
+        
+      <mat-tab label="Bloguri">
+        <app-admin-dashboard-blogs></app-admin-dashboard-blogs>
+        
+      </mat-tab>
 
     </mat-tab-group>
   </div>
@@ -50,39 +55,44 @@
       <app-admin-dashboard-suppliers></app-admin-dashboard-suppliers>
       
     </mat-tab>
-      
-    <mat-tab *ngIf="currentUserRole === 1" label="Parteneri">
-      <app-admin-dashboard-partners></app-admin-dashboard-partners>
-      
-    </mat-tab>
-      
-    <mat-tab *ngIf="currentUserRole === 1" label="Pachete">
-    
-      
-    </mat-tab>
-      
-    <mat-tab *ngIf="currentUserRole === 1" label="Categorii">
-  
-      <app-admin-dashboard-categories></app-admin-dashboard-categories>
-    </mat-tab>
-
-    <mat-tab label="Grupuri">
-      <app-admin-dashboard-main-categories></app-admin-dashboard-main-categories>
-    </mat-tab>
-      
-    <mat-tab label="Bloguri">
-      <app-admin-dashboard-blogs></app-admin-dashboard-blogs>
-      
-    </mat-tab>
 
     <mat-tab *ngIf="currentUserRole === 1" label="Review">
       <app-admin-dashboard-reviews></app-admin-dashboard-reviews>
       
     </mat-tab>
 
-    <mat-tab *ngIf="currentUserRole === 1" label="Profile Analytics">
+    <mat-tab *ngIf="currentUserRole === 1" label="Statistici Profile">
 
       <app-profile-analytics></app-profile-analytics>
+    </mat-tab>
+
+    
+    <mat-tab *ngIf="currentUserRole === 1" label="Top Providers">
+      <app-admin-dashboard-top-providers></app-admin-dashboard-top-providers>
+    </mat-tab>
+      
+    <mat-tab *ngIf="currentUserRole === 1" label="Parteneri">
+      <app-admin-dashboard-partners></app-admin-dashboard-partners>
+      
+    </mat-tab>
+      
+    <mat-tab label="Categorii" *ngIf="currentUserRole === 1">
+      <app-admin-dashboard-main-categories></app-admin-dashboard-main-categories>
+    </mat-tab>
+      
+    <mat-tab *ngIf="currentUserRole === 1" label="Servicii">
+  
+      <app-admin-dashboard-categories></app-admin-dashboard-categories>
+    </mat-tab>
+
+    <mat-tab *ngIf="currentUserRole === 1" label="Pachete">
+    
+      
+    </mat-tab>
+      
+    <mat-tab label="Bloguri">
+      <app-admin-dashboard-blogs></app-admin-dashboard-blogs>
+      
     </mat-tab>
 
     </mat-tab-group>

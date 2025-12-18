@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './core/config/app-config.service';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from '@coreui/angular';
 import { CarouselModule } from '@coreui/angular';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -21,7 +23,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
@@ -31,16 +33,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
-import { NgApexchartsModule } from 'ng-apexcharts'; 
-import { NgxEditorModule } from 'ngx-editor';
-import { MatIcon } from '@angular/material/icon';
 
 //Components
 import { ImageSliderComponent } from './components/image-slider-component/image-slider.component';
 import { NavigationBarComponent } from './components/navigation-bar-component/navigation-bar.component';
 import { DashboardComponent } from './components/dashboard-component/dashboard.component';
 import { SupplierProfileComponent } from './components/supplier-profile-component/supplier-profile.component';
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact-component/contact.component';
 import { AboutUsComponent } from './components/about-us-component/about-us.component';
@@ -83,7 +82,6 @@ import { RecoverPasswordComponent } from './components/recover-password-componen
 import { AdminDashboardMainCategoriesComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-main-categories.component';
 import { AdminDashboardUpsertMainCategoryComponent } from './components/admin-dashboard/admin-dashboard-main-categories/admin-dashboard-upsert-main-category/admin-dashboard-upsert-main-category.component.';
 import { DialogComponent } from './components/dialogs/dialog-component/dialog.component';
-import { QuillModule } from 'ngx-quill';
 import { AdminDashboardPartnerUpsertComponent } from './components/admin-dashboard/admin-dashboard-partners/admin-dashboard-partner-upsert/admin-dashboard-partner-upsert.component';
 import { LegalAnpcComponent } from './components/legal-components/legal-anpc-component/legal-anpc.component';
 import { LegalCookiesComponent } from './components/legal-components/legal-cookies-component/legal-cookies.component';
@@ -94,8 +92,17 @@ import { ActivateAccountComponent } from './components/activate-account-componen
 import { AuthInterceptor } from './Services/auth.interceptor';
 import { PopularCustomersTabComponent } from './components/popular-customers-tab/popular-customers-tab.component';
 import { LIGHTBOX_CONFIG, LightboxConfig, LightboxModule } from 'ng-gallery/lightbox';
-import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component.css/edit-user-email.component';
+import { EditUserEmailComponent } from './components/admin-dashboard/edit-user-email.component/edit-user-email.component';
 import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-analytics/profile-analytics.component';
+import { LegalCookiesPoliticsComponent } from './components/legal-components/legal-cookies-politics-component/legal-cookies-politics.component';
+import { LegalConfidentialityComponent } from './components/legal-components/legal-confidentiality-component/legal-confidentiality.component';
+import { AdminDashboardTopProvidersComponent } from './components/admin-dashboard/admin-dashboard-top-providers/admin-dashboard-top-providers.component';
+import { ProfileResolver } from './resolvers/profile.resolver';
+import { QRCodeModule } from 'angularx-qrcode';
+
+export function loadAppConfig(configService: AppConfigService) {
+  return () => configService.load();
+}
 
 @NgModule({
   declarations: [
@@ -154,59 +161,66 @@ import { ProfileAnalyticsComponent } from './components/admin-dashboard/profile-
     CreateAccountComponent,
     ActivateAccountComponent,
     ProfileAnalyticsComponent,
-    EditUserEmailComponent
+    EditUserEmailComponent,
+    LegalCookiesPoliticsComponent,
+    LegalConfidentialityComponent,
+    AdminDashboardTopProvidersComponent
   ],
   imports: [
-    AppRoutingModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatCardModule,
-    NgIf,
-    FormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    AlertModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    CarouselModule,
-    JwtModule,
-    HttpClientModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    ReactiveFormsModule,
-    MatChipsModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatTabsModule,
-    SlickCarouselModule,
-    HammerModule,
-    GalleryModule,
-    LightboxModule,
-    NgApexchartsModule,
-    MatSnackBarModule,
-    MatCheckbox,
-    MatIcon,
-    NgxEditorModule,
-    QuillModule.forRoot({
-      customOptions: [{
-        import: 'formats/font',
-        whitelist: ['mirza', 'roboto', 'aref', 'serif', 'sansserif', 'monospace']
-      }]
-})
-  ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, {
+  BrowserModule,
+  BrowserAnimationsModule,
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  HttpClientModule,
+  AppRoutingModule,
+  RouterModule,
+
+  // Angular Material
+  MatButtonModule,
+  MatMenuModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatChipsModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatTabsModule,
+  MatSnackBarModule,
+  MatCheckboxModule,
+  // Third-party modules
+  QRCodeModule,
+  AlertModule,
+  CarouselModule,
+  JwtModule,
+  SlickCarouselModule,
+  HammerModule,
+  GalleryModule,
+  LightboxModule
+]
+,
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy  }, ProfileResolver, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },{
+  },
+  {
+  provide: APP_INITIALIZER,
+  useFactory: loadAppConfig,
+  deps: [AppConfigService],
+  multi: true
+  },
+  {
     provide: LIGHTBOX_CONFIG,
     useValue: {
       keyboardShortcuts: true,
       exitAnimationTime: 1000
     } as LightboxConfig
-  }],
+  }, provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

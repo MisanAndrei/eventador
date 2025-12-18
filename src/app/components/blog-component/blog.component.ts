@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import {  Component, OnInit } from '@angular/core';
+import {  Component, Inject, OnInit } from '@angular/core';import { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Blog } from 'src/app/Models/Models';
@@ -24,7 +24,7 @@ export class BlogComponent implements OnInit {
   );
 }
   ngOnInit(): void {   
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: Params) => {
       const blogInfo = params['id'];
       const lastDashIndex = blogInfo.lastIndexOf('-');
       this.selectedBlogName = blogInfo.substring(0, lastDashIndex).replace(/-/g, ' ');

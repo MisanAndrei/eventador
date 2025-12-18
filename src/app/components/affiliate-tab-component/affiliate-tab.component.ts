@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Section } from 'src/app/Models/Models';
 
@@ -16,5 +16,11 @@ export class AffiliateTabComponent {
     .pipe(
       map(result => result.matches)
     );
+  }
+  
+  openWhatsApp(): void {
+    const phone = '40740299643'; // no +, no spaces
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent('Salut! Și eu vreau să devin afiliat. 🤝')}`;
+      window.open(url, '_blank');
   }
 }

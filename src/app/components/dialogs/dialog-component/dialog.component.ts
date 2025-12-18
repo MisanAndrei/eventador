@@ -13,7 +13,7 @@ export class DialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { message: string, isSuccess: boolean },
-    public dialogRef: MatDialogRef<DialogComponent>
+    @Inject(MatDialogRef) public dialogRef: MatDialogRef<DialogComponent>
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +26,6 @@ export class DialogComponent implements OnInit {
   autoCloseDialog(): void {
     setTimeout(() => {
       this.dialogRef.close();
-    }, 3000); // Close the dialog after 3 seconds (adjust as needed)
+    }, 10000); // Close the dialog after 3 seconds (adjust as needed)
   }
 }

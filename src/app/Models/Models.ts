@@ -306,10 +306,12 @@ import { UserRole } from "../Utilities/enums/Enums";
     image: string;
   }
 
-  export interface AdminDashboardPartners {
+  export interface AdminDashboardPartner {
     id: number;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    suppliersBrought: number;
   }
 
   export interface SendReview {
@@ -360,7 +362,7 @@ import { UserRole } from "../Utilities/enums/Enums";
   export interface PartnerSupplierUserProfile{
     id: number;
     name: string;
-    category: string;
+    categoryNames: string[];
     createdAt: Date;
     formattedDate: string;
   }
@@ -413,6 +415,13 @@ import { UserRole } from "../Utilities/enums/Enums";
     lastMonth: number;
     lastThreeMonths: number;
     lastSixMonths: number;
+    updatedAt?: Date;
+  }
+
+  export interface AdminProfileTopProvider {
+    id: number;
+    businessName: string;
+    isTopProvider: boolean;
   }
 
 

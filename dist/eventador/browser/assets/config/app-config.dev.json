@@ -1,0 +1,4 @@
+{
+  "apiBaseUrl": "https://eventador-prd.azurewebsitess.net/api",
+  "environment": "develop"
+}

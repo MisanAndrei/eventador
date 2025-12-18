@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Category, City, County, CreateUser } from 'src/app/Models/Models';
 import { UserRole } from 'src/app/Utilities/enums/Enums';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -53,7 +53,9 @@ export class CreateProfileComponent implements OnInit {
     selectedImages: File[] = [];
     selectedProfileImage: File[] = [];
     convertedSelectedImages: string[] = [];
+    convertedSelectedImagesToShow: string[] = [];
     convertedSelectedProfileImage: string = '';
+    convertedSelectedProfileImageToShow: string = '';
     maxAllowedFiles: number = 5;
     partnerCode: string = '';
     referralCodeByUrl: boolean = false;
@@ -151,7 +153,7 @@ export class CreateProfileComponent implements OnInit {
 
   // Reset error message and show checking status
   this.checkingEmail = true;
-  this.emailErrorMessage = 'Verificare email...';
+  this.emailErrorMessage = '';
 
   // Call API to check email uniqueness
   this.apiService.checkEmailUnique(this.email).subscribe({
@@ -161,7 +163,7 @@ export class CreateProfileComponent implements OnInit {
 
       // Update error message based on uniqueness check
       if (isUnique) {
-        this.emailErrorMessage = 'Emailul este disponibil.';
+        this.emailErrorMessage = '';
         this.emailUnique = true;
       } else {
         this.emailErrorMessage = 'Emailul este deja folosit!';
@@ -176,7 +178,7 @@ export class CreateProfileComponent implements OnInit {
 }
 
     isMobile!: Observable<boolean>;
-      constructor(private breakpointObserver: BreakpointObserver, private router: Router, private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
+      constructor(private breakpointObserver: BreakpointObserver, private router: Router, @Inject(MatDialog) private dialog: MatDialog, private apiService: ApiService, private route: ActivatedRoute, private toastService: ToastService ) {
 
       }
   
@@ -270,6 +272,7 @@ export class CreateProfileComponent implements OnInit {
       this.tooManyImages = false;
 
       this.convertedSelectedImages = [];
+      this.convertedSelectedImagesToShow = [];
     
       files.forEach(file => {
         const reader = new FileReader();
@@ -277,6 +280,7 @@ export class CreateProfileComponent implements OnInit {
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedImagesToShow.push(base64Image);
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedImages.push(base64Data);
         };
@@ -292,12 +296,14 @@ export class CreateProfileComponent implements OnInit {
       this.tooManyImages = false;
 
       this.convertedSelectedProfileImage = '';
+      this.convertedSelectedProfileImageToShow = '';
     
         const reader = new FileReader();
     
         reader.onload = (e: any) => {
           // Extract the base64 data part
           const base64Image = e.target.result as string;
+          this.convertedSelectedProfileImageToShow = base64Image;
           const base64Data = base64Image.split(',')[1]; // Split at the comma to get the base64 data
           this.convertedSelectedProfileImage = base64Data;
         };
@@ -421,13 +427,27 @@ export class CreateProfileComponent implements OnInit {
     }
 
     openSuccessDialog(): void {
-      this.dialog.open(DialogComponent, {
-        width: '400px',
-        data: {
-          message: 'Profilul a fost adăugat cu succes și a fost trimis spre aprobare, vă puteți autentifica !',
-          isSuccess: true
-        }
-      });
+      if (this.isBusinessAccount){
+        this.dialog.open(DialogComponent, {
+                width: '400px',
+                data: {
+                  message: 'Profilul tău a fost trimis spre aprobare. Te rugăm să verifici căsuța de e-mail și să urmezi linkul de validare pentru a confirma înregistrarea !',
+                  isSuccess: true
+                }
+              });
+      }
+      else
+        {
+        this.dialog.open(DialogComponent, {
+                width: '400px',
+                data: {
+                  message: 'Contul a fost creat cu succes. Te rugăm să verifici căsuța de e-mail și să urmezi linkul de validare pentru a confirma înregistrarea !',
+                  isSuccess: true
+                }
+              });
+      }
+
+      
     }
   
     openFailureDialog(): void {

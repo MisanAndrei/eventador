@@ -1,0 +1,14 @@
+<div class="edit-user-email-container">
+    <h2>Editare Email Utilizator</h2>
+    <p><strong>ID:</strong> {{ user.id }}</p>
+    <p><strong>Nume:</strong> {{ user.name }}</p>
+  
+    <label for="email">Email Nou:</label>
+    <input type="email" id="email" [(ngModel)]="newEmail" />
+  
+    <div class="buttons">
+      <button (click)="saveEmail()" class="save-button">Salvează</button>
+      <button (click)="close.emit()" class="cancel-button">Anulează</button>
+    </div>
+  </div>
+  

@@ -1,12 +1,13 @@
 import {  AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
-import { AdminDashboardPartners, AdminDashboardProfilesChanged, DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
+import { AdminDashboardPartner, AdminDashboardProfilesChanged, DashboardProfiles, PartnerProfile, ProfilesAddedByMonth } from 'src/app/Models/Models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
+import { ApiService } from 'src/app/Services/ApiService';
 
 @Component({
   selector: 'app-admin-dashboard-partners',
@@ -16,7 +17,7 @@ import { startWith, debounceTime, distinctUntilChanged } from 'rxjs';
 export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
     private _observer: BreakpointObserver;
     public isMobile!: Observable<boolean>;
-    displayedColumnsProfilesChanged: string[] = ['firstname', 'lastname', 'actions'];
+    displayedColumnsProfilesChanged: string[] = ['firstname', 'lastname', 'email', 'suppliersBrought'];
     searchControl = new FormControl('');
     changesProfileId?: number;
 
@@ -24,23 +25,14 @@ export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
 
 
-    profiles: AdminDashboardPartners[] = [{ id : 13, firstname: 'Misan', lastname: 'Andrei' },
-                                                  { id : 2, firstname: 'Sechei', lastname: 'Radu' },
-                                                  { id : 3, firstname: 'Varga', lastname: 'Alex' },
-                                                  { id : 1, firstname: 'Misan', lastname: 'Andrei' },
-                                                  { id : 2, firstname: 'Sechei', lastname: 'Radu' },
-                                                  { id : 3, firstname: 'Varga', lastname: 'Alex' },
-                                                  { id : 1, firstname: 'Misan', lastname: 'Andrei' },
-                                                  { id : 2, firstname: 'Sechei', lastname: 'Radu' },
-                                                  { id : 3, firstname: 'Varga', lastname: 'Alex' }
-                                                ];
+    profiles: AdminDashboardPartner[] = [];
 
-    dataSource = new MatTableDataSource<AdminDashboardPartners>(this.profiles);
+    dataSource = new MatTableDataSource<AdminDashboardPartner>(this.profiles);
 
     isUserFormVisible = false;
   selectedUserId: number | null = null;
     
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {
     this._observer = breakpointObserver;
     
   }
@@ -50,6 +42,12 @@ export class AdminDashboardPartnersComponent implements OnInit, AfterViewInit {
       .pipe(
         map(result => result.matches)
       );
+
+      this.apiService.getPartners().subscribe(response => {
+        this.profiles = response;
+
+        this.dataSource = new MatTableDataSource<AdminDashboardPartner>(this.profiles);
+       })
   }
 
   ngAfterViewInit(): void {

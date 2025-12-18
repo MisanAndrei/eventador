@@ -72,10 +72,7 @@ app-personal-profiles {
   display: block !important;
   width: 90%;
   margin-top: 20px;
-  background: #f8f8f8;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* ✅ Mobile Profile - Clean, Elegant & Modern */
@@ -84,7 +81,6 @@ app-personal-profiles {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   background-color: #f9f9f9;
 }
 
@@ -171,9 +167,8 @@ app-personal-profiles {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  width: 100%;
-  margin-top: 30px; /* Adds spacing above */
-  margin-bottom: 30px; /* Adds spacing below */
+  max-width: 100%;
+  margin-top: 20px; /* Adds spacing above */
 }
 
 /* Ensure the profile component does not stretch too wide */

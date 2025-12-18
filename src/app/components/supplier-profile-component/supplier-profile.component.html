@@ -4,7 +4,7 @@
     
     <!-- LEFT SECTION -->
     <div class="left">
-      <img class="card-image" src="{{profileImage}}" alt="Profile Image">
+      <img class="card-image" src="{{profileImage}}" >
     
       <!-- Profile Info -->
       <div class="section-container profile-info">
@@ -13,6 +13,16 @@
         <h3>{{ profileName }}</h3>
         <p class="motto">{{ motto }}</p>
       </div>
+
+      <div class="section-container">
+        <p class="section-description">Ce servicii oferă furnizorul?</p>
+        <div class="section-divider"></div>
+        
+        <div class="categories">
+          <button *ngFor="let category of categories" class="category-button">{{ category.name }}</button>
+        </div>
+      </div>
+      
     
       <!-- Location & Area of Interests -->
       <div class="section-container">
@@ -28,8 +38,15 @@
       <div class="section-container contact-info">
         <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
         <div class="section-divider"></div>
-        <p><i class="fa fa-phone"></i> {{ phoneNumber }}</p>
-        <p><i class="fa fa-envelope"></i> {{ email }}</p>
+        <p>
+          <i class="fa fa-phone"></i>
+          <a style="text-decoration: none; color:black; margin-left:3px;" [href]="'tel:' + phoneNumber">{{ phoneNumber }}</a>
+        </p>
+        
+        <p>
+          <i class="fa fa-envelope"></i>
+          <a style="text-decoration: none; color: black; margin-left: 3px;" [href]="'mailto:' + email">{{ email }}</a>
+        </p>
       </div>
     
       <!-- Social Links -->
@@ -43,6 +60,45 @@
           <a *ngIf="youtubeUrl" href="{{ youtubeUrl}}" target="_blank" class="fa fa-youtube-play"></a>
         </div>
       </div>
+
+      <!-- QR generator (desktop) -->
+<!-- QR generator (desktop) -->
+<div class="section-container" *ngIf="isCurrentProfileLogged && !changesProfileId">
+  <div class="qr-button-wrapper">
+    <button class="center-button" (click)="generateQR()">Generează QR-code</button>
+  </div>
+
+  <section *ngIf="qrData" class="qr-wrapper" #qrCanvas>
+    <qrcode
+      [qrdata]="qrData"
+      [elementType]="'canvas'"
+      [width]="256"
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+    <div class="qr-profile-name">{{ profileName }}</div>
+
+    <!-- Powered-by footer -->
+    <div class="qr-footer">
+      <span class="powered-by">Powered&nbsp;by</span>
+      <img class="qr-logo"
+           src="assets/imagesandvideos/pinklogo.png"
+           alt="Eventador logo" />
+    </div>
+
+    <div class="qr-actions">
+      <button class="center-button" (click)="downloadQR()">Descarcă PNG</button>
+      <button class="center-button" (click)="printQR()">Printează</button>
+    </div>
+  </section>
+</div>
+
+
+
+      <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
+          (click)="showRatingInput()">Ofera rating</button>
+
+          
     </div>
 
     <!-- RIGHT SECTION -->
@@ -59,14 +115,13 @@
       </gallery>
 
       <h3>Descriere</h3>
-      <p>{{ description }}</p>
+      <div style="white-space: pre-line !important;">{{ description }}</div>
     </div>
 
   </div>
 
   <!-- Give Review Section -->
-  <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
-          (click)="showRatingInput()">Ofera rating</button>
+  
 
   <div class="review-container" *ngIf="offerRating && !isCurrentProfileLogged && userLoggedIn">
     
@@ -99,12 +154,12 @@
   <div *ngIf="!changesProfileId && reviews">
     <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
   </div>
-</div>
+</div> 
 
 <!-- MOBILE VIEW -->
 <div *ngIf="(isMobile | async)" class="mobile-container">
   <div class="mobile-profile">
-    <img class="card-image" src="{{profileImage}}" alt="{{ profileName }}">
+    <img class="card-image" src="{{profileImage}}" >
 
     <!-- Profile Info -->
     <p class="section-description">Descoperă rapid cine este acest furnizor.</p>
@@ -132,18 +187,55 @@
     <!-- Contact Info -->
     <p class="section-description">Contactează furnizorul pentru mai multe detalii.</p>
     <div class="section-divider"></div>
-    <p class="contact-info-mobile">📞 {{ phoneNumber }}</p>
-    <p class="contact-info-mobile">✉ {{ email }}</p>
+    <p class="contact-info-mobile">
+      <a style="text-decoration: none; color: black;" [href]="'tel:' + phoneNumber">📞 {{ phoneNumber }}</a>
+    </p>
+    
+    <p class="contact-info-mobile">
+      <a style="text-decoration: none; color: black;" [href]="'mailto:' + email">✉ {{ email }}</a>
+    </p>
 
     <!-- Social Links -->
     <p class="section-description">Găsește-l pe rețelele sociale.</p>
     <div class="section-divider"></div>
     <div class="social-links">
       <a *ngIf="facebookUrl" href="{{ facebookUrl }}" target="_blank" class="mobile-social-fa fa fa-facebook"></a>
-      <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class=" mobile-social-fafa fa-instagram"></a>
+      <a *ngIf="instagramUrl" href="{{ instagramUrl }}" target="_blank" class=" mobile-social-fa fa fa-instagram"></a>
       <a *ngIf="websiteUrl" href="{{ websiteUrl }}" target="_blank" class="mobile-social-fa fa fa-globe"></a>
       <a *ngIf="youtubeUrl" href="{{ youtubeUrl }}" target="_blank" class="mobile-social-fa fa fa-youtube-play"></a>
     </div>
+
+   <!-- QR generator (mobile) -->
+<div class="section-description" *ngIf="isCurrentProfileLogged && !changesProfileId">
+  <div class="qr-button-wrapper">
+    <button class="center-button" (click)="generateQR()">Generează QR-code</button>
+  </div>
+
+  <section *ngIf="qrData" class="qr-wrapper" #qrCanvas>
+    <qrcode
+      [qrdata]="qrData"
+      [elementType]="'canvas'"
+      [width]="220"
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+    <div class="qr-profile-name">{{ profileName }}</div>
+
+    <!-- Powered-by footer -->
+    <div class="qr-footer">
+      <span class="powered-by">Powered&nbsp;by</span>
+      <img class="qr-logo"
+           src="assets/imagesandvideos/pinklogo.png"
+           alt="Eventador logo" />
+    </div>
+
+    <div class="qr-actions">
+      <button class="center-button" (click)="downloadQR()">Descarcă PNG</button>
+      <button class="center-button" (click)="printQR()">Printează</button>
+    </div>
+  </section>
+</div>
+
 
     <!-- Gallery -->
     <gallery 
@@ -158,6 +250,8 @@
       (itemClick)="openLightbox($event)">
     </gallery>
   </div>
+  <h3>Descriere</h3>
+  <div style="white-space: pre-line !important;">{{ description }}</div>
 
   <!-- Offer Review Button -->
   <button class="center-button" *ngIf="!changesProfileId && !isCurrentProfileLogged && !offerRating && userLoggedIn" 
@@ -197,5 +291,7 @@
   <div *ngIf="!changesProfileId && reviews">
     <app-rating [ratings]="reviews" [profileId]="numberProfileId" [currentProfileLoggedIn]="isCurrentProfileLogged"></app-rating>
   </div>
+  
+
 </div>
 

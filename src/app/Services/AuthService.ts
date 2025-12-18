@@ -6,6 +6,7 @@ import { UserRole } from '../Utilities/enums/Enums';
 import { Observable, of } from 'rxjs';
 import { tap, catchError, switchMap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { AppConfigService } from '../core/config/app-config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,13 @@ export class AuthService {
   private readonly favoriteProfilesKey: string = 'favoriteProfiles';
   private tokenKey = 'access_token';
   private refreshTokenKey = 'refresh_token';
-  private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api/Auth/login';
-  private refreshUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api/Auth/refresh';
+  private readonly apiUrl: string;
+  private readonly refreshUrl: string;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService, private configService: AppConfigService) {
+    this.apiUrl = this.configService.apiBaseUrl + '/Auth/login';
+    this.refreshUrl = this.configService.apiBaseUrl + '/Auth/refresh';
+   }
 
   // Token and refresh token in cookies
   storeToken(token: string): void {
@@ -119,10 +123,6 @@ export class AuthService {
     user.lastName = lastName;
     user.phoneNumber = phoneNumber;
     localStorage.setItem(this.userKey, this.encodeObject(user));
-  }
-
-  isUserLogged(): boolean {
-    return !!localStorage.getItem(this.userKey);
   }
 
   getLoggedUserRole(): UserRole {

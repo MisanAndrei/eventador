@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, map } from "rxjs";
 import { ProfileCard, Section } from "../../Models/Models";

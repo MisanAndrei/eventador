@@ -9,7 +9,7 @@
         <p>
             {{section?.content}}
         </p>
-        <button [routerLink]="['/Inscriere']" mat-raised-button color="accent">Înscrie-te și tu</button>
+        <button *ngIf="!userLoggedIn" [routerLink]="['/Inscriere']" mat-raised-button color="accent">Înscrie-te și tu</button>
       </div>
     </div>
   </div>
@@ -23,10 +23,10 @@
       </div>
       <div>
         <h2 style="margin-top: 0px;">{{section?.title}}</h2>
-        <p>
+        <p style="margin-right: 10px; margin-left: 10px;">
           {{section?.content}}
         </p>
-        <button [routerLink]="['/Inscriere']" style="width:150px" mat-raised-button color="accent">Înscrie-te și tu</button>
+        <button *ngIf="!userLoggedIn" [routerLink]="['/Inscriere']" style="width:150px" mat-raised-button color="accent">Înscrie-te și tu</button>
       </div>
       <div style="height: 50px;"></div>
     </div>

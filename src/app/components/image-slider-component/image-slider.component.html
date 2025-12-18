@@ -1,24 +1,48 @@
 
-<div *ngIf="!(isMobile | async)">
-  <video autoplay loop [muted]="true">
-    <source src="assets\imagesandvideos\weddingvideo.mp4" type="video/mp4">
-  
-  </video>
+<div *ngIf="!(isMobile | async) && !isSafari" class="video-wrapper">
+    <video autoplay loop [muted]="true" playsinline preload="auto" class="video-element">
+      <source src="assets/imagesandvideos/landingvideo.mp4" type="video/mp4">
+    </video>
 
+    <div class="video-overlay">
+      <h2>Cheia evenimentelor reușite.</h2>
+      <h3>Tu ce eveniment pregătești?</h3>
+      <p class="carousel-subtext">Toți furnizorii de care ai nevoie, într-un singur loc.</p>
+      <p class="carousel-subtext-alt">Platforma unde încep evenimentele de neuitat.</p>
+    </div>
+  </div>
 
+  <div *ngIf="!(isMobile | async) && isSafari">
+    <div class="carousel-container">
+    <img *ngFor="let img of sliderImages; let i = index"
+         [src]="img"
+         [class.active]="i === currentImageIndex"
+         class="carousel-image"
+         alt="slider image" />
 
-</div>
+    <div class="carousel-overlay-text">
+      <h2>Cheia evenimentelor reușite.</h2>
+      <h3>Tu ce eveniment pregătești?</h3>
+      <p class="carousel-subtext">Toți furnizorii de care ai nevoie, într-un singur loc.</p>
+      <p class="carousel-subtext-alt">Platforma unde încep evenimentele de neuitat.</p>
+    </div>
+    </div>
+  </div>
+
 
 <div *ngIf="(isMobile | async)" class="mobile">
-  <video id="myVideo" autoplay="autoplay" loop [muted]="true" playsinline preload="auto">
-    <source src="assets\imagesandvideos\weddingvideo.mp4" type="video/mp4">
-  
-  </video>
+  <div class="carousel-container">
+    <img *ngFor="let img of sliderImages; let i = index"
+         [src]="img"
+         [class.active]="i === currentImageIndex"
+         class="carousel-image"
+         alt="slider image" />
 
-
-
+    <div class="carousel-overlay-text">
+      <h2>Cheia evenimentelor reușite.</h2>
+      <h3>Tu ce eveniment pregătești?</h3>
+      <p class="carousel-subtext">Toți furnizorii de care ai nevoie, într-un singur loc.</p>
+      <p class="carousel-subtext-alt">Platforma unde încep evenimentele de neuitat.</p>
+    </div>
+  </div>
 </div>
-
-
-
-

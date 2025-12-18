@@ -131,6 +131,7 @@ body {
   .save-button-container {
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   /* Styling for the Save button */

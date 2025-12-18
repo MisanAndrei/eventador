@@ -1,40 +1,42 @@
-<div>
-    <h1>Schimbari furnizori</h1>
+
+    <h1>Afiliati</h1>
     <mat-form-field>
         <input matInput [formControl]="searchControl" placeholder="Cautare">
       </mat-form-field>
-  <div>
+
     <table mat-table [dataSource]="dataSource" matSort>
 
-  
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let profile"> {{ profile.email }} </td>
+      </ng-container>
+
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nume </th>
-        <td mat-cell *matCellDef="let profile"> {{ profile.firstname }} </td>
+        <td mat-cell *matCellDef="let profile"> {{ profile.firstName }} </td>
       </ng-container>
       
       <ng-container matColumnDef="lastname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Prenume </th>
-        <td mat-cell *matCellDef="let profile"> {{ profile.lastname }} </td>
+        <td mat-cell *matCellDef="let profile"> {{ profile.lastName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="suppliersBrought">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Furnizori </th>
+        <td mat-cell *matCellDef="let profile"> {{ profile.suppliersBrought }} </td>
       </ng-container>
       
       
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Actiuni </th>
-        <td mat-cell *matCellDef="let profile"> <button style="margin-right: 20px" mat-raised-button color="accent">Vezi Partener</button>
-        <button style="margin-right: 20px" mat-raised-button color="primary" (click)="editUser(profile.id)">Editare User</button>
-        
-        </td>
-        
-      </ng-container>
+      
   
       <tr mat-header-row *matHeaderRowDef="displayedColumnsProfilesChanged"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsProfilesChanged;"></tr>
     </table>
   
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-  </div>
+
   
-</div>
+
 <button style="margin-right: 20px" mat-raised-button color="primary" (click)="createUser()">Creare User</button>
   <div *ngIf="isUserFormVisible">
     <app-admin-dashboard-partner-upsert [id]="selectedUserId" (closeForm)="closeUserForm()"></app-admin-dashboard-partner-upsert>

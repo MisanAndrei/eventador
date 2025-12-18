@@ -17,35 +17,61 @@
     </div>
   
     <!-- Users Table -->
-    <div class="users-table">
-      <h2>Lista Utilizatori</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nume</th>
-            <th>Email</th>
-            <th>Acțiune</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of profileAnalytics?.users">
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>
-              <button (click)="openEditUserEmail(user)" class="edit-button">Editează Email</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- Filter input -->
+<mat-form-field appearance="outline" class="mb-3">
+  <mat-label>Filtru</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Caută utilizator">
+</mat-form-field>
+
+<!-- Users Table -->
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <!-- ID -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+  </ng-container>
+
+  <!-- Name -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nume</th>
+    <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+  </ng-container>
+
+  <!-- Email -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+    <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="updatedAt">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Data update-ului pe profil</th>
+    <td mat-cell *matCellDef="let user">{{ user.updatedAt | date:'dd/MM/yyyy' }}</td>
+  </ng-container>
+
+  <!-- Actions -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Acțiune</th>
+    <td mat-cell *matCellDef="let user">
+      <button mat-button (click)="openEditUserEmail(user)">Editează Email</button>
+    </td>
+  </ng-container>
+
+  <!-- Header + Row -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
+</table>
+
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+<!-- Inline editor under table -->
+<app-edit-user-email 
+  *ngIf="editUserEmailVisible" 
+  [user]="selectedUser" 
+  (close)="editUserEmailVisible = false">
+</app-edit-user-email>
+
   </div>
-  
-  <!-- Edit User Email Component -->
-  <app-edit-user-email 
-    *ngIf="editUserEmailVisible" 
-    [user]="selectedUser" 
-    (close)="editUserEmailVisible = false">
-  </app-edit-user-email>
+
   

@@ -1,12 +1,18 @@
+<div *ngIf="loading" class="loading-spinner">
+    <p>Se încarcă datele...</p>
+  </div>
+  
+  <!-- Dashboard content -->
+  <div *ngIf="!loading">
+    <app-image-slider></app-image-slider>
+    <app-about-us-tab [section]="section1"></app-about-us-tab>
+    <app-top-customers-tab [cards]="profileCards" [section]="section2"></app-top-customers-tab>
+    
+    <app-categories-tab [categories]="categories"></app-categories-tab>
+    <app-about-customers-tab [section]="section3"></app-about-customers-tab>
+    <app-affiliate-tab [section]="section4"></app-affiliate-tab>
+    <app-popular-customers-tab *ngIf="section5 && popularProfileCards" [cards]="profileCards" [section]="section2"></app-popular-customers-tab>
+  </div>
 
-<app-image-slider></app-image-slider>
-<app-about-us-tab [section]="section1"></app-about-us-tab>
-<app-top-customers-tab [cards]="profileCards" [section]="section2"></app-top-customers-tab>
-
-<app-categories-tab [categories]="categories"></app-categories-tab>
-<app-about-customers-tab [section]="section3"></app-about-customers-tab>
-<app-affiliate-tab [section]="section4"></app-affiliate-tab>
-<app-popular-customers-tab *ngIf="section5 && popularProfileCards" [cards]="profileCards" [section]="section2"></app-popular-customers-tab>
-
-<app-contact-tab></app-contact-tab>
+ 
 <!--<app-categories-profiles></app-categories-profiles><app-blogs-tab [blogs]="blogs"></app-blogs-tab>-->

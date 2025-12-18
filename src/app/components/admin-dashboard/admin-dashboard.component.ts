@@ -27,7 +27,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
         map(result => result.matches)
       );
 
-      if (!this.authService.isUserLogged()){
+      if (!this.authService.isAuthenticated()){
         this.router.navigate(['/acasa']);
       }else{
         this.currentUserRole = this.authService.getLoggedUserRole();
