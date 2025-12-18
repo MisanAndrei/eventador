@@ -11,7 +11,7 @@ import { AppConfigService } from '../core/config/app-config.service';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://eventadorapi20240303141425.azurewebsites.net/api';
+  private readonly apiUrl: string;
 
   constructor(private http: HttpClient, private authService: AuthService, private configService: AppConfigService) {
     this.apiUrl = this.configService.apiBaseUrl;
