@@ -3,8 +3,21 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "YOUR.ANDROID.PACKAGE",
-      "sha256_cert_fingerprints": ["YOUR:SHA:256:FINGERPRINT"]
+      "package_name": "ro.events.eventadorandroid",
+      "sha256_cert_fingerprints": [
+        "RELEASE_SHA256",
+        "PLAY_STORE_SHA256"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ro.events.eventadorandroid.debug",
+      "sha256_cert_fingerprints": [
+        "3E:24:F4:26:D0:7E:80:03:8B:10:1E:E2:A2:5A:B4:1F:13:92:77:5F:E1:C5:5A:06:A5:9C:A1:1F:49:52:8C:42"
+      ]
     }
   }
 ]
