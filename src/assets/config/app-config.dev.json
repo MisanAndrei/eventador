@@ -1,4 +1,5 @@
 {
   "apiBaseUrl": "https://eventador-prd.azurewebsitess.net/api",
-  "environment": "develop"
+  "environment": "develop",
+  "secretKey": "ca9f449f-173f-4de5-b50d-95ce0e08ae5d"
 }

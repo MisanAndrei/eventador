@@ -12,7 +12,6 @@ import { AppConfigService } from '../core/config/app-config.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly secretKey: string = 'ca9f449f-173f-4de5-b50d-95ce0e08ae5d';
   private jwtHelper: JwtHelperService = new JwtHelperService();
   private readonly userKey: string = 'loggedUser';
   private readonly favoriteProfilesKey: string = 'favoriteProfiles';
@@ -27,6 +26,10 @@ export class AuthService {
 
   private getRefreshUrl(): string {
     return `${this.configService.apiBaseUrl}/Auth/refresh`;
+  }
+
+   private getSecretKey(): string {
+    return `${this.configService.secretKey}`;
   }
 
   // Token and refresh token in cookies
@@ -106,13 +109,13 @@ export class AuthService {
 
   encodeObject(objectToEncode: any): string {
     const jsonString = JSON.stringify(objectToEncode);
-    const encodedString = btoa(jsonString + this.secretKey);
+    const encodedString = btoa(jsonString + this.getSecretKey());
     return encodedString;
   }
 
   decodeToObject(encodedString: string): any {
     const decodedString = atob(encodedString);
-    const jsonString = decodedString.slice(0, -this.secretKey.length);
+    const jsonString = decodedString.slice(0, -this.getSecretKey().length);
     return JSON.parse(jsonString);
   }
 

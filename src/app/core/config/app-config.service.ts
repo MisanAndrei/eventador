@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 export interface AppConfig {
   apiBaseUrl: string;
   environment: string;
+  secretKey: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -27,5 +28,9 @@ export class AppConfigService {
 
   get environment(): string {
     return this.config.environment;
+  }
+
+  get secretKey(): string {
+    return this.config.secretKey;
   }
 }
