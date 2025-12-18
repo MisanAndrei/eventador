@@ -107,8 +107,6 @@ import { Inject } from '@angular/core';
     
         const galleryRef = this.gallery.ref('lightboxGallery');
         galleryRef.load(this.images);
-    
-        this.updateMetaTags();
       });
 
       this.route.params.subscribe((params: { [x: string]: string; }) => {
@@ -189,8 +187,6 @@ import { Inject } from '@angular/core';
 
             const galleryRef = this.gallery.ref('lightboxGallery');
             galleryRef.load(this.images);
-
-            this.updateMetaTags();
           })
         }
       }
@@ -284,27 +280,6 @@ import { Inject } from '@angular/core';
         .replace(/\s+/g, ' ')
         .trim();
       }
-
-    updateMetaTags() {
-      const fullUrl = `https://www.eventador.ro/furnizor/${this.urlProfileName.replace(/\s+/g, '-')}-${this.profileId}`;
-      this.title.setTitle(`${this.profileName} | Eventador`);
-      this.meta.updateTag({ name: 'description', content: this.motto || '' });
-      this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-    
-      // OpenGraph tags (for Facebook)
-      this.meta.updateTag({ property: 'og:title', content: this.profileName || '' });
-      this.meta.updateTag({ property: 'og:description', content: this.motto || '' });
-      this.meta.updateTag({ property: 'og:image', content: this.profileImage || '' });
-      this.meta.updateTag({ property: 'og:url', content: fullUrl });
-      this.meta.updateTag({ property: 'og:type', content: 'website' });
-    
-      // Twitter meta (optional, good for sharing)
-      this.meta.updateTag({ name: 'twitter:title', content: this.profileName || '' });
-      this.meta.updateTag({ name: 'twitter:description', content: this.motto || '' });
-      this.meta.updateTag({ name: 'twitter:image', content: this.profileImage || '' });
-      this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    }
-
 
     /** Build the absolute profile URL and reveal the QR */
 generateQR(): void {
