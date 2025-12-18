@@ -4,5 +4,8 @@
     "exclude": [
       "/.well-known/*"
     ]
+  },
+  "mimeTypes": {
+    ".well-known/apple-app-site-association": "application/json"
   }
 }
