@@ -12,19 +12,25 @@ import { AppConfigService } from '../core/config/app-config.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly secretKey: string = 'ca9f449f-173f-4de5-b50d-95ce0e08ae5d';
   private jwtHelper: JwtHelperService = new JwtHelperService();
   private readonly userKey: string = 'loggedUser';
   private readonly favoriteProfilesKey: string = 'favoriteProfiles';
   private tokenKey = 'access_token';
   private refreshTokenKey = 'refresh_token';
-  private readonly apiUrl: string;
-  private readonly refreshUrl: string;
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private configService: AppConfigService) {
-    this.apiUrl = this.configService.apiBaseUrl + '/Auth/login';
-    this.refreshUrl = this.configService.apiBaseUrl + '/Auth/refresh';
-   }
+  constructor(private http: HttpClient, private cookieService: CookieService, private configService: AppConfigService) {}
+
+   private getLoginUrl(): string {
+    return `${this.configService.apiBaseUrl}/Auth/login`;
+  }
+
+  private getRefreshUrl(): string {
+    return `${this.configService.apiBaseUrl}/Auth/refresh`;
+  }
+
+   private getSecretKey(): string {
+    return `${this.configService.secretKey}`;
+  }
 
   // Token and refresh token in cookies
   storeToken(token: string): void {
@@ -89,7 +95,8 @@ export class AuthService {
 
   login(email: string, password: string): Observable<LoginResponse> {
     const platform: string = "Web";
-    return this.http.post<LoginResponse>(this.apiUrl, { email, password, platform }).pipe(
+    const apiUrl: string = this.getLoginUrl();
+    return this.http.post<LoginResponse>(apiUrl, { email, password, platform }).pipe(
       tap(response => {
         
       })
@@ -102,13 +109,13 @@ export class AuthService {
 
   encodeObject(objectToEncode: any): string {
     const jsonString = JSON.stringify(objectToEncode);
-    const encodedString = btoa(jsonString + this.secretKey);
+    const encodedString = btoa(jsonString + this.getSecretKey());
     return encodedString;
   }
 
   decodeToObject(encodedString: string): any {
     const decodedString = atob(encodedString);
-    const jsonString = decodedString.slice(0, -this.secretKey.length);
+    const jsonString = decodedString.slice(0, -this.getSecretKey().length);
     return JSON.parse(jsonString);
   }
 
@@ -167,6 +174,7 @@ export class AuthService {
   }
 
   refreshTokens(refreshToken: string | null): Observable<{ token: string, refreshToken: string }> {
-    return this.http.post<{ token: string, refreshToken: string }>(this.refreshUrl, { refreshToken });
+    const refreshUrl: string = this.getRefreshUrl();
+    return this.http.post<{ token: string, refreshToken: string }>(refreshUrl, { refreshToken });
   }
 }
