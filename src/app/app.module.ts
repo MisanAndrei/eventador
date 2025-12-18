@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './core/config/app-config.service';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -97,6 +99,10 @@ import { LegalConfidentialityComponent } from './components/legal-components/leg
 import { AdminDashboardTopProvidersComponent } from './components/admin-dashboard/admin-dashboard-top-providers/admin-dashboard-top-providers.component';
 import { ProfileResolver } from './resolvers/profile.resolver';
 import { QRCodeModule } from 'angularx-qrcode';
+
+export function loadAppConfig(configService: AppConfigService) {
+  return () => configService.load();
+}
 
 @NgModule({
   declarations: [
@@ -201,7 +207,14 @@ import { QRCodeModule } from 'angularx-qrcode';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },{
+  },
+  {
+  provide: APP_INITIALIZER,
+  useFactory: loadAppConfig,
+  deps: [AppConfigService],
+  multi: true
+  },
+  {
     provide: LIGHTBOX_CONFIG,
     useValue: {
       keyboardShortcuts: true,

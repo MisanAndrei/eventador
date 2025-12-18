@@ -5,14 +5,17 @@ import { tap } from 'rxjs/operators';
 import { AuthService } from './AuthService';
 import { AdminDashboardPartner, AdminDashboardProfilesChanged, AdminProfileTopProvider, ApprovalReview, Blog, Category, ChangePasswordRequest, City, County, CreateProfile, CreateUser, EditProfile, EditUserRequest, FavoriteProfilesRequest, Group, LandingPage, PartnerSupplierUser, ProfileCard, ProfilesAnalytics, ReferralResponse, Review, SendResponse, SendReview, UserDetails, UserProfile } from '../Models/Models';
 import { CustomersRequest, UpsertBlogRequest, UpsertMainCategoryRequest } from '../Requests/Requests';
+import { AppConfigService } from '../core/config/app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://eventador-prd.azurewebsites.net/api';
+  private readonly apiUrl: string;
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private configService: AppConfigService) {
+    this.apiUrl = this.configService.apiBaseUrl;
+   }
 
   getApiModel(): Observable<Category[]> {
     const token = this.authService.getToken();
