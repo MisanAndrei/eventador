@@ -264,12 +264,26 @@ import { Inject } from '@angular/core';
       }
     }
 
-    sanitizeBusinessName(slug: string): string {
-      return slug
+    sanitizeBusinessName(value: string): string {
+      if (!value) return '';
+
+      const diacriticsMap: Record<string, string> = {
+        'ă': 'a', 'â': 'a', 'î': 'i', 'ș': 's', 'ț': 't',
+        'Ă': 'a', 'Â': 'a', 'Î': 'i', 'Ș': 's', 'Ț': 't'
+      };
+
+      return value
         .replace(/-/g, ' ')
+        .split('')
+        .map(char => diacriticsMap[char] ?? char)
+        .join('')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
         .replace(/\s+/g, ' ')
         .trim();
-    }
+      }
 
     updateMetaTags() {
       const fullUrl = `https://www.eventador.ro/furnizor/${this.urlProfileName.replace(/\s+/g, '-')}-${this.profileId}`;

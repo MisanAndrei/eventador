@@ -291,8 +291,25 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   formatProfileName(profileName: string): string {
-    return profileName.replace(/\s+/g, '-');
-  }
+  if (!profileName) return '';
+
+  const diacriticsMap: Record<string, string> = {
+    'ă': 'a', 'â': 'a', 'î': 'i', 'ș': 's', 'ț': 't',
+    'Ă': 'a', 'Â': 'a', 'Î': 'i', 'Ș': 's', 'Ț': 't'
+  };
+
+  return profileName
+    .split('')
+    .map(char => diacriticsMap[char] ?? char)
+    .join('')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // remove special chars
+    .trim()
+    .replace(/\s+/g, '-')         // spaces → hyphens
+    .replace(/-+/g, '-');         // collapse multiple hyphens
+}
 
   onCategoryGroupChange(event: any): void {
     const selectedCategoryGroupId = event.value;
