@@ -18,13 +18,16 @@ export class AuthService {
   private readonly favoriteProfilesKey: string = 'favoriteProfiles';
   private tokenKey = 'access_token';
   private refreshTokenKey = 'refresh_token';
-  private readonly apiUrl: string;
-  private readonly refreshUrl: string;
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private configService: AppConfigService) {
-    this.apiUrl = this.configService.apiBaseUrl + '/Auth/login';
-    this.refreshUrl = this.configService.apiBaseUrl + '/Auth/refresh';
-   }
+  constructor(private http: HttpClient, private cookieService: CookieService, private configService: AppConfigService) {}
+
+   private getLoginUrl(): string {
+    return `${this.configService.apiBaseUrl}/Auth/login`;
+  }
+
+  private getRefreshUrl(): string {
+    return `${this.configService.apiBaseUrl}/Auth/refresh`;
+  }
 
   // Token and refresh token in cookies
   storeToken(token: string): void {
@@ -89,7 +92,8 @@ export class AuthService {
 
   login(email: string, password: string): Observable<LoginResponse> {
     const platform: string = "Web";
-    return this.http.post<LoginResponse>(this.apiUrl, { email, password, platform }).pipe(
+    const apiUrl: string = this.getLoginUrl();
+    return this.http.post<LoginResponse>(apiUrl, { email, password, platform }).pipe(
       tap(response => {
         
       })
@@ -167,6 +171,7 @@ export class AuthService {
   }
 
   refreshTokens(refreshToken: string | null): Observable<{ token: string, refreshToken: string }> {
-    return this.http.post<{ token: string, refreshToken: string }>(this.refreshUrl, { refreshToken });
+    const refreshUrl: string = this.getRefreshUrl();
+    return this.http.post<{ token: string, refreshToken: string }>(refreshUrl, { refreshToken });
   }
 }
