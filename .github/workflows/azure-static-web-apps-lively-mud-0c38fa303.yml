@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
-      - name: Use PROD app config
+      - name: Use dev app config
         run: cp src/assets/config/app-config.dev.json src/assets/config/app-config.json
         
       - name: Build application
@@ -58,3 +58,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_MUD_0C38FA303 }}
           action: "close"
+
