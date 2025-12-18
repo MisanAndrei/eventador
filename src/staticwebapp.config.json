@@ -2,8 +2,7 @@
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [
-      "/.well-known/*",
-      "/furnizor/*"
+      "/.well-known/*"
     ]
   }
 }
